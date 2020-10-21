@@ -1,0 +1,14 @@
+/* XPM */
+static char * XFACE[] = {
+/* <Valores> */
+/* <ancho/columnas> <altura/filas> <colores> <caracteres por pixel>*/
+"48 4 2 1",
+/* <Colores> */
+"a c #ffffff",
+"b c #000000",
+/* <Pixeles> */
+"abaabaababaaabaabababaabaabaababaabaaababaabaaab",
+"abaabaababaaabaabababaabaabaababaabaaababaabaaab",
+"abaabaababaaabaabababaabaabaababaabaaababaabaaab",
+"abaabaababaaabaabababaabaabaababaabaaababaabaaab"
+};

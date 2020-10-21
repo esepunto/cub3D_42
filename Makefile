@@ -1,0 +1,54 @@
+NAME	=	tutorial
+
+CC		=	gcc 
+
+FLAGS	=	-Wall -Wextra -Werror
+
+#MAIN	=	./samples_main/main_correccion.c
+#MAIN	=	./samples_main/main_printf.c
+MAIN	=	./samples_main/gccc.c
+#MAIN	=	./samples_main/gnl_main.c
+#MAIN	=	./samples_main/primeros_pasosA.c
+#MAIN	=	./samples_main/primeros_pasosB.c
+#MAIN	=	./samples_main/endian.c
+#MAIN	=	./samples_main/event_main.c
+#MAIN	=	./samples_main/hook.c #Error
+#MAIN	=	./samples_main/img_mlx.c
+#MAIN	=	./samples_main/rgb_to_int.c
+#MAIN	=	./samples_main/put_pixels.c
+#MAIN	=	./samples_main/draw_line.c
+#MAIN	=	./samples_main/image1.c
+#MAIN	=	./samples_main/main.c
+#MAIN	=	./samples_main/main2.c
+
+LIBS	=	libft/libft.a mlx/libmlx.a \
+			libft/ft_printf/libftprintf.a 
+
+OBJECTS	=	$(MAIN:.c=.o)
+
+LINKS	=	-I ./mlx -L ./mlx \
+    -lmlx -framework OpenGL -framework AppKit
+
+RM		=	rm -f
+
+all: $(NAME)
+
+$(NAME):	$(OBJECTS)
+			-@make -C libft
+			-@make -C libft/ft_printf
+			-@make -C mlx
+			$(CC) $(FLAGS) $(LINKS) $(MAIN) $(LIBS) -o $(NAME)
+
+clean:
+			$(RM) $(OBJECTS)
+			@make clean -C libft
+			@make clean -C libft/ft_printf
+			
+
+fclean:		clean
+			$(RM) $(NAME)
+			@make clean -C libft
+			@make clean -C libft/ft_printf
+			@make clean -C mlx
+
+re: fclean all

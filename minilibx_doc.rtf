@@ -1,0 +1,50 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf500
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red217\green11\blue5;\red23\green186\blue251;\red174\green0\blue240;
+\red198\green50\blue253;}
+{\*\expandedcolortbl;;\cssrgb\c88946\c14202\c0;\cssrgb\c0\c77905\c98860;\cssrgb\c74609\c21796\c95404;
+\cssrgb\c82670\c34053\c99466;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19200\viewh16000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs30 \cf0 To open the \cf2 man\cf0  of minilibx: \
+\
+man /usr/share/man/man3/\'85\
+\
+mlx.1\
+	mlx_init \cf3 (about MiniLibX)\cf0 \
+\
+mlx_new_window.1 \
+	mlx_new_window\
+	mlx_clear_window\
+	mlx_destroy_window\
+\
+mlx_pixel_put.1 \
+	mlx_pixel_put\
+	mlx_string_put\
+\
+mlx_loop:\
+	mlx_loop\
+	mlx_key_hook\
+	mlx_mouse_hook\
+	mlx_expose_hook\
+\
+mlx_new_image.1\
+	mlx_new_image\
+	mlx_get_data_addr\
+	mlx_put_image_to_window\
+	mlx_get_color_value\
+	mlx_ xpm_to_image\
+	mlx_xpm_file_to_image\
+	mlx_destry_image\
+\
+\
+Para \cf2 compilar\cf0 :\
+Opci\'f3n antigua: cc -I /usr/local/include main.c -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit && ./a.out\
+Nueva opci\'f3n: gcc -I /Users/ssacrist/Desktop/cub3d_ssacrist/minilibx_opengl_20191021 hook.c  -L /Users/ssacrist/Desktop/cub3d_ssacrist/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework Appkit && ./a.out\
+\
+\
+\
+\cf4 \ul \ulc4 param\ulnone  \cf0 is the address  specified  in  the  mlx_*_hook  calls.  This address  is  never  used  nor modified by the MiniLibX. On key and mouse events, additional information is passed: \cf5 \ul \ulc5 keycode\cf0 \ulnone  tells  you which key is pressed (X11  :  look  for  the  include  file "keysymdef.h", MacOS : create a small software  and  find  out  by yourself), ( x , y ) are the coordinates of the mouse click in the window, and button tells you which mouse button was pressed.\
+\
+}
