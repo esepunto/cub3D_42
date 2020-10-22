@@ -30,9 +30,9 @@ char    *hv_rgb2hex(int r, int g, int b)
 
 int    main(int arc, char **argv)
 {
-    char    *colhex;
+	char	*colhex;
 
-	t_cub3d	cub3d;
+	t_rayc	cub3d;
 
 	(void)cub3d;
     colhex = hv_rgb2hex(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[2]));
