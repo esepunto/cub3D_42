@@ -1,6 +1,8 @@
 NAME	=	tutorial
 
-CC		=	gcc 
+CC		=	gcc
+
+#SRCS	=	srcs/*.c
 
 FLAGS	=	-Wall -Wextra -Werror
 
@@ -23,12 +25,12 @@ MAIN	=	./samples_main/rgb_to_hex.c
 #MAIN	=	./samples_main/main2.c
 
 LIBS	=	libft/libft.a mlx/libmlx.a \
-			libft/ft_printf/libftprintf.a 
+			libft/ft_printf/libftprintf.a
 
 OBJECTS	=	$(MAIN:.c=.o)
 
 LINKS	=	-I ./mlx -L ./mlx \
-    -lmlx -framework OpenGL -framework AppKit
+	-lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
@@ -39,12 +41,13 @@ $(NAME):	$(OBJECTS)
 			-@make -C libft/ft_printf
 			-@make -C mlx
 			$(CC) $(FLAGS) $(LINKS) $(MAIN) $(LIBS) -o $(NAME)
+#			$(CC) $(FLAGS) $(LINKS) $(MAIN) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJECTS)
 			@make clean -C libft
 			@make clean -C libft/ft_printf
-			
+
 
 fclean:		clean
 			$(RM) $(NAME)

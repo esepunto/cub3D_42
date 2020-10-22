@@ -13,7 +13,7 @@ char    *hv_rgb2hex(int r, int g, int b)
 {
     static char     result[6];
     int             i;
-        
+
     i = 0;
     while (i < 6)
     {
@@ -21,7 +21,7 @@ char    *hv_rgb2hex(int r, int g, int b)
             calculate_hex(i, r, result);
         else if (i < 4)
             calculate_hex(i, g, result);
-        else 
+        else
             calculate_hex(i, b, result);
         i++;
     }
@@ -32,9 +32,12 @@ int    main(int arc, char **argv)
 {
     char    *colhex;
 
+	t_cub3d	cub3d;
+
+	(void)cub3d;
     colhex = hv_rgb2hex(ft_atoi(argv[1]), ft_atoi(argv[2]), ft_atoi(argv[2]));
     if (arc == 4)
-        ft_printf("Hexadec colour: %s\n", colhex);
+        ft_printf("Hexadec color: %s\n", colhex);
     else
-        return (0);    
+        return (0);
 }

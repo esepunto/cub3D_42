@@ -18,10 +18,10 @@ void	ft_putnbr(int nb)
 
 int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color)
 {
-    double deltaX;
-    double deltaY;
-    int pixels;//  
-    double pixelX;
+	double deltaX;
+	double deltaY;
+	int pixels;//
+	double pixelX;
     double pixelY;
 
     deltaX = endX - beginX; // 10
