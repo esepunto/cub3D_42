@@ -4,9 +4,10 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
+MAIN	=	./samples_main/rgb_to_hex.c
 #MAIN	=	./samples_main/main_correccion.c
 #MAIN	=	./samples_main/main_printf.c
-MAIN	=	./samples_main/gccc.c
+#MAIN	=	./samples_main/gccc.c
 #MAIN	=	./samples_main/gnl_main.c
 #MAIN	=	./samples_main/primeros_pasosA.c
 #MAIN	=	./samples_main/primeros_pasosB.c
