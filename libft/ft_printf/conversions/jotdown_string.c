@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   jotdown_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 17:46:57 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/07/23 17:47:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/23 11:02:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void	jotdown_s(t_format *carrier)
 {
 	char	*arg;
 
-	flag(carrier->flagstr, 0, carrier);
+//	flag(carrier->flagstr, 0, carrier);
+	flag((*carrier).flagstr, 0, carrier);
 	adjust_flags_s(carrier);
 	arg = va_arg(carrier->arguments, char *);
 	if (arg == NULL)
 		arg = "(null)";
-	carrier->large_arg = ft_strlen(arg);
-	print_s(arg, carrier);
+//	carrier->large_arg = ft_strlen(arg);
+	(*carrier).large_arg = ft_strlen(arg);
+//	print_s(arg, carrier);
+	print_s(arg, &(*carrier));
 }
 
 void	print_s(char *arg, t_format *carrier)

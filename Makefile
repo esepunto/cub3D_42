@@ -6,7 +6,8 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
-MAIN	=	./samples_main/rgb_to_hex.c
+MAIN	=	./samples_main/padding.c
+#MAIN	=	./samples_main/rgb_to_hex.c
 #MAIN	=	./samples_main/main_correccion.c
 #MAIN	=	./samples_main/main_printf.c
 #MAIN	=	./samples_main/gccc.c
@@ -24,13 +25,13 @@ MAIN	=	./samples_main/rgb_to_hex.c
 #MAIN	=	./samples_main/main.c
 #MAIN	=	./samples_main/main2.c
 
-LIBS	=	libft/libft.a mlx/libmlx.a \
+LIBS	=	libft/libft.a \
+			mlx/libmlx.a \
 			libft/ft_printf/libftprintf.a
 
 OBJECTS	=	$(MAIN:.c=.o)
 
-LINKS	=	-I ./mlx -L ./mlx \
-	-lmlx -framework OpenGL -framework AppKit
+LINKS	=	-I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
