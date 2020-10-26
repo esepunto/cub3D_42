@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/22 14:11:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/26 10:27:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft/libft.h"
 # include "libft/ft_printf/libftprintf.h"
 # include <limits.h>
+# include <string.h>
+# include <errno.h>
 
 typedef struct	s_raycast
 {

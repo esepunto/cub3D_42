@@ -6,7 +6,9 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
-MAIN	=	./samples_main/padding.c
+MAIN	=	./samples_main/perror.c
+#MAIN	=	./samples_main/structs_edramire.c
+#MAIN	=	./samples_main/padding_structs.c
 #MAIN	=	./samples_main/rgb_to_hex.c
 #MAIN	=	./samples_main/main_correccion.c
 #MAIN	=	./samples_main/main_printf.c
