@@ -6,7 +6,7 @@ CC		=	gcc
 
 FLAGS	=	-Wall -Wextra -Werror
 
-MAIN	=	./samples_main/perror.c
+#MAIN	=	./samples_main/perror.c
 #MAIN	=	./samples_main/structs_edramire.c
 #MAIN	=	./samples_main/padding_structs.c
 #MAIN	=	./samples_main/rgb_to_hex.c
@@ -22,7 +22,7 @@ MAIN	=	./samples_main/perror.c
 #MAIN	=	./samples_main/img_mlx.c
 #MAIN	=	./samples_main/rgb_to_int.c
 #MAIN	=	./samples_main/put_pixels.c
-#MAIN	=	./samples_main/draw_line.c
+MAIN	=	./samples_main/draw_line.c
 #MAIN	=	./samples_main/image1.c
 #MAIN	=	./samples_main/main.c
 #MAIN	=	./samples_main/main2.c

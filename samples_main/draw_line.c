@@ -1,19 +1,18 @@
-#include "mlx.h"
-#include <math.h>
+#include "../cub3d.h"
 
-void	ft_putchar(int c)
+void	ft_putchar_s(int c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_putnbr_s(int nb)
 {
 	unsigned int	copy_nb;
 
 	copy_nb = nb;
 	if (copy_nb > 9)
-		ft_putnbr(copy_nb / 10);
-	ft_putchar(copy_nb % 10 + '0');
+		ft_putnbr_s(copy_nb / 10);
+	ft_putchar_s(copy_nb % 10 + '0');
 }
 
 int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color)
@@ -34,10 +33,10 @@ int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
     deltaY /= pixels; // 0 >>>  0 / 10
     while (pixels)
     {
-        ft_putnbr(pixelX);
-	    ft_putchar(',');
-	    ft_putnbr(pixelY);
-	    ft_putchar('\n');
+        ft_putnbr_s(pixelX);
+	    ft_putchar_s(',');
+	    ft_putnbr_s(pixelY);
+	    ft_putchar_s('\n');
         mlx_pixel_put(mlx, win, pixelX, pixelY, color);
         pixelX += deltaX;
         pixelY += deltaY;
