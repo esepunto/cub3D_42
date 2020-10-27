@@ -6,39 +6,27 @@
 /*   By: ssacrist </var/mail/ssacrist>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 20:32:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 21:01:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int		read_map(char *name_map);
-
-int		main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		read_map(argv[1]);	
-	}
-	system("leaks cub3D");
-}
 
 int		read_map(char *name_map)
 {
 	int			fd;
 	char		*line;
 	int			i;
-	//t_config	cubconf;
 	
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
-		printf("Error: %s\n", strerror(errno));
+		perror("Error\n");
 		return (0);
 	}
 	line = NULL;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-		printf("\n%s", line);
+		printf("\n%s", line);// >> Manage error and save config in struct
 		free(line);
 		line = NULL;
 	}
@@ -47,4 +35,15 @@ int		read_map(char *name_map)
 	line = NULL;
 	close(fd);
 	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		read_map(argv[1]);	
+	}
+	else
+		ft_printf("Please, type carefully. It looks there's an error in you order. Thanks!\n");
+	system("leaks cub3D");
 }
