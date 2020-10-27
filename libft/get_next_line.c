@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 08:29:49 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/07/30 11:29:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 11:46:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		get_next_line(int fd, char **line)
 {
 	int			bytes_buf;
 	char		*buffer;
-	static char	*dest;
+	static char	*dest[4096];
 	char		*aux;
 
 	if (!(buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))) || fd < 0
@@ -68,17 +68,17 @@ int		get_next_line(int fd, char **line)
 	while ((bytes_buf = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[bytes_buf] = '\0';
-		if (!dest)
-			dest = ft_strdup(buffer);
+		if (!dest[fd])
+			dest[fd] = ft_strdup(buffer);
 		else
 		{
-			aux = ft_strjoin(dest, buffer);
-			ft_memdel((void **)&dest);
-			dest = aux;
+			aux = ft_strjoin(dest[fd], buffer);
+			ft_memdel((void **)&dest[fd]);
+			dest[fd] = aux;
 		}
-		if (ft_strchr(dest, '\n'))
+		if (ft_strchr(dest[fd], '\n'))
 			break ;
 	}
 	ft_memdel((void **)&buffer);
-	return (ft_chop(&dest, line));
+	return (ft_chop(&dest[fd], line));
 }
