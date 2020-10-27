@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 10:58:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 17:43:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
+
+typedef struct	s_readconfig
+{
+	char	**map;
+	char	*wallno;
+	char	*wallso;
+	char	*wallea;
+	char	*wallwe;
+	char	*sprite;
+	int		ceilclr;
+	int		flrclr;
+	int		xrendersize;
+	int		yrendersize;
+
+}				t_config
+
 
 typedef struct	s_raycast
 {
