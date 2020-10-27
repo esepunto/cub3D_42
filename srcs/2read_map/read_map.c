@@ -6,48 +6,45 @@
 /*   By: ssacrist </var/mail/ssacrist>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 19:24:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 20:32:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+int		read_map(char *name_map);
+
 int		main(int argc, char **argv)
 {
-	if (argc = 2)
+	if (argc == 2)
 	{
 		read_map(argv[1]);	
 	}
-	else
-		return (-1);
+	system("leaks cub3D");
 }
 
-char	read_map(char *name_map)
+int		read_map(char *name_map)
 {
 	int			fd;
 	char		*line;
 	int			i;
-	t_config	cubconf;
+	//t_config	cubconf;
 	
+	if ((fd = open(name_map, O_RDONLY)) == -1)
+	{
+		printf("Error: %s\n", strerror(errno));
+		return (0);
+	}
 	line = NULL;
-	fd = open(name_map, O_RDONLY);
-	if (fd == NULL)
-	{
-		ft_printf("Error: %s\n", strerror(errno));
-	}
-	while ((i = get_next_line(fd, &line)) == 1)
+	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		printf("\n%s", line);
-		line = NULL;
 		free(line);
-	}
-	if ((i = get_next_line(fd, &line)) == 0)
-	{
-		printf("\n%s", line);
 		line = NULL;
-		free(line);
 	}
+	printf("\n%s", line);
+	free(line);
+	line = NULL;
 	close(fd);
-	system("leaks a.out");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 19:24:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 19:45:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
+# include <fcntl.h>
 
 typedef struct	s_readconfig
 {

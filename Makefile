@@ -1,9 +1,10 @@
 NAME	=	cub3D
 
-CC		=	gcc -Wall -Wextra -Werror -g
+CC		=	gcc -Wall -Wextra -Werror
 
 #SRCS	=	srcs/*.c
 
+MAIN	=	./srcs/2read_map/read_map.c
 #MAIN	=	./samples_main/perror.c
 #MAIN	=	./samples_main/structs_edramire.c
 #MAIN	=	./samples_main/padding_structs.c
@@ -11,7 +12,7 @@ CC		=	gcc -Wall -Wextra -Werror -g
 #MAIN	=	./samples_main/main_correccion.c
 #MAIN	=	./samples_main/main_printf.c
 #MAIN	=	./samples_main/gccc.c
-MAIN	=	./samples_main/gnl_main.c
+#MAIN	=	./samples_main/gnl_main.c
 #MAIN	=	./samples_main/primeros_pasosA.c
 #MAIN	=	./samples_main/primeros_pasosB.c
 #MAIN	=	./samples_main/endian.c

@@ -16,5 +16,5 @@ int
 	printf("%s", line);
 	free(line);
 	line = NULL;
-	system("leaks tutorial");
+	system("leaks cub3D");
 }
