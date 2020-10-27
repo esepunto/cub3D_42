@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "../includes/cubb3d.h"
 #include <stdint.h>
 
 int main(void)

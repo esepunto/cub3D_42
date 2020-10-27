@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 #include <stdio.h>
 
 // Alignment requirements
@@ -21,8 +21,8 @@ int main()
 {
 	t_structd	*hola;
 
-	if (!(hola = malloc(sizeof(t_structd))))
-		return (0);
+	if(!(hola = malloc(sizeof(t_structd))))
+		return (-1);
 	printf("sizeof(t_structd) ocupa %lu\n", sizeof(t_structd));
 	hola->i = 6;
 	hola->c = 'd';
@@ -30,16 +30,16 @@ int main()
 	printf("i == %d /-/ c == %c /-/ d == %f \n", hola->i, hola->c, hola->d);
 	printf("&hola ocup %lu\n", sizeof(&hola));
 	printf("hola ocupa %lu\n", sizeof(hola));
-	ft_printf("hola->i ocupa %u\n", sizeof(hola->i));
-	ft_printf("hola->c ocupa %u\n", sizeof(hola->c));
-	ft_printf("hola->d ocupa %u\n", sizeof(hola->d));
+	printf("hola->i ocupa %lu\n", sizeof(hola->i));
+	printf("hola->c ocupa %lu\n", sizeof(hola->c));
+	printf("hola->d ocupa %lu\n", sizeof(hola->d));
 	printf("hola->i == %d\n", hola->i);
-	printf("hola->c == %c\n", hola->c);
+	ft_printf("hola->c == %c\n", hola->c);
+	printf("hola->d == %f\n", hola->d);
+	ft_printf("hola->i == %d\n", hola->i);
+	ft_printf("hola->c == %c\n", hola->c);
 	printf("hola->d == %f\n", hola->d);
 	free(hola);
-	printf("hola->i == %d\n", hola->i);
-	printf("hola->c == %c\n", hola->c);
-	printf("hola->d == %f\n", hola->d);
-	system ("leaks tutorial");
+//	system ("leaks tutorial");
 	return (0);
 }

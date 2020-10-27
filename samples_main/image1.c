@@ -1,3 +1,4 @@
+#include "../includes/cub3d.h"
 #include <mlx.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -54,7 +55,7 @@ int     main(void)
     char    *relative_path = "./samples_xpm/test.xpm";
     int     img_width;
     int     img_height;
-    
+
 //    char    *info_img;
 //    int     bits_pixel;
 //    int     size_line;
@@ -63,15 +64,15 @@ int     main(void)
     static int     x = 3;
     static int     y = 2;
 
-    
+
     mlx = mlx_init();
     win = mlx_new_window(mlx, 500, 500, "buenorra's window to put image on");
     relative_path = "./samples_xpm/event_main.xpm";
     img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
     mlx_put_image_to_window(mlx, win, img, 10, 80);
     mlx_destroy_image(mlx, img);
-    
-    
+
+
     relative_path = "./samples_xpm/test.xpm";
     while (c < 150)
     {
@@ -83,7 +84,7 @@ int     main(void)
         mlx_put_image_to_window(mlx, win, img, 250+x, 250+y);
         mlx_put_image_to_window(mlx, win, img, 250-x, 250-y);
         mlx_put_image_to_window(mlx, win, img, 250+x, 250-y);
-        mlx_put_image_to_window(mlx, win, img, 250-x, 250+y);        
+        mlx_put_image_to_window(mlx, win, img, 250-x, 250+y);
     //    mlx_destroy_image(mlx, img);
     //    printf("%d", c);
     //    y = y + (x/y);
@@ -93,7 +94,7 @@ int     main(void)
     //    x = y+x;
         c++;
     //    mlx_clear_window(mlx, win);
-    }    
+    }
 
 /*
     relative_path = "./samples_xpm/test2.xpm";

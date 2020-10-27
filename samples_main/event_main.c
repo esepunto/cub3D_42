@@ -3,67 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   event_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 10:14:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/13 10:14:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 11:11:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "../includes/cub3d.h"
 
-#ifndef _UNISTD_H
-# define _UNISTD_H
-
-void	ft_putchar(int c)
+void			ft_putchars(int c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void			ft_putnbrs(int nb)
 {
 	unsigned int	copy_nb;
 
 	copy_nb = nb;
 	if (copy_nb > 9)
-		ft_putnbr(copy_nb / 10);
-	ft_putchar(copy_nb % 10 + '0');
+		ft_putnbrs(copy_nb / 10);
+	ft_putchars(copy_nb % 10 + '0');
 }
 
-typedef struct  s_program
+typedef struct	s_program
 {
-    void *mlx;
-    void *win;
-}               t_program;
+	void *mlx;
+	void *win;
+}				t_program;
 
-int mouse_event(int button, int x, int y, void *param)
+int 			mouse_event(int x, int y, void *param)
 {
-    t_program *tutorial = param;
-    
-    mlx_pixel_put(tutorial->mlx, tutorial->win, 640/2, 360/2, 0xFFFFFF);
-    mlx_mouse_get_pos(tutorial->win, &x, &y);
-    ft_putchar(' ');
-	ft_putnbr(x);
-	ft_putchar(',');
-	ft_putnbr(y);
-	ft_putchar(' ');
-	ft_putchar('-');
-	ft_putchar('\n');
-    return (1);
+	t_program *tutorial = param;
+
+	mlx_pixel_put(tutorial->mlx, tutorial->win, 640/2, 360/2, 0xFFFFFF);
+	mlx_mouse_get_pos(tutorial->win, &x, &y);
+	ft_putchars(' ');
+	ft_putnbrs(x);
+	ft_putchars(',');
+	ft_putnbrs(y);
+	ft_putchars(' ');
+	ft_putchars('-');
+	ft_putchars('\n');
+	return (1);
 }
 
-int main()
+int				main()
 {
-    void *mlx = mlx_init();
-    void *win = mlx_new_window(mlx, 640, 360, "Event Parameters");
+	void		*mlx = mlx_init();
+	void		*win = mlx_new_window(mlx, 640, 360, "Event Parameters");
+	t_program	tutorial;
 
-    t_program tutorial;
-    tutorial.mlx = mlx;
-    tutorial.win = win;
-
-    mlx_mouse_hook(win, &mouse_event, &tutorial);
-
-    mlx_loop(mlx);
+	tutorial.mlx = mlx;
+	tutorial.win = win;
+	mlx_mouse_hook(win, &mouse_event, &tutorial);
+	mlx_loop(mlx);
 }
-
-#endif

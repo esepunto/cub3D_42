@@ -1,8 +1,6 @@
-#include "mlx.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "../includes/cub3d.h"
 
-int close(void *param)
+int	2close(void *param)
 {
     (void)param;
     exit(0);
@@ -21,8 +19,8 @@ int main()
     int height_y = 360;
     void *image;
     image = mlx_new_image(mlx, width_x, height_y);
-        
-    /* 
+
+    /*
     ** To get information related to the image.
     **
     ** The function will also return a char * which points to
@@ -32,11 +30,11 @@ int main()
     int line_bytes;
     int endian;
     char *buffer = mlx_get_data_addr(image, &pixel_bits, &line_bytes, &endian);
-    printf("pixel_bits: %d\n", pixel_bits);
-    printf("line_bytes: %d\n", line_bytes);
-    printf("endian: %d\n", endian);
+    ft_printf("pixel_bits: %d\n", pixel_bits);
+	ft_printf("line_bytes: %d\n", line_bytes);
+    ft_printf("endian: %d\n", endian);
 
-    
+
     int color = 0xEFABCD;
 
     if (pixel_bits != 32)
@@ -67,9 +65,9 @@ int main()
     */
     mlx_put_image_to_window(mlx, win, image, 0, 0);
 
-    mlx_hook(win, 17, int x_mask, close(void *param), void *param);
+    mlx_hook(win, 17, int x_mask, 2close(void *param), void *param);
 
     mlx_loop(mlx);
-    
-    system("leaks -fullContent a.out");
+
+    system("leaks -fullContent tutorial");
 }

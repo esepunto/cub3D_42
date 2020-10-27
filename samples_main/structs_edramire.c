@@ -1,4 +1,4 @@
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 //#include <stdio.h>
 //#include <string.h>
 //#include <stdlib.h>

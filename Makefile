@@ -1,10 +1,8 @@
 NAME	=	tutorial
 
-CC		=	gcc
+CC		=	gcc -Wall -Wextra -Werror -g
 
 #SRCS	=	srcs/*.c
-
-FLAGS	=	-Wall -Wextra -Werror
 
 #MAIN	=	./samples_main/perror.c
 #MAIN	=	./samples_main/structs_edramire.c
@@ -17,12 +15,12 @@ FLAGS	=	-Wall -Wextra -Werror
 #MAIN	=	./samples_main/primeros_pasosA.c
 #MAIN	=	./samples_main/primeros_pasosB.c
 #MAIN	=	./samples_main/endian.c
-#MAIN	=	./samples_main/event_main.c
-#MAIN	=	./samples_main/hook.c #Error
+#MAIN	=	./samples_main/event_main.c //No funciona aún
+MAIN	=	./samples_main/hook.c #Error
 #MAIN	=	./samples_main/img_mlx.c
 #MAIN	=	./samples_main/rgb_to_int.c
 #MAIN	=	./samples_main/put_pixels.c
-MAIN	=	./samples_main/draw_line.c
+#MAIN	=	./samples_main/draw_line.c
 #MAIN	=	./samples_main/image1.c
 #MAIN	=	./samples_main/main.c
 #MAIN	=	./samples_main/main2.c
@@ -43,8 +41,8 @@ $(NAME):	$(OBJECTS)
 			-@make -C libft
 			-@make -C libft/ft_printf
 			-@make -C mlx
-			$(CC) $(FLAGS) $(LINKS) $(MAIN) $(LIBS) -o $(NAME)
-#			$(CC) $(FLAGS) $(LINKS) $(MAIN) $(SRCS) $(LIBS) -o $(NAME)
+			$(CC) $(LINKS) $(MAIN) $(LIBS) -o $(NAME)
+#			$(CC) $(LINKS) $(MAIN) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJECTS)

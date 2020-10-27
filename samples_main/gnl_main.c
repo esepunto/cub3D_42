@@ -1,11 +1,11 @@
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 int
 		main(void)
 {
 	int		r;
 	char	*line;
-	
+
 	line = NULL;
 	while ((r = get_next_line(0, &line)) > 0)
 	{

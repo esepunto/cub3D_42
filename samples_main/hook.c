@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:05:36 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/10 09:40:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 11:17:39 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include "../includes/cub3d.h"
 #include <stdio.h>
 
 #ifndef _UNISTD_H
@@ -48,28 +48,28 @@ typedef struct  s_vars {
     void	*win;
 }               t_vars;
 
-void	ft_putchar(int c)
+void	ft_putchars(int c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_putnbrs(int nb)
 {
 	unsigned int	copy_nb;
 
 	copy_nb = nb;
 	if (copy_nb > 9)
-		ft_putnbr(copy_nb / 10);
-	ft_putchar(copy_nb % 10 + '0');
+		ft_putnbrs(copy_nb / 10);
+	ft_putchars(copy_nb % 10 + '0');
 }
 
-void	ft_putstr(char *str)
+void	ft_putstrs(char *str)
 {
 	if (!str)
 		return ;
 	while (*str)
 	{
-		ft_putchar(*str);
+		ft_putchars(*str);
 		str++;
 	}
 }
@@ -77,17 +77,17 @@ void	ft_putstr(char *str)
 int		put_key(int keycode, t_vars *vars)
 {
 	if (keycode == 126)
-		ft_putstr("arriba");
+		ft_putstrs("arriba");
 	else if (keycode == 125)
-		ft_putstr("abajo");
+		ft_putstrs("abajo");
 	else if (keycode == 123)
-		ft_putstr("izquierda");
+		ft_putstrs("izquierda");
 	else if (keycode == 124)
-		ft_putstr("derecha");
-	else ft_putnbr(keycode);
-	ft_putchar(' ');
-	ft_putchar('-');
-	ft_putchar(' ');
+		ft_putstrs("derecha");
+	else ft_putnbrs(keycode);
+	ft_putchars(' ');
+	ft_putchars('-');
+	ft_putchars(' ');
 	return (0);
 }
 
@@ -100,36 +100,38 @@ int		close(int keycode, t_vars *vars)
 int		get_mouse_action_and_position(int button, int x, int y, void *param)
 {
 	if (button == 1)
-		ft_putstr("click izquierdo en pos");
+		ft_putstrs("click izquierdo en pos");
 	else if (button == 2)
-		ft_putstr("clic derecho en pos");
+		ft_putstrs("clic derecho en pos");
 	else if (button == 3)
-		ft_putstr("clic rueda en pos");
+		ft_putstrs("clic rueda en pos");
 	else if (button == 5)
-		ft_putstr("rueda parriba en pos");
+		ft_putstrs("rueda parriba en pos");
 	else if (button == 4)
-		ft_putstr("rueda pabajo en pos");
-	ft_putchar(' ');
-	ft_putnbr(x);
-	ft_putchar(',');
-	ft_putnbr(y);
-	ft_putchar(' ');
-	ft_putchar('-');
-	ft_putchar('\n');
+		ft_putstrs("rueda pabajo en pos");
+	ft_putchars(' ');
+	ft_putnbrs(x);
+	ft_putchars(',');
+	ft_putnbrs(y);
+	ft_putchars(' ');
+	ft_putchars('-');
+	ft_putchars('\n');
 	return (1);
 }
 
-int		get_mouse_pos(int button, int x, int y, void *param)//No funcona aun
+/*
+int		get_mouse_pos(int x, int y, void *param)//No funcona aun
 {
 //	mlx_mouse_get_pos;
-	ft_putnbr(x);
-	ft_putchar(',');
-	ft_putnbr(y);
-	ft_putchar(' ');
-	ft_putchar('-');
-	ft_putchar('\n');
+	ft_putnbrs(x);
+	ft_putchars(',');
+	ft_putnbrs(y);
+	ft_putchars(' ');
+	ft_putchars('-');
+	ft_putchars('\n');
 	return (1);
 }
+*/
 
 typedef struct  s_mouse_pos
 {
@@ -145,11 +147,11 @@ int		main(void)
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 600, 480, "Buenorra, ese vinito blanco YAAAAAA!");
-//	mlx_mouse_move(vars.win, 25, 250);// OK
-//	mlx_mouse_hook(vars.win, &get_mouse_action_and_position, &vars);// OK
-//	mlx_mouse_hook(vars.win, &get_mouse_pos, &vars);//OK
-//	mlx_key_hook(vars.win, put_key, &vars);// OK
-//	mlx_key_hook(vars.win, close, &vars);// OK
+	mlx_mouse_move(vars.win, 25, 250);// OK
+	mlx_mouse_hook(vars.win, &get_mouse_action_and_position, &vars);// OK
+	mlx_mouse_hook(vars.win, &get_mouse_pos, &vars);//OK
+	mlx_key_hook(vars.win, put_key, &vars);// OK
+	mlx_key_hook(vars.win, close, &vars);// OK
 	printf("%p", (int (*)(void *, int *, int *))mlx_mouse_get_pos);
 	mlx_loop(vars.mlx);
 }

@@ -6,15 +6,15 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/26 14:42:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 10:58:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "mlx/mlx.h"
-# include "libft/libft.h"
-# include "libft/ft_printf/libftprintf.h"
+# include "../mlx/mlx.h"
+# include "../libft/libft.h"
+# include "../libft/ft_printf/libftprintf.h"
 # include <limits.h>
 # include <string.h>
 # include <errno.h>

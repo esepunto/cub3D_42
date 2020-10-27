@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 10:21:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/08 10:12:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 10:50:59 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "../includes/cub3d.h"
 #include <unistd.h>
 
 void	ft_putchar(int c)
