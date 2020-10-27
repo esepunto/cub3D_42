@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 17:43:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 19:24:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_readconfig
 	int		xrendersize;
 	int		yrendersize;
 
-}				t_config
+}				t_config;
 
 
 typedef struct	s_raycast

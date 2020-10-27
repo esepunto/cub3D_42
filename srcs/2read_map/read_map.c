@@ -6,7 +6,7 @@
 /*   By: ssacrist </var/mail/ssacrist>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 18:16:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/27 19:24:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ char	read_map(char *name_map)
 	
 	line = NULL;
 	fd = open(name_map, O_RDONLY);
+	if (fd == NULL)
+	{
+		ft_printf("Error: %s\n", strerror(errno));
+	}
 	while ((i = get_next_line(fd, &line)) == 1)
 	{
 		printf("\n%s", line);

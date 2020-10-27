@@ -1,4 +1,4 @@
-NAME	=	tutorial
+NAME	=	cub3D
 
 CC		=	gcc -Wall -Wextra -Werror -g
 
