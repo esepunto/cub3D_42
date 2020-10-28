@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/28 13:50:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/28 14:42:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	create_map(int c, char **line)
 {
-	static int		j;
 	int 		len;
-//	t_map		map;
+	static char		**map;
 
-	printf("\ntamaño del line %lu.\n", sizeof(line));
-	printf("fila %d\n", c);
-	printf("%s\n", *line);
-	j = 0;
+/*	printf("\nLínea %d del mapa:\n%s\n", c, *line);
 	len = ft_strlen((const char *)*line);
 	printf("len = %d\n", len);
-
+*/	if(!(map = (char **)malloc(200*sizeof(char *))))
+		return ;
 //	ft_strdup(*map.map);
-//	map.map[j] = *line;
-	j++;
+	map[c] = *line;
+	printf("\nCON VARIABLE map\nLínea %d del mapa:\n%s\n", c, map[c]);
+	len = ft_strlen((const char *)map[c]);
+	printf("len = %d\n", len);
+	free(map);
 /*
 	while (j < len)
 	{
