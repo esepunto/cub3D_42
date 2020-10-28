@@ -1,6 +1,6 @@
 NAME	=	cub3D
 
-CC		=	gcc -Wall -Wextra -Werror
+CC		=	gcc -Wall -Wextra -Werror -g
 
 #SRCS	=	srcs/*.c
 
