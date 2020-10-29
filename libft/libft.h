@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/01/11 13:48:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/29 09:12:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,7 @@ void				ft_memdel(void **a);
 char				*ft_extract(char *str);
 int					ft_chop(char **str, char **line);
 int					get_next_line(int fd, char **line);
+void				ft_memdel(void **a);
+char				*ft_extract(char *str);
+int					ft_chop(char **str, char **line);
 #endif

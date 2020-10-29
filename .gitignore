@@ -5,3 +5,6 @@ cub3D/
 tutorial.*
 codes_from_videos/
 cub3D.dSYM/
+itoamouli.c
+main_itoa.c
+samples_main/main_split.c

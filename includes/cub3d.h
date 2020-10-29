@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/28 13:03:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/29 12:32:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ static char	MAPA[14][33] = {
 typedef struct	s_map
 {
 	char	**map;
+	char	**aux;
+	char	**line;
 }				t_map;
 
 
 typedef struct	s_readconfig
 {
-//	char	map[][];
+	t_map	map;
 	char	*wallno;
 	char	*wallso;
 	char	*wallea;
@@ -93,5 +95,12 @@ typedef struct	s_raycast
 	double	yolddir;
 
 }				t_rayc;
+
+typedef struct	s_superstruct
+{
+	t_config	conf;
+	t_rayc		raycast;
+}				t_all;
+
 
 #endif

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 18:25:59 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/07/28 02:59:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/10/29 09:19:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+# include "../../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
