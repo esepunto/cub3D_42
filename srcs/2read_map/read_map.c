@@ -6,33 +6,39 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/29 23:47:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/03 14:46:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//static char	**g_map;
-
+/*
 void	create_map(int c, char **line, t_all *a)
 {
 	int 		len;
+	t_all		aux;
 
-	if(!(a->conf.map.aux = malloc(sizeof(char*) * 50)))
+	if(!(a->map = malloc(sizeof(char*) * 24)))
 		return ;
-	if(!(a->conf.map.aux[c] = malloc(sizeof(char) * 33)))
+	if(!(a->map[c] = malloc(sizeof(char) * 33)))
 		return ;
-	if(!(a->conf.map.map = malloc(sizeof(char*) * 50)))
+	if(!(aux.map = malloc(sizeof(char*) * 24)))
 		return ;
-	if(!(a->conf.map.map[c] = malloc(sizeof(char) * 33)))
+	if(!(aux.map[c] = malloc(sizeof(char) * 33)))
 		return ;
-	a->conf.map.aux[c] = *line;
-	a->conf.map.map[c] = a->conf.map.aux[c];
-	len = ft_strlen((const char *)a->conf.map.map[c]);
-	write(1, a->conf.map.map[c], len);
-	printf("\nlongitud de linea %d = %d\n\n", c, len);
+	aux.map[c] = *line;
+	a->map[c] = aux.map[c];
 
+//	ft_strjoin(lo que tenía, line)
+//	ft_split(ft_stroin)
+
+//	aux.map[c] = NULL;
+	len = ft_strlen((const char *)a->map[c]);
+	write(1, a->map[c], len);
+	printf("\nlen line %d = %d\n\n", c, len);
+	free(aux.map);
 }
+*/
 
 int		read_map(char *name_map, t_all *a)
 {
@@ -40,8 +46,9 @@ int		read_map(char *name_map, t_all *a)
 	char		*line;
 	int			i;
 	static int	c;
-//	t_config	config_file;
+	t_all		aux;
 
+	aux = *a;
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
@@ -51,56 +58,57 @@ int		read_map(char *name_map, t_all *a)
 	c = 0;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-	//	printf("\n%s", line);// >> Manage error and save config in struct
-		create_map(c, &line, a);
-//		printf("tamaño del line %lu.\n", sizeof(&line));
+//		create_map(c, &line, a);
+		if (!a->map)
+			a->map = ft_strdup(line);
+		aux.map = ft_strjoin((const char *)a->map, line);
+		free(&a->map);
+		a->map = aux.map;
 		free(line);
 		line = NULL;
 		c++;
 	}
-//	printf("\n%s", line);
 	free(line);
 	line = NULL;
+	a->map = *ft_split(a->map, '\n');
+	printf("%s", a->map);
 	close(fd);
 	return (0);
 }
 
+void	init_struct(t_all *a)
+{
+//	a->conf = (t_config)NULL;
+//	a->raycast = (t_rayc)NULL;
+	a->map = NULL;
+
+}
 
 int		main(int argc, char **argv)
 {
 	t_all	a;
 	int		i;
-//	int		len;
+	int		len;
 
+	len = 0;
+
+	init_struct(&a);
 	if (argc == 2)
 	{
 		read_map(argv[1], &a);
 	}
 	else
 		printf("Please, type carefully. It looks there's an error in you order. Thanks!\n");
-//	len = ft_strlen((const char *)a.conf.map.map[1]);
-//	printf("linea line lineaaaaa\n%s\n", a.conf.map.map[1]);
-//	write(1, a.conf.map.map[1], len);
-/*	if (a.conf.map.map != 0)
+	i = 0;
+/*	while (i <= 23)
 	{
-		while (a.conf.map.map[i])
-		{
-			len = ft_strlen((const char *)a.conf.map.map[i]);
-			write(1, a.conf.map.map[i], len);
-			printf("\nlongitud de linea %d = %d\n\n", i, len);
-			i++;
-		}
-	}
-*/	i = 0;
-	while (a.conf.map.map[i])
-	{
-		free(a.conf.map.aux[i]);
-		free(a.conf.map.map[i]);
+		free(a.map[i]);
+		a.map[i] = NULL;
 		i++;
 	}
-	free(a.conf.map.aux);
-	free(a.conf.map.map);
-	a.conf.map.aux = NULL;
-	a.conf.map.map = NULL;
+	free(a.map);
+	a.map = NULL;
+*/	printf("%s", a.map);
+	free(a.map);
 	system("leaks cub3D");
 }

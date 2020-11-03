@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/29 12:32:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/03 14:43:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,11 @@ typedef struct	s_raycast
 
 }				t_rayc;
 
-typedef struct	s_superstruct
+typedef struct	s_cub3d
 {
-	t_config	conf;
-	t_rayc		raycast;
+//	t_config	conf;
+//	t_rayc		raycast;
+	char		*map;
 }				t_all;
 
 
