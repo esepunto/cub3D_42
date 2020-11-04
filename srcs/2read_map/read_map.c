@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 11:29:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 14:48:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		read_map(char *name_map, t_all *a)
 		perror("Error\n");
 		return (0);
 	}
+	
 	line = NULL;
 	
 	size_t	columnas;
@@ -42,8 +43,20 @@ int		read_map(char *name_map, t_all *a)
 
 
 
-	if (!(a->map = (char **)malloc(a->filas)))
+	if (!(a->map = malloc(a->filas + 1)))
 		return (-1);
+	i = 0;
+	while (i < a->filas)
+	{
+		a->map[i] = malloc(a->columna_mayor);
+		if (!a->map[i])
+		{
+			perror("\nError\nFalta memoria");
+			return (0);
+		}
+		else
+			i++;
+	}	
 
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
@@ -55,10 +68,9 @@ int		read_map(char *name_map, t_all *a)
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->map[c] = ft_strdup(line);
+		c++;
 		free(line);
 		line = NULL;
-		c++;
-		
 	}
 	free(line);
 	line = NULL;
@@ -91,19 +103,23 @@ int		main(int argc, char **argv)
 	printf("filas: %d\n", a.filas);
 	printf("colum: %zu\n", a.columna_mayor);
 	i = 0;
-//	printf("map[0][5] = %c", a.map[0][5]);
+	printf("map[0][7] = %c\n", a.map[0][7]);
 	while (i < a.filas)
 	{
 		printf("linea %d: %s\n", i, a.map[i]); 
 		i++;
 	}
-	printf("map[0][5] = %c", a.map[0][5]);
+	printf("map[0][0] = %c", a.map[0][0]);
+	
 	i = 0;
-	while (i < a.filas)
-	{
-		free(a.map[i]);
-		i++;
+	if (a.map)
+/*	{
+		while (i <= a.filas)
+		{
+			free(a.map[i]);
+			i++;
+		}
+		free (a.map);
 	}
-//	free(a.map);
-	system("leaks cub3D");
+*/	system("leaks cub3D");
 }
