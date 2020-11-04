@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 11:23:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:29:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		read_map(char *name_map, t_all *a)
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->map[c] = ft_strdup(line);
-//		free(line);
+		free(line);
 		line = NULL;
 		c++;
 		
