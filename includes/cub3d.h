@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/03 14:43:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 10:13:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ typedef struct	s_cub3d
 {
 //	t_config	conf;
 //	t_rayc		raycast;
-	char		*map;
+	char		**map;
+	size_t		columna_mayor;
+	int			filas;
 }				t_all;
 
 

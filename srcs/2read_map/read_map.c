@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 07:52:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 11:23:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,59 @@ int		read_map(char *name_map, t_all *a)
 	char		*line;
 	int			i;
 	static int	c;
-	t_all		aux;
 
-	aux = *a;
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
 		return (0);
 	}
 	line = NULL;
+	
+	size_t	columnas;
+	while ((i = get_next_line(fd, &line)) > 0)
+	{
+		columnas = ft_strlen(line);
+		if (columnas > a->columna_mayor)
+			a->columna_mayor = columnas;
+		free(line);
+		line = NULL;
+		a->filas++;
+	}	
+	free(line);
+	line = NULL;
+	close(fd);
+
+
+
+	if (!(a->map = (char **)malloc(a->filas)))
+		return (-1);
+
+	if ((fd = open(name_map, O_RDONLY)) == -1)
+	{
+		perror("Error\n");
+		return (0);
+	}
+	
 	c = 0;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-//		create_map(c, &line, a);
-		if (!a->map)
-			a->map = ft_strdup(line);
-		else
-		{	
-			aux.map = ft_strjoin(a->map, line);
-			free(a->map);
-			a->map = aux.map;
-		}
-		free(line);
+		a->map[c] = ft_strdup(line);
+//		free(line);
 		line = NULL;
 		c++;
+		
 	}
 	free(line);
 	line = NULL;
-	a->map = *ft_split(a->map, '\n');
-	printf("%s", a->map);
 	close(fd);
 	return (0);
 }
 
 void	init_struct(t_all *a)
 {
-//	a->conf = (t_config)NULL;
-//	a->raycast = (t_rayc)NULL;
 	a->map = NULL;
-
+	a->filas = 0;
+	a->columna_mayor = 0;
 }
 
 int		main(int argc, char **argv)
@@ -74,16 +88,22 @@ int		main(int argc, char **argv)
 	}
 	else
 		printf("Please, type carefully. It looks there's an error in you order. Thanks!\n");
+	printf("filas: %d\n", a.filas);
+	printf("colum: %zu\n", a.columna_mayor);
 	i = 0;
-/*	while (i <= 23)
+//	printf("map[0][5] = %c", a.map[0][5]);
+	while (i < a.filas)
 	{
-		free(a.map[i]);
-		a.map[i] = NULL;
+		printf("linea %d: %s\n", i, a.map[i]); 
 		i++;
 	}
-	free(a.map);
-	a.map = NULL;
-*/	printf("%s", a.map);
-	free(a.map);
+	printf("map[0][5] = %c", a.map[0][5]);
+	i = 0;
+	while (i < a.filas)
+	{
+		free(a.map[i]);
+		i++;
+	}
+//	free(a.map);
 	system("leaks cub3D");
 }
