@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 14:48:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 15:34:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int		read_map(char *name_map, t_all *a)
 		perror("Error\n");
 		return (0);
 	}
-	
+
 	line = NULL;
-	
+
 	size_t	columnas;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
@@ -36,7 +36,7 @@ int		read_map(char *name_map, t_all *a)
 		free(line);
 		line = NULL;
 		a->filas++;
-	}	
+	}
 	free(line);
 	line = NULL;
 	close(fd);
@@ -46,7 +46,7 @@ int		read_map(char *name_map, t_all *a)
 	if (!(a->map = malloc(a->filas + 1)))
 		return (-1);
 	i = 0;
-	while (i < a->filas)
+/*	while (i < a->filas)
 	{
 		a->map[i] = malloc(a->columna_mayor);
 		if (!a->map[i])
@@ -56,14 +56,14 @@ int		read_map(char *name_map, t_all *a)
 		}
 		else
 			i++;
-	}	
-
+	}
+*/
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
 		return (0);
 	}
-	
+
 	c = 0;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
@@ -106,20 +106,20 @@ int		main(int argc, char **argv)
 	printf("map[0][7] = %c\n", a.map[0][7]);
 	while (i < a.filas)
 	{
-		printf("linea %d: %s\n", i, a.map[i]); 
+		printf("linea %d: %s\n", i, a.map[i]);
 		i++;
 	}
-	printf("map[0][0] = %c", a.map[0][0]);
-	
+//	printf("map[0][0] = %c", a.map[0][0]);
+
 	i = 0;
-	if (a.map)
-/*	{
+/*	if (a.map)
+	{
 		while (i <= a.filas)
 		{
 			free(a.map[i]);
 			i++;
 		}
-		free (a.map);
+		free(a.map);
 	}
 */	system("leaks cub3D");
 }
