@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 15:34:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/04 17:02:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int		read_map(char *name_map, t_all *a)
 
 
 
-	if (!(a->map = malloc(a->filas + 1)))
+	if (!(a->map =(char **)malloc(a->filas)))
 		return (-1);
 	i = 0;
-/*	while (i < a->filas)
+	while (i < a->filas)
 	{
-		a->map[i] = malloc(a->columna_mayor);
+		a->map[i] = malloc(a->columna_mayor + 1);
 		if (!a->map[i])
 		{
 			perror("\nError\nFalta memoria");
@@ -57,7 +57,7 @@ int		read_map(char *name_map, t_all *a)
 		else
 			i++;
 	}
-*/
+
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
@@ -109,12 +109,12 @@ int		main(int argc, char **argv)
 		printf("linea %d: %s\n", i, a.map[i]);
 		i++;
 	}
-//	printf("map[0][0] = %c", a.map[0][0]);
+	printf("map[0][0] = %c", a.map[0][0]);
 
 	i = 0;
 /*	if (a.map)
 	{
-		while (i <= a.filas)
+		while (i < a.filas)
 		{
 			free(a.map[i]);
 			i++;
