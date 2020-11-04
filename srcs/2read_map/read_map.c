@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/04 17:02:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 00:07:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int		read_map(char *name_map, t_all *a)
 
 
 
-	if (!(a->map =(char **)malloc(a->filas)))
+	if (!(a->map =(char **)malloc(a->filas * sizeof(char *))))
 		return (-1);
 	i = 0;
 	while (i < a->filas)
 	{
-		a->map[i] = malloc(a->columna_mayor + 1);
+		a->map[i] = (char *)malloc((a->columna_mayor + 1) * sizeof(char));
 		if (!a->map[i])
 		{
 			perror("\nError\nFalta memoria");
@@ -112,7 +112,7 @@ int		main(int argc, char **argv)
 	printf("map[0][0] = %c", a.map[0][0]);
 
 	i = 0;
-/*	if (a.map)
+	if (a.map)
 	{
 		while (i < a.filas)
 		{
@@ -121,5 +121,5 @@ int		main(int argc, char **argv)
 		}
 		free(a.map);
 	}
-*/	system("leaks cub3D");
+	system("leaks cub3D");
 }
