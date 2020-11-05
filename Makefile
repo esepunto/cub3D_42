@@ -5,10 +5,8 @@ CC		=	gcc -Wall -Wextra -Werror -g
 #SRCS	=	srcs/*.c
 
 SRCS	=	cub3d.c \
-			srcs\file_config\read_fconfig.c \
-			srcs\file_config\read_map.c \
-			srcs\file_config\save_fconfig.c \
-			utils\messages.c
+			./srcs/file_config/save_fconfig.c \
+			./utils/messages.c
 			
 #MAIN	=	./samples_main/main_split.c
 #MAIN	=	./srcs/2read_map/read_map.c
@@ -49,7 +47,7 @@ $(NAME):	$(OBJECTS)
 			-@make -C libft
 			-@make -C libft/ft_printf
 			-@make -C mlx
-			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
+			$(CC) $(LINKS) $(OBJECTS) $(LIBS) -o $(NAME)
 #			$(CC) $(LINKS) $(MAIN) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
