@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 01:08:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 07:59:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		read_map(char *name_map, t_cub3d *a)
 	close(fd);
 
 
-	if (!(a->.map.map = (char **)malloc(a->map.filas * sizeof(char *))))
+	if (!(a->map.map = (char **)malloc(a->map.filas * sizeof(char *))))
 		return (-1);
 	i = 0;
 	if ((fd = open(name_map, O_RDONLY)) == -1)
