@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 07:59:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 09:08:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ void	calc_map(char *conf_file, t_cub3d *a)
 	int		i;
 	size_t	columnas;
 
-	if ((fd = open(conf_file, O_RDONLY)) == -1)
-	{
-		perror("Error\n");
-		return (0);
-	}
 	line = NULL;
+	if ((fd = open(conf_file, O_RDONLY)) == -1)
+		perror("Error\n");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		columnas = ft_strlen(line);
@@ -46,12 +43,9 @@ void	save_map(char *conf_file, t_cub3d *a)
 	int			i;
 	static int	c;
 
-	if ((fd = open(conf_file, O_RDONLY)) == -1)
-	{
-		perror("Error\n");
-		return (0);
-	}
 	c = 0;
+	if ((fd = open(conf_file, O_RDONLY)) == -1)
+		perror("Error\n");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->map.map[c] = ft_strdup(line);
@@ -62,14 +56,13 @@ void	save_map(char *conf_file, t_cub3d *a)
 	free(line);
 	line = NULL;
 	close(fd);
-	return (0);
 }
 
-int		read_map(char *conf_file, t_cub3d *a)
+void	read_map(char *conf_file, t_cub3d *a)
 {
 	calc_map(conf_file, a);
 	if (!(a->map.map = (char **)malloc(a->map.row * sizeof(char *))))
-		return (-1);
+		perror("Error\nLa cagaste burt lancaster");
 	save_map(conf_file, a);
 }
 
@@ -99,7 +92,6 @@ void	print_map(t_cub3d *a)
 int		main(int argc, char **argv)
 {
 	t_cub3d	a;
-	int		i;
 
 	init_struct(&a);
 	if (argc == 2)
