@@ -12,7 +12,6 @@
 
 #include "includes/cub3d.h"
 
-
 void	init_struct(t_cub3d *a)
 {
 	a->fconf.map.map = NULL;

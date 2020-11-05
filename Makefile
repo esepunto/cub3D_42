@@ -4,7 +4,12 @@ CC		=	gcc -Wall -Wextra -Werror -g
 
 #SRCS	=	srcs/*.c
 
-MAIN	=	./cub3d.c
+SRCS	=	cub3d.c \
+			srcs\file_config\read_fconfig.c \
+			srcs\file_config\read_map.c \
+			srcs\file_config\save_fconfig.c \
+			utils\messages.c
+			
 #MAIN	=	./samples_main/main_split.c
 #MAIN	=	./srcs/2read_map/read_map.c
 #MAIN	=	./samples_main/perror.c
@@ -32,7 +37,7 @@ LIBS	=	libft/libft.a \
 			mlx/libmlx.a \
 			libft/ft_printf/libftprintf.a
 
-OBJECTS	=	$(MAIN:.c=.o)
+OBJECTS	=	$(SRCS:.c=.o)
 
 LINKS	=	-I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
@@ -44,7 +49,7 @@ $(NAME):	$(OBJECTS)
 			-@make -C libft
 			-@make -C libft/ft_printf
 			-@make -C mlx
-			$(CC) $(LINKS) $(MAIN) $(LIBS) -o $(NAME)
+			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
 #			$(CC) $(LINKS) $(MAIN) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:

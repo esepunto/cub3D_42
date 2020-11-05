@@ -84,5 +84,12 @@ typedef struct	s_cub3d
 //	t_map		map;
 }				t_cub3d;
 
+void	calc_fconfig(char *conf_file, t_cub3d *a);
+void	save_fconfig(char *conf_file, t_cub3d *a);
+void	read_fconfig(char *conf_file, t_cub3d *a);
+void	print_fconfig(t_cub3d *a);
+void	init_struct(t_cub3d *a);
+int		main(int argc, char **argv);
+int		msg_err(char *error);
 
 #endif
