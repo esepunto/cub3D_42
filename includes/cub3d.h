@@ -64,11 +64,14 @@ typedef struct	s_map
 
 typedef struct	s_readconfig
 {
+	char	*res;
 	char	*wallno;
 	char	*wallso;
 	char	*wallea;
 	char	*wallwe;
 	char	*sprite;
+	char	*ceil;
+	char	*flr;
 	int		ceilclr;
 	int		flrclr;
 	int		xrendersize;

@@ -64,6 +64,7 @@ void	read_fconfig(char *conf_file, t_cub3d *a)
 	if (!(a->fconf.map.map = (char **)malloc(a->fconf.map.row * sizeof(char *))))
 		msg_err("WTF! Give me back my memory!\n");
 	save_fconfig(conf_file, a);
+	find_walls(a);
 }
 
 void	print_fconfig(t_cub3d *a)
