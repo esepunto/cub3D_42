@@ -29,7 +29,7 @@ int		del_sp(int i, int j, t_cub3d *a)
 
 char	look4_id(char *id, t_cub3d *a, int len)
 {
-    int		i;
+	int		i;
 	int		j;
 	int		k;
 	
