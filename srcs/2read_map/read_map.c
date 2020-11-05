@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 00:07:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 01:08:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int		read_map(char *name_map, t_all *a)
 	int			i;
 	static int	c;
 
+	
+	
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
 		return (0);
 	}
-
 	line = NULL;
-
 	size_t	columnas;
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
@@ -42,22 +42,9 @@ int		read_map(char *name_map, t_all *a)
 	close(fd);
 
 
-
-	if (!(a->map =(char **)malloc(a->filas * sizeof(char *))))
+	if (!(a->map = (char **)malloc(a->filas * sizeof(char *))))
 		return (-1);
 	i = 0;
-	while (i < a->filas)
-	{
-		a->map[i] = (char *)malloc((a->columna_mayor + 1) * sizeof(char));
-		if (!a->map[i])
-		{
-			perror("\nError\nFalta memoria");
-			return (0);
-		}
-		else
-			i++;
-	}
-
 	if ((fd = open(name_map, O_RDONLY)) == -1)
 	{
 		perror("Error\n");
@@ -92,8 +79,10 @@ int		main(int argc, char **argv)
 	int		len;
 
 	len = 0;
-
+	
+	printf("Tamaño estructura antes iniciar: %lu\n", sizeof(t_all));
 	init_struct(&a);
+	printf("Tamaño estructura antes iniciar: %lu\n", sizeof(a));
 	if (argc == 2)
 	{
 		read_map(argv[1], &a);
@@ -112,8 +101,9 @@ int		main(int argc, char **argv)
 	printf("map[0][0] = %c", a.map[0][0]);
 
 	i = 0;
-	if (a.map)
+/*	if (a.map)
 	{
+		printf("\nHay a.map.\n");
 		while (i < a.filas)
 		{
 			free(a.map[i]);
@@ -121,5 +111,5 @@ int		main(int argc, char **argv)
 		}
 		free(a.map);
 	}
-	system("leaks cub3D");
+*/	system("leaks cub3D");
 }
