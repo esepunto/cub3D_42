@@ -54,17 +54,19 @@ int		del_sp(int i, int j, t_cub3d *a)
 **  don't manage all the errors because there's others functions
 **  to do it.
 **
-**  Variable len is the length of *id + 1: it helps to identify
+**  Variable len is the lenggitSth of *id + 1: it helps to identify
 **  an error (not space after id "NO", "EA", etc. in config file)  
 */
 
-char	*look4_id(char *id, t_cub3d *a, int len, int c)
+char	*look4_id(char *id, t_cub3d *a, int c)
 {
 	int		i;
 	int		j;
 	int		k;
+	int 	len;
 		
 	i = 0;
+	len = ft_strlen(id);
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
@@ -88,17 +90,16 @@ char	*look4_id(char *id, t_cub3d *a, int len, int c)
 
 void	find_walls(t_cub3d *a)
 {
-	a->fconf.wallno = (look4_id("NO ", a, 3, 0));
-	errors_mgmt("NO", a);
-	a->fconf.wallso = (look4_id("SO ", a, 3, 1));
-	errors_mgmt("SO", a);
-	a->fconf.wallwe = (look4_id("WE ", a, 3, 2));
-	errors_mgmt("WE", a);
-	a->fconf.wallea = (look4_id("EA ", a, 3, 3));
-	errors_mgmt("EA", a);
-	a->fconf.res = (look4_id("R ", a, 2, 4));
-	a->fconf.ceil = (look4_id("C ", a, 2, 5));
-	a->fconf.flr = (look4_id("F ", a, 2, 6));
+	a->fconf.wallno = (look4_id("NO ", a, 0));
+//	errors_mgmt("NO", a, 0);
+	a->fconf.wallso = (look4_id("SO ", a, 1));
+//	errors_mgmt("SO", a, 1);
+	a->fconf.wallwe = (look4_id("WE ", a, 2));
+//	errors_mgmt("WE", a, 2);
+	a->fconf.wallea = (look4_id("EA ", a, 3));
+//	errors_mgmt("EA", a, 3);
+	a->fconf.res = (look4_id("R ", a, 4));
+	a->fconf.ceil = (look4_id("C ", a, 5));
+	a->fconf.flr = (look4_id("F ", a, 6));
 	a->fconf.sprite = (look4_id("S ", a, 7));
-	errors_mgmt(a);
 }

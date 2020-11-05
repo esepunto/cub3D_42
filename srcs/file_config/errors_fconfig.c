@@ -12,13 +12,15 @@
 
 #include "../../includes/cub3d.h"
 
-void	errors_walls(char *id, t_cub3d *a)
+void	errors_mgmt(char *id, t_cub3d *a, int c)
 {
 	char	*aux;
 	int		i;
+	int		j;
 
+	a->fconf.wallno = (look4_id("NO ", a, 0));
+	
 	aux = a->fconf.res;
 	i = 0;
-	j = 0;
-	j = del_sp(i, j, a)
+	j = a->fconf.init_id[c];
 }

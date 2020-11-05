@@ -96,8 +96,8 @@ void	init_struct(t_cub3d *a);
 int		main(int argc, char **argv);
 int		msg_err(char *error);
 void	find_walls(t_cub3d *a);
-char	*look4_id(char *id, t_cub3d *a, int len, int c);
+char	*look4_id(char *id, t_cub3d *a, int c);
 int		del_sp(int i, int j, t_cub3d *a);
-void	errors_mgmt(char *id, t_cub3d *a);
+void	errors_mgmt(char *id, t_cub3d *a, int c);
 
 #endif
