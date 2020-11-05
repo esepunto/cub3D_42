@@ -55,6 +55,13 @@ typedef struct	s_raycast
 	double	yolddir;
 }				t_rayc;
 
+typedef struct	s_map
+{
+	char		**map;
+	size_t		col;
+	int			row;
+}				t_map;
+
 typedef struct	s_readconfig
 {
 	char	*wallno;
@@ -66,24 +73,15 @@ typedef struct	s_readconfig
 	int		flrclr;
 	int		xrendersize;
 	int		yrendersize;
+	t_map	map;
 }				t_config;
-
-typedef struct	s_map
-{
-	char		**map;
-	size_t		col;
-	int			row;
-	int			fd;
-	char		*line;
-	int			i;
-	t_config	config;
-}				t_map;
 
 typedef struct	s_cub3d
 {
 //	t_config	conf;
 //	t_rayc		raycast;
-	t_map		map;
+	t_config	fconf;
+//	t_map		map;
 }				t_cub3d;
 
 

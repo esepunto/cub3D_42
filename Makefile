@@ -4,8 +4,9 @@ CC		=	gcc -Wall -Wextra -Werror -g
 
 #SRCS	=	srcs/*.c
 
+MAIN	=	./cub3d.c
 #MAIN	=	./samples_main/main_split.c
-MAIN	=	./srcs/2read_map/read_map.c
+#MAIN	=	./srcs/2read_map/read_map.c
 #MAIN	=	./samples_main/perror.c
 #MAIN	=	./samples_main/structs_edramire.c
 #MAIN	=	./samples_main/padding_structs.c
