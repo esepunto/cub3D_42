@@ -27,7 +27,7 @@ int		del_sp(int i, int j, t_cub3d *a)
 	return (j);
 }
 
-char     look4_id(char *id, t_cub3d *a, int len)
+char	look4_id(char *id, t_cub3d *a, int len)
 {
     int		i;
 	int		j;
@@ -53,7 +53,7 @@ char     look4_id(char *id, t_cub3d *a, int len)
 	msg_err("Review the config file: something goes wrong.");
 }
 
-void    find_walls(t_cub3d *a)
+void	find_walls(t_cub3d *a)
 {
 	a->fconf.wallno = (look4_id("NO ", a, 2));
 	a->fconf.wallso = (look4_id("SO ", a, 3));
