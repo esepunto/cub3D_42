@@ -6,11 +6,19 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 17:07:43 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 09:08:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 10:50:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int		msg_err(char *error)
+{
+	perror("Error:\n");
+	ft_printf("%s", error);
+	system("leaks cub3D");
+	exit(0);
+}
 
 void	calc_map(char *conf_file, t_cub3d *a)
 {
@@ -21,7 +29,7 @@ void	calc_map(char *conf_file, t_cub3d *a)
 
 	line = NULL;
 	if ((fd = open(conf_file, O_RDONLY)) == -1)
-		perror("Error\n");
+		msg_err("Please, type carefully. This file is out of the air.\n");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		columnas = ft_strlen(line);
@@ -45,7 +53,7 @@ void	save_map(char *conf_file, t_cub3d *a)
 
 	c = 0;
 	if ((fd = open(conf_file, O_RDONLY)) == -1)
-		perror("Error\n");
+		msg_err("This file is out of the air.\n");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->map.map[c] = ft_strdup(line);
@@ -62,7 +70,7 @@ void	read_map(char *conf_file, t_cub3d *a)
 {
 	calc_map(conf_file, a);
 	if (!(a->map.map = (char **)malloc(a->map.row * sizeof(char *))))
-		perror("Error\nLa cagaste burt lancaster");
+		msg_err("WTF! Give me back my memory!\n");
 	save_map(conf_file, a);
 }
 
@@ -76,7 +84,7 @@ void	init_struct(t_cub3d *a)
 void	print_map(t_cub3d *a)
 {
 	int	i;
-	
+
 	i = 0;
 	printf("row: %d\n", a->map.row);
 	printf("colum: %zu\n", a->map.col);
@@ -94,12 +102,12 @@ int		main(int argc, char **argv)
 	t_cub3d	a;
 
 	init_struct(&a);
+	if (argc != 2)
+		msg_err("Either U type what I need 2 read or our LV is impossible.\n");
 	if (argc == 2)
 	{
 		read_map(argv[1], &a);
+		print_map(&a);//To check if structs saved the data
 	}
-	else
-		perror("Error\nPlease, type carefully, I can'f found the file.\n");
-	print_map(&a);//To check if structs saved the data
 	system("leaks cub3D");
 }
