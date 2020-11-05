@@ -71,9 +71,8 @@ typedef struct	s_readconfig
 typedef struct	s_map
 {
 	char		**map;
-	size_t		columna_mayor;
-	size_t		columnas;
-	int			filas;
+	size_t		col;
+	int			row;
 	int			fd;
 	char		*line;
 	int			i;
