@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 11:17:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:41:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int		main(int argc, char **argv)
 	{
 		read_fconfig(argv[1], &a);
 		print_fconfig(&a);//To check if structs saved the data
+		printf("\n%s\n\n", a.fconf.wallno);
+		printf("%s\n\n", a.fconf.wallso);
+		printf("%s\n\n", a.fconf.wallwe);
+		printf("%s\n\n", a.fconf.wallea);
+		printf("%s\n\n", a.fconf.res);
+		printf("%s\n\n", a.fconf.ceil);
+		printf("%s\n\n", a.fconf.flr);
+		printf("%s\n\n", a.fconf.sprite);
 	}
 	else
 		msg_err("Either U type what I need 2 read or our LV is impossible.\n");

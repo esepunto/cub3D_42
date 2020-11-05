@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 13:52:12 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:09:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	init_struct(t_cub3d *a);
 int		main(int argc, char **argv);
 int		msg_err(char *error);
 void	find_walls(t_cub3d *a);
-char	look4_id(char *id, t_cub3d *a, int len);
+char	*look4_id(char *id, t_cub3d *a, int len);
 int		del_sp(int i, int j, t_cub3d *a);
 
 #endif

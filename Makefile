@@ -5,8 +5,9 @@ CC		=	gcc -Wall -Wextra -Werror -g
 #SRCS	=	srcs/*.c
 
 SRCS	=	cub3d.c \
-			./srcs/file_config/save_fconfig.c \
-			./utils/messages.c
+			srcs/file_config/save_fconfig.c \
+			srcs/file_config/read_fconfig.c \
+			utils/messages.c
 			
 #MAIN	=	./samples_main/main_split.c
 #MAIN	=	./srcs/2read_map/read_map.c

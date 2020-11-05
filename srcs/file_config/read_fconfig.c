@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 11:55:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/05 18:11:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		del_sp(int i, int j, t_cub3d *a)
 	return (j);
 }
 
-char	look4_id(char *id, t_cub3d *a, int len)
+char	*look4_id(char *id, t_cub3d *a, int len)
 {
 	int		i;
 	int		j;
@@ -51,6 +51,7 @@ char	look4_id(char *id, t_cub3d *a, int len)
 		i++;
 	}
 	msg_err("Review the config file: something goes wrong.");
+	return (0);
 }
 
 void	find_walls(t_cub3d *a)
