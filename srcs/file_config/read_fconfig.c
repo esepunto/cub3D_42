@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_fconfig.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 18:11:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 11:46:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		del_sp(int i, int j, t_cub3d *a)
 	while (aux == '\n' || aux == '\t' || aux == '\r' || aux == '\v'
 			|| aux == '\f' || aux == '\b' || aux == '\r' || aux == '\\'
 			|| aux == ' ' || aux == '\t')
-	{	
+	{
 		j++;
 		aux = a->fconf.map.map[i][j];
 	}
@@ -33,7 +33,7 @@ int		del_sp(int i, int j, t_cub3d *a)
 
 /*
 ** This function look for the params of config file to identify it.
-**  _______________________________ 
+**  _______________________________
 **	|  char *id | c |   element   |
 **	|___________|___|_____________|
 **	|   "NO"    | 0 |    north    |
@@ -49,13 +49,13 @@ int		del_sp(int i, int j, t_cub3d *a)
 **  This function saves de initial position of the
 **  params in struct a.dconf.init_id[c] (see table above fior 'c')
 **
-**  This function returns a line (char *) with the params. 
+**  This function returns a line (char *) with the params.
 **  If find an error, stop the program and send message, but
 **  don't manage all the errors because there's others functions
 **  to do it.
 **
 **  Variable len is the lenggitSth of *id + 1: it helps to identify
-**  an error (not space after id "NO", "EA", etc. in config file)  
+**  an error (not space after id "NO", "EA", etc. in config file)
 */
 
 char	*look4_id(char *id, t_cub3d *a, int c)
@@ -64,15 +64,15 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 	int		j;
 	int		k;
 	int 	len;
-		
+
 	i = 0;
 	len = ft_strlen(id);
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
-		k = 0;
 		j = del_sp(i, j, a);
 		a->fconf.init_id[c] = j;
+		k = 0;
 		while (k < len)
 		{
 			if (a->fconf.map.map[i][j] != id[k])
@@ -84,13 +84,44 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 		}
 		i++;
 	}
-	msg_err("Review the config file: something goes wrong.");
+	msg_err("Review the config file: something goes wrong\n");
 	return (0);
 }
 
+/*
+**  This function returns, like *look4_id, the line when
+**  the id send by params ("NO", "WE", etc.), but its behaviour is
+**  a little diferent because its save the line without spaces at
+**  the beginning (deleted its when there's space at the beginning)
+**
+**  Also, I think this function (look4_id_2) is more readable
+**  than *look4_id, instead both functions manage the same errors.
+*/
+
+char	*look4_id_2(const char *id, t_cub3d *a)
+{
+	size_t		len;
+	const char	*s1;
+	int			i;
+
+	i = 0;
+	while (i < a->fconf.map.row)
+	{
+		s1 = a->fconf.map.map[i];
+		len = ft_strlen(s1);
+		if (ft_strnstr(s1, id, len))
+			return (ft_strnstr(s1, id, len));
+		i++;
+	}
+	msg_err("Review the config file: something goes wrong\n");
+	return (0);
+}
+
+
 void	find_walls(t_cub3d *a)
 {
-	a->fconf.wallno = (look4_id("NO ", a, 0));
+	a->fconf.wallno = (look4_id_2("NO ", a));
+//	a->fconf.wallno = (look4_id("NO ", a, 0));
 //	errors_mgmt("NO", a, 0);
 	a->fconf.wallso = (look4_id("SO ", a, 1));
 //	errors_mgmt("SO", a, 1);
