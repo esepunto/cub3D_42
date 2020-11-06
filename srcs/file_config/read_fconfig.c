@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_fconfig.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 14:01:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 14:45:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 **  This function dismiss blank spaces at the beginning of
 **  any line of the config file (except in map's lines, of course)
 */
+
 int		del_sp(int i, int j, t_cub3d *a)
 {
 	int	aux;
@@ -63,21 +64,19 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 	int		i;
 	int		j;
 	int		k;
-	int 	len;
 
 	i = 0;
-	len = ft_strlen(id);
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
 		j = del_sp(i, j, a);
 		a->fconf.init_id[c] = j;
 		k = 0;
-		while (k < len)
+		while (k < ft_strlen(id))
 		{
 			if (a->fconf.map.map[i][j] != id[k])
 				break ;
-			if (len == k + 1)
+			if (ft_strlen(id) == k + 1)
 				return (a->fconf.map.map[i]);
 			j++;
 			k++;
@@ -116,7 +115,6 @@ char	*look4_id_2(const char *id, t_cub3d *a)
 	msg_err("Review the config file: something goes wrong.");
 	return (0);
 }
-
 
 void	find_walls(t_cub3d *a)
 {
