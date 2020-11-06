@@ -8,7 +8,8 @@ SRCS	=	cub3d.c \
 			srcs/file_config/save_fconfig.c \
 			srcs/file_config/read_fconfig.c \
 			srcs/file_config/errors_fconfig.c \
-			utils/messages.c
+			utils/messages.c \
+			utils/tests.c
 
 #MAIN	=	./samples_main/main_split.c
 #MAIN	=	./srcs/2read_map/read_map.c

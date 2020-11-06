@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 11:46:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 14:01:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 		}
 		i++;
 	}
-	msg_err("Review the config file: something goes wrong\n");
+	msg_err("Review the config file: something goes wrong.");
 	return (0);
 }
 
@@ -113,7 +113,7 @@ char	*look4_id_2(const char *id, t_cub3d *a)
 			return (ft_strnstr(s1, id, len));
 		i++;
 	}
-	msg_err("Review the config file: something goes wrong\n");
+	msg_err("Review the config file: something goes wrong.");
 	return (0);
 }
 

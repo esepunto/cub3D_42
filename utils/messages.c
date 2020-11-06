@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   messages.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/05 11:20:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 14:19:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int		msg_err(char *error)
 {
-	perror("Error:\n");
-	ft_printf("%s", error);
-	system("leaks cub3D");
+	ft_printf("Error\n%s\n\n", error);
+//	system("leaks cub3D");
 	exit(0);
 }

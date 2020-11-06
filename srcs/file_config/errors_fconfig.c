@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:57:34 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 10:52:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 14:01:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	errors_mgmt(char *id, t_cub3d *a, int c)
 	len = ft_strlen((const char *)a->fconf.wallno);
 
 	if (!(aux = ft_strnstr(s1, s2, len)))
-		msg_err("Este conf file no me vale");
+		msg_err("Este conf file no me vale.");
 
 //	aux = a->fconf.res;
 //	i = 0;

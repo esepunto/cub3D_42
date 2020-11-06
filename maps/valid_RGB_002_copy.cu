@@ -1,7 +1,7 @@
 R 1080 720
-         NO ./wolftex/greystone.png
-   SmO ./wolftex/redbrick.png
-                        EA ./wolftex/wood.png
+    NO ./wolftex/greystone.png
+SO ./wolftex/redbrick.png
+		EA ./wolftex/wood.png
 WE ./wolftex/wood.png
 S ./wolftex/barrel.png
 C 255,122,0
