@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 14:27:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/07 00:19:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	init_struct(t_cub3d *a)
 	a->fconf.map.col = 0;
 }
 
+/*
+**  line 40: to check if structs saved the data
+*/
+
 int		main(int argc, char **argv)
 {
 	t_cub3d	*a;
 	int		len;
 
-//	init_struct(&a);
 	if (argc == 2)
 	{
 		if (ft_memcmp(argv[0], "./cub3D", 7))
@@ -35,8 +38,7 @@ int		main(int argc, char **argv)
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);
 		read_fconfig(argv[1], a);
-		print_fconfig(a);//To check if structs saved the data
-
+		print_fconfig(a);
 	}
 	else
 		msg_err("Either U type what I need 2 read or our LV is impossible.");

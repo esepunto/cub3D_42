@@ -6,11 +6,27 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 14:45:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/07 00:31:52 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int		ft_isblank(int c)
+{
+	return (c == 9 || c == 32);
+}
+
+char	*look4_texture(char	*str, char	*id)
+{
+	size_t	i;
+
+	i = ft_strlen(id);
+	while (ft_isblank(str[i]))
+		i++;
+	str = ft_substr(str, i, ft_strlen(str) - i);
+	return (str);
+}	
 
 /*
 **  This function dismiss blank spaces at the beginning of
@@ -63,7 +79,7 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 {
 	int		i;
 	int		j;
-	int		k;
+	size_t	k;
 
 	i = 0;
 	while (i < a->fconf.map.row)
@@ -118,17 +134,17 @@ char	*look4_id_2(const char *id, t_cub3d *a)
 
 void	find_walls(t_cub3d *a)
 {
-	a->fconf.wallno = (look4_id_2("NO ", a));
-//	a->fconf.wallno = (look4_id("NO ", a, 0));
-//	errors_mgmt("NO", a, 0);
-	a->fconf.wallso = (look4_id("SO ", a, 1));
-//	errors_mgmt("SO", a, 1);
-	a->fconf.wallwe = (look4_id("WE ", a, 2));
-//	errors_mgmt("WE", a, 2);
-	a->fconf.wallea = (look4_id("EA ", a, 3));
-//	errors_mgmt("EA", a, 3);
+	a->fconf.wallno = look4_id_2("NO ", a);
+	a->fconf.wallno_texture = look4_texture(a->fconf.wallno, "NO ");
+	a->fconf.wallso = look4_id_2("SO ", a);
+	a->fconf.wallso_texture = look4_texture(a->fconf.wallso, "SO ");
+	a->fconf.wallwe = look4_id_2("WE ", a);
+	a->fconf.wallwe_texture = look4_texture(a->fconf.wallwe, "WE ");
+	a->fconf.wallea = look4_id_2("EA ", a);
+	a->fconf.wallea_texture = look4_texture(a->fconf.wallea, "EA ");
 	a->fconf.res = (look4_id("R ", a, 4));
 	a->fconf.ceil = (look4_id("C ", a, 5));
 	a->fconf.flr = (look4_id("F ", a, 6));
-	a->fconf.sprite = (look4_id("S ", a, 7));
+	a->fconf.sprite = look4_id_2("S ", a);
+	a->fconf.sprite_texture = look4_texture(a->fconf.sprite, "S ");
 }

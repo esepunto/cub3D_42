@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 14:27:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/07 00:02:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	print_fconfig(t_cub3d *a)
 	}
 	printf("map[0][0] = %c", a->fconf.map.map[0][0]);
 	printf("\n%s\n\n", a->fconf.wallno);
+	printf("TEXTURE: %s\n\n", a->fconf.wallno_texture);
+	printf("TEXTURE: %s\n\n", a->fconf.wallso_texture);
+	printf("TEXTURE: %s\n\n", a->fconf.wallwe_texture);
+	printf("TEXTURE: %s\n\n", a->fconf.wallea_texture);
+	printf("TEXTURE: %s\n\n", a->fconf.sprite_texture);
 	printf("%s\n\n", a->fconf.wallso);
 	printf("%s\n\n", a->fconf.wallwe);
 	printf("%s\n\n", a->fconf.wallea);

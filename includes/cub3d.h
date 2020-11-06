@@ -6,7 +6,7 @@
 /*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 11:11:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/06 23:58:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,22 @@ typedef struct	s_map
 typedef struct	s_readconfig
 {
 	char	*res;
+	int		xrendersize;
+	int		yrendersize;
 	char	*wallno;
+	char	*wallno_texture;
 	char	*wallso;
+	char	*wallso_texture;
 	char	*wallea;
+	char	*wallea_texture;
 	char	*wallwe;
+	char	*wallwe_texture;
 	char	*sprite;
+	char	*sprite_texture;
 	char	*ceil;
 	char	*flr;
 	int		ceilclr;
 	int		flrclr;
-	int		xrendersize;
-	int		yrendersize;
 	int		init_id[8];
 	t_map	map;
 }				t_config;
@@ -100,5 +105,7 @@ char	*look4_id(char *id, t_cub3d *a, int c);
 char	*look4_id_2(const char *id, t_cub3d *a);
 int		del_sp(int i, int j, t_cub3d *a);
 void	errors_mgmt(char *id, t_cub3d *a, int c);
+char	*look4_texture(char *str, char *id);
+int		ft_isblank(int c);
 
 #endif
