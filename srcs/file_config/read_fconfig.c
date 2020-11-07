@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 14:25:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/07 14:41:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*look4_texture(char	*str, char	*id)
 **  any line of the config file (except in map's lines, of course)
 */
 
-int		del_sp(int i, int j, t_cub3d *a)
+int		jump_sp(int i, int j, t_cub3d *a)
 {
 	int	aux;
 
@@ -43,27 +43,24 @@ int		del_sp(int i, int j, t_cub3d *a)
 
 void	is_repeat(int m, t_cub3d *a, const char *id)
 {
-	char	**s1;
-	int			i;
 	int			j;
 	int			z;
 	int			len;
 
 	len = ft_strlen(id);
-	i = m + 1;
-	s1 = a->fconf.map.map;
-	while (i < a->fconf.map.row)
+	m = m + 1;
+	while (m < a->fconf.map.row)
 	{
-		j = del_sp(i, 0, a);
+		j = jump_sp(m, 0, a);
 		z = 0;
-		while (z < len && s1[i][j] == id[z])
+		while (z < len && a->fconf.map.map[m][j] == id[z])
 		{
 			if (z == len - 1)
 				msg_err("No no no no: a param is repeat.");
 			z++;
 			j++;
 		}
-		i++;
+		m++;
 	}
 	return ;
 }
@@ -106,7 +103,7 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
-		j = del_sp(i, j, a);
+		j = jump_sp(i, j, a);
 		a->fconf.init_id[c] = j;
 		k = 0;
 		while (k < ft_strlen(id))
@@ -114,10 +111,7 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 			if (a->fconf.map.map[i][j] != id[k])
 				break ;
 			if (ft_strlen(id) == k + 1)
-			{
-//				return (a->fconf.map.map[i]);
 				return(look4_id_2(id, a, i));
-			}
 			j++;
 			k++;
 		}

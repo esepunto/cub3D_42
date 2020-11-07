@@ -4,7 +4,7 @@ R 1080 720
                         EA ./wolftex/wood.png g
 WE ./wolftex/wood.png h
 S ./wolftex/barrel.png h
-C255,122,0
+C 255,122,0
 F 0,122,255 j
 NO ./wolftex/greystone.png   lñññk´ñ NO kjlkj
 
