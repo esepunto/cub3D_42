@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   ft_isblank.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 10:03:44 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/07 08:32:56 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/07 08:34:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int		msg_err(char *error)
+int		ft_isblank(int c)
 {
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	return (c == 9 || c == 32);
 }

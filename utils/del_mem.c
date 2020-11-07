@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   del_mem.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 10:03:44 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/07 11:17:23 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/07 11:29:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		msg_err(char *error)
+void	del_mem_fconf(t_cub3d *a)
 {
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	int		i;
+	char *c;
+
+	i = 0;
+	while (i <= 7)
+	{
+//		ft_memdel((void **)a->fconf.wall_texture[i]);
+		c = a->fconf.wall_texture[i];
+		i++;
+	}
+}
+
+void	del_mem(t_cub3d *a)
+{
+	del_mem_fconf(a);
 }

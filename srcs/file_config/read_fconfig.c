@@ -6,16 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 00:31:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/07 14:25:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int		ft_isblank(int c)
-{
-	return (c == 9 || c == 32);
-}
 
 char	*look4_texture(char	*str, char	*id)
 {
@@ -26,7 +21,7 @@ char	*look4_texture(char	*str, char	*id)
 		i++;
 	str = ft_substr(str, i, ft_strlen(str) - i);
 	return (str);
-}	
+}
 
 /*
 **  This function dismiss blank spaces at the beginning of
@@ -38,15 +33,41 @@ int		del_sp(int i, int j, t_cub3d *a)
 	int	aux;
 
 	aux = a->fconf.map.map[i][j];
-	while (aux == '\n' || aux == '\t' || aux == '\r' || aux == '\v'
-			|| aux == '\f' || aux == '\b' || aux == '\r' || aux == '\\'
-			|| aux == ' ' || aux == '\t')
+	while (ft_isblank(aux))
 	{
 		j++;
 		aux = a->fconf.map.map[i][j];
 	}
 	return (j);
 }
+
+void	is_repeat(int m, t_cub3d *a, const char *id)
+{
+	char	**s1;
+	int			i;
+	int			j;
+	int			z;
+	int			len;
+
+	len = ft_strlen(id);
+	i = m + 1;
+	s1 = a->fconf.map.map;
+	while (i < a->fconf.map.row)
+	{
+		j = del_sp(i, 0, a);
+		z = 0;
+		while (z < len && s1[i][j] == id[z])
+		{
+			if (z == len - 1)
+				msg_err("No no no no: a param is repeat.");
+			z++;
+			j++;
+		}
+		i++;
+	}
+	return ;
+}
+
 
 /*
 ** This function look for the params of config file to identify it.
@@ -93,7 +114,10 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 			if (a->fconf.map.map[i][j] != id[k])
 				break ;
 			if (ft_strlen(id) == k + 1)
-				return (a->fconf.map.map[i]);
+			{
+//				return (a->fconf.map.map[i]);
+				return(look4_id_2(id, a, i));
+			}
 			j++;
 			k++;
 		}
@@ -113,7 +137,7 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 **  than *look4_id, instead both functions manage the same errors.
 */
 
-char	*look4_id_2(const char *id, t_cub3d *a)
+char	*look4_id_2(const char *id, t_cub3d *a, int m)
 {
 	size_t		len;
 	const char	*s1;
@@ -125,7 +149,10 @@ char	*look4_id_2(const char *id, t_cub3d *a)
 		s1 = a->fconf.map.map[i];
 		len = ft_strlen(s1);
 		if (ft_strnstr(s1, id, len))
+		{
+			is_repeat(m, a, id);
 			return (ft_strnstr(s1, id, len));
+		}
 		i++;
 	}
 	msg_err("Review the config file: something goes wrong.");
@@ -134,17 +161,37 @@ char	*look4_id_2(const char *id, t_cub3d *a)
 
 void	find_walls(t_cub3d *a)
 {
-	a->fconf.wallno = look4_id_2("NO ", a);
+	int		c;
+	char	*id[] = {"NO ", "SO ", "WE ", "EA ", "R ", "C ", "F ", "S "};
+
+	c = 0;
+	while (c <= 7)
+	{
+		a->fconf.wall[c] = look4_id(id[c], a, ft_strlen(id[c]));
+		a->fconf.wall_texture[c] = look4_texture(a->fconf.wall[c], id[c]);
+		c++;
+	}
+}
+
+
+/*
+void	find_walls_2(t_cub3d *a)
+{
+	a->fconf.wallno = look4_id("NO ", a, 3);
 	a->fconf.wallno_texture = look4_texture(a->fconf.wallno, "NO ");
-	a->fconf.wallso = look4_id_2("SO ", a);
+	a->fconf.wallso = look4_id("SO ", a, 3);
 	a->fconf.wallso_texture = look4_texture(a->fconf.wallso, "SO ");
-	a->fconf.wallwe = look4_id_2("WE ", a);
+	a->fconf.wallwe = look4_id("WE ", a, 3);
 	a->fconf.wallwe_texture = look4_texture(a->fconf.wallwe, "WE ");
-	a->fconf.wallea = look4_id_2("EA ", a);
+	a->fconf.wallea = look4_id("EA ", a, 3);
 	a->fconf.wallea_texture = look4_texture(a->fconf.wallea, "EA ");
-	a->fconf.res = (look4_id("R ", a, 4));
-	a->fconf.ceil = (look4_id("C ", a, 5));
-	a->fconf.flr = (look4_id("F ", a, 6));
-	a->fconf.sprite = look4_id_2("S ", a);
+	a->fconf.res = look4_id("R ", a, 2);
+//	a->fconf.res = look4_id("R ", a, 4);
+	a->fconf.ceil = look4_id("C ", a, 2);
+//	a->fconf.ceil = look4_id("C ", a, 5);
+	a->fconf.flr = look4_id("F ", a, 2);
+//	a->fconf.flr = look4_id("F ", a, 6);
+	a->fconf.sprite = look4_id("S ", a, 2);
 	a->fconf.sprite_texture = look4_texture(a->fconf.sprite, "S ");
 }
+*/
