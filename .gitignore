@@ -11,3 +11,4 @@ samples_main/main_split.c
 *.a
 *.o
 ./cub3d_destroyer
+test_gnl.sh
