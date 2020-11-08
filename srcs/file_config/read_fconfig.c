@@ -6,11 +6,15 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 14:41:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 08:48:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+** To find the path of texture's file
+*/
 
 char	*look4_texture(char	*str, char	*id)
 {
@@ -40,31 +44,6 @@ int		jump_sp(int i, int j, t_cub3d *a)
 	}
 	return (j);
 }
-
-void	is_repeat(int m, t_cub3d *a, const char *id)
-{
-	int			j;
-	int			z;
-	int			len;
-
-	len = ft_strlen(id);
-	m = m + 1;
-	while (m < a->fconf.map.row)
-	{
-		j = jump_sp(m, 0, a);
-		z = 0;
-		while (z < len && a->fconf.map.map[m][j] == id[z])
-		{
-			if (z == len - 1)
-				msg_err("No no no no: a param is repeat.");
-			z++;
-			j++;
-		}
-		m++;
-	}
-	return ;
-}
-
 
 /*
 ** This function look for the params of config file to identify it.
@@ -166,7 +145,6 @@ void	find_walls(t_cub3d *a)
 		c++;
 	}
 }
-
 
 /*
 void	find_walls_2(t_cub3d *a)

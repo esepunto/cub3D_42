@@ -6,14 +6,14 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 12:15:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 08:50:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /*
-** Save every oine of the file config
+** Save every line of the file config
 ** in a new line in struct a.fconf.map.map
 */
 
@@ -40,8 +40,8 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 }
 
 /*
-** Calculate colums and rows
-** and error if config file isn't exist
+** Calculate colums and rows,
+** and return error if config file isn't exist
 */
 
 void	calc_fconfig(char *conf_file, t_cub3d *a)
@@ -67,6 +67,11 @@ void	calc_fconfig(char *conf_file, t_cub3d *a)
 	line = NULL;
 	close(fd);
 }
+
+/*
+** This ft is the Big Bang: the beginning of everything, so
+** the beginning of 42 :p
+*/
 
 void	open_fconfig(char *conf_file, t_cub3d *a)
 {

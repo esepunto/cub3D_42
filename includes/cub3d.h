@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 14:35:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 08:48:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ char	*look4_id(char *id, t_cub3d *a, int c);
 char	*look4_id_2(const char *id, t_cub3d *a, int m);
 void	is_repeat(int	m, t_cub3d *a, const char *id);
 int		jump_sp(int i, int j, t_cub3d *a);
-void	errors_mgmt(char *id, t_cub3d *a, int c);
 char	*look4_texture(char *str, char *id);
 void	print_fconfig(t_cub3d *a);
 void	del_mem(t_cub3d *a);

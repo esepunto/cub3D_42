@@ -6,24 +6,36 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:57:34 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/06 14:42:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 08:51:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	errors_mgmt(char *id, t_cub3d *a, int c)
-{
-	char		*aux;
-	int			j;
-	size_t		len;
-	const char	*s2;
-	const char	*s1;
+/*
+** Check if anything param is repeat ("NO", "SO", etc.)
+*/
 
-	s1 = a->fconf.wallno;
-	s2 = id;
-	len = ft_strlen((const char *)a->fconf.wallno);
-	if (!(aux = ft_strnstr(s1, s2, len)))
-		msg_err("Este conf file no me vale.");
-	j = a->fconf.init_id[c];
+void	is_repeat(int m, t_cub3d *a, const char *id)
+{
+	int			j;
+	int			z;
+	int			len;
+
+	len = ft_strlen(id);
+	m = m + 1;
+	while (m < a->fconf.map.row)
+	{
+		j = jump_sp(m, 0, a);
+		z = 0;
+		while (z < len && a->fconf.map.map[m][j] == id[z])
+		{
+			if (z == len - 1)
+				msg_err("No no no no: a param is repeat.");
+			z++;
+			j++;
+		}
+		m++;
+	}
+	return ;
 }
