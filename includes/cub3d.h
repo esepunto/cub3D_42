@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/03 14:43:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 08:48:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,46 +20,6 @@
 # include <errno.h>
 # include <math.h>
 # include <fcntl.h>
-
-static char	MAPA[14][33] = {
-	{' ',' ',' ',' ',' ',' ',' ',' ','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'} ,
-	{' ',' ',' ',' ',' ',' ',' ',' ','1','0','0','0','0','0','0','0','0','0','1','1','0','0','0','0','0','0','0','0','0','0','0','0','1'} ,
-	{' ',' ',' ',' ',' ',' ',' ',' ','1','0','1','1','0','0','0','0','0','1','1','1','0','0','0','0','0','0','2','0','0','0','0','0','1'} ,
-	{' ',' ',' ',' ',' ',' ',' ',' ','1','0','0','1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1'} ,
-	{'1','1','1','1','1','1','1','1','1','0','1','1','0','0','0','0','0','1','1','1','0','0','0','0','0','0','0','0','0','0','0','0','1'} ,
-	{'1','0','0','0','0','0','0','0','0','0','1','1','0','0','0','0','0','1','1','1','0','1','1','1','1','1','1','1','1','1','1','1','1'} ,
-	{'1','1','1','1','0','1','1','1','1','1','1','1','1','1','0','1','1','1','0','0','0','0','0','0','1','0','0','0','1'} ,
-	{'1','1','1','1','0','1','1','1','1','1','1','1','1','1','0','1','1','1','0','1','0','1','0','0','1','0','0','0','1'} ,
-	{'1','1','0','0','0','0','0','0','1','1','0','1','0','1','0','1','1','1','0','0','0','0','0','0','1','0','0','0','1'} ,
-	{'1','0','0','0','2','0','0','0','0','0','0','0','0','0','0','0','1','1','0','0','0','0','0','0','1','0','0','0','1'} ,
-	{'1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','1','1','0','1','0','1','0','0','1','0','0','0','1'} ,
-	{'1','1','0','0','0','0','0','1','1','1','0','1','0','1','0','1','1','1','1','1','0','1','1','1','1','0','N','0','1','1','1'} ,
-	{'1','1','1','1','0','1','1','1',' ','1','1','1','0','1','0','1',' ','1','0','1','1','1','1','0','1','0','0','0','1'} ,
-	{'1','1','1','1','1','1','1','1',' ','1','1','1','1','1','1','1',' ','1','1','1','1','1','1','1','1','1','1','1','1'}
-};
-
-typedef struct	s_map
-{
-	char	**map;
-	char	**aux;
-	char	**line;
-}				t_map;
-
-
-typedef struct	s_readconfig
-{
-	t_map	map;
-	char	*wallno;
-	char	*wallso;
-	char	*wallea;
-	char	*wallwe;
-	char	*sprite;
-	int		ceilclr;
-	int		flrclr;
-	int		xrendersize;
-	int		yrendersize;
-}				t_config;
-
 
 typedef struct	s_raycast
 {
@@ -93,15 +53,64 @@ typedef struct	s_raycast
 	double	rootspeed;
 	double	xolddir;
 	double	yolddir;
-
 }				t_rayc;
+
+typedef struct	s_map
+{
+	char		**map;
+	size_t		col;
+	int			row;
+}				t_map;
+
+typedef struct	s_readconfig
+{
+	char	*res;
+	int		xrendersize;
+	int		yrendersize;
+	char	*wallno;
+	char	*wallno_texture;
+	char	*wallso;
+	char	*wallso_texture;
+	char	*wallea;
+	char	*wallea_texture;
+	char	*wallwe;
+	char	*wallwe_texture;
+	char	*sprite;
+	char	*sprite_texture;
+	char	*ceil;
+	char	*flr;
+	int		ceilclr;
+	int		flrclr;
+	int		init_id[8];
+	char	*wall[8];
+	char	*wall_texture[8];
+	int		repeat[8];
+	t_map	map;
+}				t_config;
 
 typedef struct	s_cub3d
 {
 //	t_config	conf;
 //	t_rayc		raycast;
-	char		*map;
-}				t_all;
+	t_config	fconf;
+//	t_map		map;
+}				t_cub3d;
 
+int		main(int argc, char **argv);
+int		msg_err(char *error);
+void	init_struct(t_cub3d *a);
+void	open_fconfig(char *conf_file, t_cub3d *a);
+void	calc_fconfig(char *conf_file, t_cub3d *a);
+void	save_fconfig(char *conf_file, t_cub3d *a);
+void	find_walls(t_cub3d *a);
+void	find_walls_2(t_cub3d *a);
+char	*look4_id(char *id, t_cub3d *a, int c);
+char	*look4_id_2(const char *id, t_cub3d *a, int m);
+void	is_repeat(int	m, t_cub3d *a, const char *id);
+int		jump_sp(int i, int j, t_cub3d *a);
+char	*look4_texture(char *str, char *id);
+void	print_fconfig(t_cub3d *a);
+void	del_mem(t_cub3d *a);
+void	del_mem_fconf(t_cub3d *a);
 
 #endif

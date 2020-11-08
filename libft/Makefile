@@ -6,7 +6,7 @@
 #    By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:54:03 by ssacrist          #+#    #+#              #
-#    Updated: 2020/01/11 18:32:37 by ssacrist         ###   ########.fr        #
+#    Updated: 2020/11/07 08:34:29 by ssacrist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ CFLAGS		=	-Wall -Werror -Wextra
 SRC			=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
+				ft_isblank.c \
 				ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isascii.c \
@@ -72,13 +73,13 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		ar rcs $(NAME) $(OBJ) $(LIBS)
-		
+
 clean:
 		rm -f $(OBJ) $(OBJ_BONUS)
-		
+
 fclean: clean
 		rm -f $(NAME)
-		
+
 re: fclean all
 
 bonus:	$(OBJ_BONUS)

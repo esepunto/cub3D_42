@@ -1,21 +1,12 @@
-NO ./wolftex/greystone.png
-
-
-
 R 1080 720
 
-
-
-
-NO hg
-   SO ./wolftex/redbrick.png
-                        EA ./wolftex/wood.png
-WE ./wolftex/wood.png
-
-S ./wolftex/barrel.png
+   SO 	 ./wolftex/redbrick.png f
+                        EA ./wolftex/wood.png g
+WE ./wolftex/wood.png h
+S ./wolftex/barrel.png h
 C 255,122,0
-F 0,122,255
-
+F 0,122,255 j
+NO ./wolftex/greystone.png   lñññk´ñ NO kjlkj
 
         1111111111111111111111111
         1000000000110000000000001

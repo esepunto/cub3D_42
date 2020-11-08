@@ -8,3 +8,6 @@ cub3D.dSYM/
 itoamouli.c
 main_itoa.c
 samples_main/main_split.c
+*.a
+*.o
+./cub3d_destroyer
