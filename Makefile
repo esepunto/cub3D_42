@@ -58,12 +58,13 @@ clean:
 			$(RM) $(OBJECTS)
 			@make clean -C libft
 			@make clean -C libft/ft_printf
+			@make clean -C mlx
 
 
 fclean:		clean
 			$(RM) $(NAME)
-			@make clean -C libft
-			@make clean -C libft/ft_printf
-			@make clean -C mlx
+			@make fclean -C libft
+			@make fclean -C libft/ft_printf
+
 
 re: fclean all
