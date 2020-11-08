@@ -8,6 +8,7 @@ SRCS	=	cub3d.c \
 			srcs/file_config/save_fconfig.c \
 			srcs/file_config/read_fconfig.c \
 			srcs/file_config/errors_fconfig.c \
+			srcs/file_config/map/manage_map.c \
 			utils/messages.c \
 			utils/del_mem.c \
 			utils/tests.c

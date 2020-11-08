@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 10:03:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/08 14:14:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		msg_err(char *error)
 {
 	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
+	system("leaks cub3D");
 	exit(0);
 }
