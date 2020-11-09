@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/08 14:44:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/09 17:12:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	forbidd_chr(char c)
 
 	chr_allowed = "012NSEW 	";
 	i = 0;
-	while (chr_allowed[i])
+	while (chr_allowed[i] != '\0')
 	{
 		if (c == chr_allowed[i])
 			return ;
@@ -35,13 +35,19 @@ void 	review_map_horiz(t_cub3d *a, int i, int j)
 	int		imax;
 	int		jmax;
 
-	imax = a->fconf.map.row;
-	jmax = a->fconf.map.col;
+	imax = a->fconf.map.row -1;
+	jmax = a->fconf.map.col -1;
 	map = a->fconf.map.map[i];
-	while (i <= imax && map[i] != '\0')
+	printf("imax: |%d|\n", imax);
+	printf("jmax: |%d|\n", jmax);
+	printf(" map: |%s|\n", map);
+	printf("   i: |%d|\n", i);
+	printf("   j: |%d|\n", j);
+
+	while (i <= imax)
 	{
 		map = a->fconf.map.map[i];
-		printf("línea: %s\n", map);
+		j = 0;
 		while (j <= jmax && map[j] != '\0')
 		{
 			if (ft_isdigit(map[j]) == 0)
@@ -49,7 +55,7 @@ void 	review_map_horiz(t_cub3d *a, int i, int j)
 			j++;
 		}
 		i++;
-		map = a->fconf.map.map[i];
+//		map = a->fconf.map.map[i];
 	}
 }
 
