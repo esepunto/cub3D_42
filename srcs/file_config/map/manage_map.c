@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/09 21:10:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/09 23:23:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,69 @@ void	invalid_map_hor(const char *map)
 			msg_err("Ops, this map is open. Review it or try with other map.");
 	}
 }
+/*
+void	invalid_map_ver(const char **map)
+{
+	size_t	i;
 
+}
+*/
+
+void	invalid_map_zeros(int i, size_t j, t_cub3d *a)
+{
+	char	**map;
+	int		imax;
+	size_t	jmax;
+
+	imax = a->fconf.map.row;
+	jmax = a->fconf.map.col;
+	printf("imax: %d\n", imax);
+	printf("jmax: %zu\n", jmax);
+	map = a->fconf.map.map;
+//	i =  i + 1;
+	while (i < imax)
+	{
+		j = 0;
+//		j = j + 1;
+//		printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
+		while (j < ft_strlen(map[i]))
+		{
+//			printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
+			if (map[i][j] == '0')
+			{
+/*				printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
+				printf("i-1: %d\n", i-1);
+				printf("i+1: %d\n", i+1);
+				printf("j-1: %lu\n", j-1);
+				printf("j+1: %lu\n", j+1);
+*/				printf("map[i-1][j-1]: %c\n", map[i-1][j-1]);
+				printf("map[i-1][j+1]: %c\n", map[i-1][j+1]);
+				printf("map[i+1][j-1]: %c\n", map[+1][j-1]);
+				printf("map[i+1][j+1]: %c\n", map[i+1][j+1]);
+				printf("j+1: %lu\n", j+1);
+				if (map[i-1][j-1] == 0)
+					exit (0);
+//					msg_err("The zeros of map are nor closed correctly.");
+				else if (map[i+1][j-1] == '0')
+					msg_err("The zeros of map are nor closed correctly.");
+				else if (map[i-1][j+1] == '0')
+					msg_err("The zeros of map are nor closed correctly.");
+				else if (map[i+1][j+1] == '0')
+					msg_err("The zeros of map are nor closed correctly.");
+/*				{
+					printf("map[i-1][j-1]: %c\n", map[i-1][j-1]);
+					printf("map[i-1][j+1]: %c\n", map[i-1][j+1]);
+					printf("map[i+1][j-1]: %c\n", map[+1][j-1]);
+					printf("map[i+1][j+1]: %c\n", map[i+1][j+1]);
+					printf("%c\n%c\n%c\n%c\n", map[i-1][j-1], map[i+1][j-1], map[i-1][j+1], map[i+1][j+1]);
+					msg_err("The zeros of map are nor closed correctly.");
+				}
+*/			}
+			j++;
+		}
+		i++;
+	}
+}
 
 /*
 ** Add chars N, S, W and E from map.
@@ -137,5 +199,6 @@ void 	review_map_horiz(t_cub3d *a, int i, int j)
 
 void	find_map(t_cub3d *a)
 {
-	review_map_horiz(a, 0, 0);
+//	review_map_horiz(a, 0, 0);
+	invalid_map_zeros(0, 0, a);
 }
