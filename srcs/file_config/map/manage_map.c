@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 14:15:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:35:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,22 @@ void	invalid_map_hor(const char *map)
 			msg_err("Ops, this map is open. Review it or try with other map.");
 	}
 }
-/*
-void	invalid_map_ver(const char **map)
-{
-	size_t	i;
-
-}
-*/
 
 void	zero_not_closed(int i, size_t j, t_cub3d *a)
 {
-
-	if (a->fconf.map.map[i-1][j-1] == '0' || a->fconf.map.map[i-1][j-1] == ' '
-		|| a->fconf.map.map[i-1][j+1] == '0' || a->fconf.map.map[i-1][j+1] == ' '
-		|| a->fconf.map.map[i+1][j-1] == '0' || a->fconf.map.map[i+1][j-1] == ' '
-		|| a->fconf.map.map[i+1][j+1] == '0' || a->fconf.map.map[i+1][j+1] == ' ')
+	if (a->fconf.map.map[i-1][j-1] == ' '
+		|| a->fconf.map.map[i-1][j+1] == ' '
+		|| a->fconf.map.map[i+1][j-1] == ' '
+		|| a->fconf.map.map[i+1][j+1] == ' ')
 	{
-
 		msg_err("The zeros of map are nor closed correctly.");
 	}
 }
+
+/*
+**  This function review if zeros are surrounded
+**  by some space: in this case, the map is open.
+*/
 
 void	invalid_map_zeros(int i, size_t j, t_cub3d *a)
 {
