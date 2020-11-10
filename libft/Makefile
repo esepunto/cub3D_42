@@ -6,7 +6,7 @@
 #    By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:54:03 by ssacrist          #+#    #+#              #
-#    Updated: 2020/11/07 08:34:29 by ssacrist         ###   ########.fr        #
+#    Updated: 2020/11/10 12:18:40 by ssacrist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC			=	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
 				ft_isblank.c \
+				ft_isspace.c \
 				ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isascii.c \

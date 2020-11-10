@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_mem.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/07 11:17:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 09:59:31 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/10 12:16:15 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/10 12:18:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-void	del_mem_fconf(t_cub3d *a)
+int		ft_isspace(int c)
 {
-	int		i;
-
-	i = 0;
-
-	while (i < a->fconf.map.row)
-	{
-		if (a->fconf.map.map[i])
-			free(a->fconf.map.map[i]);
-		i++;
-	}
-	if (a->fconf.map.map)
-		free(a->fconf.map.map);
-}
-
-void	del_mem(t_cub3d *a)
-{
-	del_mem_fconf(a);
+	return (c == 32);
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 11:31:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 10:16:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_fconfig(t_cub3d *a)
 */	i= 0;
 	while (i <= 7)
 	{
-		printf("\n       [%d]|%s|\n", i, a->fconf.wall[i]);
+//		printf("\n       [%d]|%s|\n", i, a->fconf.wall[i]);
 		printf("TEXTURE[%d]:  |%s|\n", i, a->fconf.wall_texture[i]);
 		i++;
 	}

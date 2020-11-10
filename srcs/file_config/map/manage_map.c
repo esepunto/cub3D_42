@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/09 23:23:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:15:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /*
 **  The algorith to found invalid maps its based.
-** 
-**  There is an absolute truth to know if a map is closed: in each and every 
+**
+**  There is an absolute truth to know if a map is closed: in each and every
 **  line of the **  map (both horizontal and vertical): before an empty space
 **  there will be a wall (1), and the next site (not space) there will be a
 **  wall (1).
@@ -23,14 +23,14 @@
 **  There are 2 exceptions: when a line begins and/or finishes with a wall (1),
 **  because there cannot be a space before (when begins) nor space after (when
 **  finishes).
-**  
+**
 **  So the following rules must be observed by the algorithm:
 **		1.- The first character (not space on a map) must be a 1 (wall).
 **		2.- The character before the next space (empty) after
 **			that 1, must be a 1 (wall).
 **		3.- The character after that space, that is not a space, has to
 **			be a 1 (wall).
-**		4.- And so on. 
+**		4.- And so on.
 **		5.- It must be taken into account that the last character of the
 **			line that is not a space, must necessarily be a 1 (wall).
 **
@@ -40,8 +40,8 @@
 
 void	invalid_map_hor(const char *map)
 {
-	size_t	len;
-	size_t	j;
+	int	len;
+	int	j;
 
 	len = ft_strlen(map);
 	j = 0;
@@ -56,7 +56,7 @@ void	invalid_map_hor(const char *map)
 			j++;
 		if (map[j] != '1' && map[j] != '\0')
 			msg_err("Ops, this map is open. Review it or try with other map.");
-		while (ft_isblank(map[j]) == 0)
+		while (ft_isspace(map[j]) == 0 && j < len)
 			j++;
 		if (map[j] == '1')
 			msg_err("Ops, this map is open. Review it or try with other map.");
@@ -70,56 +70,28 @@ void	invalid_map_ver(const char **map)
 }
 */
 
+void	zero_not_closed(int i, size_t j, t_cub3d *a)
+{
+
+	if (a->fconf.map.map[i-1][j-1] == '0' || a->fconf.map.map[i-1][j-1] == ' '
+		|| a->fconf.map.map[i-1][j+1] == '0' || a->fconf.map.map[i-1][j+1] == ' '
+		|| a->fconf.map.map[i+1][j-1] == '0' || a->fconf.map.map[i+1][j-1] == ' '
+		|| a->fconf.map.map[i+1][j+1] == '0' || a->fconf.map.map[i+1][j+1] == ' ')
+	{
+
+		msg_err("The zeros of map are nor closed correctly.");
+	}
+}
+
 void	invalid_map_zeros(int i, size_t j, t_cub3d *a)
 {
-	char	**map;
-	int		imax;
-	size_t	jmax;
-
-	imax = a->fconf.map.row;
-	jmax = a->fconf.map.col;
-	printf("imax: %d\n", imax);
-	printf("jmax: %zu\n", jmax);
-	map = a->fconf.map.map;
-//	i =  i + 1;
-	while (i < imax)
+	while (i < a->fconf.map.row)
 	{
 		j = 0;
-//		j = j + 1;
-//		printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
-		while (j < ft_strlen(map[i]))
+		while (j < ft_strlen(a->fconf.map.map[i]))
 		{
-//			printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
-			if (map[i][j] == '0')
-			{
-/*				printf("map[%d][%zu]: |%c|\n", i, j, map[i][j]);
-				printf("i-1: %d\n", i-1);
-				printf("i+1: %d\n", i+1);
-				printf("j-1: %lu\n", j-1);
-				printf("j+1: %lu\n", j+1);
-*/				printf("map[i-1][j-1]: %c\n", map[i-1][j-1]);
-				printf("map[i-1][j+1]: %c\n", map[i-1][j+1]);
-				printf("map[i+1][j-1]: %c\n", map[+1][j-1]);
-				printf("map[i+1][j+1]: %c\n", map[i+1][j+1]);
-				printf("j+1: %lu\n", j+1);
-				if (map[i-1][j-1] == 0)
-					exit (0);
-//					msg_err("The zeros of map are nor closed correctly.");
-				else if (map[i+1][j-1] == '0')
-					msg_err("The zeros of map are nor closed correctly.");
-				else if (map[i-1][j+1] == '0')
-					msg_err("The zeros of map are nor closed correctly.");
-				else if (map[i+1][j+1] == '0')
-					msg_err("The zeros of map are nor closed correctly.");
-/*				{
-					printf("map[i-1][j-1]: %c\n", map[i-1][j-1]);
-					printf("map[i-1][j+1]: %c\n", map[i-1][j+1]);
-					printf("map[i+1][j-1]: %c\n", map[+1][j-1]);
-					printf("map[i+1][j+1]: %c\n", map[i+1][j+1]);
-					printf("%c\n%c\n%c\n%c\n", map[i-1][j-1], map[i+1][j-1], map[i-1][j+1], map[i+1][j+1]);
-					msg_err("The zeros of map are nor closed correctly.");
-				}
-*/			}
+			if (a->fconf.map.map[i][j] == '0')
+				zero_not_closed(i, j, a);
 			j++;
 		}
 		i++;
@@ -132,7 +104,7 @@ void	invalid_map_zeros(int i, size_t j, t_cub3d *a)
 ** not accept more than one player.
 */
 
-static void	repeat_chr(char c)
+void	repeat_chr(char c)
 {
 	static int count;
 
@@ -153,16 +125,19 @@ void	forbidd_chr(char c)
 	char	*chr_allowed;
 	int		i;
 
-	chr_allowed = "012NSEW 	";
+	chr_allowed = "012NSEW";
 	i = 0;
-	while (chr_allowed[i] != '\0')
+	while (i <= 6)
 	{
-		if (c == chr_allowed[i])
+		if (c == chr_allowed[i] || chr_allowed[i] == ' ')
 			return ;
-		else
-			i++;
+		i++;
 	}
-	msg_err("Forbidden characters in map");
+	if (i == 6)
+	{
+			printf("chr forbidd: |%c|\n", c);
+			msg_err("Forbidden characters in map");
+	}
 }
 
 /*
@@ -170,35 +145,34 @@ void	forbidd_chr(char c)
 **  init the horizontal algorithm to check invalid maps
 */
 
-void 	review_map_horiz(t_cub3d *a, int i, int j)
+void 	review_map_horiz(int i, size_t j, t_cub3d *a)
 {
-	char	*map;
 	int		imax;
-	int		jmax;
+	size_t	jmax;
 
-	imax = a->fconf.map.row -1;
-	jmax = a->fconf.map.col -1;
-	map = a->fconf.map.map[i];
-	while (i <= imax)
+	imax = a->fconf.map.row;
+	jmax = a->fconf.map.col;
+	while (i < imax)
 	{
-		map = a->fconf.map.map[i];
 		j = 0;
-		while (j <= jmax && map[j] != '\0')
+		while (j < jmax)
 		{
-			if (ft_isprint(map[j]) == 1)
+			if (i == 0 && a->fconf.map.map[i][j] == '0')
+				msg_err("Zeros at the top");
+			if (ft_isprint(a->fconf.map.map[i][j]) == 1)
 			{
-				forbidd_chr(map[j]);
-				repeat_chr(map[j]);
+				forbidd_chr(a->fconf.map.map[i][j]);
+				repeat_chr(a->fconf.map.map[i][j]);
 			}
 			j++;
 		}
-		invalid_map_hor(map);
+		invalid_map_hor(a->fconf.map.map[i]);
 		i++;
 	}
 }
 
 void	find_map(t_cub3d *a)
 {
-//	review_map_horiz(a, 0, 0);
+	review_map_horiz(0, 0, a);
 	invalid_map_zeros(0, 0, a);
 }

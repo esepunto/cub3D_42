@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/07 08:34:02 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:19:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int					ft_atoi(const char *str);
 void				ft_bzero(void *original_string, size_t how_many);
 void				*ft_calloc(size_t count, size_t size);
 int					ft_isblank(int c);
+int					ft_isspace(int c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);

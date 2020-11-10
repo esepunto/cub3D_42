@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/08 12:50:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 10:18:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		main(int argc, char **argv)
 		init_struct(a);
 		open_fconfig(argv[1], a);
 //		print_fconfig(a);
-		del_mem(a);
+//		del_mem(a);
 	}
 	else
 		msg_err("Either U type what I need 2 read or our LV is impossible.");
