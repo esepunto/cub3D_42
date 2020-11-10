@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:57:34 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/08 08:51:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 23:36:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ void	is_repeat(int m, t_cub3d *a, const char *id)
 		while (z < len && a->fconf.map.map[m][j] == id[z])
 		{
 			if (z == len - 1)
+			{
+				if (a->fconf.final_line_params < m)
+					a->fconf.final_line_params = m;
 				msg_err("No no no no: a param is repeat.");
+			}
 			z++;
 			j++;
 		}
