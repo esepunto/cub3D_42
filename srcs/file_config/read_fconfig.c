@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/08 08:59:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:21:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,11 @@ char	*look4_id(char *id, t_cub3d *a, int c)
 			if (a->fconf.map.map[i][j] != id[k])
 				break ;
 			if (ft_strlen(id) == k + 1)
+			{
+				if (i > a->fconf.final_line_params)
+					a->fconf.final_line_params = i;
 				return(look4_id_2(id, a, i));
+			}
 			j++;
 			k++;
 		}

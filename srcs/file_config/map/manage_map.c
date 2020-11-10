@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 14:45:28 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:15:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,6 @@ void 	review_map_horiz(int i, size_t j, t_cub3d *a)
 
 void	find_map(t_cub3d *a)
 {
-	review_map_horiz(0, 0, a);
-	invalid_map_zeros(0, 0, a);
+	review_map_horiz(a->fconf.final_line_params, 0, a);
+	invalid_map_zeros(a->fconf.final_line_params, 0, a);
 }

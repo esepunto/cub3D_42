@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 10:31:58 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:06:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct	s_readconfig
 	char	*wall[8];
 	char	*wall_texture[8];
 	int		repeat[8];
+	int		final_line_params;
 	t_map	map;
 }				t_config;
 

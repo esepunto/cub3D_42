@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 10:18:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 20:13:39 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_struct(t_cub3d *a)
 	a->fconf.map.map = NULL;
 	a->fconf.map.row = 0;
 	a->fconf.map.col = 0;
+	a->fconf.final_line_params = 0;
 }
 
 /*
@@ -36,7 +37,7 @@ int		main(int argc, char **argv)
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);
 		open_fconfig(argv[1], a);
-//		print_fconfig(a);
+		print_fconfig(a);
 //		del_mem(a);
 	}
 	else
