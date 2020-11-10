@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 14:35:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/10 14:45:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	invalid_map_hor(const char *map)
 	if (map[0] == '\0')
 		return ;
 	if ((map[0] != '1' && ft_isblank(map[0]) == 0)
-				|| (map[len - 1] != '1' && ft_isblank(map[len - 1]) == 0))
+				|| (map[len - 2] != '1' && ft_isblank(map[len - 2]) == 0))
 		msg_err("Ops, this map is open. Review it or try with other map.");
 	while (j < len)
 	{
