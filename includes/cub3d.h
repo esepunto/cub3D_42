@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 12:48:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/11 14:05:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct	s_readconfig
 	int		repeat[8];
 	int		final_line_params;
 	t_map	map;
+	t_map	rotate_map;
 }				t_config;
 
 typedef struct	s_cub3d
@@ -118,6 +119,7 @@ void	repeat_chr(int i, size_t j, t_cub3d *a);
 void	invalid_map_hor(int i, t_cub3d *a);
 void	zero_not_closed(int i, size_t j, t_cub3d *a);
 void	invalid_map_zeros(int i, size_t j, t_cub3d *a);
+void	rotate_map(t_cub3d *a);
 
 void	print_fconfig(t_cub3d *a);
 void	del_mem(t_cub3d *a);

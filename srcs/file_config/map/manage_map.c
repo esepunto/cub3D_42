@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 13:15:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/11 14:43:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void	zero_not_closed(int i, size_t j, t_cub3d *a)
 	if (a->fconf.map.map[i - 1][j - 1] == ' '
 		|| a->fconf.map.map[i - 1][j + 1] == ' '
 		|| a->fconf.map.map[i + 1][j - 1] == ' '
-		|| a->fconf.map.map[i + 1][j + 1] == ' ')
+		|| a->fconf.map.map[i + 1][j + 1] == ' '
+		|| a->fconf.map.map[i][j + 1] == ' '
+		|| a->fconf.map.map[i + 1][j] == ' '
+		|| a->fconf.map.map[i][j - 1] == ' '
+		|| a->fconf.map.map[i - 1][j + 1] == ' ')
 	{
 		msg_err("The zeros of map are nor closed correctly.");
 	}
@@ -35,7 +39,12 @@ void	invalid_map_zeros(int i, size_t j, t_cub3d *a)
 		j = 0;
 		while (j < ft_strlen(a->fconf.map.map[i]))
 		{
-			if (a->fconf.map.map[i][j] == '0')
+			if (a->fconf.map.map[i][j] == '0'
+				|| a->fconf.map.map[i][j] == '2'
+				|| a->fconf.map.map[i][j] == 'N'
+				|| a->fconf.map.map[i][j] == 'S'
+				|| a->fconf.map.map[i][j] == 'E'
+				|| a->fconf.map.map[i][j] == 'W')
 				zero_not_closed(i, j, a);
 			j++;
 		}
