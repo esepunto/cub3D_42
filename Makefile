@@ -5,10 +5,11 @@ CC		=	gcc -Wall -Wextra -Werror -g
 #SRCS	=	srcs/*.c
 
 SRCS	=	cub3d.c \
-			srcs/file_config/save_fconfig.c \
-			srcs/file_config/read_fconfig.c \
-			srcs/file_config/errors_fconfig.c \
+			srcs/file_config/readnsave_fconfig.c \
+			srcs/file_config/params/errors_params.c \
+			srcs/file_config/params/look4params.c \
 			srcs/file_config/map/manage_map.c \
+			srcs/file_config/map/map_algorithm.c \
 			utils/messages.c \
 			utils/del_mem.c \
 			utils/tests.c

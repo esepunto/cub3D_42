@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 11:17:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 09:59:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/11 12:50:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ void	del_mem_fconf(t_cub3d *a)
 	while (i < a->fconf.map.row)
 	{
 		if (a->fconf.map.map[i])
+		{
 			free(a->fconf.map.map[i]);
+			a->fconf.map.map[i] = NULL;
+		}
 		i++;
 	}
-	if (a->fconf.map.map)
-		free(a->fconf.map.map);
 }
 
 void	del_mem(t_cub3d *a)
 {
 	del_mem_fconf(a);
+	if (a)
+	{
+		free(a);
+		a = NULL;
+	}
 }

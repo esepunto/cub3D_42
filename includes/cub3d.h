@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 20:06:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/11 12:48:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct	s_cub3d
 }				t_cub3d;
 
 int		main(int argc, char **argv);
+int		msg_err_b4a(char *error);
 int		msg_err(char *error);
 void	init_struct(t_cub3d *a);
 void	open_fconfig(char *conf_file, t_cub3d *a);
@@ -111,10 +112,10 @@ void	is_repeat(int	m, t_cub3d *a, const char *id);
 int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 void 	find_map(t_cub3d *a);
-void 	review_map_horiz(int i, size_t j, t_cub3d *a);
+void 	review_map_horiz(size_t j, t_cub3d *a);
 void	forbidd_chr(char c);
-void	repeat_chr(char c);
-void	invalid_map_hor(const char *map);
+void	repeat_chr(int i, size_t j, t_cub3d *a);
+void	invalid_map_hor(int i, t_cub3d *a);
 void	zero_not_closed(int i, size_t j, t_cub3d *a);
 void	invalid_map_zeros(int i, size_t j, t_cub3d *a);
 
