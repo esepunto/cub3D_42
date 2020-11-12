@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 13:22:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:24:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,25 +149,3 @@ void	find_walls(t_cub3d *a)
 		c++;
 	}
 }
-
-/*
-void	find_walls_2(t_cub3d *a)
-{
-	a->fconf.wallno = look4_id("NO ", a, 3);
-	a->fconf.wallno_texture = look4_texture(a->fconf.wallno, "NO ");
-	a->fconf.wallso = look4_id("SO ", a, 3);
-	a->fconf.wallso_texture = look4_texture(a->fconf.wallso, "SO ");
-	a->fconf.wallwe = look4_id("WE ", a, 3);
-	a->fconf.wallwe_texture = look4_texture(a->fconf.wallwe, "WE ");
-	a->fconf.wallea = look4_id("EA ", a, 3);
-	a->fconf.wallea_texture = look4_texture(a->fconf.wallea, "EA ");
-	a->fconf.res = look4_id("R ", a, 2);
-//	a->fconf.res = look4_id("R ", a, 4);
-	a->fconf.ceil = look4_id("C ", a, 2);
-//	a->fconf.ceil = look4_id("C ", a, 5);
-	a->fconf.flr = look4_id("F ", a, 2);
-//	a->fconf.flr = look4_id("F ", a, 6);
-	a->fconf.sprite = look4_id("S ", a, 2);
-	a->fconf.sprite_texture = look4_texture(a->fconf.sprite, "S ");
-}
-*/

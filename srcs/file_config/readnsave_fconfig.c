@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 12:55:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:27:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	open_fconfig(char *conf_file, t_cub3d *a)
 	save_fconfig(conf_file, a);
 //	print_fconfig(a);
 	find_walls(a);
+	review_params(a);
 //	print_fconfig(a);
 //	find_walls_2(a);
 	find_map(a);

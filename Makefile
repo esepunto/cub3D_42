@@ -8,6 +8,7 @@ SRCS	=	cub3d.c \
 			srcs/file_config/readnsave_fconfig.c \
 			srcs/file_config/params/errors_params.c \
 			srcs/file_config/params/look4params.c \
+			srcs/file_config/params/review_params.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/map_algorithm.c \
 			utils/messages.c \

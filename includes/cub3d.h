@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 12:45:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 14:27:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ char	*look4_id_2(const char *id, t_cub3d *a, int m);
 void	is_repeat(int	m, t_cub3d *a, const char *id);
 int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
+void	review_params(t_cub3d *a);
 void 	find_map(t_cub3d *a);
 void 	review_map_horiz(size_t j, t_cub3d *a);
 void	is_space2map(t_cub3d *a);
