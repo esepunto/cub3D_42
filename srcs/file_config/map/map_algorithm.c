@@ -6,11 +6,20 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 13:30:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 13:00:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+/*
+**
+**
+**    THE PROGRAM NOT USE THIS FT FOR THE MOMENT, IT SEEMS NOT NECESSARY
+**
+**
+*/
+
 
 /*
 **  The algorith to found invalid maps its based.
@@ -44,13 +53,7 @@ void	invalid_map_hor(int i, t_cub3d *a)
 
 	len = ft_strlen(a->fconf.map.map[i]);
 	j = 0;
-/*	if ((a->fconf.map.map[i][0] != '1' && a->fconf.map.map[i][0] != ' ')
-		|| (a->fconf.map.map[i][len - 2] != '1'
-		&& a->fconf.map.map[i][len - 2] != ' '))
-	{
-		msg_err("52-Ops, this map is open. Review it or try with other map.");
-	}
-*/	while (j < len)
+	while (j < len)
 	{
 		while (ft_isspace(a->fconf.map.map[i][j]))
 			j++;

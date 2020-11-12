@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 08:29:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 12:01:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	print_fconfig(t_cub3d *a)
 	i = 0;
 	printf("row: %d\n", a->fconf.map.row);
 	printf("colum: %zu\n", a->fconf.map.col);
-	printf("map[0][7] = %c\n", a->fconf.map.map[0][7]);
+//	printf("map[0][7] = %c\n", a->fconf.map.map[0][7]);
 	while (i < a->fconf.map.row)
 	{
 		printf("linea %d: %s\n", i, a->fconf.map.map[i]);
 		i++;
 	}
-	printf("map[0][0] = %c", a->fconf.map.map[0][0]);
+//	printf("map[0][0] = %c", a->fconf.map.map[0][0]);
 /*	printf("\n|%s|\n", a->fconf.wallno);
 	printf("|%s|\n", a->fconf.wallso);
 	printf("|%s|\n", a->fconf.wallwe);
@@ -40,12 +40,12 @@ void	print_fconfig(t_cub3d *a)
 	printf("TEXTURE: |%s|\n", a->fconf.wallea_texture);
 	printf("TEXTURE: |%s|\n", a->fconf.sprite_texture);
 */	i= 0;
-	while (i <= 7)
+	while (i <= 7 && a->fconf.wall_texture[i])
 	{
-		printf("\n       [%d]|%s|\n", i, a->fconf.wall[i]);
 		printf("TEXTURE[%d]:  |%s|\n", i, a->fconf.wall_texture[i]);
 		i++;
 	}
 	printf("Last line with params: %d\n", a->fconf.final_line_params);
-	printf("\n");
+	printf("First line of map: %d\n", a->fconf.map.first_line);
+	printf("\n********** FIN IMPRESION ***********\n\n\n\n\n\n");
 }

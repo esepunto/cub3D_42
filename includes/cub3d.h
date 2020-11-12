@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 14:05:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/12 12:45:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_map
 	char		**map;
 	size_t		col;
 	int			row;
+	int			num_players;
+	int			first_line;
 }				t_map;
 
 typedef struct	s_readconfig
@@ -114,11 +116,13 @@ int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 void 	find_map(t_cub3d *a);
 void 	review_map_horiz(size_t j, t_cub3d *a);
+void	is_space2map(t_cub3d *a);
+void	check_frst_line_map(int i, size_t j, t_cub3d *a);
+void	check_frst_line_map2(t_cub3d *a);
 void	forbidd_chr(char c);
 void	repeat_chr(int i, size_t j, t_cub3d *a);
 void	invalid_map_hor(int i, t_cub3d *a);
-void	zero_not_closed(int i, size_t j, t_cub3d *a);
-void	invalid_map_zeros(int i, size_t j, t_cub3d *a);
+void	invalid_chrs_closed(int i, size_t j, t_cub3d *a);
 void	rotate_map(t_cub3d *a);
 
 void	print_fconfig(t_cub3d *a);
