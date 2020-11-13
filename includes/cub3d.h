@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/13 11:56:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 13:08:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 void	review_params(t_cub3d *a);
 void	rev_walls(int c, t_cub3d *a);
+void	rev_cefl(int c, t_cub3d *a);
+void	rev_res(int c, t_cub3d *a);
 int		ft_count_wrds(int c, t_cub3d *a);
 
 void 	find_map(t_cub3d *a);
