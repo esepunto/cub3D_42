@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 14:27:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 11:56:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_readconfig
 	int		init_id[8];
 	char	*wall[8];
 	char	*wall_texture[8];
+	int		nb_wrd_param;
 	int		repeat[8];
 	int		final_line_params;
 	t_map	map;
@@ -115,6 +116,9 @@ void	is_repeat(int	m, t_cub3d *a, const char *id);
 int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 void	review_params(t_cub3d *a);
+void	rev_walls(int c, t_cub3d *a);
+int		ft_count_wrds(int c, t_cub3d *a);
+
 void 	find_map(t_cub3d *a);
 void 	review_map_horiz(size_t j, t_cub3d *a);
 void	is_space2map(t_cub3d *a);

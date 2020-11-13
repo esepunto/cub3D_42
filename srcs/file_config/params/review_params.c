@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 14:41:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 11:58:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,29 @@
 **  |___________|___|_____________|
 */
 
+int	ft_count_wrds(int c, t_cub3d *a)
+{
+	int	len;
+	int	i;
 
+	len = ft_strlen(a->fconf.wall_texture[c]);
+	i = 0;
+	while (i <= len)
+	{
+		while(ft_isblank(a->fconf.wall_texture[c][i]))
+			i++;
+		a->fconf.nb_wrd_param++;
+		while(ft_isprint(a->fconf.wall_texture[c][i]))
+			i++;
+	}
+	return (a->fconf.nb_wrd_param);
+}
+
+void	rev_walls(int c, t_cub3d *a)
+{
+	if (ft_count_wrds(c, a) > 1)
+		msg_err("Too much information in params.");
+}
 
 void	review_params(t_cub3d *a)
 {
@@ -40,12 +62,13 @@ void	review_params(t_cub3d *a)
 	{
 		if (c < 4 || c == 7)
 			rev_walls(c, a);// One ft for all walls??
-		if (c >= 5 && c <= 6)
+/*		if (c >= 5 && c <= 6)
 			rev_cefl(c, a);
 		if (c == 4)
-			rev_res(a);
+			rev_res(a);*/
 		c++;
 	}
+	return ;
 /*		rev_no(0, a);// One ft for anyone wall??rev_so(1, a);rev_we(2, a);
 		rev_ea(3, a);
 		rev_r(4, a);

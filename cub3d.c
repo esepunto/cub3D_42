@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 13:20:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 11:45:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_struct(t_cub3d *a)
 	a->fconf.map.row = 0;
 	a->fconf.map.col = 0;
 	a->fconf.final_line_params = 0;
+	a->fconf.nb_wrd_param = 0;
 }
 
 /*
