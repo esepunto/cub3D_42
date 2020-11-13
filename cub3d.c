@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/13 11:45:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 14:22:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		len = ft_strlen(argv[1]);
-		if (ft_memcmp(argv[1] + len - 4, ".cub", 4))
+		if (ft_chekext(argv[1], ".cub") != 0)
 			msg_err_b4a("This is not a .cub file, bro.");
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);

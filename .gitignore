@@ -13,3 +13,4 @@ samples_main/main_split.c
 *.o
 ./cub3d_destroyer
 test_gnl.sh
+wolftex/

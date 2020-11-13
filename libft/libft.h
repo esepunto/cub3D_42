@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/10 12:19:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/13 14:20:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ int					get_next_line(int fd, char **line);
 void				ft_memdel(void **a);
 char				*ft_extract(char *str);
 int					ft_chop(char **str, char **line);
+int					ft_chekext(const char *str, char *ext);
 #endif
