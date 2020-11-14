@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 13:20:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/14 20:12:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@
 
 void	invalid_chrs_closed(int i, size_t j, t_cub3d *a)
 {
+	char	**map;
+
+	map = a->fconf.map.map;
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
-		while (j < ft_strlen(a->fconf.map.map[i]))
+		while (j <= ft_strlen(map[i]))
 		{
-			if (a->fconf.map.map[i][j] == '0' || a->fconf.map.map[i][j] == '2'
-			|| a->fconf.map.map[i][j] == 'N' || a->fconf.map.map[i][j] == 'S'
-			|| a->fconf.map.map[i][j] == 'E' || a->fconf.map.map[i][j] == 'W')
+			if (map[i][j] == '0' || map[i][j] == '2' || map[i][j] == 'N'
+				|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				if (a->fconf.map.map[i - 1][j - 1] == ' '
-					|| a->fconf.map.map[i - 1][j + 1] == ' '
-					|| a->fconf.map.map[i + 1][j - 1] == ' '
-					|| a->fconf.map.map[i + 1][j + 1] == ' '
-					|| a->fconf.map.map[i][j + 1] == ' '
-					|| a->fconf.map.map[i + 1][j] == ' '
-					|| a->fconf.map.map[i][j - 1] == ' '
-					|| a->fconf.map.map[i - 1][j + 1] == ' ')
-				{
+				if ((map[i - 1][j - 1] == ' ' && map[i - 1][j - 1])
+					|| (map[i - 1][j + 1] == ' ' && map[i - 1][j + 1])
+					|| (map[i + 1][j - 1] == ' ' && map[i + 1][j - 1])
+					|| (map[i + 1][j + 1] == ' ' && map[i + 1][j + 1])
+					|| (map[i][j + 1] == ' ' && map[i][j + 1])
+					|| (map[i + 1][j] == ' ' && map[i + 1][j])
+					|| (map[i][j - 1] == ' ' && map[i][j - 1])
+					|| (map[i - 1][j] == ' ' && map[i - 1][j]))
 					msg_err("The map's open. Don't go over the rainbow?");
-				}
 			}
 			j++;
 		}
@@ -58,7 +58,7 @@ void	repeat_chr(int i, size_t j, t_cub3d *a)
 		a->fconf.map.num_players++;
 	}
 	if (a->fconf.map.num_players > 1)
-		msg_err("Sorry, I can't accept two players.");
+		msg_err("Please, review the number of players.");
 }
 
 /*
@@ -68,19 +68,11 @@ void	repeat_chr(int i, size_t j, t_cub3d *a)
 
 void	forbidd_chr(char c)
 {
-	char	*chr_allowed;
-	int		i;
-
-	chr_allowed = "012NSEW";
-	i = 0;
-	while (i <= 6)
+	if (c != '0' && c != '1' && c != '2' && c != ' ' && c != 'N'
+			&& c != 'S'&& c != 'E'	&& c != 'W' && c != '\0')
 	{
-		if (c == chr_allowed[i] || chr_allowed[i] == ' ')
-			return ;
-		i++;
-	}
-	if (i == 6)
 		msg_err("Forbidden characters in map");
+	}
 }
 
 /*
@@ -89,17 +81,27 @@ void	forbidd_chr(char c)
 
 void	is_space2map(t_cub3d *a)
 {
-	if (a->fconf.map.row - a->fconf.final_line_params < 3)// revisar si 3 o 4
-		msg_err("The map needs to be in this universe.");
-	if (ft_strlen(a->fconf.map.map[a->fconf.final_line_params + 1]) > 1)//revisar que acepta espacios vacíos
+	char	**str;
+	int		frsline;
+	int		endline;
+	int		row;
+
+	str = a->fconf.map.map;
+	row = a->fconf.map.row;
+	endline = a->fconf.final_line_params;
+	frsline = a->fconf.map.first_line;
+
+	if (ft_strlen(str[endline + 1]) > 1)
 		msg_err("I need a blank line before params");
-	a->fconf.map.first_line = a->fconf.final_line_params + 2;
-	while (ft_strlen(a->fconf.map.map[a->fconf.map.first_line]) == 1)
+
+	frsline= endline + 2;
+	while (ft_strlen(str[frsline]) == 1)
 	{
-		a->fconf.map.first_line++;
-		if (a->fconf.map.first_line == a->fconf.map.row)
+		frsline++;
+		if (frsline == row)
 			msg_err("The map needs to be in this universe.");
 	}
+	a->fconf.map.first_line = frsline;
 }
 
 /*
@@ -108,14 +110,34 @@ void	is_space2map(t_cub3d *a)
 
 void	check_frst_line_map(int i, size_t j, t_cub3d *a)
 {
-	if (i == a->fconf.map.first_line)
+	if (i == a->fconf.map.first_line || i == a->fconf.map.row)
 		if (a->fconf.map.map[i][j] != '1'
 				&& a->fconf.map.map[i][j] != ' '
 				&& a->fconf.map.map[i][j] != '\0')
 		{
-			msg_err("Invalid chars at the top.");
+			msg_err("Invalid chars at the top/end.");
 		}
 }
+
+void	check_end_line_map2(t_cub3d *a)
+{
+	int		i;
+	size_t	j;
+
+	j = 0;
+	i = a->fconf.map.row - 1;
+	while (j < ft_strlen(a->fconf.map.map[i]))
+	{
+		if (a->fconf.map.map[i][j] != '1'
+				&& a->fconf.map.map[i][j] != ' '
+				&& a->fconf.map.map[i][j] != '\0')
+		{
+			msg_err("Invalid chars at the end line.");
+		}
+		j++;
+	}
+}
+
 
 void	check_frst_line_map2(t_cub3d *a)
 {
@@ -136,6 +158,30 @@ void	check_frst_line_map2(t_cub3d *a)
 	}
 }
 
+void	check_frst_column(t_cub3d *a)
+{
+	char	**map;
+	char	c;
+	int		i;
+	int		j;
+
+	map = a->fconf.map.map;
+	i = a->fconf.map.first_line;
+	while (i < a->fconf.map.row)
+	{
+		j = 0;
+		c = map[i][j];
+		while (c == ' ')
+		{
+			j++;
+			c = map[i][j];
+		}
+		if (c != '1')
+			msg_err("Have tou see first columns of map?");
+		i++;
+	}
+}
+
 /*
 **  Next function check some errors with above functions help:
 **  and init the horizontal algorithm to check invalid maps.
@@ -146,7 +192,10 @@ void	review_map_horiz(size_t j, t_cub3d *a)
 	int		i;
 
 	is_space2map(a);
+//	check_frst_line_map(a);
 	check_frst_line_map2(a);
+	check_end_line_map2(a);
+	check_frst_column(a);
 	i = a->fconf.map.first_line;
 	while (i < a->fconf.map.row)// ojo con el <=
 	{

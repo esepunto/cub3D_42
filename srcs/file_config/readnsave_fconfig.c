@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 14:27:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/14 18:07:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 		a->fconf.map.map[c] = ft_strdup(line);
 		aux = a->fconf.map.map[c];
 		free(a->fconf.map.map[c]);
+//		a->fconf.map.map[c] = ft_strjoin(ft_strdup(a->fconf.map.map[c]), " ");
 		a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
 		free(aux);
 		c++;
