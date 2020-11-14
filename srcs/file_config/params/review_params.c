@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/13 14:45:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/14 17:32:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 **  |___________|___|_____________|
 */
 
+/*
 int	ft_count_wrds(int c, t_cub3d *a)//Review to put in on libft
 {
 	int	len;
@@ -51,6 +52,50 @@ int	ft_count_wrds(int c, t_cub3d *a)//Review to put in on libft
 	}
 	return (count);
 }
+*/
+
+int		ft_count_wrds(int c, t_cub3d *a)
+{
+	size_t	i;
+	int		count;
+	char	*s;
+	
+	i = 0;
+	count = 0;
+	s = a->fconf.wall_texture[c];
+	while (s[i])
+	{
+		if (!ft_isblank(s[i]))
+			count++;
+		while (s[i] != ' ' && s[i + 1])
+			i++;
+		i++;
+	}
+	return (count);
+}
+
+
+char	*del_last_spaces(char *str)
+{
+	size_t	len;
+	size_t	c;
+
+	len = ft_strlen(str);
+	c = len;
+	while (c > 1)
+	{
+		if (ft_isblank(str[c]))
+			str[c] = '\0';
+		c--;
+	}
+	return (str);
+}
+
+
+
+
+
+
 
 /*
 ** Next 3 functions check the number os params in:
@@ -67,9 +112,9 @@ void	rev_walls(int c, t_cub3d *a)
 	a->fconf.wall_texture[c][len - 1] = '\0';//To deleted last space add at the end of the program
 	if (ft_count_wrds(c, a) != 1)
 		msg_err("Too much information in walls.");
+	a->fconf.wall_texture[c] = del_last_spaces(a->fconf.wall_texture[c]);
 	if (ft_chekext(a->fconf.wall_texture[c], ".png") != 0)
 		msg_err("Bad extension in textures.");
-
 	if ((fd = open(a->fconf.wall_texture[c], O_RDONLY)) == -1)
 	{
 		printf("|%s|\n", a->fconf.wall_texture[c]);
