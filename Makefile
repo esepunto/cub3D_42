@@ -1,6 +1,7 @@
 NAME	=	cub3D
 
-CC		=	gcc -Wall -Wextra -Werror -O0 -g 
+CC		=	gcc #-Wall -Wextra -Werror -O0 -g 
+
 
 #SRCS	=	srcs/*.c
 
@@ -38,13 +39,14 @@ SRCS	=	cub3d.c \
 #MAIN	=	./samples_main/main.c
 #MAIN	=	./samples_main/main2.c
 
-LIBS	=	libft/libft.a \
-			mlx/libmlx.a \
-			libft/ft_printf/libftprintf.a
+LIBS	=	libft/ft_printf/libftprintf.a \
+			libft/libft.a 
+#			mlx/libmlx.a \
+
 
 OBJECTS	=	$(SRCS:.c=.o)
 
-LINKS	=	-I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
+#LINKS	=	-I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
@@ -53,15 +55,17 @@ all: $(NAME)
 $(NAME):	$(OBJECTS)
 			@make -C libft
 			@make -C libft/ft_printf
-			@make -C mlx
-			$(CC) $(LINKS) $(LIBS) $(OBJECTS) -o $(NAME)
+			$(CC) $(OBJECTS) $(LIBS) -o $(NAME)
+#			$(CC) $(LINKS) $(LIBS) $(OBJECTS) -o $(NAME)
+#			@make -C mlx
+
 #			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJECTS)
 			@make clean -C libft
 			@make clean -C libft/ft_printf
-			@make clean -C mlx
+#			@make clean -C mlx
 
 
 fclean:		clean

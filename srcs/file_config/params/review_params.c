@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 14:47:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:45:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,14 @@ void	look4rgb(int c, t_cub3d *a)
 	j = 0;
 	while (j <= len)
 	{
-		printf("%s", aux);
+		printf("aux: |%s|\n", aux);
 		while (ft_isdigit(aux[j]))
 			j++;
 		r = ft_substr((const char *)aux, 0, j);
+		printf("pre red aux h [%d]: |%c|\n", 0, aux[0]);
+		printf("pre red aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.red[count] = ft_atoi(r);
-		free((void *)r);
+			free((void *)r);
 		if (!a->fconf.red[count])
 			msg_err("Where's the red?");
 //		j++;
@@ -157,9 +159,13 @@ void	look4rgb(int c, t_cub3d *a)
 			j++;
 		j++;
 		h = j;
+		while (ft_isblank(aux[j]))
+			j++;
 		while (ft_isdigit(aux[j]))
 			j++;
 		r = ft_substr((const char *)aux, h, j);
+		printf("pre gre aux h [%d]: |%c|\n", h, aux[h]);
+		printf("pre gre aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.green[count] = ft_atoi(r);
 		free((void *)r);
 		if (!a->fconf.green[count])
@@ -174,20 +180,28 @@ void	look4rgb(int c, t_cub3d *a)
 			j++;
 		j++;
 		h = j;
+		while (ft_isblank(aux[j]))
+			j++;
 		while (ft_isdigit(aux[j]))
 			j++;
 		r = ft_substr((const char *)aux, h, j);
+		printf("pre blu aux h [%d]: |%c|\n", h, aux[h]);
+		printf("pre blu aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.blue[count] = ft_atoi(r);
 		free((void *)r);
 		if (!a->fconf.blue[count])
 			msg_err("Where's the blue?");
 
+		printf("pos blu aux h [%d]: |%c|\n", h, aux[h]);
+		printf("pos blu aux j [%ld]: |%c|\n", j, aux[j]);
 
 		while (ft_isblank(aux[j]))
 			j++;
-		if (aux[j + 1] != ' ' && aux[j + 1] != '\0')
+		if (aux[j] != ' ' && aux[j] != '\0')
+		{
+			printf("aux[%ld]: |%c|\n", j + 1, aux[j + 1]);
 			msg_err("Something smells bad in floor/ceilling.");
-
+		}
 		count++;
 		break ;
 	}

@@ -14,7 +14,7 @@ NAME		=	libftprintf.a
 
 CC			=	gcc
 
-CFLAGS		=	-Wall -Werror -Wextra
+CFLAGS		=	#-Wall -Werror -Wextra
 
 SRC			=	ft_printf.c \
 				src/dec_left_minus.c \
