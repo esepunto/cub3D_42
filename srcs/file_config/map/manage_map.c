@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 11:07:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 12:43:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **  To check enough space to map: blank line after params, etc.
 */
 
-static void	is_space2map(t_cub3d *a)
+void	is_space2map(t_cub3d *a)
 {
 	char	**map;
 	int		frsline;
@@ -45,7 +45,7 @@ static void	is_space2map(t_cub3d *a)
 **  This function checks forbidden chars on first/end's line of the map.
 */
 
-static void	check_line_map(int line, t_cub3d *a)
+void	check_line_map(int line, t_cub3d *a)
 {
 	int		i;
 	size_t	j;
@@ -72,7 +72,7 @@ static void	check_line_map(int line, t_cub3d *a)
 **  Remenber that i put a blank space at the end of all rows.
 */
 
-static void	check_frst_column(t_cub3d *a)
+void	check_frst_column(t_cub3d *a)
 {
 	char	**map;
 	char	c;
