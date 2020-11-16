@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 09:45:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 11:11:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int		main(int argc, char **argv);
 int		msg_err_b4a(char *error);
 int		msg_err(char *error);
 void	init_struct(t_cub3d *a);
+
 void	open_fconfig(char *conf_file, t_cub3d *a);
 void	calc_fconfig(char *conf_file, t_cub3d *a);
 void	save_fconfig(char *conf_file, t_cub3d *a);
@@ -122,18 +123,14 @@ void	rev_res(int c, t_cub3d *a);
 int		ft_count_wrds(int c, t_cub3d *a);
 
 void 	find_map(t_cub3d *a);
-void 	review_map_horiz(size_t j, t_cub3d *a);
 void	is_space2map(t_cub3d *a);
-
 void	check_line_map(int line, t_cub3d *a);
-
-//void	check_frst_line_map(int i, size_t j, t_cub3d *a);
-void	check_frst_line_map2(t_cub3d *a);
+void	check_frst_column(t_cub3d *a);
+void 	review_map_horiz(t_cub3d *a);
 void	forbidd_chr(char c);
 void	repeat_chr(int i, size_t j, t_cub3d *a);
-void	invalid_map_hor(int i, t_cub3d *a);
-void	invalid_chrs_closed(int i, size_t j, t_cub3d *a);
-void	rotate_map(t_cub3d *a);
+void	map_open_algorithm(t_cub3d *a);
+
 
 void	print_fconfig(t_cub3d *a);
 void	del_mem(t_cub3d *a);

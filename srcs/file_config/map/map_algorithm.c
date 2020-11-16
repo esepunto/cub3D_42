@@ -6,62 +6,99 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/12 13:00:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 11:12:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
 /*
-**
-**
-**    THE PROGRAM NOT USE THIS FT FOR THE MOMENT, IT SEEMS NOT NECESSARY
-**
-**
+** Check if yher're chars forbidden on map.
+** The map only accepts '0','1','2','N','S','E','W' and ' ' (space).
 */
 
+void	forbidd_chr(char c)
+{
+	if (c != '0' && c != '1' && c != '2' && c != ' ' && c != 'N'
+			&& c != 'S' && c != 'E' && c != 'W' && c != '\0')
+	{
+		msg_err("Forbidden characters in map");
+	}
+}
 
 /*
-**  The algorith to found invalid maps its based.
-**
-**  There is an absolute truth to know if a map is closed: in each and every
-**  line of the **  map (both horizontal and vertical): before an empty space
-**  there will be a wall (1), and the next site (not space) there will be a
-**  wall (1).
-**
-**  There are 2 exceptions: when a line begins and/or finishes with a wall (1),
-**  because there cannot be a space before (when begins) nor space after (when
-**  finishes).
-**
-**  So the following rules must be observed by the algorithm:
-**		1.- The first character (not space on a map) must be a 1 (wall).
-**		2.- The character before the next space (empty) after
-**			that 1, must be a 1 (wall).
-**		3.- The character after that space, that is not a space, has to
-**			be a 1 (wall).
-**		4.- And so on.
-**		5.- It must be taken into account that the last character of the
-**			line that is not a space, must necessarily be a 1 (wall).
-**
-**  The program uses 2 algorithms (horizontal / vertical lines).
+** It counts the number os players.
 */
 
-void	invalid_map_hor(int i, t_cub3d *a)
+void	repeat_chr(int i, size_t j, t_cub3d *a)
 {
-	int	len;
-	int	j;
-
-	len = ft_strlen(a->fconf.map.map[i]);
-	j = 0;
-	while (j < len)
+	if (a->fconf.map.map[i][j] == 'N' || a->fconf.map.map[i][j] == 'S'
+		|| a->fconf.map.map[i][j] == 'W' || a->fconf.map.map[i][j] == 'E')
 	{
-		while (ft_isspace(a->fconf.map.map[i][j]))
+		a->fconf.map.num_players++;
+	}
+	if (a->fconf.map.num_players > 1)
+		msg_err("Please, review the number of players.");
+}
+
+/*
+**  This function checks forbideen chars
+**  and the number os players.
+*/
+
+void	review_map_horiz(t_cub3d *a)
+{
+	int		i;
+	size_t	j;
+
+	i = a->fconf.map.first_line;
+	while (i < a->fconf.map.row)
+	{
+		j = 0;
+		while (j < ft_strlen(a->fconf.map.map[i]))
+		{
+			if (ft_isprint(a->fconf.map.map[i][j]) == 1)
+			{
+				forbidd_chr(a->fconf.map.map[i][j]);
+				repeat_chr(i, j, a);
+			}
 			j++;
-		if (a->fconf.map.map[i][j] != '1' && a->fconf.map.map[i][j] != '\0')
-			msg_err("58-Ops, this map is open. Review it or try with other map.");
-		while (ft_isspace(a->fconf.map.map[i][j]) == 0 && j < len)
+		}
+		i++;
+	}
+	if (a->fconf.map.num_players == 0)
+		msg_err("Hey, the map can't run without player!");
+}
+
+/*
+**  Next function review if 0,2,N,S,E or W are surrounded
+**  by some space: in this case, the map is open.
+*/
+
+void	map_open_algorithm(t_cub3d *a)
+{
+	char	**map;
+	int		i;
+	size_t	j;
+
+	map = a->fconf.map.map;
+	i = a->fconf.map.first_line;
+	while (i < a->fconf.map.row)
+	{
+		j = 0;
+		while (j <= ft_strlen(map[i]))
+		{
+			if (map[i][j] == '0' || map[i][j] == '2' || map[i][j] == 'N'
+				|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+			{
+				if (map[i - 1][j - 1] == ' ' || map[i - 1][j + 1] == ' '
+					|| map[i + 1][j - 1] == ' ' || map[i + 1][j + 1] == ' '
+					|| map[i][j + 1] == ' ' || map[i + 1][j] == ' '
+					|| map[i][j - 1] == ' ' || map[i - 1][j] == ' ')
+					msg_err("The map's open. Don't go over the rainbow?");
+			}
 			j++;
-		if (a->fconf.map.map[i][j] == '1')
-			msg_err("62-Ops, this map is open. Review it or try with other map.");
+		}
+		i++;
 	}
 }
