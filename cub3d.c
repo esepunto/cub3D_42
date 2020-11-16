@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 13:30:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:09:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);
 		open_fconfig(argv[1], a);
-//		print_fconfig(a);
+		print_fconfig(a);
 //		del_mem(a);
 	}
 	else

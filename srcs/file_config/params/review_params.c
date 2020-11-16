@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 13:29:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:47:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,7 @@ void	look4rgb(int c, t_cub3d *a)
 {
 	size_t	j;
 	size_t	len;
-//	int		red;
 	const char	*r;
-	int		green;
-	int		blue;
 	char	*aux;
 	int		h;
 	static int	count;
@@ -136,18 +133,19 @@ void	look4rgb(int c, t_cub3d *a)
 
 	if (!count)
 		count = 0;
-	blue = 0;
-	green = 0;
 	aux = a->fconf.wall_texture[c];
 	len = ft_strlen(aux);
 	j = 0;
 	while (j <= len)
 	{
+		printf("%s", aux);
 		while (ft_isdigit(aux[j]))
 			j++;
 		r = ft_substr((const char *)aux, 0, j);
 		a->fconf.red[count] = ft_atoi(r);
 		free((void *)r);
+		if (!a->fconf.red[count])
+			msg_err("Where's the red?");
 //		j++;
 
 
@@ -155,6 +153,8 @@ void	look4rgb(int c, t_cub3d *a)
 			j++;
 		if (aux[j] != ',')
 			msg_err("Bad separations 0.");
+		while (ft_isblank(aux[j]))
+			j++;
 		j++;
 		h = j;
 		while (ft_isdigit(aux[j]))
@@ -162,12 +162,16 @@ void	look4rgb(int c, t_cub3d *a)
 		r = ft_substr((const char *)aux, h, j);
 		a->fconf.green[count] = ft_atoi(r);
 		free((void *)r);
+		if (!a->fconf.green[count])
+			msg_err("Where's the green?");
 //		j++;
 
 		while (ft_isblank(aux[j]))
 			j++;
 		if (aux[j] != ',')
 			msg_err("Bad separations 1.");
+		while (ft_isblank(aux[j]))
+			j++;
 		j++;
 		h = j;
 		while (ft_isdigit(aux[j]))
@@ -175,6 +179,14 @@ void	look4rgb(int c, t_cub3d *a)
 		r = ft_substr((const char *)aux, h, j);
 		a->fconf.blue[count] = ft_atoi(r);
 		free((void *)r);
+		if (!a->fconf.blue[count])
+			msg_err("Where's the blue?");
+
+
+		while (ft_isblank(aux[j]))
+			j++;
+		if (aux[j + 1] != ' ' && aux[j + 1] != '\0')
+			msg_err("Something smells bad in floor/ceilling.");
 
 		count++;
 		break ;
@@ -183,7 +195,7 @@ void	look4rgb(int c, t_cub3d *a)
 
 void	review_cefl(int c, t_cub3d *a)
 {
-	if (ft_count_wrds(c, a) < 1 || ft_count_wrds(c, a) > 3)
+	if (ft_count_wrds(c, a) < 1 || ft_count_wrds(c, a) > 5)
 		msg_err("Bad floor/ceilling elements.");
 	look4rgb(c, a);
 }
