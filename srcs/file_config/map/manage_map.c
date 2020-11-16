@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 12:52:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 21:27:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	check_line_map(int line, t_cub3d *a)
 	size_t	j;
 
 	j = 0;
-	if (line == a->fconf.map.row)
-		i = line - 1;
-	else
-		i = line;
+	i = line;
 	while (j < ft_strlen(a->fconf.map.map[i]))
 	{
 		if (a->fconf.map.map[i][j] != '1'
@@ -103,5 +100,6 @@ void	find_map(t_cub3d *a)
 	check_line_map(a->fconf.map.first_line, a);
 	check_frst_column(a);
 	review_map_horiz(a);
-	map_open_algorithm(a);
+/*	map_open_algorithm(a);
+*/
 }

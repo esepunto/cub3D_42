@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 13:28:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 21:30:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_fconfig(t_cub3d *a)
 	printf("row: %d\n", a->fconf.map.row);
 	printf("colum: %zu\n", a->fconf.map.col);
 //	printf("map[0][7] = %c\n", a->fconf.map.map[0][7]);
-	while (i < a->fconf.map.row)
+	while (i <= a->fconf.map.row)
 	{
 		printf("linea %d: %s\n", i, a->fconf.map.map[i]);
 		i++;
@@ -39,7 +39,7 @@ void	print_fconfig(t_cub3d *a)
 	printf("TEXTURE: |%s|\n", a->fconf.wallwe_texture);
 	printf("TEXTURE: |%s|\n", a->fconf.wallea_texture);
 	printf("TEXTURE: |%s|\n", a->fconf.sprite_texture);
-*/	i= 0;
+	i= 0;
 	while (i <= 7 && a->fconf.wall_texture[i])
 	{
 		printf("TEXTURE[%d]:  |%s|\n", i, a->fconf.wall_texture[i]);
@@ -51,5 +51,5 @@ void	print_fconfig(t_cub3d *a)
 	printf("Red[%d]: |%d|, Green[%d]: |%d| Blue[%d]: |%d|\n", i, a->fconf.red[i], i, a->fconf.green[i], i, a->fconf.blue[i]);
 	i = 1;
 	printf("Red[%d]: |%d|, Green[%d]: |%d| Blue[%d]: |%d|\n", i, a->fconf.red[i], i, a->fconf.green[i], i, a->fconf.blue[i]);
-	printf("\n********** FIN IMPRESION ***********\n\n\n\n\n\n");
+*/	printf("\n********** FIN IMPRESION ***********\n\n\n\n\n\n");
 }
