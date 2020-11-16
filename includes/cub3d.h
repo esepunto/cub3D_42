@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/13 13:08:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 09:45:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ int		ft_count_wrds(int c, t_cub3d *a);
 void 	find_map(t_cub3d *a);
 void 	review_map_horiz(size_t j, t_cub3d *a);
 void	is_space2map(t_cub3d *a);
-void	check_frst_line_map(int i, size_t j, t_cub3d *a);
+
+void	check_line_map(int line, t_cub3d *a);
+
+//void	check_frst_line_map(int i, size_t j, t_cub3d *a);
 void	check_frst_line_map2(t_cub3d *a);
 void	forbidd_chr(char c);
 void	repeat_chr(int i, size_t j, t_cub3d *a);
