@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/14 17:32:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 13:29:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		ft_count_wrds(int c, t_cub3d *a)
 	size_t	i;
 	int		count;
 	char	*s;
-	
+
 	i = 0;
 	count = 0;
 	s = a->fconf.wall_texture[c];
@@ -91,12 +91,6 @@ char	*del_last_spaces(char *str)
 	return (str);
 }
 
-
-
-
-
-
-
 /*
 ** Next 3 functions check the number os params in:
 ** 		a) walls and sprites
@@ -104,14 +98,17 @@ char	*del_last_spaces(char *str)
 ** 		c) resolution
 */
 
-void	rev_walls(int c, t_cub3d *a)
+void	review_walls(int c, t_cub3d *a)
 {
 	int	fd;//Check to put in on struct
 
 	int	len = ft_strlen(a->fconf.wall_texture[c]);//To deleted last space add at the end of the program
 	a->fconf.wall_texture[c][len - 1] = '\0';//To deleted last space add at the end of the program
 	if (ft_count_wrds(c, a) != 1)
+	{
+//		printf("textura error %s", a->fconf.wall_texture[c]);
 		msg_err("Too much information in walls.");
+	}
 	a->fconf.wall_texture[c] = del_last_spaces(a->fconf.wall_texture[c]);
 	if (ft_chekext(a->fconf.wall_texture[c], ".png") != 0)
 		msg_err("Bad extension in textures.");
@@ -120,16 +117,78 @@ void	rev_walls(int c, t_cub3d *a)
 		printf("|%s|\n", a->fconf.wall_texture[c]);
 		msg_err("This file is out of the air.");
 	}
-	close(fd);
+	else
+		close(fd);
 }
 
-void	rev_cefl(int c, t_cub3d *a)
+void	look4rgb(int c, t_cub3d *a)
 {
-	if (ft_count_wrds(c, a) != 1)
-		msg_err("Poor information in floor/ceilling.");
+	size_t	j;
+	size_t	len;
+//	int		red;
+	const char	*r;
+	int		green;
+	int		blue;
+	char	*aux;
+	int		h;
+	static int	count;
+
+
+	if (!count)
+		count = 0;
+	blue = 0;
+	green = 0;
+	aux = a->fconf.wall_texture[c];
+	len = ft_strlen(aux);
+	j = 0;
+	while (j <= len)
+	{
+		while (ft_isdigit(aux[j]))
+			j++;
+		r = ft_substr((const char *)aux, 0, j);
+		a->fconf.red[count] = ft_atoi(r);
+		free((void *)r);
+//		j++;
+
+
+		while (ft_isblank(aux[j]))
+			j++;
+		if (aux[j] != ',')
+			msg_err("Bad separations 0.");
+		j++;
+		h = j;
+		while (ft_isdigit(aux[j]))
+			j++;
+		r = ft_substr((const char *)aux, h, j);
+		a->fconf.green[count] = ft_atoi(r);
+		free((void *)r);
+//		j++;
+
+		while (ft_isblank(aux[j]))
+			j++;
+		if (aux[j] != ',')
+			msg_err("Bad separations 1.");
+		j++;
+		h = j;
+		while (ft_isdigit(aux[j]))
+			j++;
+		r = ft_substr((const char *)aux, h, j);
+		a->fconf.blue[count] = ft_atoi(r);
+		free((void *)r);
+
+		count++;
+		break ;
+	}
 }
 
-void	rev_res(int c, t_cub3d *a)
+void	review_cefl(int c, t_cub3d *a)
+{
+	if (ft_count_wrds(c, a) < 1 || ft_count_wrds(c, a) > 3)
+		msg_err("Bad floor/ceilling elements.");
+	look4rgb(c, a);
+}
+
+void	review_res(int c, t_cub3d *a)
 {
 	if (ft_count_wrds(c, a) != 2)
 		msg_err("Poor information in resolution.");
@@ -143,11 +202,11 @@ void	review_params(t_cub3d *a)
 	while (c <= 7)
 	{
 		if (c < 4 || c == 7)
-			rev_walls(c, a);
+			review_walls(c, a);
 		if (c >= 5 && c <= 6)
-			rev_cefl(c, a);
+			review_cefl(c, a);
 		if (c == 4)
-			rev_res(c, a);
+			review_res(c, a);
 		c++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 11:11:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 13:09:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ typedef struct	s_readconfig
 	char	*ceil;
 	char	*flr;
 	int		ceilclr;
+	int		red[2];
+	int		green[2];
+	int		blue[2];
 	int		flrclr;
 	int		init_id[8];
 	char	*wall[8];
@@ -116,11 +119,13 @@ char	*look4_id_2(const char *id, t_cub3d *a, int m);
 void	is_repeat(int	m, t_cub3d *a, const char *id);
 int		jump_sp(int i, int j, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
+
 void	review_params(t_cub3d *a);
-void	rev_walls(int c, t_cub3d *a);
-void	rev_cefl(int c, t_cub3d *a);
-void	rev_res(int c, t_cub3d *a);
+void	review_walls(int c, t_cub3d *a);
+void	review_cefl(int c, t_cub3d *a);
+void	review_res(int c, t_cub3d *a);
 int		ft_count_wrds(int c, t_cub3d *a);
+void	look4rgb(int c, t_cub3d *a);
 
 void 	find_map(t_cub3d *a);
 void	is_space2map(t_cub3d *a);
