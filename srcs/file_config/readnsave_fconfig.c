@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 22:16:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 22:41:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,12 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->fconf.map.map[c] = ft_strdup(line);
-//		aux = a->fconf.map.map[c];
-//		free(a->fconf.map.map[c]);
-//		a->fconf.map.map[c] = ft_strjoin(ft_strdup(a->fconf.map.map[c]), " ");
-//		a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
-//		free(aux);
 		c++;
 		free(line);
 		line = NULL;
 	}
-//	c++;
 	a->fconf.map.map[c] = ft_strdup(line);
-/*	aux = a->fconf.map.map[c];
-	a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
-	free(aux);
-*/	free(line);
+	free(line);
 	line = NULL;
 	close(fd);
 }
@@ -90,9 +81,9 @@ void	open_fconfig(char *conf_file, t_cub3d *a)
 	if (!(a->fconf.map.map = (char **)malloc(a->fconf.map.row * sizeof(char *))))
 		msg_err("WTF! Give me back my memory!");
 	save_fconfig(conf_file, a);
-	print_fconfig(a);
+//	print_fconfig(a);
 	find_walls(a);
 	review_params(a);
 	find_map(a);
-	print_fconfig(a);
+//	print_fconfig(a);
 }

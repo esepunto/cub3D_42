@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 21:29:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 23:05:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ void	review_walls(int c, t_cub3d *a)
 {
 	int	fd;//Check to put in on struct
 
-	int	len = ft_strlen(a->fconf.wall_texture[c]);//To deleted last space add at the end of the program
-	a->fconf.wall_texture[c][len - 1] = '\0';//To deleted last space add at the end of the program
 	if (ft_count_wrds(c, a) != 1)
 	{
 //		printf("textura error %s", a->fconf.wall_texture[c]);
@@ -119,6 +117,16 @@ void	review_walls(int c, t_cub3d *a)
 	}
 	else
 		close(fd);
+}
+
+void	review_rgb(int count, t_cub3d *a)
+{
+	if (a->fconf.red[count] < 0 || a->fconf.red[count] > 255
+		|| a->fconf.green[count] < 0 || a->fconf.green[count] > 255
+		|| a->fconf.blue[count] < 0 || a->fconf.blue[count] > 255)
+	{
+		msg_err("The color is out of rainbow.");
+	}
 }
 
 void	look4rgb(int c, t_cub3d *a)
@@ -146,9 +154,8 @@ void	look4rgb(int c, t_cub3d *a)
 //		printf("pre red aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.red[count] = ft_atoi(r);
 			free((void *)r);
-		if (!a->fconf.red[count])
+		if (!a->fconf.red[count] && a->fconf.red[count] != 0)
 			msg_err("Where's the red?");
-//		j++;
 
 
 		while (ft_isblank(aux[j]))
@@ -168,9 +175,9 @@ void	look4rgb(int c, t_cub3d *a)
 //		printf("pre gre aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.green[count] = ft_atoi(r);
 		free((void *)r);
-		if (!a->fconf.green[count])
+		if (!a->fconf.green[count]  && a->fconf.green[count] != 0)
 			msg_err("Where's the green?");
-//		j++;
+
 
 		while (ft_isblank(aux[j]))
 			j++;
@@ -184,12 +191,14 @@ void	look4rgb(int c, t_cub3d *a)
 			j++;
 		while (ft_isdigit(aux[j]))
 			j++;
+		if (aux[j + 1] = '\0')
+			msg_err("no hay azul!");
 		r = ft_substr((const char *)aux, h, j);
 //		printf("pre blu aux h [%d]: |%c|\n", h, aux[h]);
 //		printf("pre blu aux j [%ld]: |%c|\n", j, aux[j]);
 		a->fconf.blue[count] = ft_atoi(r);
 		free((void *)r);
-		if (!a->fconf.blue[count])
+		if (!a->fconf.blue[count] && a->fconf.blue[count] != 0)
 			msg_err("Where's the blue?");
 
 //		printf("pos blu aux h [%d]: |%c|\n", h, aux[h]);
@@ -202,6 +211,7 @@ void	look4rgb(int c, t_cub3d *a)
 //			printf("aux[%ld]: |%c|\n", j + 1, aux[j + 1]);
 			msg_err("Something smells bad in floor/ceilling.");
 		}
+		review_rgb(count, a);
 		count++;
 		break ;
 	}
