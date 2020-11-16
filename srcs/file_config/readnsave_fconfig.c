@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 21:33:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/16 22:16:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->fconf.map.map[c] = ft_strdup(line);
-		aux = a->fconf.map.map[c];
+//		aux = a->fconf.map.map[c];
 //		free(a->fconf.map.map[c]);
 //		a->fconf.map.map[c] = ft_strjoin(ft_strdup(a->fconf.map.map[c]), " ");
-		a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
-		free(aux);
+//		a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
+//		free(aux);
 		c++;
 		free(line);
 		line = NULL;
 	}
-	c++;
+//	c++;
+	a->fconf.map.map[c] = ft_strdup(line);
+/*	aux = a->fconf.map.map[c];
 	a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
-	free(line);
+	free(aux);
+*/	free(line);
 	line = NULL;
 	close(fd);
 }
@@ -71,10 +74,6 @@ void	calc_fconfig(char *conf_file, t_cub3d *a)
 		line = NULL;
 		a->fconf.map.row++;
 	}
-	columnas = ft_strlen(line);
-	if (columnas > a->fconf.map.col)
-			a->fconf.map.col = columnas;
-	a->fconf.map.row++;
 	free(line);
 	line = NULL;
 	close(fd);
