@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 14:39:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/17 14:41:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ void	find_walls(t_cub3d *a)
 	while (c <= 7)
 	{
 		a->fconf.wall[c] = look4_id(id[c], a, ft_strlen(id[c]));
-		printf("pre text: |%s|", a->fconf.wall[c]);
+//		printf("pre text: |%s|", a->fconf.wall[c]);
 		a->fconf.wall_texture[c] = look4_texture(a->fconf.wall[c], id[c]);
-		printf("pre text: |%s|", a->fconf.wall_texture[c]);
+//		printf("pre text: |%s|", a->fconf.wall_texture[c]);
 		c++;
 	}
 }
