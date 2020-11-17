@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 11:34:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/17 14:25:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	print_fconfig(t_cub3d *a)
 	}
 	printf("Last line with params: %d\n", a->fconf.final_line_params);
 	printf("First line of map: %d\n", a->fconf.map.first_line);
+	printf("final row: %d\n", a->fconf.map.row);
+	printf("nº players: %d\n", a->fconf.map.num_players);
 	i = 5;
 	printf("Red[%d]: |%d|, Green[%d]: |%d| Blue[%d]: |%d|\n", i, a->fconf.red[i], i, a->fconf.green[i], i, a->fconf.blue[i]);
 	i = 6;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 14:03:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/17 14:30:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	check_line_map(int line, t_cub3d *a)
 {
 	int		i;
 	size_t	j;
+
+
+	/*
+	*** Revisar esta función
+	*/
 
 	j = 0;
 	if (line == a->fconf.map.row)
