@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/16 13:09:02 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/17 10:39:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	review_walls(int c, t_cub3d *a);
 void	review_cefl(int c, t_cub3d *a);
 void	review_res(int c, t_cub3d *a);
 int		ft_count_wrds(int c, t_cub3d *a);
-void	look4rgb(int c, t_cub3d *a);
+int		look4color(int c, t_cub3d *a);
 
 void 	find_map(t_cub3d *a);
 void	is_space2map(t_cub3d *a);
