@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:14:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 13:18:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 		free(line);
 		line = NULL;
 	}
-//	a->fconf.map.map[c] = ft_strdup(line);
+	a->fconf.map.map[c] = ft_strdup(line);
 	free(line);
 	line = NULL;
 	close(fd);
@@ -66,9 +66,9 @@ void	calc_fconfig(char *conf_file, t_cub3d *a)
 		columns = ft_strlen(line);
 		if (columns > a->fconf.map.col)
 			a->fconf.map.col = columns;
+		a->fconf.map.row++;
 		free(line);
 		line = NULL;
-		a->fconf.map.row++;
 	}
 	free(line);
 	line = NULL;

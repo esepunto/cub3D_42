@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 08:34:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 13:18:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	is_space2map(t_cub3d *a)
 	row = a->fconf.map.row;
 	endline = a->fconf.final_line_params;
 	frsline = a->fconf.map.first_line;
-	if (ft_strlen(map[endline + 1]) > 1)
-		msg_err("I need a blank line before params");
+//	if (ft_strlen(map[endline + 1]) > 1)
+//		msg_err("I need a blank line before params");
 	if (row - endline <= 4)// <=4 if need a blank line after params, <=3 instead.
 		msg_err("The map needs 3 rows at least");
 	frsline = endline + 2;
@@ -50,17 +50,8 @@ void	check_line_map(int line, t_cub3d *a)
 	int		i;
 	size_t	j;
 
-
-	/*
-	*** Revisar esta función
-	*/
-
 	j = 0;
-	if (line == a->fconf.map.row)
-		i = line - 1;
-	else
-		i = line;
-//	i = line;
+	i = line;
 	while (j < ft_strlen(a->fconf.map.map[i]))
 	{
 		if (a->fconf.map.map[i][j] != '1'
@@ -105,7 +96,7 @@ void	check_frst_column(t_cub3d *a)
 void	find_map(t_cub3d *a)
 {
 	is_space2map(a);
-//	check_line_map(a->fconf.map.row, a);
+//	check_line_map(a->fconf.map.row - 1, a);
 //	check_line_map(a->fconf.map.first_line, a);
 //	check_frst_column(a);
 	review_map_horiz(a);
