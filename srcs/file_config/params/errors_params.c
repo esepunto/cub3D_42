@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:57:34 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/11 13:22:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 10:25:59 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@
 ** Check if anything param is repeat ("NO", "SO", etc.)
 */
 
-void	is_repeat(int m, t_cub3d *a, const char *id)
+void	is_repeat(int thisline, t_cub3d *a, const char *id)
 {
 	int			j;
 	int			z;
 	int			len;
 
 	len = ft_strlen(id);
-	m = m + 1;
-	while (m < a->fconf.map.row)
+	thisline = thisline + 1;
+	while (thisline < a->fconf.map.row)
 	{
-		j = jump_sp(m, 0, a);
+		j = jump_sp(thisline, a);
 		z = 0;
-		while (z < len && a->fconf.map.map[m][j] == id[z])
+		while (z < len && a->fconf.map.map[thisline][j] == id[z])
 		{
 			if (z == len - 1)
 			{
-				if (a->fconf.final_line_params < m)
-					a->fconf.final_line_params = m;
+				if (a->fconf.final_line_params < thisline)
+					a->fconf.final_line_params = thisline;
 				msg_err("No no no no: a param is repeat.");
 			}
 			z++;
 			j++;
 		}
-		m++;
+		thisline++;
 	}
 	return ;
 }

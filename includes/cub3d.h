@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 10:39:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 09:29:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,11 @@ void	calc_fconfig(char *conf_file, t_cub3d *a);
 void	save_fconfig(char *conf_file, t_cub3d *a);
 void	find_walls(t_cub3d *a);
 void	find_walls_2(t_cub3d *a);
-char	*look4_id(char *id, t_cub3d *a, int c);
-char	*look4_id_2(const char *id, t_cub3d *a, int m);
+char	*look4_id(char *id, t_cub3d *a);
+//char	*look4_id_2(const char *id, t_cub3d *a, int m);
+char	*extract_path(const char *id, t_cub3d *a, int m);
 void	is_repeat(int	m, t_cub3d *a, const char *id);
-int		jump_sp(int i, int j, t_cub3d *a);
+int		jump_sp(int i, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 
 void	review_params(t_cub3d *a);

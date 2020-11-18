@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 14:41:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 11:17:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void	init_struct(t_cub3d *a)
 	a->fconf.map.col = 0;
 	a->fconf.final_line_params = 0;
 	a->fconf.nb_wrd_param = 0;
+}
+
+void	del_struct(t_cub3d *a)
+{
+	a = NULL;
 }
 
 /*
@@ -38,10 +43,12 @@ int		main(int argc, char **argv)
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);
 		open_fconfig(argv[1], a);
+//		del_struct(a);
+//		free((void *)a);
 //		print_fconfig(a);
 //		del_mem(a);
 	}
 	else
 		msg_err_b4a("Either U type what I need 2 read or our LV is impossible.");
-	system("leaks cub3D");
+//	system("leaks cub3D");
 }

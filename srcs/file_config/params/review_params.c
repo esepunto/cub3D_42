@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/17 14:33:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 11:18:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,8 @@ void	extract_rgb(int c, t_cub3d *a)
 	char	*blue;
 
 	color = ft_split(a->fconf.wall_texture[c], ',');
-//	if (!color[0] || !color[1] || !color[2])
-//		msg_err("Not 3 RGB colors");
+	if (!color[0] || !color[1] || !color[2])
+		msg_err("Not 3 RGB colors");
 	red = ft_strtrim((const char *)color[0], " ");
 	green = ft_strtrim((const char *)color[1], " ");
 	blue = ft_strtrim((const char *)color[2], " ");
