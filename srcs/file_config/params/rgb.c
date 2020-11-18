@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 12:30:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 14:45:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	isdigit_str(char *color)
 	while (*color)
 	{
 		if (ft_isdigit(*color) == 0)
-			msg_err("Review RGB colors.");
+			msg_err("Review the numbers.");
 		color++;
 	}
 }

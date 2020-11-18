@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 13:14:12 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 14:26:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		main(int argc, char **argv)
 		open_fconfig(argv[1], a);
 //		del_struct(a);
 //		free((void *)a);
-//		print_fconfig(a);
+		print_fconfig(a);
 //		del_mem(a);
 	}
 	else

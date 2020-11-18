@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 12:52:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 14:45:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,27 @@ void	review_cefl(int c, t_cub3d *a)
 
 void	review_res(int c, t_cub3d *a)
 {
+	char	**size;
+	char	*x;
+	char	*y;
+
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 2)
 		msg_err("Poor information in resolution.");
+	size = ft_split(a->fconf.wall_texture[c], ' ');
+	if (!size[0] || !size[1] || size[2])
+		msg_err("Bad nbr param resolution");
+	x = ft_strtrim(size[0], " ");
+	y = ft_strtrim(size[1], " ");
+	if (x == '\0' || y == '\0')
+		msg_err("Not resolution");
+	isdigit_str(x);
+	isdigit_str(y);
+	a->fconf.xrendersize = ft_atoi(x);
+	a->fconf.yrendersize = ft_atoi(y);
+	free(x);
+	free(y);
+	ft_delmatrix(size);
+
 }
 
 void	review_params(t_cub3d *a)
