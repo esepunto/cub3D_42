@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   ft_delmatrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:37:46 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/18 11:42:06 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/18 11:42:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int		msg_err(char *error)
+void	ft_delmatrix(char **matrix)
 {
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
-}
+	int c;
 
-int		msg_err_b4a(char *error)
-{
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	c = 0;
+	while(matrix[c])
+	{
+		free(matrix[c]);
+		c++;
+	}
+	free(matrix);
 }

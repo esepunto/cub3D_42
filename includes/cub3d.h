@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 09:29:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:35:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ void	save_fconfig(char *conf_file, t_cub3d *a);
 void	find_walls(t_cub3d *a);
 void	find_walls_2(t_cub3d *a);
 char	*look4_id(char *id, t_cub3d *a);
-//char	*look4_id_2(const char *id, t_cub3d *a, int m);
 char	*extract_path(const char *id, t_cub3d *a, int m);
 void	is_repeat(int	m, t_cub3d *a, const char *id);
+void	check_nbr(int c, t_cub3d *a);
 int		jump_sp(int i, t_cub3d *a);
 char	*look4_texture(char *str, char *id);
 
@@ -125,8 +125,12 @@ void	review_params(t_cub3d *a);
 void	review_walls(int c, t_cub3d *a);
 void	review_cefl(int c, t_cub3d *a);
 void	review_res(int c, t_cub3d *a);
-int		ft_count_wrds(int c, t_cub3d *a);
 int		look4color(int c, t_cub3d *a);
+
+void	check_nbr(int c, t_cub3d *a);
+void	isdigit_str(char *color);
+void	extract_rgb(int c, t_cub3d *a);
+
 
 void 	find_map(t_cub3d *a);
 void	is_space2map(t_cub3d *a);

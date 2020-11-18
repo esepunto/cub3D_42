@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   ft_lastblanks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:37:46 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/18 12:21:18 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/18 12:24:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int		msg_err(char *error)
-{
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
-}
+/*
+** This function returns the strinf received after deletes the blanks characters
+** at the end of the string. It deletes spaces and tabs.
+*/
 
-int		msg_err_b4a(char *error)
+char	*ft_lastblanks(char *str)
 {
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	size_t	len;
+	size_t	c;
+
+	len = ft_strlen(str);
+	c = len;
+	while (c > 1)
+	{
+		if (ft_isblank(str[c]))
+			str[c] = '\0';
+		c--;
+	}
+	return (str);
 }

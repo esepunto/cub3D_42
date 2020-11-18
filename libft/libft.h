@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/13 14:20:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:22:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 void				ft_memdel(void **a);
+void				ft_delmatrix(char **matrix);
 char				*ft_extract(char *str);
 int					ft_chop(char **str, char **line);
 int					get_next_line(int fd, char **line);
@@ -91,4 +92,7 @@ void				ft_memdel(void **a);
 char				*ft_extract(char *str);
 int					ft_chop(char **str, char **line);
 int					ft_chekext(const char *str, char *ext);
+size_t				ft_countchr(char *str, char chr);
+size_t				ft_cntwrds(char *str);
+char				*ft_lastblanks(char *str);
 #endif

@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   ft_cntwrds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:37:46 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/18 12:06:56 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/18 12:10:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int		msg_err(char *error)
-{
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
-}
+/*
+** To count the number of "words" in a string.
+** "words" = any string of chars (excepts blank chars)
+**
+** Danger! It counts special chars. not only print chars.
+*/
 
-int		msg_err_b4a(char *error)
+size_t	ft_cntwrds(char *str)
 {
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	size_t	i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (!ft_isblank(str[i]))
+			count++;
+		while (str[i] != ' ' && str[i + 1])
+			i++;
+		i++;
+	}
+	return (count);
 }

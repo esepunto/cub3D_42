@@ -1,13 +1,13 @@
 NAME	=	cub3D
 
-CC		=	gcc -Wall -Wextra -Werror -O0 -g 
+CC		=	gcc -Wall -Wextra -Werror -g
 
 #SRCS	=	srcs/*.c
 
 SRCS	=	cub3d.c \
 			srcs/file_config/readnsave_fconfig.c \
-			srcs/file_config/params/errors_params.c \
 			srcs/file_config/params/look4params.c \
+			srcs/file_config/params/rgb.c \
 			srcs/file_config/params/review_params.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/map_algorithm.c \

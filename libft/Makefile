@@ -6,7 +6,7 @@
 #    By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:54:03 by ssacrist          #+#    #+#              #
-#    Updated: 2020/11/13 14:12:57 by ssacrist         ###   ########.fr        #
+#    Updated: 2020/11/18 12:22:17 by ssacrist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,10 @@ SRC			=	ft_atoi.c \
 				*ft_strtrim.c \
 				*ft_substr.c \
 				ft_chekext.c \
+				ft_delmatrix.c \
+				ft_countchr.c \
+				ft_cntwrds.c \
+				ft_lastblanks.c \
 				get_next_line.c
 
 SRC_BONUS	=	ft_lstnew_bonus.c \

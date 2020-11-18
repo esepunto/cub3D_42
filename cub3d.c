@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:17:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 11:37:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ int		main(int argc, char **argv)
 	}
 	else
 		msg_err_b4a("Either U type what I need 2 read or our LV is impossible.");
-//	system("leaks cub3D");
+	system("leaks cub3D");
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:07:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/18 12:38:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ char	*extract_path(const char *id, t_cub3d *a, int thisline)
 	msg_err("Review the config file: something goes wrong.");
 	return (0);
 }
-
 
 void	find_walls(t_cub3d *a)
 {

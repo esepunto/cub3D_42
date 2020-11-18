@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   ft_countchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 11:37:46 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/18 11:51:15 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/18 11:52:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int		msg_err(char *error)
+size_t		ft_countchr(char *str, char chr)
 {
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
-}
+	size_t	c;
 
-int		msg_err_b4a(char *error)
-{
-	ft_printf("Error\n%s\n\n", error);
-//	system("leaks cub3D");
-	exit(0);
+	c = 0;
+	while (*str)
+	{
+		if (*str == chr)
+			c++;
+		str++;
+	}
+	return (c);
 }
