@@ -12,7 +12,6 @@ SRCS	=	cub3d.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/map_algorithm.c \
 			utils/messages.c \
-			utils/del_mem.c \
 			utils/tests.c
 
 #MAIN	=	./samples_main/main_split.c

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 13:19:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:32:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 	char		*line;
 	int			i;
 	static int	c;
-//	char		*aux;
 
 	c = 0;
 	if ((fd = open(conf_file, O_RDONLY)) == -1)
@@ -31,12 +30,7 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
 		a->fconf.map.map[c] = ft_strdup(line);
-
-/*		aux = a->fconf.map.map[c];
-		free(a->fconf.map.map[c]);
-		a->fconf.map.map[c] = ft_strjoin(ft_strdup(aux), " ");
-		free(aux);
-*/		c++;
+		c++;
 		free(line);
 		line = NULL;
 	}
@@ -82,11 +76,14 @@ void	calc_fconfig(char *conf_file, t_cub3d *a)
 
 void	open_fconfig(char *conf_file, t_cub3d *a)
 {
+	int	row;
+
 	calc_fconfig(conf_file, a);
-	if (!(a->fconf.map.map = (char **)malloc(a->fconf.map.row * sizeof(char *))))
+	row = a->fconf.map.row;
+	if (!(a->fconf.map.map = (char **)malloc(row * sizeof(char *))))
 		msg_err("WTF! Give me back my memory!");
 	save_fconfig(conf_file, a);
-	find_walls(a);
+	find_params(a);
 	review_params(a);
 	find_map(a);
 }

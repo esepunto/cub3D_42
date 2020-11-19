@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 12:57:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 14:24:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@ void	init_struct(t_cub3d *a)
 	a->fconf.map.col = 0;
 	a->fconf.final_line_params = 0;
 	a->fconf.nb_wrd_param = 0;
-}
-
-void	del_struct(t_cub3d *a)
-{
-	a = NULL;
 }
 
 /*
@@ -39,18 +34,12 @@ int		main(int argc, char **argv)
 	{
 		len = ft_strlen(argv[1]);
 		if (ft_chekext(argv[1], ".cub") != 0)
-			msg_err_b4a("This is not a .cub file, bro.");
+			msg_err("This is not a .cub file, bro.");
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
-
 		init_struct(a);
 		open_fconfig(argv[1], a);
-//		del_struct(a);
-//		print_fconfig(a);
-//		ft_memdel((void **)a);
-
 	}
 	else
-		msg_err_b4a("Either U type what I need 2 read or our LV is impossible.");
-//	printf("file: %s\n", argv[1]);
+		msg_err("Revier your fingers, please.");
 	system("leaks cub3D");
 }
