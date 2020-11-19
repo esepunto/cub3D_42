@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 10:26:58 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 12:38:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	check_frst_column(t_cub3d *a)
 void	find_map(t_cub3d *a)
 {
 	is_space2map(a);
-	check_line_map(a->fconf.map.row - 1, a);
+//	check_line_map(a->fconf.map.row - 1, a);
 //	check_line_map(a->fconf.map.first_line, a);
 //	check_frst_column(a);
 	review_map_horiz(a);

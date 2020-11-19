@@ -1,0 +1,561 @@
+Error
+Not 3 RGB colors
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+There is line and isn't a param.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+RGB < 0 or RGB > 255
+
+Error
+RGB < 0 or RGB > 255
+
+Error
+RGB < 0 or RGB > 255
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Review the numbers.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+No no no no: a param is repeat.
+
+Error
+No no no no: a param is repeat.
+
+Error
+Review RGB colors. Are U in COMMA?
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+file: ./cub3d_destroyer/invalid_maps/invalid_map_area_002.cub
+file: ./cub3d_destroyer/invalid_maps/invalid_map_area_003.cub
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+Hey, the map can't run without player!
+
+file: ./cub3d_destroyer/invalid_maps/invalid_map_area_006.cub
+Error
+Hey, the map can't run without player!
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map needs 3 rows at least
+
+Error
+The map needs 3 rows at least
+
+Error
+The map needs 3 rows at least
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+The map needs 3 rows at least
+
+Error
+The map needs 3 rows at least
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+file: ./cub3d_destroyer/invalid_maps/invalid_map_area_021.cub
+file: ./cub3d_destroyer/invalid_maps/invalid_map_area_022.cub
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+The map's open. Don't go over the rainbow?
+
+Error
+Please, review the number of players.
+
+Error
+Please, review the number of players.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Poor information in resolution.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Poor information in resolution.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+file: ./cub3d_destroyer/invalid_maps/invalid_res_014.cub
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Review the numbers.
+
+Error
+There is line and isn't a param.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Review the numbers.
+
+Error
+Poor information in resolution.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+This file is out of the air.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Too much information in walls.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+This file is out of the air.
+
+Error
+No no no no: a param is repeat.
+
+Error
+No no no no: a param is repeat.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+This file is out of the air.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Too much information in walls.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+This file is out of the air.
+
+Error
+No no no no: a param is repeat.
+
+Error
+No no no no: a param is repeat.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+This file is out of the air.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Too much information in walls.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+This file is out of the air.
+
+Error
+No no no no: a param is repeat.
+
+Error
+No no no no: a param is repeat.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+This file is out of the air.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Too much information in walls.
+
+Error
+999Review the config file: something goes wrong.
+
+Error
+Bad extension in textures.
+
+Error
+Bad extension in textures.
+
+Error
+There is line and isn't a param.
+
+Error
+This file is out of the air.
+
+Error
+No no no no: a param is repeat.
+
+Error
+No no no no: a param is repeat.
+

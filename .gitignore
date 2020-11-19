@@ -15,3 +15,4 @@ samples_main/main_split.c
 test_gnl.sh
 wolftex/
 .nfs*
+./mapgen

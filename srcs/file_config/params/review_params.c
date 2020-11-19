@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 14:45:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 13:01:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	review_res(int c, t_cub3d *a)
 	free(x);
 	free(y);
 	ft_delmatrix(size);
+	if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
+		msg_err("Review the resolution,, please.");
 
 }
 
