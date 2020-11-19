@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 08:25:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 08:45:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ void	map_open_algorithm(t_cub3d *a)
 					|| (map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
 					|| (map[i][j - 1] == ' ' || map[i][j - 1] == '\0')
 					|| (map[i - 1][j] == ' ' || map[i - 1][j] == '\0'))
-
-
 					msg_err("The map's open. Don't go over the rainbow?");
 			}
 			j++;

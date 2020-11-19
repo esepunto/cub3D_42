@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 12:38:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 08:41:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		jump_sp(int i, t_cub3d *a)
 **  to do it.
 */
 
+/*
 char	*look4_id(char *id, t_cub3d *a)
 {
 	int		i;
@@ -80,10 +81,10 @@ char	*look4_id(char *id, t_cub3d *a)
 		j = 0;
 		j = jump_sp(i, a);//"Quita" los espacios vacíos que haya al comienzo
 		k = 0;
-		while (k < ft_strlen(id))
+		while (k < ft_strlen(id) && a->fconf.map.map[i][j] == id[k])
 		{
-			if (a->fconf.map.map[i][j] != id[k])//Si el primer carácter no coincide, corta el bucle
-				break ;
+//			if (a->fconf.map.map[i][j] != id[k])//Si el primer carácter no coincide, corta el bucle
+//				break ;
 			if (ft_strlen(id) == k + 1)//Si hemos commprobado todos los caracteres del id
 			{
 				if (i > a->fconf.final_line_params)
@@ -96,6 +97,33 @@ char	*look4_id(char *id, t_cub3d *a)
 		i++;
 	}
 	print_fconfig(a);
+	msg_err("999Review the config file: something goes wrong.");
+	return (0);
+}
+*/
+
+char	*look4_id(char *id, t_cub3d *a)
+{
+	int		i;
+	char	*texture;
+	char	**map;
+	size_t	len;
+
+	map = a->fconf.map.map;
+	i = 0;
+	while (i < a->fconf.map.row)
+	{
+		len = ft_strlen(map[i]);
+		if (!(texture = ft_strnstr(map[i], id, len)))
+			i++;
+		else
+		{
+			if (i > a->fconf.final_line_params)
+				a->fconf.final_line_params = i;// Posiciona la última línea de los parámetros
+			return(extract_path(id, a, i));// Para buscar el path/sendero del fichero (textura)
+		}
+	}
+//	print_fconfig(a);
 	msg_err("999Review the config file: something goes wrong.");
 	return (0);
 }

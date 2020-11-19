@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 14:26:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 08:46:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ int		main(int argc, char **argv)
 		init_struct(a);
 		open_fconfig(argv[1], a);
 //		del_struct(a);
-//		free((void *)a);
-		print_fconfig(a);
-//		del_mem(a);
+//		print_fconfig(a);
+//		ft_memdel((void **)a);
 	}
 	else
 		msg_err_b4a("Either U type what I need 2 read or our LV is impossible.");
-	system("leaks cub3D");
+//	system("leaks cub3D");
 }
