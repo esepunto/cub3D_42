@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 11:54:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 13:07:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	*look4_id(char *id, t_cub3d *a)
 		}
 		i++;
 	}
-//	print_fconfig(a);
+	print_fconfig(a);
 	msg_err("999Review the config file: something goes wrong.");
 	return (0);
 }
