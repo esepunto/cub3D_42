@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 08:41:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 10:23:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		jump_sp(int i, t_cub3d *a)
 **  to do it.
 */
 
-/*
+
 char	*look4_id(char *id, t_cub3d *a)
 {
 	int		i;
@@ -100,33 +100,39 @@ char	*look4_id(char *id, t_cub3d *a)
 	msg_err("999Review the config file: something goes wrong.");
 	return (0);
 }
-*/
 
+/*
 char	*look4_id(char *id, t_cub3d *a)
 {
 	int		i;
 	char	*texture;
-	char	**map;
+	char	*map;
 	size_t	len;
 
-	map = a->fconf.map.map;
 	i = 0;
 	while (i < a->fconf.map.row)
 	{
-		len = ft_strlen(map[i]);
-		if (!(texture = ft_strnstr(map[i], id, len)))
+		map = ft_strtrim(a->fconf.map.map[i], " ");
+		len = ft_strlen(id);
+		if (!(texture = ft_strnstr(a->fconf.map.map[i], id, len)))
+		{
+			free(map);
 			i++;
+		}
 		else
 		{
+			free(map);
 			if (i > a->fconf.final_line_params)
-				a->fconf.final_line_params = i;// Posiciona la última línea de los parámetros
-			return(extract_path(id, a, i));// Para buscar el path/sendero del fichero (textura)
+				a->fconf.final_line_params = i;
+			return(extract_path(id, a, i));
 		}
 	}
-//	print_fconfig(a);
-	msg_err("999Review the config file: something goes wrong.");
+//	msg_err("Review the config file: something goes wrong.");
 	return (0);
 }
+*/
+
+
 
 /*
 **  This function returns, like *look4_id, the line when
@@ -156,6 +162,43 @@ char	*extract_path(const char *id, t_cub3d *a, int thisline)
 	return (0);
 }
 
+void	isthisaparam(t_cub3d *a)
+{
+	int		i;
+	int		c;
+	char	*map;
+	char	*aux;
+	char	*id[] = {"NO ", "SO ", "WE ", "EA ", "R ", "C ", "F ", "S "};
+
+	i = 0;
+	c = 0;
+	while (i <= a->fconf.final_line_params)
+	{
+		aux = ft_strtrim(a->fconf.map.map[i], " ");
+		map = ft_strtrim(aux, "	");
+		free(aux);
+		while (c <= 7 && map[0] != '\0'
+			&& ft_strnstr(map, id[c], ft_strlen(id[c])) == NULL)
+		{
+//			printf("\nnft_strnstr: |%s|\n", ft_strnstr(map, id[c], ft_strlen(id[c])));
+//			printf("Línea: %d\n", i);
+//			printf("id[%d]: |%s|\n", c, id[c]);
+//			printf("no line: |%s|\n", map);
+			if (c == 7)
+			{
+//				printf("id[%d]: |%s|\n", c, id[c]);
+//				printf("no line: |%s|\n", map);
+				free(map);
+				msg_err("There is line and isn't a param.");
+			}
+			c++;
+		}
+		free(map);
+		i++;
+		c = 0;
+	}
+}
+
 void	find_walls(t_cub3d *a)
 {
 	int		c;
@@ -168,4 +211,5 @@ void	find_walls(t_cub3d *a)
 		a->fconf.wall_texture[c] = look4_texture(a->fconf.wall[c], id[c]);
 		c++;
 	}
+	isthisaparam(a);
 }

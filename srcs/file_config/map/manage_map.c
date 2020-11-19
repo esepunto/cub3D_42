@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 08:44:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/19 10:26:58 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	is_space2map(t_cub3d *a)
 //		msg_err("I need a blank line before params");
 	if (row - endline <= 4)// <=4 if need a blank line after params, <=3 instead.
 		msg_err("The map needs 3 rows at least");
-	frsline = endline + 2;
+//	frsline = endline + 2;
+	frsline = endline + 1;
 	while (ft_strlen(map[frsline]) == 1)
 	{
 		frsline++;
