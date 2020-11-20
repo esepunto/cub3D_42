@@ -6,11 +6,15 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 11:31:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 13:12:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+/*
+**  To check invalid line at params
+*/
 
 void	isthisaparam(t_cub3d *a)
 {
@@ -18,12 +22,13 @@ void	isthisaparam(t_cub3d *a)
 	int		c;
 	char	*map;
 	char	*aux;
-	char	*id[] = {"NO ", "SO ", "WE ", "EA ", "R ", "C ", "F ", "S "};
+	char	**id;
 
+	id = ft_split("NO ,SO ,WE ,EA ,R ,C ,F ,S ", ',');
 	i = 0;
-	c = 0;
 	while (i <= a->fconf.final_line_params)
 	{
+		c = 0;
 		aux = ft_strtrim(a->fconf.map.map[i], " ");
 		map = ft_strtrim(aux, "	");
 		free(aux);
@@ -31,23 +36,20 @@ void	isthisaparam(t_cub3d *a)
 			&& ft_strnstr(map, id[c], ft_strlen(id[c])) == NULL)
 		{
 			if (c == 7)
-			{
-				free(map);
 				msg_err("There is line and isn't a param.");
-			}
 			c++;
 		}
 		free(map);
 		i++;
-		c = 0;
 	}
+	ft_delmatrix(id);
 }
 
 /*
 ** To find the path of texture's file
 */
 
-char	*look4_texture(char	*str, char	*id)
+char	*look4_texture(char *str, char *id)
 {
 	size_t	i;
 
@@ -83,7 +85,7 @@ char	*look4_id(char *id, t_cub3d *a)
 			{
 				if (i > a->fconf.final_line_params)
 					a->fconf.final_line_params = i;
-				return(extract_path(id, a, i));
+				return (extract_path(id, a, i));
 			}
 			j++;
 			k++;
@@ -96,8 +98,8 @@ char	*look4_id(char *id, t_cub3d *a)
 
 /*
 **  This function returns, like *look4_id, the line when
-**  the id send by params ("NO", "WE", etc.), and save the line without spaces at
-**  the beginning (deleted its when there's space at the beginning)
+**  the id send by params ("NO", "WE", etc.), and save the line without
+**  spaces at the beginning (deleted its when there's space at the beginning)
 */
 
 char	*extract_path(const char *id, t_cub3d *a, int thisline)
@@ -141,8 +143,9 @@ char	*extract_path(const char *id, t_cub3d *a, int thisline)
 void	manage_params(t_cub3d *a)
 {
 	int		c;
-	char	*id[] = {"NO ", "SO ", "WE ", "EA ", "R ", "C ", "F ", "S "};
+	char	**id;
 
+	id = ft_split("NO ,SO ,WE ,EA ,R ,C ,F ,S ", ',');
 	c = 0;
 	while (c <= 7)
 	{
@@ -150,6 +153,7 @@ void	manage_params(t_cub3d *a)
 		a->fconf.wall_texture[c] = look4_texture(a->fconf.wall[c], id[c]);
 		c++;
 	}
+	ft_delmatrix(id);
 	isthisaparam(a);
 	review_params(a);
 }

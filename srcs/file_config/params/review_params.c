@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 11:22:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 13:20:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	review_cefl(int c, t_cub3d *a)
 	char	*param;
 
 	param = a->fconf.wall_texture[c];
-
 	if (ft_cntwrds(param) < 1 || ft_cntwrds(param) > 5)
 		msg_err("Bad floor/ceilling elements.");
 	if (ft_countchr(param, ',') != 2)
@@ -75,8 +74,6 @@ void	review_res(int c, t_cub3d *a)
 		count++;
 	}
 	ft_delmatrix(size);
-	if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
-		msg_err("Review the resolution,, please.");
 }
 
 void	review_params(t_cub3d *a)
@@ -91,7 +88,11 @@ void	review_params(t_cub3d *a)
 		if (c >= 5 && c <= 6)
 			review_cefl(c, a);
 		if (c == 4)
+		{
 			review_res(c, a);
+			if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
+				msg_err("Review the resolution,, please.");
+		}
 		c++;
 	}
 }
