@@ -1,11 +1,11 @@
-F 122,122,122
+R 1080 720
+NO ./wolftex/greystone.png
 SO ./wolftex/redbrick.png
-WE  ./wolftex/wood.png
 EA ./wolftex/wood.png
- NO ./wolftex/greystone.png
-R 1080  001
+WE ./wolftex/wood.png
 S ./wolftex/barrel.png
-C 01,200,234
+C 255,200,160
+F 122,122,122
 
 11111111111111111
 10000000000000001
@@ -19,4 +19,4 @@ C 01,200,234
 10000000000000001
 10200000200002001
 10000000000000001
-11111111111111111
+1111111111111111
