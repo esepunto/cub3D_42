@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 14:18:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 09:20:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	is_space2map(t_cub3d *a)
 	map = a->fconf.map.map;
 	row = a->fconf.map.row;
 	endline = a->fconf.final_line_params;
-	frsline = a->fconf.map.first_line;
+	frsline = a->fconf.map.first_line;// ¿Por qué no puedo quitarla?
 	frsline = endline + 1;
 	while (ft_strlen(map[frsline]) == 1)
 	{

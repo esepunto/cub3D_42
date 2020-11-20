@@ -16,3 +16,5 @@ test_gnl.sh
 wolftex/
 .nfs*
 ./mapgen
+*.txt
+*.sh
