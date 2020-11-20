@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 14:18:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:44:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	repeat_chr(int i, size_t j, t_cub3d *a)
 **  and if there's a player.
 */
 
-void	review_map_horiz(t_cub3d *a)
+void	review_map(t_cub3d *a)
 {
 	int		i;
 	size_t	j;
@@ -77,14 +77,14 @@ void	review_map_horiz(t_cub3d *a)
 
 void	surrounded(int i, size_t j, char **map)
 {
-	if ((map[i - 1][j - 1] == ' ' || map[i - 1][j - 1] == '\0')
-		|| (map[i - 1][j + 1] == ' ' || map[i - 1][j + 1] == '\0')
-		|| (map[i + 1][j - 1] == ' ' || map[i + 1][j - 1] == '\0')
-		|| (map[i + 1][j + 1] == ' ' || map[i + 1][j + 1] == '\0')
-		|| (map[i][j + 1] == ' ' || map[i][j + 1] == '\0')
-		|| (map[i + 1][j] == ' ' || map[i + 1][j] == '\0')
-		|| (map[i][j - 1] == ' ' || map[i][j - 1] == '\0')
-		|| (map[i - 1][j] == ' ' || map[i - 1][j] == '\0'))
+	if ((map[i - 1][j - 1] == ' ')// || map[i - 1][j - 1] == '\0')
+		|| (map[i - 1][j + 1] == ' ')// || map[i - 1][j + 1] == '\0')
+		|| (map[i + 1][j - 1] == ' ')// || map[i + 1][j - 1] == '\0')
+		|| (map[i + 1][j + 1] == ' ')// || map[i + 1][j + 1] == '\0')
+		|| (map[i][j + 1] == ' ')// || map[i][j + 1] == '\0')
+		|| (map[i + 1][j] == ' ')// || map[i + 1][j] == '\0')
+		|| (map[i][j - 1] == ' ')// || map[i][j - 1] == '\0')
+		|| (map[i - 1][j] == ' '))// || map[i - 1][j] == '\0'))
 	{
 		msg_err("The map's open. Don't go over the rainbow?");
 	}

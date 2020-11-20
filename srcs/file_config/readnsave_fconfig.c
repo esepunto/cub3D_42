@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 09:07:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:35:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	open_fconfig(char *conf_file, t_cub3d *a)
 	if (!(a->fconf.map.map = (char **)malloc(row * sizeof(char *) + 1)))
 		msg_err("WTF! Give me back my memory!");
 	save_fconfig(conf_file, a);
-	find_params(a);
-	review_params(a);
-	find_map(a);
+	manage_params(a);
+	manage_map(a);
 }

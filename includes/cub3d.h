@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/19 14:44:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:47:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,67 +102,32 @@ typedef struct	s_cub3d
 }				t_cub3d;
 
 int		main(int argc, char **argv);
-int		msg_err(char *error);
 void	init_struct(t_cub3d *a);
 void	open_fconfig(char *conf_file, t_cub3d *a);
 void	calc_fconfig(char *conf_file, t_cub3d *a);
 void	save_fconfig(char *conf_file, t_cub3d *a);
-void	find_params(t_cub3d *a);
-char	*look4_id(char *id, t_cub3d *a);
-int		jump_sp(int i, t_cub3d *a);
-char	*extract_path(const char *id, t_cub3d *a, int m);
-void	is_repeat(int	m, t_cub3d *a, const char *id);
-char	*look4_texture(char *str, char *id);
 void	isthisaparam(t_cub3d *a);
-void	review_params(t_cub3d *a);
+char	*look4_texture(char *str, char *id);
+char	*look4_id(char *id, t_cub3d *a);
+char	*extract_path(const char *id, t_cub3d *a, int m);
+void	manage_params(t_cub3d *a);
 void	review_walls(int c, t_cub3d *a);
 void	review_cefl(int c, t_cub3d *a);
-void	extract_rgb(int c, t_cub3d *a);
-void	check_nbr(int c, t_cub3d *a);
 void	review_res(int c, t_cub3d *a);
+void	review_params(t_cub3d *a);
+void	check_nbr(int c, t_cub3d *a);
 void	isdigit_str(char *color);
-void	check_nbr(int c, t_cub3d *a);
-int		look4color(int c, t_cub3d *a);
-
-
-
-void	print_fconfig(t_cub3d *a);
-
-
-
-
-
-
-void	find_walls(t_cub3d *a);
-void	find_walls_2(t_cub3d *a);
-
-
-
-
-
-
-
-
-
-void	check_nbr(int c, t_cub3d *a);
-
-
-
-
-void 	find_map(t_cub3d *a);
+void	extract_rgb(int c, t_cub3d *a);
+int		jump_sp(int i, t_cub3d *a);
+void	is_repeat(int	m, t_cub3d *a, const char *id);
 void	is_space2map(t_cub3d *a);
-void	check_line_map(int line, t_cub3d *a);
-void	check_frst_column(t_cub3d *a);
-void 	review_map_horiz(t_cub3d *a);
+void	manage_map(t_cub3d *a);
 void	forbidd_chr(char c);
 void	repeat_chr(int i, size_t j, t_cub3d *a);
-void	map_algorithm(t_cub3d *a);
-
+void 	review_map(t_cub3d *a);
 void	surrounded(int i, size_t j, char **map);
-
-
+void	map_algorithm(t_cub3d *a);
+int		msg_err(char *error);
 void	print_fconfig(t_cub3d *a);
-void	del_mem(t_cub3d *a);
-void	del_mem_fconf(t_cub3d *a);
 
 #endif

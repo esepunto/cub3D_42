@@ -6,12 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 10:06:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:22:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-
 
 void	check_nbr(int c, t_cub3d *a)
 {

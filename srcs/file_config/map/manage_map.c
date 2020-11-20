@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 09:20:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:44:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	is_space2map(t_cub3d *a)
 	a->fconf.map.first_line = frsline;
 }
 
-void	find_map(t_cub3d *a)
+void	manage_map(t_cub3d *a)
 {
 	is_space2map(a);
-	review_map_horiz(a);
+	review_map(a);
 	map_algorithm(a);
 }

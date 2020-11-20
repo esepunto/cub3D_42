@@ -6,43 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 11:01:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 11:22:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-
-/*
-** Check if anything param is repeat ("NO", "SO", etc.)
-*/
-
-void	is_repeat(int thisline, t_cub3d *a, const char *id)
-{
-	int			j;
-	int			z;
-	int			len;
-
-	len = ft_strlen(id);
-	thisline = thisline + 1;
-	while (thisline < a->fconf.map.row)
-	{
-		j = jump_sp(thisline, a);
-		z = 0;
-		while (z < len && a->fconf.map.map[thisline][j] == id[z])
-		{
-			if (z == len - 1)
-			{
-				if (a->fconf.final_line_params < thisline)
-					a->fconf.final_line_params = thisline;
-				msg_err("No no no no: a param is repeat.");
-			}
-			z++;
-			j++;
-		}
-		thisline++;
-	}
-	return ;
-}
 
 /*
 ** Next 3 functions check the number of params in:
@@ -110,8 +78,6 @@ void	review_res(int c, t_cub3d *a)
 	if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
 		msg_err("Review the resolution,, please.");
 }
-
-
 
 void	review_params(t_cub3d *a)
 {
