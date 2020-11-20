@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 12:47:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/20 13:44:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <math.h>
 # include <fcntl.h>
 
-typedef struct	s_raycast
+typedef struct	s_rayc
 {
 	double	xpos;
 	double	ypos;
@@ -53,47 +53,29 @@ typedef struct	s_raycast
 	double	rootspeed;
 	double	xolddir;
 	double	yolddir;
-}				t_rayc;
+}				t_raycast;
 
 typedef struct	s_map
 {
-	char		**map;
-	size_t		col;
-	int			row;
-	int			num_players;
-	int			first_line;
+	char	**map;
+	size_t	col;
+	int		row;
+	int		num_players;
+	int		first_line;
 }				t_map;
 
 typedef struct	s_readconfig
 {
-	char	*res;
 	int		xrendersize;
 	int		yrendersize;
-	char	*wallno;
-	char	*wallno_texture;
-	char	*wallso;
-	char	*wallso_texture;
-	char	*wallea;
-	char	*wallea_texture;
-	char	*wallwe;
-	char	*wallwe_texture;
-	char	*sprite;
-	char	*sprite_texture;
-	char	*ceil;
-	char	*flr;
-	int		ceilclr;
 	int		red[2];
 	int		green[2];
 	int		blue[2];
-	int		flrclr;
-	int		init_id[8];
 	char	*wall[8];
 	char	*wall_texture[8];
 	int		nb_wrd_param;
-	int		repeat[8];
 	int		final_line_params;
 	t_map	map;
-	t_map	rotate_map;
 }				t_config;
 
 typedef struct	s_cub3d
@@ -101,33 +83,33 @@ typedef struct	s_cub3d
 	t_config	fconf;
 }				t_cub3d;
 
-int		main(int argc, char **argv);
-void	init_struct(t_cub3d *a);
-void	open_fconfig(char *conf_file, t_cub3d *a);
-void	calc_fconfig(char *conf_file, t_cub3d *a);
-void	save_fconfig(char *conf_file, t_cub3d *a);
-void	isthisaparam(t_cub3d *a);
-char	*look4_texture(char *str, char *id);
-char	*look4_id(char *id, t_cub3d *a);
-char	*extract_path(const char *id, t_cub3d *a, int m);
-void	manage_params(t_cub3d *a);
-void	review_walls(int c, t_cub3d *a);
-void	review_cefl(int c, t_cub3d *a);
-void	review_res(int c, t_cub3d *a);
-void	review_params(t_cub3d *a);
-void	check_nbr(int c, t_cub3d *a);
-void	isdigit_str(char *color);
-void	extract_rgb(int c, t_cub3d *a);
-int		jump_sp(int i, t_cub3d *a);
-void	is_repeat(int	m, t_cub3d *a, const char *id);
-void	is_space2map(t_cub3d *a);
-void	manage_map(t_cub3d *a);
-void	forbidd_chr(char c);
-void	repeat_chr(int i, size_t j, t_cub3d *a);
-void 	review_map(t_cub3d *a);
-void	surrounded(int i, size_t j, char **map);
-void	map_algorithm(t_cub3d *a);
-int		msg_err(char *error);
-void	print_fconfig(t_cub3d *a);
+int				main(int argc, char **argv);
+void			init_struct(t_cub3d *a);
+void			open_fconfig(char *conf_file, t_cub3d *a);
+void			calc_fconfig(char *conf_file, t_cub3d *a);
+void			save_fconfig(char *conf_file, t_cub3d *a);
+void			isthisaparam(t_cub3d *a);
+char			*look4_texture(char *str, char *id);
+char			*look4_id(char *id, t_cub3d *a);
+char			*extract_path(const char *id, t_cub3d *a, int m);
+void			manage_params(t_cub3d *a);
+void			review_walls(int c, t_cub3d *a);
+void			review_cefl(int c, t_cub3d *a);
+void			review_res(int c, t_cub3d *a);
+void			review_params(t_cub3d *a);
+void			check_nbr(int c, t_cub3d *a);
+void			isdigit_str(char *color);
+void			extract_rgb(int c, t_cub3d *a);
+int				jump_sp(int i, t_cub3d *a);
+void			is_repeat(int	m, t_cub3d *a, const char *id);
+void			is_space2map(t_cub3d *a);
+void			manage_map(t_cub3d *a);
+void			forbidd_chr(char c);
+void			repeat_chr(int i, size_t j, t_cub3d *a);
+void			review_map(t_cub3d *a);
+void			surrounded(int i, size_t j, char **map);
+void			map_algorithm(t_cub3d *a);
+int				msg_err(char *error);
+void			print_fconfig(t_cub3d *a);
 
 #endif
