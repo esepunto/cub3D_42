@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 18:51:35 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:53:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,21 @@ void	isthisaparam(t_cub3d *a)
 }
 
 /*
+** To find the path of texture's file
+*/
+
+char	*look4_texture(char *str, char *id)
+{
+	size_t	i;
+
+	i = ft_strlen(id);
+	while (ft_isblank(str[i]))
+		i++;
+	str = ft_substr(str, i, ft_strlen(str) - i);
+	return (str);
+}
+
+/*
 **  This function returns a line (char *) with the params.
 **  If find an error, stop the program and send message, but
 **  don't manage all the errors because there's others functions
@@ -61,25 +76,6 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 	i = 0;
 	while (i < a->fconf.map.row)
 	{
-/*
-		map  = a->fconf.map.map[i];
-		while (ft_isblank(*map) == 0)
-			map++;
-		aux [0] = &map;
-		if (ft_strnstr((char *)map, id, idlen) != NULL)
-		{
-			if (i > a->fconf.final_line_params)
-				a->fconf.final_line_params = i;
-			is_repeat(i, a, id);
-//			aux = map;
-
-//			free(map);
-			return (ft_substr((char *)map, idlen, ft_strlen((char *)map) - idlen));
-		}
-//		else
-//			free(map);
-		i++;
-*/
 		aux = ft_strtrim(a->fconf.map.map[i], " ");
 		map = ft_strtrim(aux, "	");
 		free(aux);
@@ -88,9 +84,9 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 			if (i > a->fconf.final_line_params)
 				a->fconf.final_line_params = i;
 			is_repeat(i, a, id);
-			aux = map;
+			aux = look4_texture(map, id);
 			free(map);
-			return (ft_substr(aux, idlen, ft_strlen(aux) - idlen));
+			return (aux);
 		}
 		else
 			free(map);
