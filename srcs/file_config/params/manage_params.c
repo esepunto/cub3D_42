@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 13:12:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 06:26:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,78 +46,34 @@ void	isthisaparam(t_cub3d *a)
 }
 
 /*
-** To find the path of texture's file
-*/
-
-char	*look4_texture(char *str, char *id)
-{
-	size_t	i;
-
-	i = ft_strlen(id);
-	while (ft_isblank(str[i]))
-		i++;
-	str = ft_substr(str, i, ft_strlen(str) - i);
-	return (str);
-}
-
-/*
 **  This function returns a line (char *) with the params.
 **  If find an error, stop the program and send message, but
 **  don't manage all the errors because there's others functions
 **  to do it.
 */
 
-char	*look4_id(char *id, t_cub3d *a)
+char	*look4_id(char *id, int c, t_cub3d *a)
 {
 	int		i;
-	size_t	j;
-	size_t	k;
+	char	*aux;
+	char	*map;
 
 	i = 0;
 	while (i < a->fconf.map.row)
 	{
-		j = 0;
-		j = jump_sp(i, a);
-		k = 0;
-		while (k < ft_strlen(id) && a->fconf.map.map[i][j] == id[k])
+		aux = ft_strtrim(a->fconf.map.map[i], " ");
+		map = ft_strtrim(aux, "	");
+		free(aux);
+		if (ft_strnstr(map, id, ft_strlen(id)))
 		{
-			if (ft_strlen(id) == k + 1)
-			{
-				if (i > a->fconf.final_line_params)
-					a->fconf.final_line_params = i;
-				return (extract_path(id, a, i));
-			}
-			j++;
-			k++;
+			if (i > a->fconf.final_line_params)
+				a->fconf.final_line_params = i;
+			is_repeat(i, a, id);
+			a->fconf.wall_texture[c] = map;
+			free(map);
+			return (0);
 		}
-		i++;
-	}
-	msg_err("Review the config file: something goes wrong.");
-	return (0);
-}
-
-/*
-**  This function returns, like *look4_id, the line when
-**  the id send by params ("NO", "WE", etc.), and save the line without
-**  spaces at the beginning (deleted its when there's space at the beginning)
-*/
-
-char	*extract_path(const char *id, t_cub3d *a, int thisline)
-{
-	size_t		len;
-	const char	*s1;
-	int			i;
-
-	i = 0;
-	while (i < a->fconf.map.row)
-	{
-		s1 = a->fconf.map.map[i];
-		len = ft_strlen(s1);
-		if (ft_strnstr(s1, id, len))
-		{
-			is_repeat(thisline, a, id);
-			return (ft_strnstr(s1, id, len));
-		}
+		free(map);
 		i++;
 	}
 	msg_err("Review the config file: something goes wrong.");
@@ -149,8 +105,7 @@ void	manage_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
-		a->fconf.wall[c] = look4_id(id[c], a);
-		a->fconf.wall_texture[c] = look4_texture(a->fconf.wall[c], id[c]);
+		look4_id(id[c], ft_strlen(id[c]), a);
 		c++;
 	}
 	ft_delmatrix(id);

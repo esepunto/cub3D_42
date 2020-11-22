@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 13:44:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 06:13:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ void			calc_fconfig(char *conf_file, t_cub3d *a);
 void			save_fconfig(char *conf_file, t_cub3d *a);
 void			isthisaparam(t_cub3d *a);
 char			*look4_texture(char *str, char *id);
-char			*look4_id(char *id, t_cub3d *a);
-char			*extract_path(const char *id, t_cub3d *a, int m);
+char			*look4_id(char *id, int c, t_cub3d *a);
 void			manage_params(t_cub3d *a);
 void			review_walls(int c, t_cub3d *a);
 void			review_cefl(int c, t_cub3d *a);
