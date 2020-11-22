@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 03:49:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 20:38:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ int		main(int argc, char **argv)
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
 		init_struct(a);
 		open_fconfig(argv[1], a);
+		if (a)
+		{
+			if (sizeof(a->fconf.wall_texture) >= 848)
+				ft_delmatrix(a->fconf.wall_texture);
+			if (sizeof(a->fconf.map.map) >= 208)
+				ft_delmatrix(a->fconf.map.map);
+			if (sizeof(a) >= sizeof(t_cub3d))
+				free(a);
+		}
 	}
 	else
 		msg_err("Revier your fingers, please.");
