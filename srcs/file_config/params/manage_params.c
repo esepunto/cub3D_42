@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 19:53:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 21:39:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	isthisaparam(t_cub3d *a)
 		free(map);
 		i++;
 	}
-	ft_delmatrix(id);
+	ft_delmatrix(id)
 }
 
 /*
@@ -61,6 +61,20 @@ char	*look4_texture(char *str, char *id)
 }
 
 /*
+**  To implement in code and add to libft.
+**  Its good to changed the ft_strtrim and
+**  its allocates memory
+*/
+
+void	ft_delinit_spaces(char *str)
+{
+	while (ft_isblank(*str))
+		str++;
+	return (*str);
+}
+
+
+/*
 **  This function returns a line (char *) with the params.
 **  If find an error, stop the program and send message, but
 **  don't manage all the errors because there's others functions
@@ -73,8 +87,8 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 	char	*aux;
 	char	*map;
 
-	i = 0;
-	while (i < a->fconf.map.row)
+	i = -1;
+	while (i++ < a->fconf.map.row)
 	{
 		aux = ft_strtrim(a->fconf.map.map[i], " ");
 		map = ft_strtrim(aux, "	");
@@ -88,9 +102,7 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 			free(map);
 			return (aux);
 		}
-		else
-			free(map);
-		i++;
+		free(map);
 	}
 	msg_err("Review the config file: something goes wrong.");
 	return (0);
