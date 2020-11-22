@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 13:20:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 18:52:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	review_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
+//		printf("texture: |%s|\n", a->fconf.wall_texture[c]);
 		if (c < 4 || c == 7)
 			review_walls(c, a);
 		if (c >= 5 && c <= 6)

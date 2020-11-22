@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 06:26:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/22 18:51:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	isthisaparam(t_cub3d *a)
 **  to do it.
 */
 
-char	*look4_id(char *id, int c, t_cub3d *a)
+char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 {
 	int		i;
 	char	*aux;
@@ -61,19 +61,39 @@ char	*look4_id(char *id, int c, t_cub3d *a)
 	i = 0;
 	while (i < a->fconf.map.row)
 	{
-		aux = ft_strtrim(a->fconf.map.map[i], " ");
-		map = ft_strtrim(aux, "	");
-		free(aux);
-		if (ft_strnstr(map, id, ft_strlen(id)))
+/*
+		map  = a->fconf.map.map[i];
+		while (ft_isblank(*map) == 0)
+			map++;
+		aux [0] = &map;
+		if (ft_strnstr((char *)map, id, idlen) != NULL)
 		{
 			if (i > a->fconf.final_line_params)
 				a->fconf.final_line_params = i;
 			is_repeat(i, a, id);
-			a->fconf.wall_texture[c] = map;
-			free(map);
-			return (0);
+//			aux = map;
+
+//			free(map);
+			return (ft_substr((char *)map, idlen, ft_strlen((char *)map) - idlen));
 		}
-		free(map);
+//		else
+//			free(map);
+		i++;
+*/
+		aux = ft_strtrim(a->fconf.map.map[i], " ");
+		map = ft_strtrim(aux, "	");
+		free(aux);
+		if (ft_strnstr(map, id, idlen) != NULL)
+		{
+			if (i > a->fconf.final_line_params)
+				a->fconf.final_line_params = i;
+			is_repeat(i, a, id);
+			aux = map;
+			free(map);
+			return (ft_substr(aux, idlen, ft_strlen(aux) - idlen));
+		}
+		else
+			free(map);
 		i++;
 	}
 	msg_err("Review the config file: something goes wrong.");
@@ -105,7 +125,7 @@ void	manage_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
-		look4_id(id[c], ft_strlen(id[c]), a);
+		a->fconf.wall_texture[c] = look4_id(id[c], ft_strlen(id[c]), a);
 		c++;
 	}
 	ft_delmatrix(id);
