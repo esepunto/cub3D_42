@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:46:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 23:51:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	isthisaparam(t_cub3d *a)
 	while (i <= a->fconf.final_line_params)
 	{
 		c = 0;
-		map = a->fconf.map.map[i];
-		map = ft_delinitblanks(map);
-		map = ft_delendblanks(map);
+		map = ft_delinitendblanks(a->fconf.map.map[i]);
 		while (c <= 7 && map[0] != '\0'
 			&& ft_strnstr(map, id[c], ft_strlen(id[c])) == NULL)
 		{

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 23:30:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 00:11:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	review_map(t_cub3d *a)
 **  Save the first line of map
 */
 
-void	is_space2map(t_cub3d *a)
+void	frstlinemap(t_cub3d *a)
 {
 	int		frsline;
 
@@ -84,7 +84,7 @@ void	is_space2map(t_cub3d *a)
 
 void	manage_map(t_cub3d *a)
 {
-	is_space2map(a);
+	frstlinemap(a);
 	review_map(a);
 	map_algorithm(a);
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:17:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 17:19:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 00:02:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	is_repeat(int thisline, t_cub3d *a, const char *id)
 	int			len;
 
 	len = ft_strlen(id);
-	thisline = thisline + 1;
+	thisline += 1;
 	while (thisline < a->fconf.map.row)
 	{
 		z = 0;
