@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 14:44:15 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:32:59 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_fconfig(t_cub3d *a)
 	printf("row: %d\n", a->fconf.map.row);
 	printf("colum: %zu\n", a->fconf.map.col);
 //	printf("map[0][7] = %c\n", a->fconf.map.map[0][7]);
-	while (i < a->fconf.map.row)
+	while (i <= a->fconf.map.row)
 	{
 		printf("linea %d: %s\n", i, a->fconf.map.map[i]);
 		i++;

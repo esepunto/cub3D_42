@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 12:36:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:46:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,11 @@ void	isthisaparam(t_cub3d *a)
 }
 
 /*
-** To find the path of texture's file
-*/
-
-char	*look4_texture(char *str, char *id)
-{
-	size_t	i;
-
-	i = ft_strlen(id);
-	while (ft_isblank(str[i]))
-		i++;
-	str = ft_substr(str, i, ft_strlen(str) - i);
-	return (str);
-}
-
-/*
 **  This function returns a line (char *) with the params.
-**  If find an error, stop the program and send message, but
-**  don't manage all the errors because there's others functions
-**  to do it.
+**  When finds an error, stops the program and returns a message.
 */
 
-char	*look4_id(char *id, size_t idlen, t_cub3d *a)
+char	*look4texture(char *id, size_t idlen, t_cub3d *a)
 {
 	int		i;
 	char	*map;
@@ -73,15 +56,13 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 	i = 0;
 	while (i < a->fconf.map.row)
 	{
-		map = a->fconf.map.map[i];
-		map = ft_delinitendblanks(map);
+		map = ft_delinitendblanks(a->fconf.map.map[i]);
 		if (ft_strnstr(map, id, idlen) != NULL)
 		{
 			if (i > a->fconf.final_line_params)
 				a->fconf.final_line_params = i;
 			is_repeat(i, a, id);
-			map = look4_texture(map, id);
-			return (map);
+			return ((map + ft_strlen(id)));
 		}
 		i++;
 	}
@@ -90,7 +71,7 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 }
 
 /*
-** This function look for the params of config file to identify it.
+** This function looks for the params of config file to identify it.
 **  _______________________________
 **  |  char *id | c |   element   |
 **  |___________|___|_____________|
@@ -114,7 +95,7 @@ void	manage_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
-		a->fconf.wall_texture[c] = look4_id(id[c], ft_strlen(id[c]), a);
+		a->fconf.wall_texture[c] = look4texture(id[c], ft_strlen(id[c]), a);
 		cleantexture(c, a);
 		c++;
 	}

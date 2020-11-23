@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 12:24:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 13:46:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	review_res(int c, t_cub3d *a)
 {
 	int		count;
 	char	**size;
-	char	*aux;
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 2)
 		msg_err("Bad information in resolution.");
@@ -54,14 +53,14 @@ void	review_res(int c, t_cub3d *a)
 	count = 0;
 	while (count <= 1)
 	{
-		aux = ft_delinitendblanks(size[count]);
-		if (aux == '\0')
+		size[count] = ft_delinitendblanks(size[count]);
+		if (size[count] == '\0')
 			msg_err("Not resolution");
-		isdigit_str(aux);
+		isdigit_str(size[count]);
 		if (count == 0)
-			a->fconf.xrendersize = ft_atoi(aux);
+			a->fconf.xrendersize = ft_atoi(size[count]);
 		else if (count == 1)
-			a->fconf.yrendersize = ft_atoi(aux);
+			a->fconf.yrendersize = ft_atoi(size[count]);
 		count++;
 	}
 	ft_delmatrix(size);
