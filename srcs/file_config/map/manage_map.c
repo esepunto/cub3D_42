@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 18:01:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 23:30:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,21 @@ void	forbidd_chr(char c)
 }
 
 /*
-**  It counts if there're more than one player.
+**  Check if there're more than one player.
 */
 
-void	repeat_chr(int i, size_t j, t_cub3d *a)
+int		nbr_players(char c)
 {
-	if (a->fconf.map.map[i][j] == 'N' || a->fconf.map.map[i][j] == 'S'
-		|| a->fconf.map.map[i][j] == 'W' || a->fconf.map.map[i][j] == 'E')
-	{
-		a->fconf.map.num_players++;
-	}
-	if (a->fconf.map.num_players > 1)
-		msg_err("Please, review the number of players.");
+	if (c == 'N' || c == 'S'
+		|| c == 'W' || c == 'E')
+		return (1);
+	else
+		return (0);
 }
 
 /*
-**  This function checks forbidden/repeat chars
-**  and if there's a player.
+**  Check forbidden/repeat chars
+**  and minimum number of players.
 */
 
 void	review_map(t_cub3d *a)
@@ -60,32 +58,26 @@ void	review_map(t_cub3d *a)
 			if (ft_isprint(a->fconf.map.map[i][j]) == 1)
 			{
 				forbidd_chr(a->fconf.map.map[i][j]);
-				repeat_chr(i, j, a);
+				a->fconf.map.num_players += nbr_players(a->fconf.map.map[i][j]);
 			}
 			j++;
 		}
 		i++;
 	}
-	if (a->fconf.map.num_players == 0)
-		msg_err("Hey, the map can't run without player!");
+	if (a->fconf.map.num_players != 1)
+		msg_err("Hey! Only player, and one only, is accepted.");
 }
 
 /*
-**  To check that map exists and save the first line of map
+**  Save the first line of map
 */
 
 void	is_space2map(t_cub3d *a)
 {
-	char	**map;
 	int		frsline;
-	int		endline;
-	int		row;
 
-	map = a->fconf.map.map;
-	row = a->fconf.map.row;
-	endline = a->fconf.final_line_params;
-	frsline = endline + 1;
-	while (ft_strlen(map[frsline]) == 1)
+	frsline = a->fconf.final_line_params + 1;
+	while (ft_strlen(a->fconf.map.map[frsline]) == 1)
 		frsline++;
 	a->fconf.map.first_line = frsline;
 }

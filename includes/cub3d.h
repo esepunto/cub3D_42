@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 18:06:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 23:29:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char			*replacetabs(char *str);
 void			is_space2map(t_cub3d *a);
 void			manage_map(t_cub3d *a);
 void			forbidd_chr(char c);
-void			repeat_chr(int i, size_t j, t_cub3d *a);
+int				nbr_players(char c);
 void			review_map(t_cub3d *a);
 void			surrounded(int i, size_t j, char **map, t_cub3d *a);
 void			map_algorithm(t_cub3d *a);
