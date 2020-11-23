@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:35:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 14:23:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@
 # include <math.h>
 # include <fcntl.h>
 
-typedef struct	s_rayc
+typedef struct	s_minilibx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+}				t_minilibx;
+
+typedef struct	s_raycasting
 {
 	double	xpos;
 	double	ypos;
@@ -81,6 +88,7 @@ typedef struct	s_readconfig
 typedef struct	s_cub3d
 {
 	t_config	fconf;
+	t_minilibx	mlibx;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -109,6 +117,9 @@ void			repeat_chr(int i, size_t j, t_cub3d *a);
 void			review_map(t_cub3d *a);
 void			surrounded(int i, size_t j, char **map);
 void			map_algorithm(t_cub3d *a);
+
+void			init_window(t_cub3d *a);
+
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);

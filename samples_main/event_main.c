@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/13 10:14:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 11:11:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 14:15:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct	s_program
 
 int 			mouse_event(int x, int y, void *param)
 {
-	t_program *tutorial = param;
-
+	t_program *tutorial;
+	
+	tutorial = param;
 	mlx_pixel_put(tutorial->mlx, tutorial->win, 640/2, 360/2, 0xFFFFFF);
 	mlx_mouse_get_pos(tutorial->win, &x, &y);
 	ft_putchars(' ');

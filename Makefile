@@ -12,6 +12,7 @@ SRCS	=	cub3d.c \
 			srcs/file_config/params/utils.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/map_algorithm.c \
+			srcs/window/manage_window.c \
 			utils/messages.c \
 			utils/delmem.c \
 			utils/tests.c
