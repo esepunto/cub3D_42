@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:35:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 14:45:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void			cleantexture(int c, t_cub3d *a);
 void			check_nbr(int c, t_cub3d *a);
 void			isdigit_str(char *color);
 void			extract_rgb(int c, t_cub3d *a);
-int				jump_sp(int i, t_cub3d *a);
 void			is_repeat(int	m, t_cub3d *a, const char *id);
 char			*replacetabs(char *str);
 void			is_space2map(t_cub3d *a);
