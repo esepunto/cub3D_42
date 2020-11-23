@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 13:27:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 18:01:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,7 @@ void	is_space2map(t_cub3d *a)
 	endline = a->fconf.final_line_params;
 	frsline = endline + 1;
 	while (ft_strlen(map[frsline]) == 1)
-	{
 		frsline++;
-		if (frsline == row)
-			msg_err("The map needs to be in this universe.");
-	}
 	a->fconf.map.first_line = frsline;
 }
 

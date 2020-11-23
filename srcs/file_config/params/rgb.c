@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 11:14:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 17:41:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	check_nbr(int c, t_cub3d *a)
 	}
 }
 
-void	isdigit_str(char *color)
+void	isdigit_str(char *nbr)
 {
-	while (*color)
+	while (*nbr)
 	{
-		if (ft_isdigit(*color) == 0)
+		if (ft_isdigit(*nbr) == 0)
 			msg_err("Ooops. Please, review the numbers (res/rgb).");
-		color++;
+		nbr++;
 	}
 }
 
@@ -44,7 +44,7 @@ void	extract_rgb(int c, t_cub3d *a)
 	{
 		if (!color[count])
 			msg_err("Not RGB color");
-		aux = ft_strtrim((const char *)color[count], " ");
+		aux = ft_delinitendblanks(color[count]);
 		if (aux == '\0')
 			msg_err("Not RGB colors");
 		isdigit_str(aux);
@@ -54,7 +54,6 @@ void	extract_rgb(int c, t_cub3d *a)
 			a->fconf.green[c] = ft_atoi(aux);
 		else if (count == 2)
 			a->fconf.blue[c] = ft_atoi(aux);
-		free(aux);
 		count++;
 	}
 	ft_delmatrix(color);
