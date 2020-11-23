@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 12:22:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 10:25:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int					ft_chop(char **str, char **line);
 int					ft_chekext(const char *str, char *ext);
 size_t				ft_countchr(char *str, char chr);
 size_t				ft_cntwrds(char *str);
-char				*ft_lastblanks(char *str);
+char				*ft_delinitblanks(char *str);
+char				*ft_delendblanks(char *str);
+char				*ft_delinitendblanks(char *str);
 #endif

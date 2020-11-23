@@ -19,5 +19,5 @@ wolftex/
 ./mapgen
 *.txt
 *.sh
-./NOwolftex
-./wolftex
+NOwolftex/
+wolftex/

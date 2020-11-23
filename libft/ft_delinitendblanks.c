@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cntwrds.c                                       :+:      :+:    :+:   */
+/*   ft_delinitendblanks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 12:06:56 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 10:28:37 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/23 10:21:29 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/23 10:23:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-** To count the number of "words" in a string.
-** "words" = any string of chars (excepts blank chars)
-**
-** Danger! It counts special chars. not only print chars.
+** This function returns the string received after deletes the blanks characters
+** at the end and the beggining of the string. It deletes spaces and tabs.
 */
 
-size_t	ft_cntwrds(char *str)
+char	*ft_delinitendblanks(char *str)
 {
-	size_t	i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (!ft_isblank(str[i]))
-			count++;
-		while (str[i] != ' ' && str[i] != '	' && str[i + 1])
-			i++;
-		i++;
-	}
-	return (count);
+	return (ft_delinitblanks(ft_delendblanks(str)));
 }

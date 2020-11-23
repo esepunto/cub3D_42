@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 19:56:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 11:06:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	review_walls(int c, t_cub3d *a)
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 1)
 		msg_err("Too much information in walls.");
-	a->fconf.wall_texture[c] = ft_lastblanks(a->fconf.wall_texture[c]);
+	a->fconf.wall_texture[c] = ft_delendblanks(a->fconf.wall_texture[c]);
 	if (ft_chekext(a->fconf.wall_texture[c], ".png") != 0
 			&& ft_chekext(a->fconf.wall_texture[c], ".xpm") != 0)
 		msg_err("Bad extension in textures.");
@@ -48,6 +48,20 @@ void	review_cefl(int c, t_cub3d *a)
 	check_nbr(c, a);
 }
 
+char	*replacetabs(char *str)
+{
+	size_t	c;
+	
+	c = 0;
+	while(c <= ft_strlen(str))
+	{
+		if (str[c] == '	')
+			str[c] = ' ';
+		c++;
+	}
+	return (str);
+}
+
 void	review_res(int c, t_cub3d *a)
 {
 	int		count;
@@ -56,13 +70,14 @@ void	review_res(int c, t_cub3d *a)
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 2)
 		msg_err("Poor information in resolution.");
+	a->fconf.wall_texture[c] = replacetabs(a->fconf.wall_texture[c]);
 	size = ft_split(a->fconf.wall_texture[c], ' ');
 	count = 0;
 	while (count <= 1)
 	{
 		if (!size[count])
 			msg_err("Bad nbr param resolution");
-		aux = ft_strtrim((const char *)size[count], " ");
+		aux = ft_delinitendblanks(size[count]);
 		if (aux == '\0')
 			msg_err("Not resolution");
 		isdigit_str(aux);
@@ -70,7 +85,6 @@ void	review_res(int c, t_cub3d *a)
 			a->fconf.xrendersize = ft_atoi(aux);
 		else if (count == 1)
 			a->fconf.yrendersize = ft_atoi(aux);
-		free(aux);
 		count++;
 	}
 	ft_delmatrix(size);

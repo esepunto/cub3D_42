@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lastblanks.c                                    :+:      :+:    :+:   */
+/*   ft_delendblanks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:21:18 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/18 12:24:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 10:01:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 ** at the end of the string. It deletes spaces and tabs.
 */
 
-char	*ft_lastblanks(char *str)
+char	*ft_delendblanks(char *str)
 {
 	size_t	len;
 	size_t	c;
 
 	len = ft_strlen(str);
-	c = len;
-	while (c > 1)
+	c = len -1;
+	while (c > 1 && ft_isblank(str[c]))
 	{
-		if (ft_isblank(str[c]))
-			str[c] = '\0';
+		str[c] = '\0';
 		c--;
 	}
 	return (str);
