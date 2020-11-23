@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   messages.c                                         :+:      :+:    :+:   */
+/*   delmem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 11:20:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 12:38:11 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/23 11:27:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		msg_err(char *error)
+void	delmem(t_cub3d *a)
 {
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
+	if (a)
+	{
+		if (sizeof(a->fconf.wall_texture) >= 848)
+			ft_delmatrix(a->fconf.wall_texture);
+		if (sizeof(a->fconf.map.map) >= 208)
+			ft_delmatrix(a->fconf.map.map);
+		if (sizeof(a) >= sizeof(t_cub3d))
+			free(a);
+	}
 }

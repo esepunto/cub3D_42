@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/22 18:33:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 11:48:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,13 @@ void			review_walls(int c, t_cub3d *a);
 void			review_cefl(int c, t_cub3d *a);
 void			review_res(int c, t_cub3d *a);
 void			review_params(t_cub3d *a);
+void			cleantexture(int c, t_cub3d *a);
 void			check_nbr(int c, t_cub3d *a);
 void			isdigit_str(char *color);
 void			extract_rgb(int c, t_cub3d *a);
 int				jump_sp(int i, t_cub3d *a);
 void			is_repeat(int	m, t_cub3d *a, const char *id);
+char			*replacetabs(char *str);
 void			is_space2map(t_cub3d *a);
 void			manage_map(t_cub3d *a);
 void			forbidd_chr(char c);
@@ -110,5 +112,6 @@ void			surrounded(int i, size_t j, char **map);
 void			map_algorithm(t_cub3d *a);
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
+void			delmem(t_cub3d *a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 10:51:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:36:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*look4_id(char *id, size_t idlen, t_cub3d *a)
 	return (0);
 }
 
-
 /*
 ** This function look for the params of config file to identify it.
 **  _______________________________
@@ -116,6 +115,7 @@ void	manage_params(t_cub3d *a)
 	while (c <= 7)
 	{
 		a->fconf.wall_texture[c] = look4_id(id[c], ft_strlen(id[c]), a);
+		cleantexture(c, a);
 		c++;
 	}
 	ft_delmatrix(id);

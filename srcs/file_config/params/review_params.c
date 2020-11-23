@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 11:06:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:24:49 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	review_walls(int c, t_cub3d *a)
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 1)
 		msg_err("Too much information in walls.");
-	a->fconf.wall_texture[c] = ft_delendblanks(a->fconf.wall_texture[c]);
 	if (ft_chekext(a->fconf.wall_texture[c], ".png") != 0
 			&& ft_chekext(a->fconf.wall_texture[c], ".xpm") != 0)
 		msg_err("Bad extension in textures.");
@@ -37,29 +36,10 @@ void	review_walls(int c, t_cub3d *a)
 
 void	review_cefl(int c, t_cub3d *a)
 {
-	char	*param;
-
-	param = a->fconf.wall_texture[c];
-	if (ft_cntwrds(param) < 1 || ft_cntwrds(param) > 5)
-		msg_err("Bad floor/ceilling elements.");
-	if (ft_countchr(param, ',') != 2)
+	if (ft_countchr(a->fconf.wall_texture[c], ',') != 2)
 		msg_err("Review RGB colors. Are U in COMMA?");
 	extract_rgb(c, a);
 	check_nbr(c, a);
-}
-
-char	*replacetabs(char *str)
-{
-	size_t	c;
-	
-	c = 0;
-	while(c <= ft_strlen(str))
-	{
-		if (str[c] == '	')
-			str[c] = ' ';
-		c++;
-	}
-	return (str);
 }
 
 void	review_res(int c, t_cub3d *a)
@@ -69,14 +49,11 @@ void	review_res(int c, t_cub3d *a)
 	char	*aux;
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 2)
-		msg_err("Poor information in resolution.");
-	a->fconf.wall_texture[c] = replacetabs(a->fconf.wall_texture[c]);
+		msg_err("Bad information in resolution.");
 	size = ft_split(a->fconf.wall_texture[c], ' ');
 	count = 0;
 	while (count <= 1)
 	{
-		if (!size[count])
-			msg_err("Bad nbr param resolution");
 		aux = ft_delinitendblanks(size[count]);
 		if (aux == '\0')
 			msg_err("Not resolution");
@@ -88,6 +65,8 @@ void	review_res(int c, t_cub3d *a)
 		count++;
 	}
 	ft_delmatrix(size);
+	if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
+		msg_err("Review the resolution,, please.");
 }
 
 void	review_params(t_cub3d *a)
@@ -97,17 +76,12 @@ void	review_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
-//		printf("texture: |%s|\n", a->fconf.wall_texture[c]);
 		if (c < 4 || c == 7)
 			review_walls(c, a);
 		if (c >= 5 && c <= 6)
 			review_cefl(c, a);
 		if (c == 4)
-		{
 			review_res(c, a);
-			if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
-				msg_err("Review the resolution,, please.");
-		}
 		c++;
 	}
 }

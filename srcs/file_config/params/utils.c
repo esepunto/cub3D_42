@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 11:17:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/20 11:21:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/23 12:35:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,37 @@ void	is_repeat(int thisline, t_cub3d *a, const char *id)
 		thisline++;
 	}
 	return ;
+}
+
+/*
+** To replace tabs by spaces
+*/
+
+char	*replacetabs(char *str)
+{
+	size_t	c;
+
+	c = 0;
+	while (c <= ft_strlen(str))
+	{
+		if (str[c] == '	')
+			str[c] = ' ';
+		c++;
+	}
+	return (str);
+}
+
+/*
+** To deleted spaces and tabs and
+** replace tabs by spaces from the
+** begin and the end of texture
+*/
+
+void	cleantexture(int c, t_cub3d *a)
+{
+	char	*str;
+
+	str = ft_delinitendblanks(a->fconf.wall_texture[c]);
+	str = replacetabs(str);
+	a->fconf.wall_texture[c] = str;
 }
