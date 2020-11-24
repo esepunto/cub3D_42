@@ -3,18 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ssacrist <ssacrist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:05:36 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/27 11:17:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 12:33:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+//#include "../includes/cub3d.h"
+#include "../mlx/mlx.h"
+#include <limits.h>
+#include <string.h>
+#include <errno.h>
+#include <math.h>
+#include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+
 
 #ifndef _UNISTD_H
 # define _UNISTD_H
+
+typedef struct  s_vars {
+    void	*mlx;
+    void	*win;
+}               t_vars;
+
+typedef struct  s_mouse_pos
+{
+    void	*win_ptr;
+    int		*x;
+	int		*y;
+}               t_mouse_pos;
 
 /*
 ** Shows the mouse.
@@ -43,11 +65,6 @@ int     mlx_mouse_move(void *win_ptr, int x, int y);
 */
 int     mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 
-typedef struct  s_vars {
-    void	*mlx;
-    void	*win;
-}               t_vars;
-
 void	ft_putchars(int c)
 {
 	write(1, &c, 1);
@@ -74,6 +91,7 @@ void	ft_putstrs(char *str)
 	}
 }
 
+/*
 int		put_key(int keycode, t_vars *vars)
 {
 	if (keycode == 126)
@@ -89,15 +107,17 @@ int		put_key(int keycode, t_vars *vars)
 	ft_putchars('-');
 	ft_putchars(' ');
 	return (0);
-}
+}*/
 
-int		close(int keycode, t_vars *vars)
+int		closed(int keycode, t_vars *vars)
 {
+	if (keycode == 126)
+		ft_putstrs("arriba");
 	mlx_destroy_window(vars->mlx, vars->win);
 	return (0);
 }
 
-int		get_mouse_action_and_position(int button, int x, int y, void *param)
+/*int		get_mouse_action_and_position(int button, int x, int y, void *param)
 {
 	if (button == 1)
 		ft_putstrs("click izquierdo en pos");
@@ -117,7 +137,7 @@ int		get_mouse_action_and_position(int button, int x, int y, void *param)
 	ft_putchars('-');
 	ft_putchars('\n');
 	return (1);
-}
+}*/
 
 /*
 int		get_mouse_pos(int x, int y, void *param)//No funcona aun
@@ -133,13 +153,6 @@ int		get_mouse_pos(int x, int y, void *param)//No funcona aun
 }
 */
 
-typedef struct  s_mouse_pos
-{
-    void	*win_ptr;
-    int		*x;
-	int		*y;
-}               t_mouse_pos;
-
 int		main(void)
 {
 	t_vars		vars;
@@ -147,12 +160,12 @@ int		main(void)
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 600, 480, "Buenorra, ese vinito blanco YAAAAAA!");
-	mlx_mouse_move(vars.win, 25, 250);// OK
-	mlx_mouse_hook(vars.win, &get_mouse_action_and_position, &vars);// OK
-	mlx_mouse_hook(vars.win, &get_mouse_pos, &vars);//OK
-	mlx_key_hook(vars.win, put_key, &vars);// OK
-	mlx_key_hook(vars.win, close, &vars);// OK
-	printf("%p", (int (*)(void *, int *, int *))mlx_mouse_get_pos);
+//	mlx_mouse_move(vars.win, 25, 250);// OK
+//	mlx_mouse_hook(vars.win, &get_mouse_action_and_position, &vars);// OK
+//	mlx_mouse_hook(vars.win, &get_mouse_pos, &vars);//OK
+//	mlx_key_hook(vars.win, put_key, &vars);// OK
+	mlx_key_hook(vars.win, closed, &vars);// OK
+//	printf("%p", (int (*)(void *, int *, int *))mlx_mouse_get_pos);
 	mlx_loop(vars.mlx);
 }
 

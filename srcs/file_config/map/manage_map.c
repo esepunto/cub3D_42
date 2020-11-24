@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:50:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 11:01:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,22 @@ void	forbidd_chr(char c)
 
 /*
 **  Count number of players.
+**  Save position and direction of player.
 */
 
-int		nbr_plyrs(char c)
+int		nbr_plyrs(int i, int j, t_cub3d *a)
 {
+	char	c;
+
+	c = a->fconf.map.maze[i][j];
 	if (c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E')
+	{
+		a->rayc.xpos = i;
+		a->rayc.ypos = j;
+		a->rayc.plyr = c;
 		return (1);
+	}
 	else
 		return (0);
 }
@@ -58,7 +67,7 @@ void	review_maze(t_cub3d *a)
 			if (ft_isprint(a->fconf.map.maze[i][j]) == 1)
 			{
 				forbidd_chr(a->fconf.map.maze[i][j]);
-				a->fconf.map.num_players += nbr_plyrs(a->fconf.map.maze[i][j]);
+				a->fconf.map.num_players += nbr_plyrs(i, j, a);
 			}
 			j++;
 		}

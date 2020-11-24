@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 09:10:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 13:19:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,26 @@
 # include <math.h>
 # include <fcntl.h>
 
+# define KEY_ESC	53
+
+typedef struct  s_mouse_pos
+{
+    void	*win_ptr;
+    int		*x;
+	int		*y;
+}               t_mpos;
+
 typedef struct	s_minilibx
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
+	t_mpos	mpos;
 }				t_minilibx;
 
 typedef struct	s_raycasting
 {
+	char	plyr;
 	double	xpos;
 	double	ypos;
 	double	xdir;
@@ -83,12 +94,14 @@ typedef struct	s_readconfig
 	int		nb_wrd_param;
 	int		final_line_params;
 	t_map	map;
+
 }				t_config;
 
 typedef struct	s_cub3d
 {
 	t_config	fconf;
 	t_minilibx	mlibx;
+	t_raycast	rayc;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -111,10 +124,17 @@ void			is_repeat(int	m, t_cub3d *a, const char *id);
 void			frstlinemaze(t_cub3d *a);
 void			manage_map(t_cub3d *a);
 void			forbidd_chr(char c);
-int				nbr_plyrs(char c);
+int				nbr_plyrs(int i, int j, t_cub3d *a);
 void			review_maze(t_cub3d *a);
 void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
+
+void			init_window(t_cub3d *a);
+int				caress_key(int keycode, t_cub3d *a);
+int				closed(t_cub3d *a);
+int 			closemouse(t_cub3d *a);
+int 			key_press(int keycode, t_cub3d *a);
+
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);

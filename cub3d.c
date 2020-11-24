@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 09:10:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 10:58:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	init_struct(t_cub3d *a)
 	a->fconf.final_line_params = 0;
 	a->fconf.nb_wrd_param = 0;
 	a->fconf.map.num_players = 0;
+	a->rayc.xpos = 0;
+	a->rayc.ypos = 0;
+	a->rayc.plyr = ' ';
 }
 
 /*

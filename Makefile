@@ -11,10 +11,12 @@ SRCS	=	cub3d.c \
 			srcs/file_config/params/rgb.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/maze_algorithm.c \
+			srcs/window/manage_window.c \
 			utils/messages.c \
 			utils/delmem.c \
 			utils/tests.c
 
+#MAIN	=	./samples_main/hook.c
 #MAIN	=	./samples_main/main_split.c
 #MAIN	=	./srcs/2read_map/read_map.c
 #MAIN	=	./samples_main/perror.c
