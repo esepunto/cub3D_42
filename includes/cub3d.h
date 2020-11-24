@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 00:08:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:50:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct	s_rayc
 
 typedef struct	s_map
 {
-	char	**map;
+	char	**maze;
 	size_t	col;
 	int		row;
 	int		num_players;
@@ -100,14 +100,13 @@ void			check_nbr(int c, t_cub3d *a);
 void			isdigit_str(char *nbr);
 void			extract_rgb(int c, t_cub3d *a);
 void			is_repeat(int	m, t_cub3d *a, const char *id);
-char			*replacetabs(char *str);
-void			frstlinemap(t_cub3d *a);
+void			frstlinemaze(t_cub3d *a);
 void			manage_map(t_cub3d *a);
 void			forbidd_chr(char c);
-int				nbr_players(char c);
-void			review_map(t_cub3d *a);
-void			surrounded(int i, size_t j, char **map, t_cub3d *a);
-void			map_algorithm(t_cub3d *a);
+int				nbr_plyrs(char c);
+void			review_maze(t_cub3d *a);
+void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
+void			maze_algorithm(t_cub3d *a);
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 08:55:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:38:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** Save every line of the file config
-** in a new line in struct a.fconf.map.map
+** in a new line in struct a.fconf.map.maze
 */
 
 void	save_fconfig(char *conf_file, t_cub3d *a)
@@ -29,12 +29,12 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 		msg_err("This file is out of the air.");
 	while ((i = get_next_line(fd, &line)) > 0)
 	{
-		a->fconf.map.map[c] = ft_strdup(line);
+		a->fconf.map.maze[c] = ft_strdup(line);
 		c++;
 		free(line);
 		line = NULL;
 	}
-	a->fconf.map.map[c] = ft_strdup(line);
+	a->fconf.map.maze[c] = ft_strdup(line);
 	free(line);
 	line = NULL;
 	close(fd);
@@ -80,7 +80,7 @@ void	open_fconfig(char *conf_file, t_cub3d *a)
 
 	calc_fconfig(conf_file, a);
 	row = a->fconf.map.row;
-	if (!(a->fconf.map.map = (char **)malloc((row + 1) * sizeof(char *))))
+	if (!(a->fconf.map.maze = (char **)malloc((row + 1) * sizeof(char *))))
 		msg_err("WTF! Give me back my memory!");
 	save_fconfig(conf_file, a);
 	manage_params(a);

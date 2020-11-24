@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_delmatrix.c                                     :+:      :+:    :+:   */
+/*   ft_replacetabs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 11:42:06 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:54:01 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/24 08:14:17 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/24 08:15:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_delmatrix(char **matrix)
+/*
+** Replace tabs by spaces
+*/
+
+char	*ft_replacetabs(char *str)
 {
-	int c;
+	size_t	c;
 
 	c = 0;
-	while (matrix[c])
+	while (c <= ft_strlen(str))
 	{
-		free(matrix[c]);
+		if (str[c] == '	')
+			str[c] = ' ';
 		c++;
 	}
-	free(matrix);
+	return (str);
 }

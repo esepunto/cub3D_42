@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 17:41:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:43:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_nbr(int c, t_cub3d *a)
 		|| a->fconf.green[c] < 0 || a->fconf.green[c] > 255
 		|| a->fconf.blue[c] < 0 || a->fconf.blue[c] > 255)
 	{
-		msg_err("RGB < 0 or RGB > 255");
+		msg_err("The RGB < 0 or RGB > 255. You 're over the rainbow.");
 	}
 }
 
@@ -27,7 +27,7 @@ void	isdigit_str(char *nbr)
 	while (*nbr)
 	{
 		if (ft_isdigit(*nbr) == 0)
-			msg_err("Ooops. Please, review the numbers (res/rgb).");
+			msg_err("Ooops. Is there a letter in number (res/rgb)?");
 		nbr++;
 	}
 }

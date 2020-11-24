@@ -6,15 +6,15 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 00:11:12 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:50:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
 /*
-** Check if ther're chars forbidden on map.
-** The map only accepts '0','1','2','N','S','E','W' and ' ' (space).
+** Check if ther're chars forbidden on maze.
+** The maze only accepts '0','1','2','N','S','E','W' and ' ' (space).
 */
 
 void	forbidd_chr(char c)
@@ -27,10 +27,10 @@ void	forbidd_chr(char c)
 }
 
 /*
-**  Check if there're more than one player.
+**  Count number of players.
 */
 
-int		nbr_players(char c)
+int		nbr_plyrs(char c)
 {
 	if (c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E')
@@ -40,11 +40,11 @@ int		nbr_players(char c)
 }
 
 /*
-**  Check forbidden/repeat chars
-**  and minimum number of players.
+**  Check forbidden/repeat chars.
+**  Check number of players.
 */
 
-void	review_map(t_cub3d *a)
+void	review_maze(t_cub3d *a)
 {
 	int		i;
 	size_t	j;
@@ -53,38 +53,38 @@ void	review_map(t_cub3d *a)
 	while (i < a->fconf.map.row)
 	{
 		j = 0;
-		while (j < ft_strlen(a->fconf.map.map[i]))
+		while (j < ft_strlen(a->fconf.map.maze[i]))
 		{
-			if (ft_isprint(a->fconf.map.map[i][j]) == 1)
+			if (ft_isprint(a->fconf.map.maze[i][j]) == 1)
 			{
-				forbidd_chr(a->fconf.map.map[i][j]);
-				a->fconf.map.num_players += nbr_players(a->fconf.map.map[i][j]);
+				forbidd_chr(a->fconf.map.maze[i][j]);
+				a->fconf.map.num_players += nbr_plyrs(a->fconf.map.maze[i][j]);
 			}
 			j++;
 		}
 		i++;
 	}
 	if (a->fconf.map.num_players != 1)
-		msg_err("Hey! Only player, and one only, is accepted.");
+		msg_err("Hey! Only a player, and one only, is accepted.");
 }
 
 /*
-**  Save the first line of map
+**  Look for the first line of maze
 */
 
-void	frstlinemap(t_cub3d *a)
+void	frstlinemaze(t_cub3d *a)
 {
 	int		frsline;
 
 	frsline = a->fconf.final_line_params + 1;
-	while (ft_strlen(a->fconf.map.map[frsline]) == 1)
+	while (ft_strlen(a->fconf.map.maze[frsline]) == 1)
 		frsline++;
 	a->fconf.map.first_line = frsline;
 }
 
 void	manage_map(t_cub3d *a)
 {
-	frstlinemap(a);
-	review_map(a);
-	map_algorithm(a);
+	frstlinemaze(a);
+	review_maze(a);
+	maze_algorithm(a);
 }

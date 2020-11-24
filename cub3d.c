@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:52:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:18:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_struct(t_cub3d *a)
 		a->fconf.wall_texture[c] = NULL;
 		c++;
 	}
-	a->fconf.map.map = NULL;
+	a->fconf.map.maze = NULL;
 	a->fconf.map.row = 0;
 	a->fconf.map.col = 0;
 	a->fconf.final_line_params = 0;
