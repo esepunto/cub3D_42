@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:32:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:19:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	print_fconfig(t_cub3d *a)
 	i = 0;
 	printf("row: %d\n", a->fconf.map.row);
 	printf("colum: %zu\n", a->fconf.map.col);
-//	printf("map[0][7] = %c\n", a->fconf.map.map[0][7]);
+//	printf("map[0][7] = %c\n", a->fconf.map.maze[0][7]);
 	while (i <= a->fconf.map.row)
 	{
-		printf("linea %d: %s\n", i, a->fconf.map.map[i]);
+		printf("linea %d: %s\n", i, a->fconf.map.maze[i]);
 		i++;
 	}
-//	printf("map[0][0] = %c", a->fconf.map.map[0][0]);
+//	printf("map[0][0] = %c", a->fconf.map.maze[0][0]);
 /*	printf("\n|%s|\n", a->fconf.wallno);
 	printf("|%s|\n", a->fconf.wallso);
 	printf("|%s|\n", a->fconf.wallwe);

@@ -1,14 +1,23 @@
 R 700   	  			     420   			  
 NO ./wolftex/greystone.png
+
+
+
+
+
 SO ./wolftex/redbrick.png
 EA ./wolftex/wood.png
 WE ./wolftex/wood.png
 S ./wolftex/barrel.png
-C 255     				,  		   		 200			  		 	 	 ,				    160
-F 122,122,122
-
-111
-101
-10111111
-10000N01
-11111111
+C 25     				,  		   		 200			  		 	 	 ,				    160
+F 111 , 122, 122
+111011111
+  11111
+  100011
+ 11020011
+ 10020001
+ 1000E021
+ 11000011
+  110011
+   1011
+   111

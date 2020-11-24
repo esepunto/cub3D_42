@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 10:25:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:14:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ size_t				ft_cntwrds(char *str);
 char				*ft_delinitblanks(char *str);
 char				*ft_delendblanks(char *str);
 char				*ft_delinitendblanks(char *str);
+char				*ft_replacetabs(char *str);
 #endif

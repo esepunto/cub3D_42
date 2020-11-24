@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 13:46:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 08:41:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,22 @@ void	review_res(int c, t_cub3d *a)
 	if (a->fconf.xrendersize == 0 || a->fconf.yrendersize == 0)
 		msg_err("Review the resolution,, please.");
 }
+
+/*
+**  Check if the parameters meet the stipulated requirements.
+**  _______________________________
+**  |  char *id | c |   element   |
+**  |___________|___|_____________|
+**  |	"NO"    | 0 |    north    |
+**  |	"SO"    | 1 |    south    |
+**  |	"WE"    | 2 |    west     |
+**  |	"EA"    | 3 |    east     |
+**  |	"R"     | 4 |  resolution |
+**  |	"C"     | 5 |  ceilling   |
+**  |	"F"     | 6 |    floor    |
+**  |	"S"     | 7 |   sprites   |
+**  |___________|___|_____________|
+*/
 
 void	review_params(t_cub3d *a)
 {

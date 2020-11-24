@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/23 14:23:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/24 09:10:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_raycasting
 
 typedef struct	s_map
 {
-	char	**map;
+	char	**maze;
 	size_t	col;
 	int		row;
 	int		num_players;
@@ -105,21 +105,16 @@ void			review_res(int c, t_cub3d *a);
 void			review_params(t_cub3d *a);
 void			cleantexture(int c, t_cub3d *a);
 void			check_nbr(int c, t_cub3d *a);
-void			isdigit_str(char *color);
+void			isdigit_str(char *nbr);
 void			extract_rgb(int c, t_cub3d *a);
-int				jump_sp(int i, t_cub3d *a);
 void			is_repeat(int	m, t_cub3d *a, const char *id);
-char			*replacetabs(char *str);
-void			is_space2map(t_cub3d *a);
+void			frstlinemaze(t_cub3d *a);
 void			manage_map(t_cub3d *a);
 void			forbidd_chr(char c);
-void			repeat_chr(int i, size_t j, t_cub3d *a);
-void			review_map(t_cub3d *a);
-void			surrounded(int i, size_t j, char **map);
-void			map_algorithm(t_cub3d *a);
-
-void			init_window(t_cub3d *a);
-
+int				nbr_plyrs(char c);
+void			review_maze(t_cub3d *a);
+void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
+void			maze_algorithm(t_cub3d *a);
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
