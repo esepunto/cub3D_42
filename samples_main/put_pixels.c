@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main3.c                                            :+:      :+:    :+:   */
+/*   put_pixels.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 10:36:04 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/10/08 12:05:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/25 12:13:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int             main(void)
 {
     t_vars  vars;
     vars.mlx = mlx_init();
-    vars.win = mlx_new_window(vars.mlx, 500, 500, "Hello world!");  ft_fill_pixels(&vars, 300, 400, rgb_to_int(255, 255, 45));
+    vars.win = mlx_new_window(vars.mlx, 500, 500, "Hello world!");
+	ft_fill_pixels(&vars, 300, 400, rgb_to_int(255, 255, 45));
     ft_fill_pixels(&vars, 400, 350, rgb_to_int_ligth(255, 255, 45, 45));
     ft_fill_pixels(&vars, 400, 300, rgb_to_int_ligth(200, 255, 45, 45));
     ft_fill_pixels(&vars, 400, 250, rgb_to_int_ligth(150, 255, 45, 45));

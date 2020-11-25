@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 10:58:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/25 13:15:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	init_struct(t_cub3d *a)
 	a->rayc.xpos = 0;
 	a->rayc.ypos = 0;
 	a->rayc.plyr = ' ';
+	
+	a->rayc.xdir = -1;//Depends of player (N,S,WE,EA)
+	a->rayc.ydir = 0;//Depends of player (N,S,WE,EA)
+	a->rayc.xplane = 0;
+	a->rayc.yplane = 0.66;
+	a->rayc.time = 0;//time of current frame
+	a->rayc.oldtime = 0;//time of previous frame
 }
 
 /*

@@ -12,8 +12,11 @@ SRCS	=	cub3d.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/maze_algorithm.c \
 			srcs/window/manage_window.c \
+			srcs/window/keypress.c \
+			srcs/raycast/iamlost.c \
 			utils/messages.c \
 			utils/delmem.c \
+			utils/print_struct.c \
 			utils/tests.c
 
 #MAIN	=	./samples_main/hook.c

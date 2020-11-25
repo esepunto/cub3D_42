@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 13:19:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/25 13:53:24 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@
 # include <math.h>
 # include <fcntl.h>
 
-# define KEY_ESC	53
+# define KEY_ESC		53
+# define KEY_LOOK_RIGHT	124
+# define KEY_LOOK_LEFT	123
+# define KEY_MOVE_FRONT	13
+# define KEY_MOVE_BACK	1
+# define KEY_MOVE_LEFT	0
+# define KEY_MOVE_RIGHT	2
+
+
 
 typedef struct  s_mouse_pos
 {
@@ -50,10 +58,11 @@ typedef struct	s_raycasting
 	double	time;
 	double	oldtime;
 	double	xcamera;
+	double	ycamera;
 	double	xraydir;
 	double	yraydir;
-	double	xmap;
-	double	ymap;
+	int		xmap;
+	int		ymap;
 	double	xsidedist;
 	double	ysidedist;
 	double	xdeltadist;
@@ -71,6 +80,7 @@ typedef struct	s_raycasting
 	double	rootspeed;
 	double	xolddir;
 	double	yolddir;
+	double	xoldplane;
 }				t_raycast;
 
 typedef struct	s_map
@@ -134,9 +144,19 @@ int				caress_key(int keycode, t_cub3d *a);
 int				closed(t_cub3d *a);
 int 			closemouse(t_cub3d *a);
 int 			key_press(int keycode, t_cub3d *a);
+void			go_front(t_cub3d *a);
+void			go_back(t_cub3d *a);
+void			go_right(t_cub3d *a);
+void			go_left(t_cub3d *a);
+void			rotate_right(t_cub3d *a);
+void			rotate_left(t_cub3d *a);
+
+
+void			init_raycast(t_cub3d *a);
 
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
+void			print_struct(t_cub3d *a);
 
 #endif
