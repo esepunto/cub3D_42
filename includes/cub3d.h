@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 10:48:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:56:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct	s_raycasting
 	int		drawend;
 	double	frametime;
 	double	movespeed;
-	double	rootspeed;
+	double	rotspeed;
 	double	xolddir;
 	double	yolddir;
 	double	xoldplane;

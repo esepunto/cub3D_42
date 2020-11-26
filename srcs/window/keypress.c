@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:32:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:55:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	go_front(t_cub3d *a)
 // ++*** OJO +++*** eliminado el (!(map.maze))
 void	go_back(t_cub3d *a)
 {
-	print_struct(a);
+//	print_struct(a);
 //	if(a->fconf.map.maze[(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == false)
 	if(a->fconf.map.maze[(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == '0')
 		a->rayc.xpos -= a->rayc.xdir * a->rayc.movespeed;
@@ -71,11 +71,11 @@ void	go_right(t_cub3d *a)
 void	rotate_right(t_cub3d *a)
 {
 	a->rayc.xolddir = a->rayc.xdir;
-	a->rayc.xdir = a->rayc.xdir * cos(-a->rayc.rootspeed) - a->rayc.ydir * sin(-a->rayc.rootspeed);
-	a->rayc.ydir = a->rayc.xolddir * sin(-a->rayc.rootspeed) + a->rayc.ydir * cos(-a->rayc.rootspeed);
+	a->rayc.xdir = a->rayc.xdir * cos(-a->rayc.rotspeed) - a->rayc.ydir * sin(-a->rayc.rotspeed);
+	a->rayc.ydir = a->rayc.xolddir * sin(-a->rayc.rotspeed) + a->rayc.ydir * cos(-a->rayc.rotspeed);
 	a->rayc.xoldplane = a->rayc.xplane;
-	a->rayc.xplane = a->rayc.xplane * cos(-a->rayc.rootspeed) - a->rayc.yplane * sin(-a->rayc.rootspeed);
-	a->rayc.yplane = a->rayc.xoldplane * sin(-a->rayc.rootspeed) + a->rayc.yplane * cos(-a->rayc.rootspeed);
+	a->rayc.xplane = a->rayc.xplane * cos(-a->rayc.rotspeed) - a->rayc.yplane * sin(-a->rayc.rotspeed);
+	a->rayc.yplane = a->rayc.xoldplane * sin(-a->rayc.rotspeed) + a->rayc.yplane * cos(-a->rayc.rotspeed);
 	init_raycast(a);
 }
 
@@ -87,10 +87,10 @@ void	rotate_right(t_cub3d *a)
 void	rotate_left(t_cub3d *a)
 {
 	a->rayc.xolddir = a->rayc.xdir;
-	a->rayc.xdir = a->rayc.xdir * cos(a->rayc.rootspeed) - a->rayc.ydir * sin(a->rayc.rootspeed);
-	a->rayc.ydir = a->rayc.xolddir * sin(a->rayc.rootspeed) + a->rayc.ydir * cos(a->rayc.rootspeed);
+	a->rayc.xdir = a->rayc.xdir * cos(a->rayc.rotspeed) - a->rayc.ydir * sin(a->rayc.rotspeed);
+	a->rayc.ydir = a->rayc.xolddir * sin(a->rayc.rotspeed) + a->rayc.ydir * cos(a->rayc.rotspeed);
 	a->rayc.xoldplane = a->rayc.xplane;
-	a->rayc.xplane = a->rayc.xplane * cos(a->rayc.rootspeed) - a->rayc.yplane * sin(a->rayc.rootspeed);
-	a->rayc.yplane = a->rayc.xoldplane * sin(a->rayc.rootspeed) + a->rayc.yplane * cos(a->rayc.rootspeed);
+	a->rayc.xplane = a->rayc.xplane * cos(a->rayc.rotspeed) - a->rayc.yplane * sin(a->rayc.rotspeed);
+	a->rayc.yplane = a->rayc.xoldplane * sin(a->rayc.rotspeed) + a->rayc.yplane * cos(a->rayc.rotspeed);
 	init_raycast(a);
 }

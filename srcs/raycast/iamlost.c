@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:35:05 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:30:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 21:03:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	init_raycast(t_cub3d *a)
 			&& (a->rayc.keycode != KEY_LOOK_LEFT))
 		return (0);
 */	a->rayc.ray = 0;
-//	print_struct(a);
+	print_struct(a);
 //	a->rayc.keycode = 42;
 //	caress_key(a->rayc.keycode, a);
 	while (a->rayc.ray < a->fconf.xrendersize)
 	{
 
-		print_struct(a);
+//		print_struct(a);
 		//calculate ray position and direction
 		a->rayc.xcamera = 2 * a->rayc.ray / (double)a->fconf.yrendersize - 1;//x-coordinate in camera space
 		a->rayc.xraydir = a->rayc.xdir + a->rayc.xplane * a->rayc.xcamera;
@@ -136,7 +136,7 @@ int	init_raycast(t_cub3d *a)
 	
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, a->rayc.drawstart, a->rayc.drawend, color);
-		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.drawstart, a->rayc.drawend, color);
+		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.ray, a->rayc.drawend, color);
 
 		a->rayc.ray++;
 	}
@@ -153,7 +153,7 @@ int	init_raycast(t_cub3d *a)
 */	
 /*	//speed modifiers
 	a->rayc.movespeed = a->rayc.frametime * 5.0;//the constant value is in squares/second
-	a->rayc.rootspeed = a->rayc.frametime * 3.0;//the constant value is in squares/second
+	a->rayc.rotspeed = a->rayc.frametime * 3.0;//the constant value is in squares/second
 */		
 //	readkeys;
 //	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
@@ -321,7 +321,7 @@ int	init_raycast(t_cub3d *a)
 	
 	//speed modifiers
 	a->rayc.movespeed = a->rayc.frametime * 5.0;//the constant value is in squares/second
-	a->rayc.rootspeed = a->rayc.frametime * 3.0;//the constant value is in squares/second
+	a->rayc.rotspeed = a->rayc.frametime * 3.0;//the constant value is in squares/second
 		
 	readkeys();
 	//move forward if no wall in front of you
