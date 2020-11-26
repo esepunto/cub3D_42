@@ -95,7 +95,7 @@ int	init_raycast(t_cub3d *a)
 			}
 			//Check if ray has hit a wall
 //			if (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap] > 0)
-			if (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap] != '0')
+			if (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap] == '1')
 				a->rayc.hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
