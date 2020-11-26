@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/25 13:55:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:04:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int		caress_key(int keycode, t_cub3d *a)
 {
-	init_raycast(a);
+	a->rayc.keycode = keycode;
 	if (keycode == KEY_ESC)
 		closed(a);
 	if (keycode == KEY_MOVE_FRONT)
@@ -33,8 +33,7 @@ int		caress_key(int keycode, t_cub3d *a)
 		rotate_right(a);
 	if (keycode == KEY_LOOK_LEFT)
 		rotate_left(a);
-	printf("key: %d\n", keycode);
-	print_struct(a);
+//	print_struct(a);
 	init_raycast(a);
 	return (0);
 }
@@ -84,7 +83,10 @@ void	init_window(t_cub3d *a)
 //	mlx_key_hook(a->mlibx.win, caress_key, a);//This ft or mlx_hook to close windows when type ESC
 	mlx_hook(a->mlibx.win, 17, 1L << 17, closed, a);
 	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
-//	mlx_loop_hook(a->mlibx.win, &init_raycast(a), a);
-//	init_raycast(a);
+//	mlx_loop_hook(a->mlibx.win, &init_raycast, a);
+//	mlx_loop_hook(a->mlibx.win, &caress_key, a);
 	mlx_loop(a->mlibx.mlx);
 }
+
+
+//mlx_loop_hook(game->window.mlx, &run_game, game);

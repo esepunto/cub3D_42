@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/25 13:15:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 09:51:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_struct(t_cub3d *a)
 	a->rayc.yplane = 0.66;
 	a->rayc.time = 0;//time of current frame
 	a->rayc.oldtime = 0;//time of previous frame
+	a->rayc.movespeed = 1;
 }
 
 /*

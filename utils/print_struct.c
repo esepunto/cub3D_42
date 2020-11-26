@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:36:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/25 13:53:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:06:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void print_struct(t_cub3d *a)
 {
+	printf("key: %d\n", a->rayc.keycode);
+	printf("xrendersize: %d\n", a->fconf.xrendersize);
+	printf("yrendersize: %d\n", a->fconf.yrendersize);
+	printf("ray: %d\n", a->rayc.ray);
 	printf("xpos: %f - ", a->rayc.xpos);
 	printf("ypos: %f\n", a->rayc.ypos);
 	printf("xdir: %f - ", a->rayc.xdir);

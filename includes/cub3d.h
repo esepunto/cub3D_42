@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/25 13:53:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:03:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ typedef struct	s_minilibx
 
 typedef struct	s_raycasting
 {
+	int		keycode;
 	char	plyr;
+	int		ray;
 	double	xpos;
 	double	ypos;
 	double	xdir;
@@ -152,7 +154,7 @@ void			rotate_right(t_cub3d *a);
 void			rotate_left(t_cub3d *a);
 
 
-void			init_raycast(t_cub3d *a);
+int			init_raycast(t_cub3d *a);
 
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
