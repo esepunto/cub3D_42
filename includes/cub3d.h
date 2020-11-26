@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 10:03:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:48:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct	s_raycasting
 	double	time;
 	double	oldtime;
 	double	xcamera;
-	double	ycamera;
+//	double	ycamera;
 	double	xraydir;
 	double	yraydir;
 	int		xmap;

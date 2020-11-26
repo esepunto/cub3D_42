@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:36:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 10:06:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 10:50:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void print_struct(t_cub3d *a)
 	printf("ypos: %f\n", a->rayc.ypos);
 	printf("xdir: %f - ", a->rayc.xdir);
 	printf("ydir: %f\n", a->rayc.ydir);
-	printf("xcamera: %f - ", a->rayc.xcamera);
-	printf("ycamera: %f\n", a->rayc.ycamera);
+	printf("xcamera: %f\n", a->rayc.xcamera);
 	printf("xmap: %d - ", a->rayc.xmap);
 	printf("ymap: %d\n", a->rayc.ymap);
 	printf("xplane: %f - ", a->rayc.xplane);

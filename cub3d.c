@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 09:51:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 12:22:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	init_struct(t_cub3d *a)
 int		main(int argc, char **argv)
 {
 	t_cub3d	*a;
-
-
 
 	if (argc == 2)
 	{
