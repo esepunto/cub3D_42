@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:35:05 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 18:45:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 19:51:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_raycast(t_cub3d *a)
 			&& (a->rayc.keycode != KEY_LOOK_LEFT))
 		return (0);
 */	a->rayc.ray = 0;
-	print_struct(a);
+//	print_struct(a);
 //	a->rayc.keycode = 42;
 //	caress_key(a->rayc.keycode, a);
 	while (a->rayc.ray < a->fconf.xrendersize)
@@ -123,20 +123,20 @@ int	init_raycast(t_cub3d *a)
 		long	color;
 		switch (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap])
 		{
-			case 1:		color = 0x00FF0000;	break;//red
-			case 2:		color = 0x0000FF00;	break;//green
+			case '1':		color = 0x00FF0000;	break;//red
+			case '2':		color = 0x0000FF00;	break;//green
 			case 3:		color = 0x000000FF;	break;//blue
 			case 4:		color = 0x00FFFFFF;	break;//white
 			default:	color = 0x00FFFF00;	break;//yellow
 		}
 		
 		//give x and y sides different brightness
-		if (a->rayc.side == 1)
-			color = color / 2;
+//		if (a->rayc.side == 1)
+//			color = color / 2;
 	
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, a->rayc.drawstart, a->rayc.drawend, color);
-		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.ray, a->rayc.drawend, color);
+		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.drawstart, a->rayc.drawend, color);
 
 		a->rayc.ray++;
 	}

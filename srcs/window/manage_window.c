@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 18:47:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:22:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		caress_key(int keycode, t_cub3d *a)
 		rotate_left(a);
 //	print_struct(a);
 	keycode = 42;
-//	init_raycast(a);
+	init_raycast(a);
 	return (0);
 }
 
