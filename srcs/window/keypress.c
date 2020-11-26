@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:24:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:32:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	go_back(t_cub3d *a)
 //	if(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)] == false)
 	if(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)] == '0')
 		a->rayc.ypos -= a->rayc.ydir * a->rayc.movespeed;
-	print_struct(a);
-//	init_raycast(a);
+	init_raycast(a);
 }
 
 void	go_left(t_cub3d *a)

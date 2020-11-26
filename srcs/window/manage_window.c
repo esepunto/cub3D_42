@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:22:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 20:31:53 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	init_window(t_cub3d *a)
 	a->mlibx.win = mlx_new_window(a->mlibx.mlx,
 			a->fconf.xrendersize, a->fconf.yrendersize, "cub3D");
 //	mlx_key_hook(a->mlibx.win, caress_key, a);//This ft or mlx_hook to close windows when type ESC
-	init_raycast(a);
+//	init_raycast(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, closed, a);
 //	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
 //	mlx_loop_hook(a->mlibx.mlx, &init_raycast, a);
