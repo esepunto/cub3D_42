@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:35:05 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 12:42:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:45:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	init_raycast(t_cub3d *a)
 */	a->rayc.ray = 0;
 	print_struct(a);
 //	a->rayc.keycode = 42;
-	while (a->rayc.ray < a->fconf.yrendersize)
+//	caress_key(a->rayc.keycode, a);
+	while (a->rayc.ray < a->fconf.xrendersize)
 	{
 
 //		print_struct(a);
