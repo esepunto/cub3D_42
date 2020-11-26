@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 10:04:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/26 18:22:53 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	go_front(t_cub3d *a)
 //	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == false)
 	if (!(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)]))
 		a->rayc.ypos += a->rayc.ydir * a->rayc.movespeed;
+	init_raycast(a);
 }
 
 /*
@@ -45,6 +46,7 @@ void	go_back(t_cub3d *a)
 //	if(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)] == false)
 	if(!(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)]))
 		a->rayc.ypos -= a->rayc.ydir * a->rayc.movespeed;
+	init_raycast(a);
 }
 
 void	go_left(t_cub3d *a)
@@ -72,6 +74,7 @@ void	rotate_right(t_cub3d *a)
 	a->rayc.xoldplane = a->rayc.xplane;
 	a->rayc.xplane = a->rayc.xplane * cos(-a->rayc.rootspeed) - a->rayc.yplane * sin(-a->rayc.rootspeed);
 	a->rayc.yplane = a->rayc.xoldplane * sin(-a->rayc.rootspeed) + a->rayc.yplane * cos(-a->rayc.rootspeed);
+	init_raycast(a);
 }
 
 /*
@@ -87,4 +90,5 @@ void	rotate_left(t_cub3d *a)
 	a->rayc.xoldplane = a->rayc.xplane;
 	a->rayc.xplane = a->rayc.xplane * cos(a->rayc.rootspeed) - a->rayc.yplane * sin(a->rayc.rootspeed);
 	a->rayc.yplane = a->rayc.xoldplane * sin(a->rayc.rootspeed) + a->rayc.yplane * cos(a->rayc.rootspeed);
+	init_raycast(a);
 }
