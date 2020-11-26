@@ -21,3 +21,8 @@ wolftex/
 *.sh
 NOwolftex/
 wolftex/
+*.out
+ejemploraycaster.c
+*.rtf
+samples_main/
+samples_xpm/
