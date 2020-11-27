@@ -26,3 +26,6 @@ ejemploraycaster.c
 *.rtf
 samples_main/
 samples_xpm/
+*.zip
+./raycasting
+

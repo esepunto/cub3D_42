@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:56:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/27 10:31:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,19 @@
 # define KEY_MOVE_LEFT	0
 # define KEY_MOVE_RIGHT	2
 
-
-
-typedef struct  s_mouse_pos
+typedef struct	s_minimap
 {
-    void	*win_ptr;
-    int		*x;
+	double	sizecell;
+	double	xpix;
+	double	ypix;
+}				t_minimap;
+
+typedef struct	s_mouse_pos
+{
+	void	*win_ptr;
+	int		*x;
 	int		*y;
-}               t_mpos;
+}				t_mpos;
 
 typedef struct	s_minilibx
 {
@@ -106,7 +111,6 @@ typedef struct	s_readconfig
 	int		nb_wrd_param;
 	int		final_line_params;
 	t_map	map;
-
 }				t_config;
 
 typedef struct	s_cub3d
@@ -114,6 +118,7 @@ typedef struct	s_cub3d
 	t_config	fconf;
 	t_minilibx	mlibx;
 	t_raycast	rayc;
+	t_minimap	minimap;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -154,7 +159,9 @@ void			rotate_right(t_cub3d *a);
 void			rotate_left(t_cub3d *a);
 
 
-int			init_raycast(t_cub3d *a);
+int				init_raycast(t_cub3d *a);
+
+void			size_minimap(t_cub3d *a);
 
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
