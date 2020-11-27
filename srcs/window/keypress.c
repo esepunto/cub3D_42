@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 20:55:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/27 14:41:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	go_front(t_cub3d *a)
 	if (a->fconf.map.maze[(int)(a->rayc.xpos + a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == '0')
 		a->rayc.xpos += a->rayc.xdir * a->rayc.movespeed;
 //	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == false)
-	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == 0)
+	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == '0')
 		a->rayc.ypos += a->rayc.ydir * a->rayc.movespeed;
 	init_raycast(a);
 }
