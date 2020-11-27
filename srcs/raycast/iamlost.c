@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:35:05 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/26 21:03:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/27 12:34:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	init_raycast(t_cub3d *a)
 	
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, a->rayc.drawstart, a->rayc.drawend, color);
-		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.ray, a->rayc.drawend, color);
+//		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.ray, a->rayc.drawend, color);
 
 		a->rayc.ray++;
 	}

@@ -28,4 +28,5 @@ samples_main/
 samples_xpm/
 *.zip
 ./raycasting
+cub3d_destroyer/
 
