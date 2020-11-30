@@ -30,3 +30,4 @@ samples_xpm/
 ./raycasting
 cub3d_destroyer/
 ejemploraycast.c
+.gitignore

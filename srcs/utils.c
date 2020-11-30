@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delmem.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 19:36:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:56:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,12 @@ void	print_fconfig(t_cub3d *a)
 	i = 0;
 	printf("row: %d\n", a->fconf.map.row);
 	printf("colum: %zu\n", a->fconf.map.col);
-//	printf("map[0][7] = %c\n", a->fconf.map.maze[0][7]);
 	while (i <= a->fconf.map.row)
 	{
 		printf("linea %d: %s\n", i, a->fconf.map.maze[i]);
 		i++;
 	}
-//	printf("map[0][0] = %c", a->fconf.map.maze[0][0]);
-/*	printf("\n|%s|\n", a->fconf.wallno);
-	printf("|%s|\n", a->fconf.wallso);
-	printf("|%s|\n", a->fconf.wallwe);
-	printf("|%s|\n", a->fconf.wallea);
-	printf("|%s|\n", a->fconf.res);
-	printf("|%s|\n", a->fconf.ceil);
-	printf("|%s|\n", a->fconf.flr);
-	printf("|%s|\n", a->fconf.sprite);
-	printf("TEXTURE: |%s|\n", a->fconf.wallno_texture);
-	printf("TEXTURE: |%s|\n", a->fconf.wallso_texture);
-	printf("TEXTURE: |%s|\n", a->fconf.wallwe_texture);
-	printf("TEXTURE: |%s|\n", a->fconf.wallea_texture);
-	printf("TEXTURE: |%s|\n", a->fconf.sprite_texture);
-*/	i= 0;
+	i= 0;
 	while (i <= 7 && a->fconf.wall_texture[i])
 	{
 		printf("TEXTURE[%d]:  |%s|\n", i, a->fconf.wall_texture[i]);
