@@ -1,16 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   delmem.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/06 14:25:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:19:32 by ssacrist         ###   ########.fr       */
+/*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
+/*   Updated: 2020/11/30 19:36:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	delmem(t_cub3d *a)
+{
+	if (a)
+	{
+		init_struct(a);
+		if (sizeof(a->fconf.wall_texture) >= 848)
+			ft_delmatrix(a->fconf.wall_texture);
+		if (sizeof(a->fconf.map.maze) >= 208)
+			ft_delmatrix(a->fconf.map.maze);
+		if (sizeof(a) >= sizeof(t_cub3d))
+			free(a);
+	}
+}
+
+int		msg_err(char *error)
+{
+	ft_printf("Error\n%s\n\n", error);
+	system("leaks cub3D");
+	exit(0);
+}
+
+void print_struct(t_cub3d *a)
+{
+	printf("key: %d\n", a->rayc.keycode);
+	printf("xrendersize: %d\n", a->fconf.xrendersize);
+	printf("yrendersize: %d\n", a->fconf.yrendersize);
+	printf("ray: %d\n", a->rayc.ray);
+	printf("xpos: %f - ", a->rayc.xpos);
+	printf("ypos: %f\n", a->rayc.ypos);
+	printf("xdir: %f - ", a->rayc.xdir);
+	printf("ydir: %f\n", a->rayc.ydir);
+	printf("xcamera: %f\n", a->rayc.xcamera);
+	printf("xmap: %d - ", a->rayc.xmap);
+	printf("ymap: %d\n", a->rayc.ymap);
+	printf("xplane: %f - ", a->rayc.xplane);
+	printf("yplane: %f\n", a->rayc.yplane);
+	printf("xraydir: %f - ", a->rayc.xraydir);
+	printf("yraydir: %f\n", a->rayc.yraydir);
+	printf("xsidedist: %f - ", a->rayc.xsidedist);
+	printf("ysidedist: %f\n", a->rayc.ysidedist);
+	printf("xdeltadist: %f - ", a->rayc.xdeltadist);
+	printf("ydeltadist: %f\n", a->rayc.ydeltadist);
+	printf("perpwalldist: %f\n\n", a->rayc.perpwalldist);
+}
 
 void	print_fconfig(t_cub3d *a)
 {
@@ -57,3 +102,4 @@ void	print_fconfig(t_cub3d *a)
 	printf("resY: %d\n", a->fconf.yrendersize);
 	printf("\n********** FIN IMPRESION ***********\n\n\n\n\n\n");
 }
+
