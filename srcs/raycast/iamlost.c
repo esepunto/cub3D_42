@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 08:35:05 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/27 14:43:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/30 12:51:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,11 @@
 
 int	init_raycast(t_cub3d *a)
 {
-/*	if ((a->rayc.keycode != KEY_MOVE_FRONT)
-			&& (a->rayc.keycode != KEY_MOVE_BACK)
-			&& (a->rayc.keycode != KEY_MOVE_RIGHT)
-			&& (a->rayc.keycode != KEY_MOVE_LEFT)
-			&& (a->rayc.keycode != KEY_LOOK_RIGHT)
-			&& (a->rayc.keycode != KEY_LOOK_LEFT))
-		return (0);
-*/	a->rayc.ray = 0;
-	print_struct(a);
-//	a->rayc.keycode = 42;
-//	caress_key(a->rayc.keycode, a);
-	draw_minimap(a);
+	a->rayc.ray = 0;
 	while (a->rayc.ray < a->fconf.xrendersize)
 	{
-
-//		print_struct(a);
 		//calculate ray position and direction
-		a->rayc.xcamera = 2 * a->rayc.ray / (double)a->fconf.yrendersize - 1;//x-coordinate in camera space
+		a->rayc.xcamera = 2 * a->rayc.ray / (double)a->fconf.xrendersize - 1;//x-coordinate in camera space
 		a->rayc.xraydir = a->rayc.xdir + a->rayc.xplane * a->rayc.xcamera;
 		a->rayc.yraydir = a->rayc.ydir + a->rayc.yplane * a->rayc.xcamera;
 		
@@ -44,10 +31,10 @@ int	init_raycast(t_cub3d *a)
 		// a->rayc.ysidedist;
 		
 		//length of ray from one x or y-side to next x or y-side
-//		a->rayc.xdeltadist = sqrt(1 + (a->rayc.yraydir * a->rayc.yraydir) / (a->rayc.xraydir * a->rayc.xraydir));
-//		a->rayc.ydeltadist = sqrt(1 + (a->rayc.xraydir * a->rayc.xraydir) / (a->rayc.yraydir * a->rayc.yraydir));
-		a->rayc.xdeltadist = fabs(1 / a->rayc.xraydir);
-		a->rayc.ydeltadist = fabs(1 / a->rayc.yraydir);
+		a->rayc.xdeltadist = sqrt(1 + (a->rayc.yraydir * a->rayc.yraydir) / (a->rayc.xraydir * a->rayc.xraydir));
+		a->rayc.ydeltadist = sqrt(1 + (a->rayc.xraydir * a->rayc.xraydir) / (a->rayc.yraydir * a->rayc.yraydir));
+//		a->rayc.xdeltadist = fabs(1 / a->rayc.xraydir);
+//		a->rayc.ydeltadist = fabs(1 / a->rayc.yraydir);
 	
 		//what direction to step in x or y-direction (either +1 or -1)
 		// a->rayc.xstep;
@@ -79,7 +66,7 @@ int	init_raycast(t_cub3d *a)
 		}
 		
 		//DDA algorithm
-		while (a->rayc.hit == 0)
+		while (a->rayc.hit != 1)
 		{
 			//jump to next map square, OR in x-direction, OR in y-direction
 			if (a->rayc.xsidedist < a->rayc.ysidedist)
@@ -96,7 +83,7 @@ int	init_raycast(t_cub3d *a)
 			}
 			//Check if ray has hit a wall
 //			if (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap] > 0)
-			if (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap] == '1')
+			if (a->fconf.map.maze[a->rayc.ymap][a->rayc.xmap] == '1')
 				a->rayc.hit = 1;
 		}
 		//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
@@ -118,11 +105,9 @@ int	init_raycast(t_cub3d *a)
 		if (a->rayc.drawend >= a->rayc.lineheight)
 			a->rayc.drawend = a->rayc.lineheight - 1;
 		
-		
-		
 		//choose wall color
 		long	color;
-		switch (a->fconf.map.maze[a->rayc.xmap][a->rayc.ymap])
+		switch (a->fconf.map.maze[a->rayc.ymap][a->rayc.xmap])
 		{
 			case '1':		color = 0x00FF0000;	break;//red
 			case '2':		color = 0x0000FF00;	break;//green
@@ -138,7 +123,7 @@ int	init_raycast(t_cub3d *a)
 		//draw the pixels of the stripe as a vertical line
 //		verLine(x, a->rayc.drawstart, a->rayc.drawend, color);
 //		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->rayc.ray, a->rayc.drawend, color);
-
+		print_struct(a);
 		a->rayc.ray++;
 	}
 //	print_struct(a);

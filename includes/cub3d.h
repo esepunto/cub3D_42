@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/27 13:27:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/30 11:09:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void			rotate_left(t_cub3d *a);
 
 int				init_raycast(t_cub3d *a);
 
-int				draw_minimap(t_cub3d *a);
+void			draw_minimap(t_cub3d *a);
 void			put_pixel_minimap(int x, int y, t_cub3d *a, long color);
 void			draw_player(t_cub3d *a);
 

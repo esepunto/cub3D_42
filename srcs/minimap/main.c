@@ -1,3 +1,4 @@
+#include "../../includes/cub3d.h"
 #include <stdio.h>
 #include <limits.h>
 #include <SDL2/SDL.h>
@@ -30,8 +31,6 @@ struct Ray
     int wallHitContent;
 } rays[NUM_RAYS];
 
-SDL_Window* window = NULL;
-SDL_Renderer* renderer = NULL;
 int isGameRunning = FALSE;
 int ticksLastFrame;
 
