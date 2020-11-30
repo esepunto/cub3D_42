@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 13:06:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/11/30 14:41:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,33 @@ int		closed(t_cub3d *a)
 
 void	go_front(t_cub3d *a)
 {
-//	if (a->fconf.map.maze[(int)(a->rayc.xpos + a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == false)
-//	if (a->fconf.map.maze[(int)(a->rayc.xpos + a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == '0')
 	if (a->fconf.map.maze[(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
 		a->rayc.xpos += a->rayc.xdir * a->rayc.movespeed;
-//	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == false)
-//	if (a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)] == '0')
 	if (a->fconf.map.maze[(int)(a->rayc.ypos)][(int)(a->rayc.xpos + a->rayc.xdir * a->rayc.movespeed)] != '1')
-		a->rayc.ypos += a->rayc.ydir * a->rayc.movespeed;
-//	init_raycast(a);
+		a->rayc.ypos += (a->rayc.ydir * a->rayc.movespeed);
 }
 
 /*
 ** Move backwards if no wall behind you
 */
 
-// ++*** OJO +++*** eliminado el (!(map.maze))
 void	go_back(t_cub3d *a)
 {
-//	print_struct(a);
-//	if(a->fconf.map.maze[(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == false)
-//	if(a->fconf.map.maze[(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)][(int)(a->rayc.ypos)] == '0')
-	if(a->fconf.map.maze[(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
+	int xpos = (int)a->rayc.xpos;
+	int ypos = (int)a->rayc.ypos;
+	int xdir = (int)a->rayc.xdir;
+	int ydir = (int)a->rayc.ydir;
+	char **maze = a->fconf.map.maze;
+
+	if (maze[ypos - ydir][xpos] != '1')
+		xpos -= xdir;
+	if (maze[ypos][xpos - xdir] != '1')
+		a->rayc.ypos -= ydir;
+		
+/*	if (a->fconf.map.maze[(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
 		a->rayc.xpos -= a->rayc.xdir * a->rayc.movespeed;
-//	if(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)] == false)
-//	if(a->fconf.map.maze[(int)(a->rayc.xpos)][(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)] == '0')
-	if(a->fconf.map.maze[(int)(a->rayc.ypos)][(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)] != '1')
-		a->rayc.ypos -= a->rayc.ydir * a->rayc.movespeed;
-//	init_raycast(a);
+	if (a->fconf.map.maze[(int)(a->rayc.ypos)][(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)] != '1')
+		a->rayc.ypos -= (a->rayc.ydir * a->rayc.movespeed);*/
 }
 
 void	go_left(t_cub3d *a)
@@ -80,7 +79,6 @@ void	rotate_left(t_cub3d *a)
 	a->rayc.xoldplane = a->rayc.xplane;
 	a->rayc.xplane = a->rayc.xplane * cos(- a->rayc.rotspeed) - a->rayc.yplane * sin(- a->rayc.rotspeed);
 	a->rayc.yplane = a->rayc.xoldplane * sin(- a->rayc.rotspeed) + a->rayc.yplane * cos(- a->rayc.rotspeed);
-//	init_raycast(a);
 }
 
 /*
@@ -96,5 +94,4 @@ void	rotate_right(t_cub3d *a)
 	a->rayc.xoldplane = a->rayc.xplane;
 	a->rayc.xplane = a->rayc.xplane * cos(a->rayc.rotspeed) - a->rayc.yplane * sin(a->rayc.rotspeed);
 	a->rayc.yplane = a->rayc.xoldplane * sin(a->rayc.rotspeed) + a->rayc.yplane * cos(a->rayc.rotspeed);
-//	init_raycast(a);
 }
