@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 12:12:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:18:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ void print_struct(t_cub3d *a)
 	printf("ysidedist: %f\n", a->rayc.ysidedist);
 	printf("xdeltadist: %f - ", a->rayc.xdeltadist);
 	printf("ydeltadist: %f\n", a->rayc.ydeltadist);
-	printf("perpwalldist: %f\n\n", a->rayc.perpwalldist);
+	printf("perpwalldist: %f\n", a->rayc.perpwalldist);
 	printf("angulo FOV: |%f|\n", FOV);
+	printf("color ceil: |%x|\n", a->fconf.ceilcolor);
+	printf("color floor: |%x|\n\n", a->fconf.floorcolor);
 }
 
 void	print_fconfig(t_cub3d *a)

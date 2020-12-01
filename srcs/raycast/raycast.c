@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 14:49:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:23:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void    calculate_hex(int c, int color, char *result)
 
 char    *hv_rgb2hex(int r, int g, int b)
 {
-    static char     result[6];
-    int             i;
+    static char	result[6];
+    int			i;
+	char		*aux;
+	char		*col;
 
     i = 0;
     while (i < 6)
@@ -36,13 +38,12 @@ char    *hv_rgb2hex(int r, int g, int b)
             calculate_hex(i, b, result);
         i++;
     }
-    return(ft_strjoin("0x#00\0", result));
-}
-
-void ceilfloorcolor(t_cub3d *a)
-{
-	a->fconf.ceilcolor = ft_atoi(hv_rgb2hex(a->fconf.red[0], a->fconf.green[0], a->fconf.blue[0]));
-	a->fconf.floorcolor = ft_atoi(hv_rgb2hex(a->fconf.red[1], a->fconf.green[1], a->fconf.blue[1]));
+	aux = ft_strjoin("0x00\0", result);
+	col = aux;
+	free(aux);
+//	printf("colores: |%s|\n", col);
+	return (col);
+	
 }
 
 void	draw_ceilling(t_cub3d *a)
@@ -69,7 +70,7 @@ void	draw_ceilling(t_cub3d *a)
 void	draw(t_cub3d *a)
 {
 	//Calculamos el delta time:
-	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
+//	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
 	
 	/*
 	** *+*+ Pintar con minilbx *+*+*
@@ -106,7 +107,7 @@ void	draw(t_cub3d *a)
 			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while:
 			if(a->steal.xray < 0 || a->steal.xray >= a->fconf.map.col
 				|| a->steal.yray < 0 || a->steal.yray >= a->fconf.map.row// ft_strlen(a->fconf.map.maze[a->steal.yray])
-				|| a->fconf.map.maze[int(a->steal.yray)][int(a->steal.xray)] == '1')
+				|| a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
 			{
 				knock = 1;
 			}
@@ -120,8 +121,8 @@ void	draw(t_cub3d *a)
 		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
 
 		//Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro (initwall) y donde hay que acabar (endwall)
-		a->steal.initwall = int(float(a->fconf.yrendersize) / 2.0 - a->steal.staturewall/2);
-		a->steal.endwall = int(float(a->fconf.yrendersize) / 2.0 + a->steal.staturewall/2);
+		a->steal.initwall = (int)(float)(a->fconf.yrendersize / 2.0 - a->steal.staturewall/2);
+		a->steal.endwall = (int)(float)(a->fconf.yrendersize / 2.0 + a->steal.staturewall/2);
 
 		/*
 		** Antes de dibujar la línea vertical hay que elegir una tonalidad de color,
@@ -142,8 +143,9 @@ void	draw(t_cub3d *a)
 }
 
 //Controles del jugador:
-void keyPressed(t_cub3d *a)
+int		teclado(int keycode, t_cub3d *a)
 {
+	keycode = a->rayc.keycode;
 	//Moverse hacia delante:
 	if (a->rayc.keycode == KEY_MOVE_FRONT)
 	{
@@ -152,7 +154,7 @@ void keyPressed(t_cub3d *a)
 		a->steal.yplyr += sin(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
 
 		//Si el jugador ha entrado dentro de una pared se deshace el movimiento:
-		if(a->fconf.map.maze[int(a->steal.yplyr)][int(a->steal.xplyr)] != 0)
+		if(a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] != 0)
 		{
 			a->steal.xplyr -= cos(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
 			a->steal.yplyr -= sin(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
@@ -183,6 +185,7 @@ void keyPressed(t_cub3d *a)
 		a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	}
+	return (0);
 }
 
 

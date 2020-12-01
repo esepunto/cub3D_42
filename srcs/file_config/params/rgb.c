@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:43:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 17:20:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	isdigit_str(char *nbr)
 			msg_err("Ooops. Is there a letter in number (res/rgb)?");
 		nbr++;
 	}
+}
+
+void ceilfloorcolor(t_cub3d *a)
+{
+	a->fconf.ceilcolor = ft_atoi(hv_rgb2hex(a->fconf.red[0], a->fconf.green[0], a->fconf.blue[0]));
+	a->fconf.floorcolor = ft_atoi(hv_rgb2hex(a->fconf.red[1], a->fconf.green[1], a->fconf.blue[1]));
 }
 
 void	extract_rgb(int c, t_cub3d *a)

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:41:15 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 17:27:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	review_cefl(int c, t_cub3d *a)
 		msg_err("Review RGB colors. Are U in COMMA?");
 	extract_rgb(c, a);
 	check_nbr(c, a);
+	ceilfloorcolor(a);
 }
 
 void	review_res(int c, t_cub3d *a)
