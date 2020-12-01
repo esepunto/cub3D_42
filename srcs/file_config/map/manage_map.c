@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 13:40:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 09:07:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	frstlinemaze(t_cub3d *a)
 	int		frsline;
 
 	frsline = a->fconf.final_line_params + 1;
-//	while (ft_strlen(a->fconf.map.maze[frsline]) == 1)
 	while (a->fconf.map.maze[frsline][0] == '\0')
 		frsline++;
 	a->fconf.map.first_line = frsline;
+	a->fconf.map.nbrlines = a->fconf.map.row - a->fconf.map.first_line;
 }
 
 void	manage_map(t_cub3d *a)

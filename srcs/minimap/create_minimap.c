@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 09:53:11 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 14:30:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 09:12:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ void	draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int color
 	double pixelX;
 	double pixelY;
 
-	deltaX = endX - beginX; // 10
-	deltaY = endY - beginY; // 0
-	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY)); // 10
-//	pixels ^ 2 = (deltaX ^ 2) + (deltaY ^ 2) >>> pixels = sqrt((10 * 10) + (0 * 0)) = sqrt(100) = 10
-	pixelX = beginX; // 640
-	pixelY = beginY; // 360
-	deltaX /= pixels; // 1 >>> 10 / 10
-	deltaY /= pixels; // 0 >>>  0 / 10
+	deltaX = endX - beginX;
+	deltaY = endY - beginY;
+	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	pixelX = beginX;
+	pixelY = beginY;
+	deltaX /= pixels;
+	deltaY /= pixels;
 	while (pixels)
 	{
 		mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, pixelX, pixelY, color);
@@ -40,16 +39,16 @@ void	draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int color
 
 void	draw_player(t_cub3d *a)
 {
-	int r = 4; // radius
+	int radius = 4; // radius
 	int		ox;
 	int		oy;
 	int sizecell = a->minimap.sizecell;
 
 	ox = a->rayc.xpos * sizecell;
 	oy = (a->rayc.ypos - a->fconf.map.first_line) * sizecell;
-	for (int x = -r; x < r ; x++)
+	for (int x = -radius; x < radius ; x++)
 	{
-		int height = (int)sqrt(r * r - x * x);
+		int height = (int)sqrt(radius * radius - x * x);
 		for (int y = -height; y < height; y++)
 			mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x + ox, y + oy, 0x00FF0000);
 	}
@@ -63,7 +62,7 @@ void	put_pixel_minimap(int j, int i, t_cub3d *a, long color)
 	double		xmax;
 	double		ymax;
 		
-	a->minimap.sizecell = a->fconf.yrendersize / (a->fconf.map.row - a->fconf.map.first_line);
+	a->minimap.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
 	xmin = a->minimap.sizecell * j;
 	xmax = xmin + a->minimap.sizecell;
 	ymin = a->minimap.sizecell * (i - a->fconf.map.first_line);

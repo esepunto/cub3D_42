@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 11:09:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 14:46:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define KEY_MOVE_BACK	1
 # define KEY_MOVE_LEFT	0
 # define KEY_MOVE_RIGHT	2
+# define FOV			180 * M_PI / 180
+# define HEXADEC		"0123456789ABCDEF"
 
 typedef struct	s_minimap
 {
@@ -99,7 +101,31 @@ typedef struct	s_map
 	int		row;
 	int		num_players;
 	int		first_line;
+	int		nbrlines;
 }				t_map;
+
+typedef struct s_lanzarayos
+{
+	double	modulo;
+	double	xplyr;
+	double	yplyr;
+	double	dirplyr;
+	double	movspeed;
+	double	rotspeed;
+	double	lasttime;
+	double	delta;
+	double	xray;
+	double	yray;
+	double	anglray;
+	double	xincrease;
+	double	yincrease;
+	double	distance;
+	int		initwall;
+	int		endwall;
+	double	staturewall;
+
+}				t_lanzaray;
+
 
 typedef struct	s_readconfig
 {
@@ -112,6 +138,8 @@ typedef struct	s_readconfig
 	char	*wall_texture[8];
 	int		nb_wrd_param;
 	int		final_line_params;
+	int		ceilcolor;
+	int		floorcolor;
 	t_map	map;
 }				t_config;
 
@@ -121,6 +149,7 @@ typedef struct	s_cub3d
 	t_minilibx	mlibx;
 	t_raycast	rayc;
 	t_minimap	minimap;
+	t_lanzaray	steal;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -147,6 +176,8 @@ int				nbr_plyrs(int i, int j, t_cub3d *a);
 void			review_maze(t_cub3d *a);
 void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
+void			calculate_hex(int c, int color, char *result);
+char			*hv_rgb2hex(int r, int g, int b);
 
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
@@ -166,6 +197,9 @@ int				init_raycast(t_cub3d *a);
 void			draw_minimap(t_cub3d *a);
 void			put_pixel_minimap(int x, int y, t_cub3d *a, long color);
 void			draw_player(t_cub3d *a);
+
+void			draw(t_cub3d *a);
+void			keyPressed(t_cub3d *a);
 
 
 int				msg_err(char *error);

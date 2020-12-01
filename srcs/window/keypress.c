@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 11:10:39 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/30 14:41:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 11:50:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ int		closed(t_cub3d *a)
 
 void	go_front(t_cub3d *a)
 {
-	if (a->fconf.map.maze[(int)(a->rayc.ypos + a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
+	if (a->fconf.map.maze[(int)((a->rayc.ypos + a->rayc.ydir) * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
 		a->rayc.xpos += a->rayc.xdir * a->rayc.movespeed;
-	if (a->fconf.map.maze[(int)(a->rayc.ypos)][(int)(a->rayc.xpos + a->rayc.xdir * a->rayc.movespeed)] != '1')
-		a->rayc.ypos += (a->rayc.ydir * a->rayc.movespeed);
+	else
+		a->rayc.xpos -= a->rayc.xdir * a->rayc.movespeed;
+
+	if (a->fconf.map.maze[(int)(a->rayc.ypos)][(int)((a->rayc.xpos + a->rayc.xdir) * a->rayc.movespeed)] != '1')
+		a->rayc.ypos += a->rayc.ydir * a->rayc.movespeed;
+	else
+		a->rayc.ypos -= a->rayc.ydir * a->rayc.movespeed;
 }
 
 /*
@@ -37,21 +42,14 @@ void	go_front(t_cub3d *a)
 
 void	go_back(t_cub3d *a)
 {
-	int xpos = (int)a->rayc.xpos;
-	int ypos = (int)a->rayc.ypos;
-	int xdir = (int)a->rayc.xdir;
-	int ydir = (int)a->rayc.ydir;
-	char **maze = a->fconf.map.maze;
-
-	if (maze[ypos - ydir][xpos] != '1')
-		xpos -= xdir;
-	if (maze[ypos][xpos - xdir] != '1')
-		a->rayc.ypos -= ydir;
-		
-/*	if (a->fconf.map.maze[(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
+	if (a->fconf.map.maze[(int)(a->rayc.ypos - a->rayc.ydir * a->rayc.movespeed)][(int)(a->rayc.xpos)] != '1')
 		a->rayc.xpos -= a->rayc.xdir * a->rayc.movespeed;
+	else
+		a->rayc.xpos += a->rayc.xdir * a->rayc.movespeed;
 	if (a->fconf.map.maze[(int)(a->rayc.ypos)][(int)(a->rayc.xpos - a->rayc.xdir * a->rayc.movespeed)] != '1')
-		a->rayc.ypos -= (a->rayc.ydir * a->rayc.movespeed);*/
+		a->rayc.ypos -= (a->rayc.ydir * a->rayc.movespeed);
+	else
+		a->rayc.ypos += (a->rayc.ydir * a->rayc.movespeed);
 }
 
 void	go_left(t_cub3d *a)

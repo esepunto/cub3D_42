@@ -14,6 +14,7 @@ SRCS	=	cub3d.c \
 			srcs/window/manage_window.c \
 			srcs/window/keypress.c \
 			srcs/raycast/raycast.c \
+			srcs/raycast/iamlost.c \
 			srcs/minimap/create_minimap.c \
 			srcs/utils.c 
 
