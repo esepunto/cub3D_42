@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 08:57:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:28:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		caress_key(int keycode, t_cub3d *a)
 
 int		prueba(t_cub3d *a)
 {
-	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
+//	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
+	mlx_hook(a->mlibx.win, 2, 1L << 17, teclado, a);
 	return (0);
 }
 
@@ -52,7 +53,8 @@ void	init_window(t_cub3d *a)
 			a->fconf.xrendersize, a->fconf.yrendersize);
 	a->mlibx.win = mlx_new_window(a->mlibx.mlx,
 			a->fconf.xrendersize, a->fconf.yrendersize, "cub3D");
-	draw_minimap(a);
+//	draw_minimap(a);
+	draw(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, closed, a);
 	mlx_loop_hook(a->mlibx.mlx, &prueba, a);
 	mlx_loop(a->mlibx.mlx);

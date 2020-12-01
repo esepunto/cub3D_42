@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 18:21:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 18:49:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,9 @@ int				init_raycast(t_cub3d *a);
 void			draw_minimap(t_cub3d *a);
 void			put_pixel_minimap(int x, int y, t_cub3d *a, long color);
 void			draw_player(t_cub3d *a);
+void			draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int color);
 
-void			draw(t_cub3d *a);
+int				draw(t_cub3d *a);
 int				teclado(int keycode, t_cub3d *a);
 
 
