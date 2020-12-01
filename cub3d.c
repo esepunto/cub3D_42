@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 17:50:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:24:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_struct(t_cub3d *a)
 	a->fconf.final_line_params = 0;
 	a->fconf.nb_wrd_param = 0;
 	a->fconf.map.num_players = 0;
-	a->rayc.xpos = 0;
-	a->rayc.ypos = 0;
+	a->rayc.xpos = 0.0;
+	a->rayc.ypos = 0.0;
 	a->rayc.plyr = ' ';
 	
 	a->rayc.xdir = 0;//Depends of player (N,S,WE,EA)
@@ -41,12 +41,12 @@ void	init_struct(t_cub3d *a)
 	a->rayc.movespeed = 1;
 	a->rayc.rotspeed = 0.5;
 	
-	a->steal.modulo = 0.01;
+	a->steal.modulo = 0.05;
 	a->steal.dirplyr = 0.0;
-	a->steal.movspeed = 0.004;
-	a->steal.rotspeed = 0.002;
+	a->steal.movspeed = 0.5;
+	a->steal.rotspeed = 0.5;
 	a->steal.lasttime = 0;
-	a->steal.delta = 0;
+	a->steal.delta = 0.5;
 	
 	
 

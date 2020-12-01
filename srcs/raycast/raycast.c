@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 19:14:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/01 20:24:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ int		draw(t_cub3d *a)
 	rect(0,altoPantalla/2,anchoPantalla, altoPantalla/2); //Suelo
 */
 	//Trazar un rayo desde cada una de las columnas de la pantalla:
-
+	a->steal.xplyr = a->rayc.xpos;
+	a->steal.yplyr = a->rayc.ypos;
 	x = 0;
 	while (x < a->fconf.xrendersize)
 	{
@@ -102,15 +103,15 @@ int		draw(t_cub3d *a)
 	
 		//Calcular la trayectoria del rayo, paso a paso:
 		int knock = 0;
-		while(knock <= 0)
+		while (knock <= 0)
 		{
 			//Calcular un nuevo punto de la trayectoria:		
 			a->steal.xray += a->steal.xincrease;
 			a->steal.yray += a->steal.yincrease;
 
-			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while:
-			if(a->steal.xray < 0 || a->steal.xray >= a->fconf.map.col
-				|| a->steal.yray < 0 || a->steal.yray >= a->fconf.map.row// ft_strlen(a->fconf.map.maze[a->steal.yray])
+			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while: // ft_strlen(a->fconf.map.maze[a->steal.yray])
+			if (a->steal.xray < 0 || a->steal.xray >= a->fconf.map.col
+				|| a->steal.yray < a->fconf.map.first_line || a->steal.yray >= a->fconf.map.row
 				|| a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
 			{
 				knock = 1;
@@ -123,10 +124,11 @@ int		draw(t_cub3d *a)
 
 		//Calcular la altura del muro:
 		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
-
+//		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
+		
 		//Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro (initwall) y donde hay que acabar (endwall)
-		a->steal.initwall = (int)((float)(a->fconf.yrendersize / 2.0) - (a->steal.staturewall / 2));
-		a->steal.endwall = (int)((float)(a->fconf.yrendersize / 2.0) + (a->steal.staturewall / 2));
+		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
+		a->steal.endwall = (int)((float)(a->fconf.yrendersize) / 2.0 + a->steal.staturewall / 2);
 
 		/*
 		** Antes de dibujar la línea vertical hay que elegir una tonalidad de color,
@@ -139,6 +141,7 @@ int		draw(t_cub3d *a)
 		stroke(int(tonalidad));
 
 		//Dibujar la línea vertical:
+		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
 */		draw_line(a, x, a->steal.initwall, x, a->steal.endwall, 0x00FF13FF);
 /*		line(x, nTecho, x, nSuelo);
 	
@@ -146,6 +149,8 @@ int		draw(t_cub3d *a)
 		lastTime = millis();
 */		x++;
 	}
+	a->rayc.xpos = a->steal.xplyr;
+	a->rayc.ypos = a->steal.yplyr;
 	return (0);
 }
 
@@ -160,27 +165,27 @@ int		teclado(int keycode, t_cub3d *a)
 	else if (a->rayc.keycode == KEY_MOVE_FRONT)
 	{
 		//Avanzar la posición del jugador hacia delante:
-		a->steal.xplyr += cos(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
-		a->steal.yplyr += sin(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
+		a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 
 		//Si el jugador ha entrado dentro de una pared se deshace el movimiento:
 		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
 		{
-			a->steal.xplyr -= cos(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
-			a->steal.yplyr -= sin(a->steal.dirplyr)*a->steal.movspeed*a->steal.delta;
+			a->steal.xplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			a->steal.yplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		}
 	}
 
 	//Giro a la izquierda:
 	else if (a->rayc.keycode == KEY_LOOK_LEFT)
 	{
-		a->steal.dirplyr -= a->steal.rotspeed*a->steal.delta;
+		a->steal.dirplyr -= a->steal.rotspeed * a->steal.delta;
 	}
 
 	//Giro a la derecha:
 	else if (a->rayc.keycode == KEY_LOOK_RIGHT)
 	{
-		a->steal.dirplyr += a->steal.rotspeed*a->steal.delta;
+		a->steal.dirplyr += a->steal.rotspeed * a->steal.delta;
 	}
 
 	//Moverse hacia atrás:
