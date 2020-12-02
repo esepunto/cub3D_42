@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:43:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 11:29:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,39 @@ int			teclado(int keycode, t_cub3d *a)
 			printf("**¡¡MURO!!** xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
 		}
 	}
+	
+	else if (a->rayc.keycode == KEY_MOVE_RIGHT)
+	{
+		//Avanzar la posición del jugador hacia derecha:
+		a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		printf("xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		
+		//Si el jugador ha entrado dentro de una pared se deshace el movimiento:
+		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
+		{
+			a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			printf("**¡¡MURO!!** xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		}
+	}
+	
+	else if (a->rayc.keycode == KEY_MOVE_LEFT)
+	{
+		//Avanzar la posición del jugador hacia izquierda:
+		a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		printf("xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		
+		//Si el jugador ha entrado dentro de una pared se deshace el movimiento:
+		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
+		{
+			a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			printf("**¡¡MURO!!** xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		}
+	}
+	
 	draw(a);
 	return (0);
 }
