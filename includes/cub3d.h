@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:47:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:57:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # define KEY_MOVE_LEFT	0
 # define KEY_MOVE_RIGHT	2
 # define FOV			60 * M_PI / 180
-# define HEXADEC		"0123456789ABCDEF"
 
 typedef struct	s_minimap
 {
@@ -176,9 +175,6 @@ int				nbr_plyrs(int i, int j, t_cub3d *a);
 void			review_maze(t_cub3d *a);
 void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
-void			calculate_hex(int c, int color, char *result);
-char			*hv_rgb2hex(int r, int g, int b);
-int				rgb_to_int(double r, double g, double b);
 uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 
 void			init_window(t_cub3d *a);

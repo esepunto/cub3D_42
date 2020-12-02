@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:31:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:55:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+# define HEXADEC	"0123456789ABCDEF"
 
 typedef struct		s_list
 {
@@ -99,4 +100,6 @@ char				*ft_delendblanks(char *str);
 char				*ft_delinitendblanks(char *str);
 char				*ft_replacetabs(char *str);
 uint32_t			ft_hex2int(char *hex);
+char				*ft_rgb2hex(int r, int g, int b);
+void				calculate_hex(int c, int color, char *result);
 #endif
