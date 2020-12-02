@@ -6,56 +6,75 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 08:37:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:25:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void    calculate_hex(int c, int color, char *result)
+/**
+* hex2int
+* take a hex string and convert it to a 32bit number (max 8 hex digits)
+*/
+
+uint32_t	ft_hex2int(char *hex)
 {
-    if (c % 2 != 0)
-        result[c] = HEXADEC[color / 16];
-    else
-        result[c] = HEXADEC[color % 16];
+	uint32_t	val;
+	uint8_t		byte;
+	
+	val = 0;
+	while (*hex)
+	{
+		// get current character then increment
+		byte = *hex++; 
+		// transform hex character to the 4bit equivalent number, using the ascii table indexes
+		if (byte >= '0' && byte <= '9')
+			byte = byte - '0';
+		else if (byte >= 'a' && byte <='f')
+			byte = byte - 'a' + 10;
+		else if (byte >= 'A' && byte <='F')
+			byte = byte - 'A' + 10;
+		// shift 4 to make space for new digit, and add the 4 bits of the new digit
+		val = (val << 4) | (byte & 0xF);
+	}
+	return (val);
 }
 
-char    *hv_rgb2hex(int r, int g, int b)
+void		calculate_hex(int c, int color, char *result)
 {
-    static char	result[6];
-    int			i;
+	if (c % 2 == 0)
+		result[c] = HEXADEC[color / 16];
+	else
+		result[c] = HEXADEC[color % 16];
+}
+
+char		*hv_rgb2hex(int r, int g, int b)
+{
+	static char	result[6];
+	int			i;
 	char		*aux;
 	char		*col;
 
-    i = 0;
-    while (i < 6)
-    {
-        if (i < 2)
-            calculate_hex(i, r, result);
-        else if (i < 4)
-            calculate_hex(i, g, result);
-        else
-            calculate_hex(i, b, result);
-        i++;
-    }
+	i = 0;
+	while (i < 6)
+	{
+		if (i < 2)
+			calculate_hex(i, r, result);
+		else if (i < 4)
+			calculate_hex(i, g, result);
+		else
+			calculate_hex(i, b, result);
+		i++;
+	}
 	aux = ft_strjoin("0x00\0", result);
 	col = aux;
 	free(aux);
-//	printf("colores: |%s|\n", col);
+	printf("col: |%s|\n", col);
 	return (col);
 	
 }
 
-int rgb_to_int(double r, double g, double b)
-{
-    int color = 0;
-    color |= (int)(b * 255);
-    color |= (int)(g * 255) << 8;
-    color |= (int)(r * 255) << 16;
-    return (color);
-}
-
-void	draw_ceilling(t_cub3d *a)
+void		draw_ceilling(t_cub3d *a)
 {
 	int	x;
 	int	y;
@@ -67,16 +86,16 @@ void	draw_ceilling(t_cub3d *a)
 		while(y <= a->fconf.yrendersize)
 		{
 			if (y <= a->fconf.yrendersize / 2)
-				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, 0x00FFFF00);
+				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.ceilcolor);
 			else if (y > a->fconf.yrendersize / 2)
-				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, 0x0000FFFF);
+				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.floorcolor);
 			y++;
 		}
 		x++;
 	}
 }
 
-int		draw(t_cub3d *a)
+int			draw(t_cub3d *a)
 {
 	//Calculamos el delta time:
 //	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
@@ -148,7 +167,7 @@ int		draw(t_cub3d *a)
 
 		//Dibujar la línea vertical:
 		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
-*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x00FF13FF);
+*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x00C04225);
 /*		line(x, nTecho, x, nSuelo);
 	
 		//Actualizar la variable lastTime con el tiempo actual
@@ -159,7 +178,7 @@ int		draw(t_cub3d *a)
 }
 
 //Controles del jugador:
-int		teclado(int keycode, t_cub3d *a)
+int			teclado(int keycode, t_cub3d *a)
 {
 	a->rayc.keycode = keycode;
 //	printf("keycode: |%d|\n", keycode);
@@ -186,12 +205,14 @@ int		teclado(int keycode, t_cub3d *a)
 	else if (a->rayc.keycode == KEY_LOOK_LEFT)
 	{
 		a->steal.dirplyr -= a->steal.rotspeed * a->steal.delta;
+		printf("dirplayer: |%f|\n", a->steal.dirplyr);
 	}
 
 	//Giro a la derecha:
 	else if (a->rayc.keycode == KEY_LOOK_RIGHT)
 	{
 		a->steal.dirplyr += a->steal.rotspeed * a->steal.delta;
+		printf("dirplayer: |%f|\n", a->steal.dirplyr);
 	}
 
 	//Moverse hacia atrás:

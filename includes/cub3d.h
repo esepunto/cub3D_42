@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 08:33:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:11:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,24 +124,23 @@ typedef struct s_lanzarayos
 	int		endwall;
 	double	staturewall;
 	int		nbr_ray;
-
 }				t_lanzaray;
 
 
 typedef struct	s_readconfig
 {
-	int		xrendersize;
-	int		yrendersize;
-	int		red[2];
-	int		green[2];
-	int		blue[2];
-	char	*wall[8];
-	char	*wall_texture[8];
-	int		nb_wrd_param;
-	int		final_line_params;
-	int		ceilcolor;
-	int		floorcolor;
-	t_map	map;
+	int			xrendersize;
+	int			yrendersize;
+	int			red[2];
+	int			green[2];
+	int			blue[2];
+	char		*wall[8];
+	char		*wall_texture[8];
+	int			nb_wrd_param;
+	int			final_line_params;
+	uint32_t	ceilcolor;
+	uint32_t	floorcolor;
+	t_map		map;
 }				t_config;
 
 typedef struct	s_cub3d
@@ -181,6 +180,7 @@ void			calculate_hex(int c, int color, char *result);
 char			*hv_rgb2hex(int r, int g, int b);
 void			ceilfloorcolor(t_cub3d *a);
 int				rgb_to_int(double r, double g, double b);
+uint32_t		ft_hex2int(char *hex);
 
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);

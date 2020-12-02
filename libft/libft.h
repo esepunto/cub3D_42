@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:14:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:31:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ char				*ft_delinitblanks(char *str);
 char				*ft_delendblanks(char *str);
 char				*ft_delinitendblanks(char *str);
 char				*ft_replacetabs(char *str);
+uint32_t			ft_hex2int(char *hex);
 #endif
