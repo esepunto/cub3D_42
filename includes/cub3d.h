@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:57:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 14:27:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <math.h>
 # include <fcntl.h>
+# include <stdbool.h>
 
 # define KEY_ESC		53
 # define KEY_LOOK_RIGHT	124
@@ -123,6 +124,8 @@ typedef struct s_lanzarayos
 	int		endwall;
 	double	staturewall;
 	int		nbr_ray;
+	bool	xhit;
+	bool	yhit;
 }				t_lanzaray;
 
 

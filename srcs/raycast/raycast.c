@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 11:35:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 14:46:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,11 @@ void		draw_ceilling(t_cub3d *a)
 int			draw(t_cub3d *a)
 {
 	//Calculamos el delta time:
-//	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
+	//	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
 	
-	/*
-	** *+*+ Pintar con minilbx *+*+*
-	*/
-	draw_ceilling(a);
 	//Pintar el cielo y el suelo:
-/*	noStroke();
-	fill(30);
-	rect(0,0,anchoPantalla, altoPantalla/2); //Cielo
-	fill(120);
-	rect(0,altoPantalla/2,anchoPantalla, altoPantalla/2); //Suelo
-*/
+	draw_ceilling(a);
+
 	//Trazar un rayo desde cada una de las columnas de la pantalla:
 	a->steal.nbr_ray = 0;
 	while (a->steal.nbr_ray < a->fconf.xrendersize)
@@ -68,15 +60,36 @@ int			draw(t_cub3d *a)
 		int knock = 0;
 		while (knock <= 0)
 		{
-			//Calcular un nuevo punto de la trayectoria:		
+			//Calcular un nuevo punto de la trayectoria:
 			a->steal.xray += a->steal.xincrease;
 			a->steal.yray += a->steal.yincrease;
+			
+//			printf("yray: |%f| - xincrease: |%f|\n", a->steal.yray, a->steal.xincrease);
+//			printf("xhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
+			
 
 			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while: // ft_strlen(a->fconf.map.maze[a->steal.yray])
 			if (a->steal.xray < 0 || a->steal.xray >= a->fconf.map.col
 				|| a->steal.yray < a->fconf.map.first_line || a->steal.yray >= a->fconf.map.row
 				|| a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
 			{
+				if (fmod(a->steal.xray, a->steal.xincrease) == 0)
+				{
+					a->steal.xhit = 1;
+					printf("xray: |%f| - xincrease: |%f|\n", a->steal.xray, a->steal.xincrease);
+					printf("xhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
+				}
+				else
+					a->steal.xhit = 0;
+				if (fmod(a->steal.yray, a->steal.yincrease) == 0)
+				{
+					a->steal.yhit = 1;
+					printf("yray: |%f| - yincrease: |%f|\n", a->steal.yray, a->steal.yincrease);
+					printf("yhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
+				}
+				else
+					a->steal.yhit = 0;
+
 				knock = 1;
 			}
 		}
@@ -87,7 +100,7 @@ int			draw(t_cub3d *a)
 
 		//Calcular la altura del muro:
 		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
-//		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
+//		a->steal.staturewall = a->fconf.yrendersize / a->steal.distance;
 		
 		//Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro (initwall) y donde hay que acabar (endwall)
 		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
@@ -105,7 +118,7 @@ int			draw(t_cub3d *a)
 
 		//Dibujar la línea vertical:
 		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
-*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x00C04225);
+*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x0101010);
 /*		line(x, nTecho, x, nSuelo);
 	
 		//Actualizar la variable lastTime con el tiempo actual
