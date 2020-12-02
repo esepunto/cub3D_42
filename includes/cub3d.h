@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:11:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:47:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,8 @@ void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
 void			calculate_hex(int c, int color, char *result);
 char			*hv_rgb2hex(int r, int g, int b);
-void			ceilfloorcolor(t_cub3d *a);
 int				rgb_to_int(double r, double g, double b);
-uint32_t		ft_hex2int(char *hex);
+uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);

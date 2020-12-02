@@ -6,73 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:25:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 10:43:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/**
-* hex2int
-* take a hex string and convert it to a 32bit number (max 8 hex digits)
-*/
-
-uint32_t	ft_hex2int(char *hex)
-{
-	uint32_t	val;
-	uint8_t		byte;
-	
-	val = 0;
-	while (*hex)
-	{
-		// get current character then increment
-		byte = *hex++; 
-		// transform hex character to the 4bit equivalent number, using the ascii table indexes
-		if (byte >= '0' && byte <= '9')
-			byte = byte - '0';
-		else if (byte >= 'a' && byte <='f')
-			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <='F')
-			byte = byte - 'A' + 10;
-		// shift 4 to make space for new digit, and add the 4 bits of the new digit
-		val = (val << 4) | (byte & 0xF);
-	}
-	return (val);
-}
-
-void		calculate_hex(int c, int color, char *result)
-{
-	if (c % 2 == 0)
-		result[c] = HEXADEC[color / 16];
-	else
-		result[c] = HEXADEC[color % 16];
-}
-
-char		*hv_rgb2hex(int r, int g, int b)
-{
-	static char	result[6];
-	int			i;
-	char		*aux;
-	char		*col;
-
-	i = 0;
-	while (i < 6)
-	{
-		if (i < 2)
-			calculate_hex(i, r, result);
-		else if (i < 4)
-			calculate_hex(i, g, result);
-		else
-			calculate_hex(i, b, result);
-		i++;
-	}
-	aux = ft_strjoin("0x00\0", result);
-	col = aux;
-	free(aux);
-	printf("col: |%s|\n", col);
-	return (col);
-	
-}
 
 void		draw_ceilling(t_cub3d *a)
 {
