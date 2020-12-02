@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 20:24:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 08:37:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ char    *hv_rgb2hex(int r, int g, int b)
 	
 }
 
+int rgb_to_int(double r, double g, double b)
+{
+    int color = 0;
+    color |= (int)(b * 255);
+    color |= (int)(g * 255) << 8;
+    color |= (int)(r * 255) << 16;
+    return (color);
+}
+
 void	draw_ceilling(t_cub3d *a)
 {
 	int	x;
@@ -69,7 +78,6 @@ void	draw_ceilling(t_cub3d *a)
 
 int		draw(t_cub3d *a)
 {
-	int	x;
 	//Calculamos el delta time:
 //	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
 	
@@ -85,17 +93,15 @@ int		draw(t_cub3d *a)
 	rect(0,altoPantalla/2,anchoPantalla, altoPantalla/2); //Suelo
 */
 	//Trazar un rayo desde cada una de las columnas de la pantalla:
-	a->steal.xplyr = a->rayc.xpos;
-	a->steal.yplyr = a->rayc.ypos;
-	x = 0;
-	while (x < a->fconf.xrendersize)
+	a->steal.nbr_ray = 0;
+	while (a->steal.nbr_ray < a->fconf.xrendersize)
 	{
 		//La posición inicial del rayo será la del jugador:
 		a->steal.xray = a->steal.xplyr;
 		a->steal.yray = a->steal.yplyr;
 
 		//Calculamos su ángulo inicial:
-		a->steal.anglray = (a->steal.dirplyr - FOV / 2.0) + x * (FOV / a->fconf.xrendersize);
+		a->steal.anglray = (a->steal.dirplyr - FOV / 2.0) + a->steal.nbr_ray * (FOV / a->fconf.xrendersize);
 	
 		//Calculamos el incremento:
 		a->steal.xincrease = cos(a->steal.anglray) * a->steal.modulo;
@@ -142,15 +148,13 @@ int		draw(t_cub3d *a)
 
 		//Dibujar la línea vertical:
 		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
-*/		draw_line(a, x, a->steal.initwall, x, a->steal.endwall, 0x00FF13FF);
+*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x00FF13FF);
 /*		line(x, nTecho, x, nSuelo);
 	
 		//Actualizar la variable lastTime con el tiempo actual
 		lastTime = millis();
-*/		x++;
+*/		a->steal.nbr_ray++;
 	}
-	a->rayc.xpos = a->steal.xplyr;
-	a->rayc.ypos = a->steal.yplyr;
 	return (0);
 }
 
@@ -167,12 +171,14 @@ int		teclado(int keycode, t_cub3d *a)
 		//Avanzar la posición del jugador hacia delante:
 		a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-
+		printf("xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		
 		//Si el jugador ha entrado dentro de una pared se deshace el movimiento:
 		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
 		{
 			a->steal.xplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 			a->steal.yplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			printf("**¡¡MURO!!** xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
 		}
 	}
 
@@ -193,11 +199,13 @@ int		teclado(int keycode, t_cub3d *a)
 	{
 		a->steal.xplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		a->steal.yplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-	
+		printf("xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
+		
 		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
 		{
 			a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 			a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+			printf("**¡¡MURO!!** xplayer: |%f| - yplayer: |%f|\n", a->steal.xplyr, a->steal.yplyr);
 		}
 	}
 	draw(a);

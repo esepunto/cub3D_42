@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 18:49:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 08:33:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_lanzarayos
 	int		initwall;
 	int		endwall;
 	double	staturewall;
+	int		nbr_ray;
 
 }				t_lanzaray;
 
@@ -178,13 +179,14 @@ void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
 void			calculate_hex(int c, int color, char *result);
 char			*hv_rgb2hex(int r, int g, int b);
-void 			ceilfloorcolor(t_cub3d *a);
+void			ceilfloorcolor(t_cub3d *a);
+int				rgb_to_int(double r, double g, double b);
 
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				closed(t_cub3d *a);
-int 			closemouse(t_cub3d *a);
-int 			key_press(int keycode, t_cub3d *a);
+int				closemouse(t_cub3d *a);
+int				key_press(int keycode, t_cub3d *a);
 void			go_front(t_cub3d *a);
 void			go_back(t_cub3d *a);
 void			go_right(t_cub3d *a);

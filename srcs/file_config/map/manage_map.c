@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 09:07:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/02 08:30:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		nbr_plyrs(int i, int j, t_cub3d *a)
 	if (c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E')
 	{
-		a->rayc.xpos = j;//OJO
-		a->rayc.ypos = i;//OJO
+		a->steal.xplyr = j;//OJO
+		a->steal.yplyr = i;//OJO
 		a->rayc.plyr = c;
 		if (c == 'N')
 			a->rayc.ydir -= 1;
