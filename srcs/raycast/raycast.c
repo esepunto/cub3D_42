@@ -6,12 +6,21 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/03 09:35:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:37:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+void my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length + x * (a->mlibx.img.bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+/*
 void		draw_ceilling(t_cub3d *a)
 {
 	int	x;
@@ -27,6 +36,30 @@ void		draw_ceilling(t_cub3d *a)
 				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.ceilcolor);
 			else if (y > a->fconf.yrendersize / 2)
 				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.floorcolor);
+			y++;
+		}
+		x++;
+	}
+}
+*/
+
+void		draw_ceilling_win(t_cub3d *a)
+{
+	int	x;
+	int	y;
+	
+	x = 0;
+	while (x < a->fconf.xrendersize)
+	{
+		y = 0;
+		while(y < a->fconf.yrendersize)
+		{
+			if (y < a->fconf.yrendersize / 2)
+				my_mlx_pixel_put(a, x, y, a->fconf.ceilcolor);
+			//	a->mlibx.img.addr[y * a->fconf.yrendersize + x] = a->fconf.ceilcolor;
+			else// if (x > a->fconf.xrendersize / 2)
+				my_mlx_pixel_put(a, x, y, a->fconf.floorcolor);
+				//a->mlibx.img.addr[y * a->fconf.yrendersize + x] = a->fconf.floorcolor;
 			y++;
 		}
 		x++;
@@ -88,7 +121,8 @@ int			draw(t_cub3d *a)
 	//	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
 	
 	//Pintar el cielo y el suelo:
-	draw_ceilling(a);
+//	draw_ceilling(a);
+	draw_ceilling_win(a);
 
 	//Trazar un rayo desde cada una de las columnas de la pantalla:
 	a->steal.nbr_ray = 0;
@@ -171,7 +205,8 @@ int			draw(t_cub3d *a)
 		double b;
 		b = a->steal.initwall;
 		while (b++ < a->steal.endwall)
-			mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->steal.nbr_ray, b, 0x0101010);
+			my_mlx_pixel_put(a, a->steal.nbr_ray, b, 0x50FF1010);
+//			mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->steal.nbr_ray, b, 0x50FF1010);
 	
 /*		//Actualizar la variable lastTime con el tiempo actual
 		lastTime = millis();

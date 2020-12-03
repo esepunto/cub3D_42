@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 18:28:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 11:37:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,16 @@ int		prueba(t_cub3d *a)
 void	init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
-	a->mlibx.img = mlx_new_image(a->mlibx.mlx,
-			a->fconf.xrendersize, a->fconf.yrendersize);
-	a->mlibx.win = mlx_new_window(a->mlibx.mlx,
-			a->fconf.xrendersize, a->fconf.yrendersize, "cub3D");
+	a->mlibx.img.img = mlx_new_image(a->mlibx.mlx, a->fconf.xrendersize, a->fconf.yrendersize);
+	a->mlibx.win = mlx_new_window(a->mlibx.mlx, a->fconf.xrendersize, a->fconf.yrendersize, "cub3D");
 //	draw_minimap(a);
+	a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img, &a->mlibx.img.bits_per_pixel, &a->mlibx.img.line_length, &a->mlibx.img.endian);
 	draw(a);
+	//a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img, &a->mlibx.img.bits_per_pixel, &a->mlibx.img.line_length, &a->mlibx.img.endian);
+//	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, closed, a);
 	mlx_loop_hook(a->mlibx.mlx, &prueba, a);
+	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+//	mlx_destroy_image(a->mlibx.mlx, a->mlibx.img.img);
 	mlx_loop(a->mlibx.mlx);
 }

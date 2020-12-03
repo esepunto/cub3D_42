@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/03 08:44:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 10:30:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,22 @@ typedef struct	s_mouse_pos
 	int		*y;
 }				t_mpos;
 
+typedef struct  s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct	s_minilibx
 {
 	void	*mlx;
 	void	*win;
-	void	*img;
+//	void	*img;
 	t_mpos	mpos;
+	t_data	img;
 }				t_minilibx;
 
 typedef struct	s_raycasting
@@ -193,6 +203,8 @@ void			go_left(t_cub3d *a);
 void			rotate_right(t_cub3d *a);
 void			rotate_left(t_cub3d *a);
 
+void			my_mlx_pixel_put(t_cub3d *a, int x, int y, int color);
+void		draw_ceilling_win(t_cub3d *a);
 
 int				init_raycast(t_cub3d *a);
 
