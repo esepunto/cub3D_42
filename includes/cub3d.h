@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 14:27:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 08:44:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct s_lanzarayos
 	double	xray;
 	double	yray;
 	double	anglray;
+	int		quadrant;
 	double	xincrease;
 	double	yincrease;
 	double	distance;
@@ -202,6 +203,7 @@ void			draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int col
 
 int				draw(t_cub3d *a);
 int				teclado(int keycode, t_cub3d *a);
+void			calc_texture(t_cub3d *a);
 
 
 int				msg_err(char *error);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 14:46:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 09:35:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,55 @@ void		draw_ceilling(t_cub3d *a)
 		}
 		x++;
 	}
+}
+
+/*
+** Asign to every ray that hits a wall
+** its quadrant's angle (1, 2, 3 or 4).
+**
+**       |
+**   4   |   1
+** ______|_______
+**       |
+**   3   |   2
+**       |
+*/
+
+void		calc_quadrant(t_cub3d *a)
+{
+	double	val;
+
+	val = fmod(a->steal.anglray, 6);
+	if ((val >=0 && val < 1.5) || (val >= -6 && val < -4.5))
+		a->steal.quadrant = 1;
+	if ((val >=1.5 && val < 3) || (val >= -4.5 && val < -3))
+		a->steal.quadrant = 2;
+	if ((val >=3 && val < 4.5) || (val >= -3 && val < -1.5))
+		a->steal.quadrant = 3;
+	if ((val >=4.5 && val < 6) || (val >= -1.5 && val < -0))
+		a->steal.quadrant = 4;
+	printf("Ángulo: |%f| - Cuadrante: |%d|\n", val, a->steal.quadrant);
+	
+}
+
+/*
+** Every ray that hits a wall impact on x,y coordenates.
+** To calculate the texture of the wall impacted by the ray,
+** we need to know 2 data:
+**   1. The exactly x or y coordenate when ray impacts (no decimals coordenate)
+**   2. The quadrant of the ray's angle.
+** So:
+** Impact on x coordenate:
+**    Texture N on 1 and 4 quadrants.
+**    Texture S on 2 and 3 quadrants.
+** Impact on y coordenate:
+**    Texture E on 1 and 2 quadrants.
+**    Texture W on 3 and 4 quadrants.
+*/
+
+void		calc_texture(t_cub3d *a)
+{
+	calc_quadrant(a);
 }
 
 int			draw(t_cub3d *a)
@@ -69,11 +118,9 @@ int			draw(t_cub3d *a)
 			
 
 			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while: // ft_strlen(a->fconf.map.maze[a->steal.yray])
-			if (a->steal.xray < 0 || a->steal.xray >= a->fconf.map.col
-				|| a->steal.yray < a->fconf.map.first_line || a->steal.yray >= a->fconf.map.row
-				|| a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
+			if (a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
 			{
-				if (fmod(a->steal.xray, a->steal.xincrease) == 0)
+/*				if (fmod(a->steal.xray, a->steal.xincrease) == 0)
 				{
 					a->steal.xhit = 1;
 					printf("xray: |%f| - xincrease: |%f|\n", a->steal.xray, a->steal.xincrease);
@@ -90,9 +137,11 @@ int			draw(t_cub3d *a)
 				else
 					a->steal.yhit = 0;
 
-				knock = 1;
+*/				knock = 1;
 			}
 		}
+		calc_texture(a);
+
 
 		//Calcular la distancia corregida del jugador al punto de colisión:
 		a->steal.distance = sqrt(pow(a->steal.xray - a->steal.xplyr, 2) + pow(a->steal.yray - a->steal.yplyr, 2) );
@@ -118,10 +167,13 @@ int			draw(t_cub3d *a)
 
 		//Dibujar la línea vertical:
 		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
-*/		draw_line(a, a->steal.nbr_ray, a->steal.initwall, a->steal.nbr_ray, a->steal.endwall, 0x0101010);
-/*		line(x, nTecho, x, nSuelo);
+*/	
+		double b;
+		b = a->steal.initwall;
+		while (b++ < a->steal.endwall)
+			mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->steal.nbr_ray, b, 0x0101010);
 	
-		//Actualizar la variable lastTime con el tiempo actual
+/*		//Actualizar la variable lastTime con el tiempo actual
 		lastTime = millis();
 */		a->steal.nbr_ray++;
 	}
@@ -181,6 +233,7 @@ int			teclado(int keycode, t_cub3d *a)
 	else if (a->rayc.keycode == KEY_LOOK_RIGHT)
 		a->steal.dirplyr += a->steal.rotspeed * a->steal.delta;
 	draw(a);
+//	printf("Cuadrante ángulo: |%f|\n", fmod(a->steal.anglray - FOV / 2, 6));
 	return (0);
 }
 

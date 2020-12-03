@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 13:54:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 08:32:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ void	init_struct(t_cub3d *a)
 	a->rayc.movespeed = 1;
 	a->rayc.rotspeed = 0.5;
 	
-	a->steal.modulo = 0.02;
+	a->steal.modulo = 0.002;//0,002
 	a->steal.dirplyr = 0.0;
-	a->steal.movspeed = 0.7;
+	a->steal.movspeed = 0.7;//0,7
 	a->steal.rotspeed = 0.7;
 	a->steal.lasttime = 0;
-	a->steal.delta = 0.7;
+	a->steal.delta = 0.15;
 }
 
 /*
