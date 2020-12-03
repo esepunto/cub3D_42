@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/03 11:37:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/03 14:45:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_window(t_cub3d *a)
 //	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, closed, a);
 	mlx_loop_hook(a->mlibx.mlx, &prueba, a);
-	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+//	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 //	mlx_destroy_image(a->mlibx.mlx, a->mlibx.img.img);
 	mlx_loop(a->mlibx.mlx);
 }
