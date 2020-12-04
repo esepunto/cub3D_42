@@ -6,18 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 14:03:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:33:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int		closed(t_cub3d *a)
-{
-	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
-	system("leaks cub3D");
-	exit(0);
-}
 
 void	gofront(t_cub3d *a)
 {
@@ -67,7 +60,7 @@ int		caress_key(int keycode, t_cub3d *a)
 {
 	a->steal.keycode = keycode;
 	if (a->steal.keycode == KEY_ESC)
-		closed(a);
+		close_window(a);
 	else if (a->steal.keycode == KEY_MOVE_FRONT)
 		gofront(a);
 	else if (a->steal.keycode == KEY_MOVE_BACK)
@@ -80,6 +73,6 @@ int		caress_key(int keycode, t_cub3d *a)
 		a->steal.dirplyr -= a->steal.rotspeed * a->steal.delta;
 	else if (a->steal.keycode == KEY_LOOK_RIGHT)
 		a->steal.dirplyr += a->steal.rotspeed * a->steal.delta;
-	draw(a);
+	throw_rays(a);
 	return (0);
 }

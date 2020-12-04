@@ -6,47 +6,16 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 14:13:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:30:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length + x * (a->mlibx.img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	draw_background(t_cub3d *a)
-{
-	int	x;
-	int	y;
-	
-	x = 0;
-	while (x < a->fconf.xrendersize)
-	{
-		y = 0;
-		while(y < a->fconf.yrendersize)
-		{
-			if (y < a->fconf.yrendersize / 2)
-				my_mlx_pixel_put(a, x, y, a->fconf.ceilcolor);
-			else if (y >= a->fconf.yrendersize / 2)
-				my_mlx_pixel_put(a, x, y, a->fconf.floorcolor);
-			y++;
-		}
-		x++;
-	}
-}
-
-
 void	calc_texture(t_cub3d *a)
 {
 	if (a->steal.xhit == 1 && a->steal.yhit == 1)
 		return ;
-	//	printf("nbray: |%d|\n", a->steal.nbr_ray);
 	if (a->steal.xhit == 1)
 	{
 		if (a->steal.quadrant == 4 || a->steal.quadrant == 1)
@@ -143,45 +112,38 @@ void	ifimpact(t_cub3d *a)
 	}
 }
 
-int		draw(t_cub3d *a)
+/*
+**  +*+*+*+* The raycast algorithm *+*+*+*+*
+**
+** 1. Trazar un rayo desde cada una de las columnas de la pantalla
+** 2. La posición inicial del rayo será la del jugador.
+** 3. Calculamos su ángulo inicial.
+** 4. Calculamos el incremento.
+** 5. Calcular el impacto.
+** 6. Calcular la distancia corregida del jugador al punto de colisión.
+** 7. Calcular la altura del muro.
+** 8. Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro
+**    (initwall) y donde hay que acabar (endwall).
+*/
+
+int		throw_rays(t_cub3d *a)
 {
 	draw_background(a);
-
-	//Trazar un rayo desde cada una de las columnas de la pantalla:
 	a->steal.nbr_ray = 0;
 	while (a->steal.nbr_ray < a->fconf.xrendersize)
 	{
-		//La posición inicial del rayo será la del jugador:
 		a->steal.xray = a->steal.xplyr;
 		a->steal.yray = a->steal.yplyr;
-
-		//Calculamos su ángulo inicial:
 		a->steal.anglray = (a->steal.dirplyr - FOV / 2.0) + a->steal.nbr_ray * (FOV / a->fconf.xrendersize);
-	
-		//Calculamos el incremento:
 		a->steal.xincrease = cos(a->steal.anglray) * a->steal.modulo;
 		a->steal.yincrease = sin(a->steal.anglray) * a->steal.modulo;
-
 		ifimpact(a);
-
-		//Calcular la distancia corregida del jugador al punto de colisión:
 		a->steal.distance = sqrt(pow(a->steal.xray - a->steal.xplyr, 2) + pow(a->steal.yray - a->steal.yplyr, 2) );
 		a->steal.distance = a->steal.distance * cos(a->steal.anglray - a->steal.dirplyr);
-
-		//Calcular la altura del muro:
 		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
-		
-		//Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro (initwall) y donde hay que acabar (endwall)
 		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
 		a->steal.endwall = (int)((float)(a->fconf.yrendersize) / 2.0 + a->steal.staturewall / 2);
-
-		double brush_on;
-		brush_on = a->steal.initwall;
-		while (brush_on < a->steal.endwall)
-		{
-			my_mlx_pixel_put(a, a->steal.nbr_ray, brush_on, a->steal.wallcolor);
-			brush_on++;
-		}
+		brush_wall(a);
 		a->steal.nbr_ray++;
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);

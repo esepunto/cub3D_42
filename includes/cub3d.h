@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:40:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:36:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,28 +138,20 @@ uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
-int				closed(t_cub3d *a);
+int				close_window(t_cub3d *a);
 
 void			my_mlx_pixel_put(t_cub3d *a, int x, int y, int color);
 void			draw_background(t_cub3d *a);
-
-/*
-void			draw_minimap(t_cub3d *a);
-void			put_pixel_minimap(int x, int y, t_cub3d *a, long color);
-void			draw_player(t_cub3d *a);
-void			draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int color);
-*/
+void			brush_wall(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
-int				draw(t_cub3d *a);
-int				teclado(int keycode, t_cub3d *a);
+int				throw_rays(t_cub3d *a);
 void			calc_texture(t_cub3d *a);
 void			calc_wallimpact(t_cub3d *a);
 void			gofront(t_cub3d *a);
 void			goback(t_cub3d *a);
 void			goright(t_cub3d *a);
 void			goleft(t_cub3d *a);
-
 
 int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
