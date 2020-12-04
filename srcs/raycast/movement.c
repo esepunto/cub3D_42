@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:34:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:00:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ void	goback(t_cub3d *a)
 
 void	goright(t_cub3d *a)
 {
-	a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+	a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
 	{
-		a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	}
 }
 
 void	goleft(t_cub3d *a)
 {
-	a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+	a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
 	{
-		a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
+		a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 		a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
 	}
 }
