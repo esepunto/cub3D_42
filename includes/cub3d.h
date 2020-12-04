@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:03:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:40:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,6 @@
 # define KEY_MOVE_RIGHT	2
 # define FOV			60 * M_PI / 180
 
-typedef struct	s_minimap
-{
-	int		sizecell;
-	int		xpix;
-	int		ypix;
-	int		xply;
-	int		yply;
-}				t_minimap;
-
-typedef struct	s_mouse_pos
-{
-	void	*win_ptr;
-	int		*x;
-	int		*y;
-}				t_mpos;
-
 typedef struct  s_data
 {
 	void	*img;
@@ -60,49 +44,8 @@ typedef struct	s_minilibx
 {
 	void	*mlx;
 	void	*win;
-//	void	*img;
-	t_mpos	mpos;
 	t_data	img;
 }				t_minilibx;
-
-typedef struct	s_raycasting
-{
-	int		keycode;
-	char	plyr;
-	int		ray;
-	double	xpos;
-	double	ypos;
-	double	xdir;
-	double	ydir;
-	double	xplane;
-	double	yplane;
-	double	time;
-	double	oldtime;
-	double	xcamera;
-//	double	ycamera;
-	double	xraydir;
-	double	yraydir;
-	int		xmap;
-	int		ymap;
-	double	xsidedist;
-	double	ysidedist;
-	double	xdeltadist;
-	double	ydeltadist;
-	double	perpwalldist;
-	int		xstep;
-	int		ystep;
-	int		hit;
-	int		side;
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-	double	frametime;
-	double	movespeed;
-	double	rotspeed;
-	double	xolddir;
-	double	yolddir;
-	double	xoldplane;
-}				t_raycast;
 
 typedef struct	s_map
 {
@@ -140,6 +83,7 @@ typedef struct s_lanzarayos
 	bool	xhit;
 	bool	yhit;
 	int		wallcolor;
+	int		keycode;
 }				t_lanzaray;
 
 
@@ -163,8 +107,6 @@ typedef struct	s_cub3d
 {
 	t_config	fconf;
 	t_minilibx	mlibx;
-	t_raycast	rayc;
-	t_minimap	minimap;
 	t_lanzaray	steal;
 }				t_cub3d;
 
@@ -197,24 +139,16 @@ uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				closed(t_cub3d *a);
-int				closemouse(t_cub3d *a);
-int				key_press(int keycode, t_cub3d *a);
-void			go_front(t_cub3d *a);
-void			go_back(t_cub3d *a);
-void			go_right(t_cub3d *a);
-void			go_left(t_cub3d *a);
-void			rotate_right(t_cub3d *a);
-void			rotate_left(t_cub3d *a);
 
 void			my_mlx_pixel_put(t_cub3d *a, int x, int y, int color);
 void			draw_background(t_cub3d *a);
 
-int				init_raycast(t_cub3d *a);
-
+/*
 void			draw_minimap(t_cub3d *a);
 void			put_pixel_minimap(int x, int y, t_cub3d *a, long color);
 void			draw_player(t_cub3d *a);
 void			draw_line(t_cub3d *a, int beginX, int beginY, int endX, int endY, int color);
+*/
 
 int				raycast(t_cub3d *a);
 int				draw(t_cub3d *a);

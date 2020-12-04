@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/01 18:18:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:29:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,9 @@ int		msg_err(char *error)
 
 void print_struct(t_cub3d *a)
 {
-	printf("key: %d\n", a->rayc.keycode);
+
 	printf("xrendersize: %d\n", a->fconf.xrendersize);
 	printf("yrendersize: %d\n", a->fconf.yrendersize);
-	printf("ray: %d\n", a->rayc.ray);
-	printf("xpos: %f - ", a->rayc.xpos);
-	printf("ypos: %f\n", a->rayc.ypos);
-	printf("xdir: %f - ", a->rayc.xdir);
-	printf("ydir: %f\n", a->rayc.ydir);
-	printf("xcamera: %f\n", a->rayc.xcamera);
-	printf("xmap: %d - ", a->rayc.xmap);
-	printf("ymap: %d\n", a->rayc.ymap);
-	printf("xplane: %f - ", a->rayc.xplane);
-	printf("yplane: %f\n", a->rayc.yplane);
-	printf("xraydir: %f - ", a->rayc.xraydir);
-	printf("yraydir: %f\n", a->rayc.yraydir);
-	printf("xsidedist: %f - ", a->rayc.xsidedist);
-	printf("ysidedist: %f\n", a->rayc.ysidedist);
-	printf("xdeltadist: %f - ", a->rayc.xdeltadist);
-	printf("ydeltadist: %f\n", a->rayc.ydeltadist);
-	printf("perpwalldist: %f\n", a->rayc.perpwalldist);
 	printf("angulo FOV: |%f|\n", FOV);
 	printf("color ceil: |%x|\n", a->fconf.ceilcolor);
 	printf("color floor: |%x|\n\n", a->fconf.floorcolor);

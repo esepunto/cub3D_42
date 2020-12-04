@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:03:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:20:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void		my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
+void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,7 +20,7 @@ void		my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		draw_background(t_cub3d *a)
+void	draw_background(t_cub3d *a)
 {
 	int	x;
 	int	y;
@@ -42,7 +42,7 @@ void		draw_background(t_cub3d *a)
 }
 
 
-void		calc_texture(t_cub3d *a)
+void	calc_texture(t_cub3d *a)
 {
 	if (a->steal.xhit == 1)
 	{
@@ -72,7 +72,7 @@ void		calc_texture(t_cub3d *a)
 **       |
 */
 
-void		calc_quadrant(t_cub3d *a)
+void	calc_quadrant(t_cub3d *a)
 {
 	double	val;
 
@@ -96,7 +96,7 @@ void		calc_quadrant(t_cub3d *a)
 ** of the ray is changed of cell in the last advance.
 */
 
-void		calc_wallimpact(t_cub3d *a)
+void	calc_wallimpact(t_cub3d *a)
 {
 	if ((int)a->steal.xray != (int)(a->steal.xray - a->steal.xincrease))
 		a->steal.xhit = 1;
@@ -123,7 +123,7 @@ void		calc_wallimpact(t_cub3d *a)
 **    Texture W on 3 and 4 quadrants.
 */
 
-void		ifimpact(t_cub3d *a)
+void	ifimpact(t_cub3d *a)
 {
 	int hit = 0;
 	while (hit == 0)
@@ -140,7 +140,7 @@ void		ifimpact(t_cub3d *a)
 	}
 }
 
-int			draw(t_cub3d *a)
+int		draw(t_cub3d *a)
 {
 	draw_background(a);
 

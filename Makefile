@@ -2,8 +2,6 @@ NAME	=	cub3D
 
 CC		=	gcc -Wall -Wextra -Werror -g
 
-#SRCS	=	srcs/*.c
-
 SRCS	=	cub3d.c \
 			srcs/file_config/readnsave_fconfig.c \
 			srcs/file_config/params/manage_params.c \
@@ -12,36 +10,9 @@ SRCS	=	cub3d.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/maze_algorithm.c \
 			srcs/window/manage_window.c \
-			srcs/window/keypress.c \
 			srcs/raycast/raycast.c \
 			srcs/raycast/movement.c \
-			srcs/raycast/iamlost.c \
-			srcs/minimap/create_minimap.c \
 			srcs/utils.c 
-
-#MAIN	=	./samples_main/hook.c
-#MAIN	=	./samples_main/main_split.c
-#MAIN	=	./srcs/2read_map/read_map.c
-#MAIN	=	./samples_main/perror.c
-#MAIN	=	./samples_main/structs_edramire.c
-#MAIN	=	./samples_main/padding_structs.c
-#MAIN	=	./samples_main/rgb_to_hex.c
-#MAIN	=	./samples_main/main_correccion.c
-#MAIN	=	./samples_main/main_printf.c
-#MAIN	=	./samples_main/gccc.c
-#MAIN	=	./samples_main/gnl_main.c
-#MAIN	=	./samples_main/primeros_pasosA.c
-#MAIN	=	./samples_main/primeros_pasosB.c
-#MAIN	=	./samples_main/endian.c
-#MAIN	=	./samples_main/event_main.c //No funciona aún
-#MAIN	=	./samples_main/hook.c #Error
-#MAIN	=	./samples_main/img_mlx.c
-#MAIN	=	./samples_main/rgb_to_int.c
-#MAIN	=	./samples_main/put_pixels.c
-#MAIN	=	./samples_main/draw_line.c
-#MAIN	=	./samples_main/image1.c
-#MAIN	=	./samples_main/main.c
-#MAIN	=	./samples_main/main2.c
 
 LIBS	=	libft/libft.a \
 			mlx/libmlx.a \
