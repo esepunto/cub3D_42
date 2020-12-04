@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/03 14:42:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 08:31:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void		draw_ceilling_win(t_cub3d *a)
 		{
 			if (y < a->fconf.yrendersize / 2)
 				my_mlx_pixel_put(a, x, y, a->fconf.ceilcolor);
-			//	a->mlibx.img.addr[y * a->fconf.yrendersize + x] = a->fconf.ceilcolor;
-			else// if (x > a->fconf.xrendersize / 2)
+			else if (y >= a->fconf.yrendersize / 2)
 				my_mlx_pixel_put(a, x, y, a->fconf.floorcolor);
-				//a->mlibx.img.addr[y * a->fconf.yrendersize + x] = a->fconf.floorcolor;
 			y++;
 		}
 		x++;
@@ -91,7 +89,7 @@ void		calc_quadrant(t_cub3d *a)
 		a->steal.quadrant = 3;
 	if ((val >=4.5 && val < 6) || (val >= -1.5 && val < -0))
 		a->steal.quadrant = 4;
-	printf("Ángulo: |%f| - Cuadrante: |%d|\n", val, a->steal.quadrant);
+//	printf("Ángulo: |%f| - Cuadrante: |%d|\n", val, a->steal.quadrant);
 	
 }
 
@@ -141,7 +139,7 @@ int			draw(t_cub3d *a)
 	
 		//Calcular la trayectoria del rayo, paso a paso:
 		int knock = 0;
-		while (knock <= 0)
+		while (knock == 0)
 		{
 			//Calcular un nuevo punto de la trayectoria:
 			a->steal.xray += a->steal.xincrease;
@@ -183,7 +181,6 @@ int			draw(t_cub3d *a)
 
 		//Calcular la altura del muro:
 		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
-//		a->steal.staturewall = a->fconf.yrendersize / a->steal.distance;
 		
 		//Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro (initwall) y donde hay que acabar (endwall)
 		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
@@ -204,9 +201,11 @@ int			draw(t_cub3d *a)
 */	
 		double b;
 		b = a->steal.initwall;
-		while (b++ < a->steal.endwall)
-			my_mlx_pixel_put(a, a->steal.nbr_ray, b, 0x50FF1010);
-//			mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, a->steal.nbr_ray, b, 0x50FF1010);
+		while (b < a->steal.endwall)
+		{
+			my_mlx_pixel_put(a, a->steal.nbr_ray, b, 0x40343B);
+			b++;
+		}
 	
 /*		//Actualizar la variable lastTime con el tiempo actual
 		lastTime = millis();

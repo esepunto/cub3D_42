@@ -4,8 +4,8 @@ EA ./wolftex/wood.png
 WE ./wolftex/wood.png
 R 1000 500
 S ./wolftex/barrel.png
-C 248,199,42
-F 191,103,36
+F 28,189,42
+C 134,231,236
 
 
 
