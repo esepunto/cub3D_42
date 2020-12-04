@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:20:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:13:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	draw_background(t_cub3d *a)
 
 void	calc_texture(t_cub3d *a)
 {
+	if (a->steal.xhit == 1 && a->steal.yhit == 1)
+		return ;
+	//	printf("nbray: |%d|\n", a->steal.nbr_ray);
 	if (a->steal.xhit == 1)
 	{
 		if (a->steal.quadrant == 4 || a->steal.quadrant == 1)
@@ -51,7 +54,7 @@ void	calc_texture(t_cub3d *a)
 		else if (a->steal.quadrant == 2 || a->steal.quadrant == 3)
 			a->steal.wallcolor = 0x40583B;//South
 	}
-	if (a->steal.yhit == 1)
+	else if (a->steal.yhit == 1)
 	{
 		if (a->steal.quadrant == 1 || a->steal.quadrant == 2)
 			a->steal.wallcolor = 0x10343B;//East
