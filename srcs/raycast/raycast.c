@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 08:31:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:03:52 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
+void		my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,30 +20,7 @@ void my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-/*
-void		draw_ceilling(t_cub3d *a)
-{
-	int	x;
-	int	y;
-	
-	x = 0;
-	while(x <= a->fconf.xrendersize)
-	{
-		y = 0;
-		while(y <= a->fconf.yrendersize)
-		{
-			if (y <= a->fconf.yrendersize / 2)
-				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.ceilcolor);
-			else if (y > a->fconf.yrendersize / 2)
-				mlx_pixel_put(a->mlibx.mlx, a->mlibx.win, x, y, a->fconf.floorcolor);
-			y++;
-		}
-		x++;
-	}
-}
-*/
-
-void		draw_ceilling_win(t_cub3d *a)
+void		draw_background(t_cub3d *a)
 {
 	int	x;
 	int	y;
@@ -64,6 +41,25 @@ void		draw_ceilling_win(t_cub3d *a)
 	}
 }
 
+
+void		calc_texture(t_cub3d *a)
+{
+	if (a->steal.xhit == 1)
+	{
+		if (a->steal.quadrant == 4 || a->steal.quadrant == 1)
+			a->steal.wallcolor = 0x40343B;//North
+		else if (a->steal.quadrant == 2 || a->steal.quadrant == 3)
+			a->steal.wallcolor = 0x40583B;//South
+	}
+	if (a->steal.yhit == 1)
+	{
+		if (a->steal.quadrant == 1 || a->steal.quadrant == 2)
+			a->steal.wallcolor = 0x10343B;//East
+		else if (a->steal.quadrant == 3 || a->steal.quadrant == 4)
+			a->steal.wallcolor = 0x4034aB;//West
+	}
+}
+
 /*
 ** Asign to every ray that hits a wall
 ** its quadrant's angle (1, 2, 3 or 4).
@@ -80,47 +76,73 @@ void		calc_quadrant(t_cub3d *a)
 {
 	double	val;
 
-	val = fmod(a->steal.anglray, 6);
-	if ((val >=0 && val < 1.5) || (val >= -6 && val < -4.5))
+	val = fmod(a->steal.anglray, M_PI * 2);
+	if ((val >= 0 && val < M_PI_2) || (val >= - (M_PI * 2) && val < - M_PI_2 * 3))
 		a->steal.quadrant = 1;
-	if ((val >=1.5 && val < 3) || (val >= -4.5 && val < -3))
+	if ((val >= M_PI_2 && val < M_PI) || (val >= - (M_PI_2 * 3) && val < -M_PI))
 		a->steal.quadrant = 2;
-	if ((val >=3 && val < 4.5) || (val >= -3 && val < -1.5))
+	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= - M_PI && val < -M_PI_2))
 		a->steal.quadrant = 3;
-	if ((val >=4.5 && val < 6) || (val >= -1.5 && val < -0))
+	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= - M_PI_2 && val < -0))
 		a->steal.quadrant = 4;
-//	printf("Ángulo: |%f| - Cuadrante: |%d|\n", val, a->steal.quadrant);
-	
+}
+
+/*
+** To calc where coodinate (x or y) the impact is.
+** xhit = 1, if immpact on x coordenate.
+** yhit = 1, if immpact on y coordenate.
+** Of course, every colision point have 2 ccordenates. When I say
+** that impact on x coordenate, what I mean is that the x coordenate 
+** of the ray is changed of cell in the last advance.
+*/
+
+void		calc_wallimpact(t_cub3d *a)
+{
+	if ((int)a->steal.xray != (int)(a->steal.xray - a->steal.xincrease))
+		a->steal.xhit = 1;
+	else
+		a->steal.xhit = 0;
+	if ((int)a->steal.yray != (int)(a->steal.yray - a->steal.yincrease))
+		a->steal.yhit = 1;
+	else
+		a->steal.yhit = 0;
 }
 
 /*
 ** Every ray that hits a wall impact on x,y coordenates.
-** To calculate the texture of the wall impacted by the ray,
-** we need to know 2 data:
-**   1. The exactly x or y coordenate when ray impacts (no decimals coordenate)
+** To calculate the texture of the wall impacted by the ray, we
+** need to know 2 data:
+**   1. The exactly x or y coordenate when ray impacts.
 **   2. The quadrant of the ray's angle.
 ** So:
-** Impact on x coordenate:
+** If impact on x coordenate:
 **    Texture N on 1 and 4 quadrants.
 **    Texture S on 2 and 3 quadrants.
-** Impact on y coordenate:
+** If impact on y coordenate:
 **    Texture E on 1 and 2 quadrants.
 **    Texture W on 3 and 4 quadrants.
 */
 
-void		calc_texture(t_cub3d *a)
+void		ifimpact(t_cub3d *a)
 {
-	calc_quadrant(a);
+	int hit = 0;
+	while (hit == 0)
+	{
+		a->steal.xray += a->steal.xincrease;
+		a->steal.yray += a->steal.yincrease;
+		if (a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
+		{
+			calc_wallimpact(a);
+			calc_quadrant(a);
+			calc_texture(a);
+			hit = 1;
+		}
+	}
 }
 
 int			draw(t_cub3d *a)
 {
-	//Calculamos el delta time:
-	//	a->steal.delta = millis() - a->steal.lasttime;//Imposible a priori: no puedo usar librería de tiempo
-	
-	//Pintar el cielo y el suelo:
-//	draw_ceilling(a);
-	draw_ceilling_win(a);
+	draw_background(a);
 
 	//Trazar un rayo desde cada una de las columnas de la pantalla:
 	a->steal.nbr_ray = 0;
@@ -136,44 +158,8 @@ int			draw(t_cub3d *a)
 		//Calculamos el incremento:
 		a->steal.xincrease = cos(a->steal.anglray) * a->steal.modulo;
 		a->steal.yincrease = sin(a->steal.anglray) * a->steal.modulo;
-	
-		//Calcular la trayectoria del rayo, paso a paso:
-		int knock = 0;
-		while (knock == 0)
-		{
-			//Calcular un nuevo punto de la trayectoria:
-			a->steal.xray += a->steal.xincrease;
-			a->steal.yray += a->steal.yincrease;
-			
-//			printf("yray: |%f| - xincrease: |%f|\n", a->steal.yray, a->steal.xincrease);
-//			printf("xhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
-			
 
-			//Si el rayo sale del mapa, o si colisiona con un muro, salimos del bucle while: // ft_strlen(a->fconf.map.maze[a->steal.yray])
-			if (a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
-			{
-/*				if (fmod(a->steal.xray, a->steal.xincrease) == 0)
-				{
-					a->steal.xhit = 1;
-					printf("xray: |%f| - xincrease: |%f|\n", a->steal.xray, a->steal.xincrease);
-					printf("xhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
-				}
-				else
-					a->steal.xhit = 0;
-				if (fmod(a->steal.yray, a->steal.yincrease) == 0)
-				{
-					a->steal.yhit = 1;
-					printf("yray: |%f| - yincrease: |%f|\n", a->steal.yray, a->steal.yincrease);
-					printf("yhit: |%d| - yhit: |%d|\n", a->steal.xhit, a->steal.yhit);
-				}
-				else
-					a->steal.yhit = 0;
-
-*/				knock = 1;
-			}
-		}
-		calc_texture(a);
-
+		ifimpact(a);
 
 		//Calcular la distancia corregida del jugador al punto de colisión:
 		a->steal.distance = sqrt(pow(a->steal.xray - a->steal.xplyr, 2) + pow(a->steal.yray - a->steal.yplyr, 2) );
@@ -186,91 +172,15 @@ int			draw(t_cub3d *a)
 		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
 		a->steal.endwall = (int)((float)(a->fconf.yrendersize) / 2.0 + a->steal.staturewall / 2);
 
-		/*
-		** Antes de dibujar la línea vertical hay que elegir una tonalidad de color,
-		** que vendrá dada por la distancia.
-		** Para ello se utiliza la función map() de processing:
-		*/
-
-		//Calcular una tonalidad para la columna, que dependerá de la distancia (cuanto más lejos, más oscuro)
-/*		float tonalidad = map(min(distancia, 7), 0, 7, 255, 40);
-		stroke(int(tonalidad));
-
-		//Dibujar la línea vertical:
-		printf("punto alto muro: |%d| - punto bajo muro : |%d|\n", a->steal.initwall, a->steal.endwall);
-*/	
-		double b;
-		b = a->steal.initwall;
-		while (b < a->steal.endwall)
+		double brush_on;
+		brush_on = a->steal.initwall;
+		while (brush_on < a->steal.endwall)
 		{
-			my_mlx_pixel_put(a, a->steal.nbr_ray, b, 0x40343B);
-			b++;
+			my_mlx_pixel_put(a, a->steal.nbr_ray, brush_on, a->steal.wallcolor);
+			brush_on++;
 		}
-	
-/*		//Actualizar la variable lastTime con el tiempo actual
-		lastTime = millis();
-*/		a->steal.nbr_ray++;
+		a->steal.nbr_ray++;
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);
 }
-
-//Controles del jugador:
-int			teclado(int keycode, t_cub3d *a)
-{
-	a->rayc.keycode = keycode;
-//	printf("keycode: |%d|\n", keycode);
-	//Moverse hacia delante:
-	if (a->rayc.keycode == KEY_ESC)
-		closed(a);
-	else if (a->rayc.keycode == KEY_MOVE_FRONT)
-	{
-		a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
-		{
-			a->steal.xplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-			a->steal.yplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		}
-	}
-	else if (a->rayc.keycode == KEY_MOVE_BACK)
-	{
-		a->steal.xplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		a->steal.yplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
-		{
-			a->steal.xplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-			a->steal.yplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		}
-	}
-	else if (a->rayc.keycode == KEY_MOVE_RIGHT)
-	{
-		a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
-		{
-			a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-			a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		}
-	}
-	else if (a->rayc.keycode == KEY_MOVE_LEFT)
-	{
-		a->steal.xplyr -= sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		a->steal.yplyr -= cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		if (a->fconf.map.maze[(int)a->steal.yplyr][(int)a->steal.xplyr] == '1')
-		{
-			a->steal.xplyr += sin(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-			a->steal.yplyr += cos(a->steal.dirplyr) * a->steal.movspeed * a->steal.delta;
-		}
-	}
-	else if (a->rayc.keycode == KEY_LOOK_LEFT)
-		a->steal.dirplyr -= a->steal.rotspeed * a->steal.delta;
-	else if (a->rayc.keycode == KEY_LOOK_RIGHT)
-		a->steal.dirplyr += a->steal.rotspeed * a->steal.delta;
-	draw(a);
-//	printf("Cuadrante ángulo: |%f|\n", fmod(a->steal.anglray - FOV / 2, 6));
-	return (0);
-}
-
-
-
