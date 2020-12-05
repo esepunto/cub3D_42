@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   brush_window.c                                     :+:      :+:    :+:   */
+/*   vangoghs_turn.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 14:28:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 08:57:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
+void	brushstroke(t_cub3d *a, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,34 +20,19 @@ void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	draw_background(t_cub3d *a)
+void	pointillism(t_cub3d *a)
 {
-	int	x;
-	int	y;
+	double point;
 	
-	x = 0;
-	while (x < a->fconf.xrendersize)
+	point = 0;
+	while (point < a->fconf.yrendersize)
 	{
-		y = 0;
-		while(y < a->fconf.yrendersize)
-		{
-			if (y < a->fconf.yrendersize / 2)
-				my_mlx_pixel_put(a, x, y, a->fconf.ceilcolor);
-			else if (y >= a->fconf.yrendersize / 2)
-				my_mlx_pixel_put(a, x, y, a->fconf.floorcolor);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	brush_wall(t_cub3d *a)
-{
-	double brush_on;
-	brush_on = a->steal.initwall;
-	while (brush_on < a->steal.endwall)
-	{
-		my_mlx_pixel_put(a, a->steal.nbr_ray, brush_on, a->steal.wallcolor);
-		brush_on++;
+		if (point < a->rayc.initwall)
+			brushstroke(a, a->rayc.nbr_ray, point, a->fconf.ceilcolor);
+		else if (point < a->rayc.endwall)
+			brushstroke(a, a->rayc.nbr_ray, point, a->rayc.wallcolor);
+		else
+			brushstroke(a, a->rayc.nbr_ray, point, a->fconf.floorcolor);
+		point++;
 	}
 }

@@ -10,7 +10,7 @@ SRCS	=	cub3d.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/maze_algorithm.c \
 			srcs/window/manage_window.c \
-			srcs/window/brush_window.c \
+			srcs/window/vangoghs_turn.c \
 			srcs/raycast/raycast.c \
 			srcs/raycast/movement.c \
 			srcs/utils.c 

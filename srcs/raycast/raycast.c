@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 14:30:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 09:03:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	calc_texture(t_cub3d *a)
 {
-	if (a->steal.xhit == 1 && a->steal.yhit == 1)
+	if (a->rayc.xhit == 1 && a->rayc.yhit == 1)
 		return ;
-	if (a->steal.xhit == 1)
+	if (a->rayc.xhit == 1)
 	{
-		if (a->steal.quadrant == 4 || a->steal.quadrant == 1)
-			a->steal.wallcolor = 0x40343B;//North
-		else if (a->steal.quadrant == 2 || a->steal.quadrant == 3)
-			a->steal.wallcolor = 0x40583B;//South
+		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
+			a->rayc.wallcolor = 0x40343B;
+		else if (a->rayc.quadrant == 2 || a->rayc.quadrant == 3)
+			a->rayc.wallcolor = 0x40583B;
 	}
-	else if (a->steal.yhit == 1)
+	else if (a->rayc.yhit == 1)
 	{
-		if (a->steal.quadrant == 1 || a->steal.quadrant == 2)
-			a->steal.wallcolor = 0x10343B;//East
-		else if (a->steal.quadrant == 3 || a->steal.quadrant == 4)
-			a->steal.wallcolor = 0x4034aB;//West
+		if (a->rayc.quadrant == 1 || a->rayc.quadrant == 2)
+			a->rayc.wallcolor = 0x10343B;
+		else if (a->rayc.quadrant == 3 || a->rayc.quadrant == 4)
+			a->rayc.wallcolor = 0x4034aB;
 	}
 }
 
@@ -48,15 +48,15 @@ void	calc_quadrant(t_cub3d *a)
 {
 	double	val;
 
-	val = fmod(a->steal.anglray, M_PI * 2);
-	if ((val >= 0 && val < M_PI_2) || (val >= - (M_PI * 2) && val < - M_PI_2 * 3))
-		a->steal.quadrant = 1;
-	if ((val >= M_PI_2 && val < M_PI) || (val >= - (M_PI_2 * 3) && val < -M_PI))
-		a->steal.quadrant = 2;
-	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= - M_PI && val < -M_PI_2))
-		a->steal.quadrant = 3;
-	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= - M_PI_2 && val < -0))
-		a->steal.quadrant = 4;
+	val = fmod(a->rayc.anglray, M_PI * 2);
+	if ((val >= 0 && val < M_PI_2) || (val >= -(M_PI * 2) && val < -M_PI_2 * 3))
+		a->rayc.quadrant = 1;
+	if ((val >= M_PI_2 && val < M_PI) || (val >= -(M_PI_2 * 3) && val < -M_PI))
+		a->rayc.quadrant = 2;
+	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= -M_PI && val < -M_PI_2))
+		a->rayc.quadrant = 3;
+	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= -M_PI_2 && val < -0))
+		a->rayc.quadrant = 4;
 }
 
 /*
@@ -64,20 +64,20 @@ void	calc_quadrant(t_cub3d *a)
 ** xhit = 1, if immpact on x coordenate.
 ** yhit = 1, if immpact on y coordenate.
 ** Of course, every colision point have 2 ccordenates. When I say
-** that impact on x coordenate, what I mean is that the x coordenate 
+** that impact on x coordenate, what I mean is that the x coordenate
 ** of the ray is changed of cell in the last advance.
 */
 
 void	calc_wallimpact(t_cub3d *a)
 {
-	if ((int)a->steal.xray != (int)(a->steal.xray - a->steal.xincrease))
-		a->steal.xhit = 1;
+	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
+		a->rayc.xhit = 1;
 	else
-		a->steal.xhit = 0;
-	if ((int)a->steal.yray != (int)(a->steal.yray - a->steal.yincrease))
-		a->steal.yhit = 1;
+		a->rayc.xhit = 0;
+	if ((int)a->rayc.yray != (int)(a->rayc.yray - a->rayc.yincrease))
+		a->rayc.yhit = 1;
 	else
-		a->steal.yhit = 0;
+		a->rayc.yhit = 0;
 }
 
 /*
@@ -97,12 +97,14 @@ void	calc_wallimpact(t_cub3d *a)
 
 void	ifimpact(t_cub3d *a)
 {
-	int hit = 0;
+	int hit;
+
+	hit = 0;
 	while (hit == 0)
 	{
-		a->steal.xray += a->steal.xincrease;
-		a->steal.yray += a->steal.yincrease;
-		if (a->fconf.map.maze[(int)a->steal.yray][(int)a->steal.xray] == '1')
+		a->rayc.xray += a->rayc.xincrease;
+		a->rayc.yray += a->rayc.yincrease;
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
 			calc_quadrant(a);
@@ -115,36 +117,42 @@ void	ifimpact(t_cub3d *a)
 /*
 **  +*+*+*+* The raycast algorithm *+*+*+*+*
 **
-** 1. Trazar un rayo desde cada una de las columnas de la pantalla
-** 2. La posición inicial del rayo será la del jugador.
-** 3. Calculamos su ángulo inicial.
-** 4. Calculamos el incremento.
-** 5. Calcular el impacto.
-** 6. Calcular la distancia corregida del jugador al punto de colisión.
-** 7. Calcular la altura del muro.
-** 8. Calcular el píxel de la pantalla donde hay que empezar a dibujar el muro
-**    (initwall) y donde hay que acabar (endwall).
+** 1. Throw a ray from each of the columns on the screen.
+** 2. The ray's init position is the player's position (lines 135-136).
+** 3. Calculate its initial angle (line 137).
+** 4. Calc the increment (lines 138-139).
+** 5. Calc the impact (line 140).
+** 6. Calc the corrected player's distance to the hit point (lines 141-142).
+** 7. Calc the height of the wall (line 143).
+** 8. Calc the screen pixel where we should start drawing the wall
+**    (initwall) and where to end up (endwall) (lines 144-145).
+** 9. Save on an image the picture to paint (line 146).
 */
 
 int		throw_rays(t_cub3d *a)
 {
-	draw_background(a);
-	a->steal.nbr_ray = 0;
-	while (a->steal.nbr_ray < a->fconf.xrendersize)
+	a->rayc.nbr_ray = 0;
+	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
-		a->steal.xray = a->steal.xplyr;
-		a->steal.yray = a->steal.yplyr;
-		a->steal.anglray = (a->steal.dirplyr - FOV / 2.0) + a->steal.nbr_ray * (FOV / a->fconf.xrendersize);
-		a->steal.xincrease = cos(a->steal.anglray) * a->steal.modulo;
-		a->steal.yincrease = sin(a->steal.anglray) * a->steal.modulo;
+		a->rayc.xray = a->rayc.xplyr;
+		a->rayc.yray = a->rayc.yplyr;
+		a->rayc.anglray = (a->rayc.dirplyr - FOV / 2.0)
+				+ a->rayc.nbr_ray * (FOV / a->fconf.xrendersize);
+		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
+		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);
-		a->steal.distance = sqrt(pow(a->steal.xray - a->steal.xplyr, 2) + pow(a->steal.yray - a->steal.yplyr, 2) );
-		a->steal.distance = a->steal.distance * cos(a->steal.anglray - a->steal.dirplyr);
-		a->steal.staturewall = fmin(a->fconf.yrendersize, a->fconf.yrendersize / a->steal.distance);
-		a->steal.initwall = (int)((float)(a->fconf.yrendersize) / 2.0 - a->steal.staturewall / 2);
-		a->steal.endwall = (int)((float)(a->fconf.yrendersize) / 2.0 + a->steal.staturewall / 2);
-		brush_wall(a);
-		a->steal.nbr_ray++;
+		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
+				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
+		a->rayc.distance = a->rayc.distance * cos(a->rayc.anglray
+				- a->rayc.dirplyr);
+		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+				a->fconf.yrendersize / a->rayc.distance);
+		a->rayc.initwall = (int)((float)(a->fconf.yrendersize) / 2.0
+				- a->rayc.staturewall / 2);
+		a->rayc.endwall = (int)((float)(a->fconf.yrendersize) / 2.0
+				+ a->rayc.staturewall / 2);
+		pointillism(a);
+		a->rayc.nbr_ray++;
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);

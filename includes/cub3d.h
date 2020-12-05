@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 14:36:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 09:07:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ typedef struct	s_map
 	int		nbrlines;
 }				t_map;
 
-typedef struct s_lanzarayos
+typedef struct s_raycast
 {
 	double	modulo;
 	double	xplyr;
 	double	yplyr;
 	double	dirplyr;
-	double	movspeed;
+	double	rush;
 	double	rotspeed;
 	double	lasttime;
 	double	delta;
@@ -84,7 +84,7 @@ typedef struct s_lanzarayos
 	bool	yhit;
 	int		wallcolor;
 	int		keycode;
-}				t_lanzaray;
+}				t_raycast;
 
 
 typedef struct	s_readconfig
@@ -107,7 +107,7 @@ typedef struct	s_cub3d
 {
 	t_config	fconf;
 	t_minilibx	mlibx;
-	t_lanzaray	steal;
+	t_raycast	rayc;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -140,9 +140,8 @@ void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-void			my_mlx_pixel_put(t_cub3d *a, int x, int y, int color);
-void			draw_background(t_cub3d *a);
-void			brush_wall(t_cub3d *a);
+void			brushstroke(t_cub3d *a, int x, int y, int color);
+void			pointillism(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
 int				throw_rays(t_cub3d *a);
