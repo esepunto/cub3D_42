@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 09:03:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:18:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ int		throw_rays(t_cub3d *a)
 	{
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
-		a->rayc.anglray = (a->rayc.dirplyr - FOV / 2.0)
-				+ a->rayc.nbr_ray * (FOV / a->fconf.xrendersize);
+		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
+				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);

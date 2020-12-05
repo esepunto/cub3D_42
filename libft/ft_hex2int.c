@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 10:27:01 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:33:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:20:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ uint32_t	ft_hex2int(char *hex)
 {
 	uint32_t	val;
 	uint8_t		byte;
-	
+
 	val = 0;
 	while (*hex)
 	{
-		byte = *hex++; 
+		byte = *hex++;
 		if (byte >= '0' && byte <= '9')
 			byte = byte - '0';
-		else if (byte >= 'a' && byte <='f')
+		else if (byte >= 'a' && byte <= 'f')
 			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <='F')
+		else if (byte >= 'A' && byte <= 'F')
 			byte = byte - 'A' + 10;
 		val = (val << 4) | (byte & 0xF);
 	}

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/04 13:29:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:18:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int		msg_err(char *error)
 	exit(0);
 }
 
-void print_struct(t_cub3d *a)
+void	print_struct(t_cub3d *a)
 {
 
 	printf("xrendersize: %d\n", a->fconf.xrendersize);
 	printf("yrendersize: %d\n", a->fconf.yrendersize);
-	printf("angulo FOV: |%f|\n", FOV);
+	printf("angulo FOV: |%f|\n", a->rayc.fov);
 	printf("color ceil: |%x|\n", a->fconf.ceilcolor);
 	printf("color floor: |%x|\n\n", a->fconf.floorcolor);
 }
@@ -55,7 +55,7 @@ void	print_fconfig(t_cub3d *a)
 		printf("linea %d: %s\n", i, a->fconf.map.maze[i]);
 		i++;
 	}
-	i= 0;
+	i = 0;
 	while (i <= 7 && a->fconf.wall_texture[i])
 	{
 		printf("TEXTURE[%d]:  |%s|\n", i, a->fconf.wall_texture[i]);
@@ -73,4 +73,3 @@ void	print_fconfig(t_cub3d *a)
 	printf("resY: %d\n", a->fconf.yrendersize);
 	printf("\n********** FIN IMPRESION ***********\n\n\n\n\n\n");
 }
-

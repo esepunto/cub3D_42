@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 09:07:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:16:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@
 # define KEY_MOVE_BACK	1
 # define KEY_MOVE_LEFT	0
 # define KEY_MOVE_RIGHT	2
-# define FOV			60 * M_PI / 180
 
-typedef struct  s_data
+typedef struct	s_data
 {
 	void	*img;
 	char	*addr;
@@ -57,7 +56,7 @@ typedef struct	s_map
 	int		nbrlines;
 }				t_map;
 
-typedef struct s_raycast
+typedef struct	s_raycast
 {
 	double	modulo;
 	double	xplyr;
@@ -70,6 +69,7 @@ typedef struct s_raycast
 	double	xray;
 	double	yray;
 	double	anglray;
+	double	fov;
 	int		quadrant;
 	double	xincrease;
 	double	yincrease;
@@ -85,7 +85,6 @@ typedef struct s_raycast
 	int		wallcolor;
 	int		keycode;
 }				t_raycast;
-
 
 typedef struct	s_readconfig
 {
