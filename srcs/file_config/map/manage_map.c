@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 08:57:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 12:12:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	forbidd_chr(char c)
 /*
 **  Count number of players.
 **  Save position and direction of player.
+**  If c == E, dur = 0.
 */
 
 int		nbr_plyrs(int i, int j, t_cub3d *a)
@@ -42,13 +43,11 @@ int		nbr_plyrs(int i, int j, t_cub3d *a)
 		a->rayc.xplyr = j;
 		a->rayc.yplyr = i;
 		if (c == 'N')
-			a->rayc.dirplyr -= 0;
+			a->rayc.dirplyr -= M_PI_2;
 		if (c == 'S')
-			a->rayc.dirplyr -= 1.5;
+			a->rayc.dirplyr += M_PI_2;
 		if (c == 'W')
-			a->rayc.dirplyr += 3.0;
-		if (c == 'E')
-			a->rayc.dirplyr += 1.5;
+			a->rayc.dirplyr += M_PI;
 		return (1);
 	}
 	else

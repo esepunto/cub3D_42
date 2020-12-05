@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:16:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:27:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-# define KEY_ESC		53
-# define KEY_LOOK_RIGHT	124
-# define KEY_LOOK_LEFT	123
-# define KEY_MOVE_FRONT	13
-# define KEY_MOVE_BACK	1
-# define KEY_MOVE_LEFT	0
-# define KEY_MOVE_RIGHT	2
+# define KEY_ESC			53
+# define KEY_ROTATE_RIGHT	124
+# define KEY_ROTATE_LEFT	123
+# define KEY_MOVE_FRONT		13
+# define KEY_MOVE_BACK		1
+# define KEY_MOVE_LEFT		0
+# define KEY_MOVE_RIGHT		2
 
 typedef struct	s_data
 {

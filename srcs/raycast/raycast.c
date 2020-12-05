@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:18:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 12:05:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ifimpact(t_cub3d *a)
 		a->rayc.yray += a->rayc.yincrease;
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
+//			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
 			calc_wallimpact(a);
 			calc_quadrant(a);
 			calc_texture(a);
@@ -136,6 +137,10 @@ int		throw_rays(t_cub3d *a)
 	{
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
+		printf("x - int(x): %f\n", a->rayc.xray - (int)a->rayc.xray);
+		printf("y - int(y): %f\n", a->rayc.yray - (int)a->rayc.yray);
+		printf("x: %f\n", a->rayc.xray);
+		printf("y: %f\n\n", a->rayc.yray);
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
@@ -143,8 +148,8 @@ int		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
 				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
-		a->rayc.distance = a->rayc.distance * cos(a->rayc.anglray
-				- a->rayc.dirplyr);
+		a->rayc.distance = a->rayc.distance
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,
 				a->fconf.yrendersize / a->rayc.distance);
 		a->rayc.initwall = (int)((float)(a->fconf.yrendersize) / 2.0

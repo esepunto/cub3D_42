@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 09:07:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 10:27:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int		caress_key(int keycode, t_cub3d *a)
 		goright(a);
 	else if (a->rayc.keycode == KEY_MOVE_LEFT)
 		goleft(a);
-	else if (a->rayc.keycode == KEY_LOOK_LEFT)
+	else if (a->rayc.keycode == KEY_ROTATE_LEFT)
 		a->rayc.dirplyr -= a->rayc.rotspeed * a->rayc.delta;
-	else if (a->rayc.keycode == KEY_LOOK_RIGHT)
+	else if (a->rayc.keycode == KEY_ROTATE_RIGHT)
 		a->rayc.dirplyr += a->rayc.rotspeed * a->rayc.delta;
 	throw_rays(a);
 	return (0);
