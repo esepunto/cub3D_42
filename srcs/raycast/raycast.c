@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 12:05:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/05 14:41:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,28 @@ void	calc_wallimpact(t_cub3d *a)
 **    Texture W on 3 and 4 quadrants.
 */
 
+/*
+void	ifimpact(t_cub3d *a)
+{
+	int hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		a->rayc.xray += a->rayc.xincrease;
+		a->rayc.yray += a->rayc.yincrease;
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+		{
+//			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
+			calc_wallimpact(a);
+			calc_quadrant(a);
+			calc_texture(a);
+			hit = 1;
+		}
+	}
+}
+*/
+
 void	ifimpact(t_cub3d *a)
 {
 	int hit;
@@ -137,10 +159,46 @@ int		throw_rays(t_cub3d *a)
 	{
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
-		printf("x - int(x): %f\n", a->rayc.xray - (int)a->rayc.xray);
-		printf("y - int(y): %f\n", a->rayc.yray - (int)a->rayc.yray);
-		printf("x: %f\n", a->rayc.xray);
-		printf("y: %f\n\n", a->rayc.yray);
+		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
+				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
+
+
+
+		a->rayc.xray += cos(a->rayc.anglray);
+		a->rayc.yray += sin(a->rayc.anglray);
+		a->rayc.xincrease = cos(a->rayc.anglray) / (a->fconf.yrendersize / a->fconf.map.nbrlines);
+		a->rayc.yincrease = sin(a->rayc.anglray) / (a->fconf.yrendersize / a->fconf.map.nbrlines);
+
+//a->minimap.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
+		
+		ifimpact(a);
+
+		//Distania = cos(angle)/xray - x pos)
+		a->rayc.distance = cos(a->rayc.anglray) / (a->rayc.xray - a->rayc.xplyr) / 2;
+//		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
+//				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
+		a->rayc.distance = a->rayc.distance
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
+		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+				a->fconf.yrendersize / a->rayc.distance);
+		a->rayc.initwall = (int)((float)(a->fconf.yrendersize) / 2.0
+				- a->rayc.staturewall / 2);
+		a->rayc.endwall = (int)((float)(a->fconf.yrendersize) / 2.0
+				+ a->rayc.staturewall / 2);
+		pointillism(a);
+		a->rayc.nbr_ray++;
+	}
+	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+	return (0);
+}
+/*
+int		throw_rays(t_cub3d *a)
+{
+	a->rayc.nbr_ray = 0;
+	while (a->rayc.nbr_ray < a->fconf.xrendersize)
+	{
+		a->rayc.xray = a->rayc.xplyr;
+		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
@@ -161,4 +219,4 @@ int		throw_rays(t_cub3d *a)
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);
-}
+}*/
