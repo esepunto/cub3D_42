@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 14:41:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/07 09:53:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void	ifimpact(t_cub3d *a)
 	hit = 0;
 	while (hit == 0)
 	{
-		a->rayc.xray += a->rayc.xincrease;
-		a->rayc.yray += a->rayc.yincrease;
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 //			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
@@ -134,6 +132,8 @@ void	ifimpact(t_cub3d *a)
 			calc_texture(a);
 			hit = 1;
 		}
+		a->rayc.xray++;
+		a->rayc.yray++;
 	}
 }
 
@@ -162,12 +162,25 @@ int		throw_rays(t_cub3d *a)
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 
+		if (isgreaterequal(cos(a->rayc.anglray), 0.0))
+			a->rayc.xfactor = ceil(cos(a->rayc.anglray));
+		else
+			a->rayc.xfactor = floor(cos(a->rayc.anglray));
+		if (isgreaterequal(sin(a->rayc.anglray), 0.0))		
+			a->rayc.yfactor = ceil(sin(a->rayc.anglray));
+		else
+			a->rayc.yfactor = floor(sin(a->rayc.anglray));
+
+		
+//		printf("sin: |%f|\n\n",tan(a->rayc.anglray));
+//		printf("PRE xray: |%f| - yray: |%f|\n", a->rayc.xray, a->rayc.yray);
+		a->rayc.xray += (int)(a->rayc.xray + 1.0) - a->rayc.xray;
+		a->rayc.yray += (int)(a->rayc.yray + 1.0) - a->rayc.yray;
+//		printf("POS xray: |%f| - yray: |%f|\n", a->rayc.xray, a->rayc.yray);
+		printf("incremento xray: |%f|\n", a->rayc.xray - a->rayc.xplyr);
+		printf("incremento yray: |%f|\n\n", a->rayc.yray - a->rayc.yplyr);
 
 
-		a->rayc.xray += cos(a->rayc.anglray);
-		a->rayc.yray += sin(a->rayc.anglray);
-		a->rayc.xincrease = cos(a->rayc.anglray) / (a->fconf.yrendersize / a->fconf.map.nbrlines);
-		a->rayc.yincrease = sin(a->rayc.anglray) / (a->fconf.yrendersize / a->fconf.map.nbrlines);
 
 //a->minimap.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
 		
@@ -206,6 +219,7 @@ int		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
 				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
+//		hypot(x, y) returns sqrt(x*x + y*y)
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,

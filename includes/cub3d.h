@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:27:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/07 09:48:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct	s_raycast
 	int		quadrant;
 	double	xincrease;
 	double	yincrease;
+	double	xfactor;
+	double	yfactor;
 	double	xdist2coord;
 	double	ydist2coord;
 	double	distance;
