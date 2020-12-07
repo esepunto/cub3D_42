@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/07 09:48:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:20:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct	s_raycast
 	double	xdist2coord;
 	double	ydist2coord;
 	double	distance;
+	double	xdistance;
+	double	ydistance;
 	int		initwall;
 	int		endwall;
 	double	staturewall;
@@ -102,6 +104,7 @@ typedef struct	s_readconfig
 	uint32_t	ceilcolor;
 	uint32_t	floorcolor;
 	t_map		map;
+	double		sizecell;
 }				t_config;
 
 typedef struct	s_cub3d

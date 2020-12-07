@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/07 09:53:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/07 14:40:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,28 +57,13 @@ void	calc_quadrant(t_cub3d *a)
 		a->rayc.quadrant = 3;
 	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= -M_PI_2 && val < -0))
 		a->rayc.quadrant = 4;
+	printf("\nalt: |%f| - init: |%d| - end: |%d|\n", a->rayc.staturewall, a->rayc.initwall, a->rayc.endwall);
+	printf("xdist: |%f| - ydist: |%f|\n", a->rayc.xdistance, a->rayc.ydistance);
+	printf("dist: |%f|\n", a->rayc.distance);
+	printf("xhit: |%d| - yhit: |%d|\n", a->rayc.xhit, a->rayc.yhit);
+	printf("ang: |%f| - resto: |%f| - quad: |%d|\n\n", a->rayc.anglray, val, a->rayc.quadrant);
 }
 
-/*
-** To calc where coodinate (x or y) the impact is.
-** xhit = 1, if immpact on x coordenate.
-** yhit = 1, if immpact on y coordenate.
-** Of course, every colision point have 2 ccordenates. When I say
-** that impact on x coordenate, what I mean is that the x coordenate
-** of the ray is changed of cell in the last advance.
-*/
-
-void	calc_wallimpact(t_cub3d *a)
-{
-	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
-		a->rayc.xhit = 1;
-	else
-		a->rayc.xhit = 0;
-	if ((int)a->rayc.yray != (int)(a->rayc.yray - a->rayc.yincrease))
-		a->rayc.yhit = 1;
-	else
-		a->rayc.yhit = 0;
-}
 
 /*
 ** Every ray that hits a wall impact on x,y coordenates.
@@ -95,46 +80,75 @@ void	calc_wallimpact(t_cub3d *a)
 **    Texture W on 3 and 4 quadrants.
 */
 
-/*
-void	ifimpact(t_cub3d *a)
+void	ifimpact_x(t_cub3d *a)
 {
-	int hit;
+	int	xray;
+	int	yray;
 
-	hit = 0;
-	while (hit == 0)
+	a->rayc.yhit = 0;
+	xray = a->rayc.xray;
+	yray = a->rayc.yray;
+	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
+			&& (int)xray >= 0 && (int)xray <= (int)a->fconf.map.col)
 	{
-		a->rayc.xray += a->rayc.xincrease;
-		a->rayc.yray += a->rayc.yincrease;
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
 		{
-//			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
-			calc_wallimpact(a);
-			calc_quadrant(a);
-			calc_texture(a);
-			hit = 1;
+			a->rayc.xdistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+			printf("xdist: |%f|\n", a->rayc.xdistance);
+			a->rayc.xray = xray;
+			a->rayc.yray = yray;
+			a->rayc.xhit = 1;
+			return ;
 		}
+		xray += a->rayc.xincrease;
+		yray += xray * tan(a->rayc.anglray);
 	}
 }
-*/
+
+void	ifimpact_y(t_cub3d *a, int xray, int yray)
+{
+	a->rayc.yhit = 0;
+	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
+			&& (int)xray >= 0 && (int)xray <= (int)a->fconf.map.col)
+	{
+		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
+		{
+			a->rayc.ydistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+			printf("ydist: |%f|\n", a->rayc.ydistance);
+			if (a->rayc.ydistance < a->rayc.xdistance)
+			{
+				a->rayc.xray = xray;
+				a->rayc.yray = yray;
+			}
+			a->rayc.yhit = 1;
+			return ;
+		}
+		yray += a->rayc.yincrease;
+		xray += yray / tan(a->rayc.anglray);
+	}
+}
 
 void	ifimpact(t_cub3d *a)
 {
-	int hit;
-
-	hit = 0;
-	while (hit == 0)
+	double	xray;
+	double	yray;
+	
+	xray = a->rayc.xray;
+	yray = a->rayc.yray;
+	ifimpact_x(a);
+	ifimpact_y(a, xray, yray);
+	if (a->rayc.xdistance < a->rayc.ydistance && a->rayc.xhit == 1)
 	{
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
-		{
-//			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
-			calc_wallimpact(a);
-			calc_quadrant(a);
-			calc_texture(a);
-			hit = 1;
-		}
-		a->rayc.xray++;
-		a->rayc.yray++;
+		a->rayc.yhit = 0;
+		a->rayc.distance = a->rayc.xdistance;
 	}
+	else if (a->rayc.ydistance < a->rayc.xdistance && a->rayc.yhit == 1)
+	{
+		a->rayc.xhit = 0;
+		a->rayc.distance = a->rayc.ydistance;
+	}
+	calc_quadrant(a);
+	calc_texture(a);
 }
 
 /*
@@ -154,6 +168,7 @@ void	ifimpact(t_cub3d *a)
 
 int		throw_rays(t_cub3d *a)
 {
+	a->fconf.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
 	a->rayc.nbr_ray = 0;
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
@@ -171,25 +186,26 @@ int		throw_rays(t_cub3d *a)
 		else
 			a->rayc.yfactor = floor(sin(a->rayc.anglray));
 
-		
-//		printf("sin: |%f|\n\n",tan(a->rayc.anglray));
-//		printf("PRE xray: |%f| - yray: |%f|\n", a->rayc.xray, a->rayc.yray);
-		a->rayc.xray += (int)(a->rayc.xray + 1.0) - a->rayc.xray;
-		a->rayc.yray += (int)(a->rayc.yray + 1.0) - a->rayc.yray;
-//		printf("POS xray: |%f| - yray: |%f|\n", a->rayc.xray, a->rayc.yray);
-		printf("incremento xray: |%f|\n", a->rayc.xray - a->rayc.xplyr);
-		printf("incremento yray: |%f|\n\n", a->rayc.yray - a->rayc.yplyr);
+		if (a->rayc.xfactor > 0)
+			a->rayc.xray = ceil(a->rayc.xray);
+		else
+			a->rayc.xray = floor(a->rayc.xray);
+		if (a->rayc.yfactor > 0)
+			a->rayc.yray = ceil(a->rayc.yray);
+		else
+			a->rayc.yray = floor(a->rayc.yray);
 
 
+		a->rayc.xincrease = a->rayc.xfactor;
+		a->rayc.yincrease = a->rayc.yfactor;
 
-//a->minimap.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
-		
 		ifimpact(a);
 
-		//Distania = cos(angle)/xray - x pos)
-		a->rayc.distance = cos(a->rayc.anglray) / (a->rayc.xray - a->rayc.xplyr) / 2;
-//		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
-//				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
+
+		//Distancia = cos(angle)/xray - x pos)
+
+		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
+				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,
@@ -204,33 +220,3 @@ int		throw_rays(t_cub3d *a)
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);
 }
-/*
-int		throw_rays(t_cub3d *a)
-{
-	a->rayc.nbr_ray = 0;
-	while (a->rayc.nbr_ray < a->fconf.xrendersize)
-	{
-		a->rayc.xray = a->rayc.xplyr;
-		a->rayc.yray = a->rayc.yplyr;
-		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
-				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
-		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
-		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
-		ifimpact(a);
-		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
-				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
-//		hypot(x, y) returns sqrt(x*x + y*y)
-		a->rayc.distance = a->rayc.distance
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-				a->fconf.yrendersize / a->rayc.distance);
-		a->rayc.initwall = (int)((float)(a->fconf.yrendersize) / 2.0
-				- a->rayc.staturewall / 2);
-		a->rayc.endwall = (int)((float)(a->fconf.yrendersize) / 2.0
-				+ a->rayc.staturewall / 2);
-		pointillism(a);
-		a->rayc.nbr_ray++;
-	}
-	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
-	return (0);
-}*/
