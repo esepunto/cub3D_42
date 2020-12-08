@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/07 14:07:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/08 13:33:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,30 @@ void	init_struct(t_cub3d *a)
 	a->fconf.final_line_params = 0;
 	a->fconf.nb_wrd_param = 0;
 	a->fconf.map.num_players = 0;
-	a->rayc.modulo = 0.01;
 	a->rayc.dirplyr = 0.0;
-	a->rayc.rush = 1.5;
-	a->rayc.rotspeed = 1.5;
+	a->rayc.rush = 3.5;
+	a->rayc.rotspeed = 3.5;
 	a->rayc.lasttime = 0;
 	a->rayc.delta = 0.01;
 	a->rayc.xdist2coord = 0;
 	a->rayc.ydist2coord = 0;
 	a->rayc.fov = 60 * M_PI / 180;
+	a->rayc.xray = 0;
+	a->rayc.yray = 0;
+	a->rayc.anglray = 0;
+	a->rayc.quadrant = 0;
+	a->rayc.xincrease = 0;
+	a->rayc.yincrease = 0;
+	a->rayc.xdist2coord = 0;
+	a->rayc.ydist2coord = 0;
+	a->rayc.distance = 0;
+	a->rayc.initwall = 0;
+	a->rayc.endwall = 0;
+	a->rayc.staturewall = 0;
+	a->rayc.nbr_ray = 0;
+	a->rayc.xhit = 0;
+	a->rayc.yhit = 0;
+	a->rayc.wallcolor = 0;
 }
 
 /*

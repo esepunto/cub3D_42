@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:18:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/08 14:20:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,27 @@ void	print_struct(t_cub3d *a)
 	printf("angulo FOV: |%f|\n", a->rayc.fov);
 	printf("color ceil: |%x|\n", a->fconf.ceilcolor);
 	printf("color floor: |%x|\n\n", a->fconf.floorcolor);
+}
+
+void	print_maze(t_cub3d *a)
+{
+	printf("nbr_ray: |%d|\n", a->rayc.nbr_ray);
+	printf("xplyr: |%f|\n", a->rayc.xplyr);
+	printf("yplyr: |%f|\n", a->rayc.yplyr);
+	printf("xdir: |%f|\n", a->rayc.xray);
+	printf("ydir: |%f|\n", a->rayc.yray);
+	printf("xfactor: |%f|\n", a->rayc.xfactor);
+	printf("yfactor: |%f|\n", a->rayc.yfactor);
+	printf("xincrease: |%f|\n", a->rayc.xincrease);
+	printf("yincrease: |%f|\n", a->rayc.yincrease);
+	printf("xdist2coord: |%f|\n", a->rayc.xdist2coord);
+	printf("ydist2coord: |%f|\n", a->rayc.ydist2coord);
+	printf("xhypo: |%f|\n", a->rayc.xdistance);
+	printf("yhypo: |%f|\n", a->rayc.ydistance);
+	printf("alt: |%f| - init: |%d| - end: |%d|\n", a->rayc.staturewall, a->rayc.initwall, a->rayc.endwall);
+	printf("dist: |%f|\n", a->rayc.distance);
+	printf("xhit: |%d| - yhit: |%d|\n", a->rayc.xhit, a->rayc.yhit);
+	printf("ang: |%f| - quad: |%d|\n\n", a->rayc.anglray, a->rayc.quadrant);
 }
 
 void	print_fconfig(t_cub3d *a)

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/07 14:20:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/08 10:07:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct	s_map
 
 typedef struct	s_raycast
 {
-	double	modulo;
 	double	xplyr;
 	double	yplyr;
 	double	dirplyr;
@@ -160,5 +159,6 @@ int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
 void			print_struct(t_cub3d *a);
+void			print_maze(t_cub3d *a);
 
 #endif
