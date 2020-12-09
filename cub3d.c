@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/08 13:33:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/09 13:51:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	init_struct(t_cub3d *a)
 	a->fconf.nb_wrd_param = 0;
 	a->fconf.map.num_players = 0;
 	a->rayc.dirplyr = 0.0;
-	a->rayc.rush = 3.5;
-	a->rayc.rotspeed = 3.5;
+	a->rayc.rush = 0.3;
+	a->rayc.rotspeed = 0.3;
 	a->rayc.lasttime = 0;
-	a->rayc.delta = 0.01;
+	a->rayc.delta = 1;
 	a->rayc.xdist2coord = 0;
 	a->rayc.ydist2coord = 0;
 	a->rayc.fov = 60 * M_PI / 180;
