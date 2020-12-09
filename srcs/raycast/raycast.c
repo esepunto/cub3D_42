@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/08 14:46:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/09 08:15:24 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,13 +156,6 @@ void	ifimpact_y(t_cub3d *a, double xray, double yray)
 		xray += (a->rayc.yincrease / tan(a->rayc.anglray));
 	}
 }
-
-/*
-void	ifimpactB(t_cub3d *a)
-{
-	
-}
-*/
 
 void	ifimpact(t_cub3d *a)
 {
