@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/10 12:28:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/10 14:44:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,9 @@ void	ifimpact_x(t_cub3d *a, double xray, double yray)
 
 void	ifimpact_y(t_cub3d *a, double xray, double yray)
 {
+	a->rayc.ydist2coord = yray- (int)yray;
+//	printf("resta: %f\n", ceil(yray) - yray);
+	printf("ydist2coord: %f\n", a->rayc.ydist2coord);
 	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
 			&& xray >= 0 && (size_t)xray <= a->fconf.map.col)
 	{
@@ -160,8 +163,22 @@ void	ifimpact_y(t_cub3d *a, double xray, double yray)
 			}
 			return ;
 		}
-		yray += a->rayc.yincrease;
-		xray += (a->rayc.yincrease / tan(a->rayc.anglray));
+		//1ª pasada: desde x,y
+		/*
+		** 2ª pasada: desde ceil(x), ceil(y)
+		**
+		** Coord X: 
+		**		Q1 y Q2: (int)x
+		**		Q3 y Q4: ceil(x)
+		**
+		** Coord Y:
+		**		Q3 y Q3: (int)x
+		**		Q4 y Q1: ceil(x)
+		*/
+		//3ª pasada: con incrementos.
+		xray += ((a->rayc.yincrease - (a->rayc.xdist2coord * a->rayc.yfactor) / tan(a->rayc.anglray)));
+		yray += (a->rayc.yincrease - (a->rayc.xdist2coord * a->rayc.yfactor));
+		a->rayc.ydist2coord = 0;
 	}
 }
 
@@ -175,8 +192,8 @@ void	ifimpact(t_cub3d *a)
 	a->rayc.xdistance = 0;
 	a->rayc.ydistance = 0;
 	a->rayc.distance = 0;
-	xray = a->rayc.xray;
-	yray = a->rayc.yray;
+	xray = a->rayc.xray + 0.14;//Add 0.14 para probar
+	yray = a->rayc.yray + 0.14;//Add 0.14 para probar
 	ifimpact_x(a, xray, yray);
 	ifimpact_y(a, xray, yray);
 	print_maze(a);
