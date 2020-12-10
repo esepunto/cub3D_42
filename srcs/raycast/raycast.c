@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/10 11:04:02 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/10 12:28:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	calc_wallimpact(t_cub3d *a)
 */
 
 
-void	calc_distance_x(t_cub3d *a, double xray)
+void	calc_distance_x(t_cub3d *a, int xray)
 {
 	if (a->rayc.quadrant == 1)
 		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
@@ -113,7 +113,7 @@ void	calc_distance_x(t_cub3d *a, double xray)
 		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
 }
 
-void	calc_distance_y(t_cub3d *a, double yray)
+void	calc_distance_y(t_cub3d *a, int yray)
 {
 	if (a->rayc.quadrant == 1)
 		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
@@ -123,19 +123,7 @@ void	calc_distance_y(t_cub3d *a, double yray)
 		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
 	else if (a->rayc.quadrant == 4)
 		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
-	
-	
-	
-	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
-	printf("     yray: |%f|\n", yray);
-	printf("ceil-yray: |%f|\n", ceil(yray));
-	printf("    yplyr: |%f|\n", a->rayc.yplyr);
-	printf("ceil(yray) - a->rayc.yplyr: |%f|\n", ceil(yray) - a->rayc.yplyr);
-	printf("ceil(yray - a->rayc.yplyr): |%f|\n", ceil(yray - a->rayc.yplyr));
-	printf("ceil(yray + 1) - a->rayc.yplyr: |%f|\n", ceil(yray + 1) - a->rayc.yplyr);
-	printf("ceil(yray + 1 - a->rayc.yplyr): |%f|\n", ceil(yray + 1 - a->rayc.yplyr));
-	printf("    xdistance: |%f|\n", a->rayc.xdistance);
-	printf("xdistance new: |%f|\n\n", a->rayc.xdistance);
+
 
 }
 

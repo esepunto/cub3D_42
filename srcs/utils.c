@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/09 10:37:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/10 12:25:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ void	print_maze(t_cub3d *a)
 	printf("dist: |%f|\n", a->rayc.distance);
 	printf("xhit: |%d| - yhit: |%d|\n", a->rayc.xhit, a->rayc.yhit);
 	printf("ang: |%f| - quad: |%d|\n\n", a->rayc.anglray, a->rayc.quadrant);
+	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
+	printf("    xplyr: |%f|\n", a->rayc.xplyr);
+	printf("    xdistance: |%f|\n", a->rayc.xdistance);
+	printf("xdistance new: |%f|\n\n", a->rayc.xdistance);
+	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
+	printf("    yplyr: |%f|\n", a->rayc.yplyr);
+	printf("    ydistance: |%f|\n", a->rayc.ydistance);
+	printf("ydistance new: |%f|\n\n", a->rayc.ydistance);
 }
 
 void	print_fconfig(t_cub3d *a)
