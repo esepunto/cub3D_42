@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/09 14:44:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/10 11:04:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,69 +101,52 @@ void	calc_wallimpact(t_cub3d *a)
 */
 
 
-void	calc_distance_x(t_cub3d *a, double xray, double yray)
+void	calc_distance_x(t_cub3d *a, double xray)
 {
-	double	yplus;
-	
-	yplus = tan(a->rayc.anglray);
 	if (a->rayc.quadrant == 1)
-		a->rayc.xdistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
 	else if (a->rayc.quadrant == 2)
-		a->rayc.xdistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
 	else if (a->rayc.quadrant == 3)
-		a->rayc.xdistance = hypot(xray + 1 - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
 	else if (a->rayc.quadrant == 4)
-		a->rayc.xdistance = hypot(xray + 1 - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.xdistance = (xray - a->rayc.xplyr) / cos(a->rayc.anglray);
 }
 
-void	calc_distance_y(t_cub3d *a, double xray, double yray)
+void	calc_distance_y(t_cub3d *a, double yray)
 {
-	double	xplus;
-	
-	xplus = 1 / tan(a->rayc.anglray);
 	if (a->rayc.quadrant == 1)
-		a->rayc.ydistance = hypot(xplus + xray - a->rayc.xplyr, 1 + yray - a->rayc.yplyr);
+		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
 	else if (a->rayc.quadrant == 2)
-		a->rayc.ydistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
 	else if (a->rayc.quadrant == 3)
-		a->rayc.ydistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
 	else if (a->rayc.quadrant == 4)
-		a->rayc.ydistance = hypot(xplus + xray - a->rayc.xplyr, 1 + yray - a->rayc.yplyr);
-}
-
-double	adjustX(t_cub3d *a, double xray)
-{
-	if (a->rayc.quadrant == 1 || a->rayc.quadrant == 4)
-		return (xray + 1);
-	else
-		return (xray);
-}
-
-double	adjustY(t_cub3d *a, int yray)
-{
-	if (a->rayc.quadrant == 1 || a->rayc.quadrant == 4)
-		return (yray + (1 / tan(a->rayc.anglray)));
-	else
-		return (yray);
+		a->rayc.ydistance = (yray - a->rayc.yplyr) / sin(a->rayc.anglray);
 	
+	
+	
+	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
+	printf("     yray: |%f|\n", yray);
+	printf("ceil-yray: |%f|\n", ceil(yray));
+	printf("    yplyr: |%f|\n", a->rayc.yplyr);
+	printf("ceil(yray) - a->rayc.yplyr: |%f|\n", ceil(yray) - a->rayc.yplyr);
+	printf("ceil(yray - a->rayc.yplyr): |%f|\n", ceil(yray - a->rayc.yplyr));
+	printf("ceil(yray + 1) - a->rayc.yplyr: |%f|\n", ceil(yray + 1) - a->rayc.yplyr);
+	printf("ceil(yray + 1 - a->rayc.yplyr): |%f|\n", ceil(yray + 1 - a->rayc.yplyr));
+	printf("    xdistance: |%f|\n", a->rayc.xdistance);
+	printf("xdistance new: |%f|\n\n", a->rayc.xdistance);
+
 }
 
 void	ifimpact_x(t_cub3d *a, double xray, double yray)
 {
-	if (a->rayc.xfactor > 0)
-		xray = ceil(xray);
-	else
-		xray = floor(xray);
-	yray += (xray - a->rayc.xplyr) * tan(a->rayc.anglray);
 	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
 			&& xray >= 0 && (size_t)xray <= a->fconf.map.col)
 	{
-//		xray = adjustX(a, xray);
-//		yray = adjustY(a, yray);
 		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
 		{
-			calc_distance_x(a, xray, yray);
-		//	a->rayc.xdistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+			calc_distance_x(a, xray);
 			a->rayc.xhit = 1;
 			a->rayc.distance = a->rayc.xdistance;
 			return ;
@@ -175,18 +158,12 @@ void	ifimpact_x(t_cub3d *a, double xray, double yray)
 
 void	ifimpact_y(t_cub3d *a, double xray, double yray)
 {
-	if (a->rayc.yfactor > 0)
-		yray = ceil(yray);
-	else
-		yray = floor(yray);
-	xray += (yray - a->rayc.yplyr) / tan(a->rayc.anglray);
 	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
 			&& xray >= 0 && (size_t)xray <= a->fconf.map.col)
 	{
 		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
 		{
-			calc_distance_y(a, xray, yray);
-		//	a->rayc.ydistance = hypot(xray - a->rayc.xplyr, yray - a->rayc.yplyr);
+			calc_distance_y(a, yray);
 			if (a->rayc.ydistance != 0 && (a->rayc.ydistance < a->rayc.xdistance || a->rayc.xhit == 0))
 			{
 				a->rayc.yhit = 1;
@@ -215,31 +192,7 @@ void	ifimpact(t_cub3d *a)
 	ifimpact_x(a, xray, yray);
 	ifimpact_y(a, xray, yray);
 	print_maze(a);
-/*	if (a->rayc.ydistance == 0.0 && a->rayc.xdistance != 0.0)
-	{
-		a->rayc.distance = a->rayc.xdistance;
-		a->rayc.xhit = 1;
-		a->rayc.yhit = 0;
-	}
-	else if (a->rayc.xdistance == 0.0 && a->rayc.ydistance != 0.0)
-	{
-		a->rayc.distance = a->rayc.ydistance;
-		a->rayc.yhit = 1;
-		a->rayc.xhit = 0;
-	}
-	else if (a->rayc.ydistance < a->rayc.xdistance)
-	{
-		a->rayc.distance = a->rayc.ydistance;
-		a->rayc.yhit = 1;
-		a->rayc.xhit = 0;
-	}
-	else if (a->rayc.xdistance < a->rayc.ydistance)
-	{
-		a->rayc.distance = a->rayc.xdistance;
-		a->rayc.xhit = 1;
-		a->rayc.yhit = 0;
-	}
-*/	calc_texture(a);
+	calc_texture(a);
 }
 
 void	calc_factor(t_cub3d *a)
