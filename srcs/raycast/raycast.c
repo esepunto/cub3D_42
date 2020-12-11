@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/10 14:44:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/11 11:00:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,57 +129,68 @@ void	calc_distance_y(t_cub3d *a, int yray)
 
 void	ifimpact_x(t_cub3d *a, double xray, double yray)
 {
+//	printf("xdir: |%f|\n", xray);
+//	printf("ydir: |%f|\n", yray);
+//	calc_dist2_x_coord(a, xray);
+	xray += a->rayc.xdist2coord;
+	yray += a->rayc.ydist2coord;
+//	printf("xdir: |%f|\n", xray);
+//	printf("ydir: |%f|\n", yray);
 	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
 			&& xray >= 0 && (size_t)xray <= a->fconf.map.col)
 	{
 		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
 		{
+			printf("impactX maze[%d][%d]: |%c|\n", (int)yray, (int)xray, a->fconf.map.maze[(int)yray][(int)xray]);
+			printf("xdir: |%f|\n", xray);
+			printf("ydir: |%f|\n", yray);
 			calc_distance_x(a, xray);
 			a->rayc.xhit = 1;
 			a->rayc.distance = a->rayc.xdistance;
+			printf("xhypo: |%f|\n\n", a->rayc.xdistance);
+//			print_maze(a);
 			return ;
 		}
-		xray += a->rayc.xincrease ;
-		yray += (a->rayc.xincrease * tan(a->rayc.anglray));
-	}
+		xray += a->rayc.xstep ;
+		yray += (a->rayc.xstep * tan(a->rayc.anglray));
+/*		printf("xdir: |%f|\n", xray);
+		printf("ydir: |%f|\n", yray);
+		printf("nbr_ray: |%d|\n\n", a->rayc.nbr_ray);
+*/	}
 }
 
 void	ifimpact_y(t_cub3d *a, double xray, double yray)
 {
-	a->rayc.ydist2coord = yray- (int)yray;
-//	printf("resta: %f\n", ceil(yray) - yray);
-	printf("ydist2coord: %f\n", a->rayc.ydist2coord);
+//	printf("xdir: |%f|\n", xray);
+//	printf("ydir: |%f|\n", yray);
+//	calc_dist2_y_coord(a, xray);
+	xray += a->rayc.xdist2coord;
+	yray += a->rayc.ydist2coord;
+//	printf("xdir: |%f|\n", xray);
+//	printf("ydir: |%f|\n", yray);
 	while ((int)yray >= a->fconf.map.first_line && (int)yray <= a->fconf.map.row
 			&& xray >= 0 && (size_t)xray <= a->fconf.map.col)
 	{
 		if (a->fconf.map.maze[(int)yray][(int)xray] == '1')
 		{
+			printf("impactY maze[%d][%d]: |%c|\n", (int)yray, (int)xray, a->fconf.map.maze[(int)yray][(int)xray]);
 			calc_distance_y(a, yray);
-			if (a->rayc.ydistance != 0 && (a->rayc.ydistance < a->rayc.xdistance || a->rayc.xhit == 0))
+			if (a->rayc.ydistance > 0 && (a->rayc.ydistance < a->rayc.xdistance || a->rayc.xhit == 0))
 			{
 				a->rayc.yhit = 1;
 				a->rayc.xhit = 0;
+				printf("yhypo: |%f|\n\n", a->rayc.ydistance);
 				a->rayc.distance = a->rayc.ydistance;
+//				print_maze(a);
 			}
 			return ;
 		}
-		//1ª pasada: desde x,y
-		/*
-		** 2ª pasada: desde ceil(x), ceil(y)
-		**
-		** Coord X: 
-		**		Q1 y Q2: (int)x
-		**		Q3 y Q4: ceil(x)
-		**
-		** Coord Y:
-		**		Q3 y Q3: (int)x
-		**		Q4 y Q1: ceil(x)
-		*/
-		//3ª pasada: con incrementos.
-		xray += ((a->rayc.yincrease - (a->rayc.xdist2coord * a->rayc.yfactor) / tan(a->rayc.anglray)));
-		yray += (a->rayc.yincrease - (a->rayc.xdist2coord * a->rayc.yfactor));
-		a->rayc.ydist2coord = 0;
-	}
+		yray += a->rayc.ystep;
+		xray += (a->rayc.ystep / tan(a->rayc.anglray));
+/*		printf("xdir: |%f|\n", xray);
+		printf("ydir: |%f|\n", yray);
+		printf("nbr_ray: |%d|\n\n", a->rayc.nbr_ray);
+*/	}
 }
 
 void	ifimpact(t_cub3d *a)
@@ -196,43 +207,92 @@ void	ifimpact(t_cub3d *a)
 	yray = a->rayc.yray + 0.14;//Add 0.14 para probar
 	ifimpact_x(a, xray, yray);
 	ifimpact_y(a, xray, yray);
-	print_maze(a);
+	printf("dist: |%f|\n\n", a->rayc.distance);
+//	print_maze(a);
 	calc_texture(a);
 }
 
-void	calc_factor(t_cub3d *a)
+void	calc_step(t_cub3d *a)
 {
 	if (cos(a->rayc.anglray) >= 0.0)
-		a->rayc.xfactor = ceil(cos(a->rayc.anglray));
+		a->rayc.xstep = ceil(cos(a->rayc.anglray));
 	else
-		a->rayc.xfactor = floor(cos(a->rayc.anglray));
+		a->rayc.xstep = floor(cos(a->rayc.anglray));
 	if (sin(a->rayc.anglray) >= 0.0)		
-		a->rayc.yfactor = ceil(sin(a->rayc.anglray));
+		a->rayc.ystep = ceil(sin(a->rayc.anglray));
 	else
-		a->rayc.yfactor = floor(sin(a->rayc.anglray));
+		a->rayc.ystep = floor(sin(a->rayc.anglray));
+}
+
+void	if_impact(t_cub3d *a)
+{
+	a->rayc.hit = 0;
+	while (a->rayc.hit == 0 && ((int)a->rayc.yray >= a->fconf.map.first_line
+			&& (int)a->rayc.yray <= a->fconf.map.row
+			&& a->rayc.xray >= 0 && (size_t)a->rayc.xray <= a->fconf.map.col))
+	{
+		if (a->rayc.xhypo2coord < a->rayc.yhypo2coord)
+		{
+			a->rayc.xhypo2coord += a->rayc.xhypo;
+			a->rayc.xray += a->rayc.xstep;
+			a->rayc.xhit = 1;
+			a->rayc.yhit = 0;
+		}
+		else
+		{
+			a->rayc.yhypo2coord += a->rayc.yhypo;
+			a->rayc.yray += a->rayc.ystep;
+			a->rayc.yhit = 1;
+			a->rayc.xhit = 0;
+		}
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+		{
+			a->rayc.hit = 1;
+			print_maze(a);
+		}
+	}
+	if (a->rayc.xhit == 1 && a->rayc.hit == 1)
+		a->rayc.distance = a->rayc.xhypo2coord;// - a->rayc.xhypo;//Tengo mis dudas de si restarle xhypo
+	else if (a->rayc.yhit == 1 && a->rayc.hit == 1)
+		a->rayc.distance = a->rayc.yhypo2coord;// - a->rayc.yhypo;//Tengo mis dudas de si restarle yhypo
+}
+
+void	calc_hypotenuses(t_cub3d *a)
+{
+	if (a->rayc.xstep == 1)
+		a->rayc.xdist2coord = ceil(a->rayc.xray) - a->rayc.xray;
+	else if (a->rayc.xstep == -1)
+		a->rayc.xdist2coord = floor(a->rayc.xray) - a->rayc.xray;
+	if (a->rayc.ystep == 1)
+		a->rayc.ydist2coord = ceil(a->rayc.yray) - a->rayc.yray;
+	else if (a->rayc.ystep == -1)
+		a->rayc.ydist2coord = floor(a->rayc.yray) - a->rayc.yray;
+	a->rayc.xhypo2coord = a->rayc.xdist2coord / cos(a->rayc.anglray);
+	a->rayc.yhypo2coord = a->rayc.ydist2coord / sin(a->rayc.anglray);
+	a->rayc.xhypo = a->rayc.xstep / cos(a->rayc.anglray);
+	a->rayc.yhypo = a->rayc.ystep * sin(a->rayc.anglray);
 }
 
 int		throw_rays(t_cub3d *a)
 {
-	a->fconf.sizecell = a->fconf.yrendersize / a->fconf.map.nbrlines;
 	a->rayc.nbr_ray = 0;
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
-		calc_quadrant(a);
-			
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
+		calc_quadrant(a);//Probably innecesary
+		calc_step(a);
+		calc_hypotenuses(a);
+		
+		if_impact(a);
 
-		calc_factor(a);
 
-		a->rayc.xincrease = a->rayc.xfactor;
-		a->rayc.yincrease = a->rayc.yfactor;
+		calc_texture(a);
 
-		ifimpact(a);
+//		ifimpact(a);
 
-		//Distancia = cos(angle)/xray - x pos)
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,

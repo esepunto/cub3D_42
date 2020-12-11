@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/08 10:07:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/11 10:35:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,14 @@ typedef struct	s_raycast
 	int		quadrant;
 	double	xincrease;
 	double	yincrease;
-	double	xfactor;
-	double	yfactor;
+	double	xstep;
+	double	xhypo;
+	double	ystep;
+	double	yhypo;
 	double	xdist2coord;
+	double	xhypo2coord;
 	double	ydist2coord;
+	double	yhypo2coord;
 	double	distance;
 	double	xdistance;
 	double	ydistance;
@@ -83,6 +87,7 @@ typedef struct	s_raycast
 	int		endwall;
 	double	staturewall;
 	int		nbr_ray;
+	bool	hit;
 	bool	xhit;
 	bool	yhit;
 	int		wallcolor;

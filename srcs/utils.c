@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/10 13:48:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/11 11:01:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,24 @@ void	print_struct(t_cub3d *a)
 void	print_maze(t_cub3d *a)
 {
 	printf("nbr_ray: |%d|\n", a->rayc.nbr_ray);
+	
+	printf("ang: |%f| - quad: |%d|\n", a->rayc.anglray, a->rayc.quadrant);
 	printf("xplyr: |%f|\n", a->rayc.xplyr);
 	printf("yplyr: |%f|\n", a->rayc.yplyr);
 	printf("xdir: |%f|\n", a->rayc.xray);
 	printf("ydir: |%f|\n", a->rayc.yray);
-	printf("xfactor: |%f|\n", a->rayc.xfactor);
-	printf("yfactor: |%f|\n", a->rayc.yfactor);
-	printf("xincrease: |%f|\n", a->rayc.xincrease);
-	printf("yincrease: |%f|\n", a->rayc.yincrease);
+	printf("xstep: |%f|\n", a->rayc.xstep);
+	printf("ystep: |%f|\n", a->rayc.ystep);
+	printf("Xhypo2coord: |%f|\n", a->rayc.xhypo2coord);
+	printf("Yhypo2coord: |%f|\n", a->rayc.yhypo2coord);
+	printf("Xhypo: |%f|\n", a->rayc.xhypo);
+	printf("Yhypo: |%f|\n", a->rayc.yhypo);
 	printf("xdist2coord: |%f|\n", a->rayc.xdist2coord);
 	printf("ydist2coord: |%f|\n", a->rayc.ydist2coord);
-	printf("xhypo: |%f|\n", a->rayc.xdistance);
-	printf("yhypo: |%f|\n", a->rayc.ydistance);
 	printf("alt: |%f| - init: |%d| - end: |%d|\n", a->rayc.staturewall, a->rayc.initwall, a->rayc.endwall);
-	printf("dist: |%f|\n", a->rayc.distance);
-	printf("xhit: |%d| - yhit: |%d|\n", a->rayc.xhit, a->rayc.yhit);
-	printf("ang: |%f| - quad: |%d|\n\n", a->rayc.anglray, a->rayc.quadrant);
-	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
-	printf("    xplyr: |%f|\n", a->rayc.xplyr);
-	printf("    xdistance: |%f|\n", a->rayc.xdistance);
-	printf("xdistance new: |%f|\n\n", a->rayc.xdistance);
-	printf("nbr_ray: %d\n", a->rayc.nbr_ray);
-	printf("    yplyr: |%f|\n", a->rayc.yplyr);
-	printf("    ydistance: |%f|\n", a->rayc.ydistance);
-	printf("ydistance new: |%f|\n\n", a->rayc.ydistance);
+	printf("hit: |%d| - xhit: |%d| - yhit: |%d|\n", a->rayc.hit, a->rayc.xhit, a->rayc.yhit);
+	printf("dist: |%f|\n\n", a->rayc.distance);
+	printf("maze[%d][%d]: |%c|\n", (int)a->rayc.xray, (int)a->rayc.yray, a->fconf.map.maze[(int)a->rayc.xray][(int)a->rayc.yray]);
 }
 
 void	print_fconfig(t_cub3d *a)
