@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 20:20:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 20:22:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,65 @@ void	calc_wallimpact(t_cub3d *a)
 		a->rayc.yhit = 1;
 	else
 		a->rayc.yhit = 0;
+}
+
+void	calc_step(t_cub3d *a)
+{
+	if (cos(a->rayc.anglray) >= 0.0)
+		a->rayc.xstep = ceil(cos(a->rayc.anglray));
+	else
+		a->rayc.xstep = floor(cos(a->rayc.anglray));
+	if (sin(a->rayc.anglray) >= 0.0)		
+		a->rayc.ystep = ceil(sin(a->rayc.anglray));
+	else
+		a->rayc.ystep = floor(sin(a->rayc.anglray));
+}
+
+
+void	if_impact(t_cub3d *a)
+{
+	a->rayc.hit = 0;
+	while (a->rayc.hit == 0 && ((int)a->rayc.yray >= a->fconf.map.first_line
+			&& (int)a->rayc.yray <= a->fconf.map.row
+			&& a->rayc.xray >= 0 && (size_t)a->rayc.xray <= a->fconf.map.col))
+	{
+		if (a->rayc.xhypo2coord < a->rayc.yhypo2coord)
+		{
+			a->rayc.xhypo2coord += a->rayc.xhypo;
+			a->rayc.xray += a->rayc.xstep;
+			a->rayc.xhit = 1;
+			a->rayc.yhit = 0;
+		}
+		else
+		{
+			a->rayc.yhypo2coord += a->rayc.yhypo;
+			a->rayc.yray += a->rayc.ystep;
+			a->rayc.yhit = 1;
+			a->rayc.xhit = 0;
+		}
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+			a->rayc.hit = 1;
+	}
+	if (a->rayc.xhit == 1 && a->rayc.hit == 1)
+		a->rayc.distance = a->rayc.xhypo2coord;// - a->rayc.xhypo;//Tengo mis dudas de si restarle xhypo
+	else if (a->rayc.yhit == 1 && a->rayc.hit == 1)
+		a->rayc.distance = a->rayc.yhypo2coord;// - a->rayc.yhypo;//Tengo mis dudas de si restarle yhypo
+}
+
+void	calc_hypotenuses(t_cub3d *a)
+{
+	if (a->rayc.xstep == 1)
+		a->rayc.xdist2coord = ceil(a->rayc.xray) - a->rayc.xray;
+	else if (a->rayc.xstep == -1)
+		a->rayc.xdist2coord = floor(a->rayc.xray) - a->rayc.xray;
+	if (a->rayc.ystep == 1)
+		a->rayc.ydist2coord = ceil(a->rayc.yray) - a->rayc.yray;
+	else if (a->rayc.ystep == -1)
+		a->rayc.ydist2coord = floor(a->rayc.yray) - a->rayc.yray;
+	a->rayc.xhypo2coord = a->rayc.xdist2coord / cos(a->rayc.anglray);
+	a->rayc.yhypo2coord = a->rayc.ydist2coord / sin(a->rayc.anglray);
+	a->rayc.xhypo = a->rayc.xstep / cos(a->rayc.anglray);
+	a->rayc.yhypo = a->rayc.ystep / sin(a->rayc.anglray);//Ojo, review
 }
 
 /*

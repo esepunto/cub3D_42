@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 14:34:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 20:51:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,16 @@ typedef struct	s_raycast
 	bool	yhit;
 	int		wallcolor;
 	int		keycode;
+	
+	double	xhypo;
+	double	ystep;
+	double	xstep;
+	double	yhypo;
+	double	xhypo2coord;
+	double	yhypo2coord;
+	double	xdistance;
+	double	ydistance;
+	bool	hit;
 }				t_raycast;
 
 typedef struct	s_readconfig
