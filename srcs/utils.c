@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:18:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 09:23:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ void	print_struct(t_cub3d *a)
 	printf("angulo FOV: |%f|\n", a->rayc.fov);
 	printf("color ceil: |%x|\n", a->fconf.ceilcolor);
 	printf("color floor: |%x|\n\n", a->fconf.floorcolor);
+}
+
+void	print_textures(t_cub3d *a)
+{
+	printf("north: %s - width %d - heigth %d\n", a->fconf.wall_texture[0], a->mlibx.north.img_width, a->mlibx.north.img_height);
+	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.south.img_width, a->mlibx.south.img_height);
+	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.west.img_width, a->mlibx.west.img_height);
+	printf("east: %s - width %d - heigth %d\n", a->fconf.wall_texture[3], a->mlibx.east.img_width, a->mlibx.east.img_height);
 }
 
 void	print_fconfig(t_cub3d *a)

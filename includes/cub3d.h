@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 10:27:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 09:38:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,39 @@ typedef struct	s_data
 	int		endian;
 }				t_data;
 
-typedef struct	s_minilibx
+typedef struct	s_texture_xpm
 {
 	void	*mlx;
-	void	*win;
-	t_data	img;
+	void	*img;
+	char	relative_path;
+	int		img_width;
+	int		img_height;
+}				t_texture;
+
+typedef struct	s_texture_png
+{
+	void	*mlx;
+	char	filename;
+	int		*width;
+	int		*height;
+}				t_texture_png;
+
+typedef struct	s_minilibx
+{
+	void		*mlx;
+	void		*win;
+	t_data		img;
+	t_texture	north;
+	t_texture	south;
+	t_texture	west;
+	t_texture	east;
+	t_texture	sprite;
+//	t_texture_png	*north;
+//	t_texture_png	*south;
+//	t_texture_png	*west;
+//	t_texture_png	*east;
+//	t_texture_png	*sprite;
+	
 }				t_minilibx;
 
 typedef struct	s_map
@@ -135,6 +163,8 @@ void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
 uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 
+void			save_textures(t_cub3d *a);
+
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
@@ -155,5 +185,6 @@ int				msg_err(char *error);
 void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
 void			print_struct(t_cub3d *a);
+void			print_textures(t_cub3d *a);
 
 #endif

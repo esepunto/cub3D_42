@@ -13,6 +13,7 @@ SRCS	=	cub3d.c \
 			srcs/window/vangoghs_turn.c \
 			srcs/raycast/raycast.c \
 			srcs/raycast/movement.c \
+			srcs/raycast/textures.c \
 			srcs/utils.c 
 
 LIBS	=	libft/libft.a \
