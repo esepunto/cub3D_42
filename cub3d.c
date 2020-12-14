@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 10:02:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 19:10:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		main(int argc, char **argv)
 		if (ft_chekext(argv[1], ".cub") != 0)
 			msg_err("This is not a .cub file, bro.");
 		a = (t_cub3d *)malloc(sizeof(t_cub3d));
+		ft_bzero(a, sizeof(a));//Add at home. Review, please.
 		init_struct(a);
 		open_fconfig(argv[1], a);
 		init_window(a);
