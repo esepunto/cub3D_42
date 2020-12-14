@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 09:26:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 14:47:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,35 @@ int		raycast(t_cub3d *a)
 	return (0);
 }
 
+
+void	rescale_screen(t_cub3d *a)
+{
+	int	sizex;
+	int	sizey;
+	
+	mlx_get_screen_size(a->mlibx.mlx, &sizex, &sizey);
+	printf("resolución pantalla. X: %d - Y: %d\n", sizex, sizey);
+	if (sizex && sizey)
+	{
+		if (sizex < a->fconf.xrendersize && sizey >= a->fconf.yrendersize)
+		{
+			a->fconf.yrendersize = a->fconf.yrendersize * sizex / a->fconf.xrendersize; 
+			a->fconf.xrendersize = sizex;
+			
+		}
+		else if (sizey < a->fconf.yrendersize)
+		{
+			a->fconf.xrendersize = a->fconf.xrendersize * sizey / a->fconf.yrendersize; 
+			a->fconf.yrendersize = sizey;
+		}
+	}
+}
+
+
 void	init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
+	rescale_screen(a);
 	a->mlibx.img.img = mlx_new_image(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize);
 	a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img,

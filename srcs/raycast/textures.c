@@ -6,12 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 09:39:28 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 13:18:58 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 /*
 ** Textures are saved in the char** a->fconf.wall_texture[0 to 3]. fconf is a

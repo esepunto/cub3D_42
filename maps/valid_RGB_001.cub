@@ -2,7 +2,7 @@ NO ./wolftex/texture_north.xpm
 SO ./wolftex/texture_south.xpm
 EA ./wolftex/texture_east.xpm
 WE ./wolftex/texture_west.xpm
-R 1000 500
+R 780 420
 S ./wolftex/barrel.png
 F 28,189,42
 C 134,231,236

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 09:26:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 09:57:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,25 +137,18 @@ int		throw_rays(t_cub3d *a)
 	{
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
-/*		printf("x - int(x): %f\n", a->rayc.xray - (int)a->rayc.xray);
-		printf("y - int(y): %f\n", a->rayc.yray - (int)a->rayc.yray);
-		printf("x: %f\n", a->rayc.xray);
-		printf("y: %f\n\n", a->rayc.yray);
-*/		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
+		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);
-		a->rayc.distance = sqrt(pow(a->rayc.xray - a->rayc.xplyr, 2)
-				+ pow(a->rayc.yray - a->rayc.yplyr, 2));
+		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,
 				a->fconf.yrendersize / a->rayc.distance);
-		a->rayc.initwall = (int)((float)(a->fconf.yrendersize) / 2.0
-				- a->rayc.staturewall / 2);
-		a->rayc.endwall = (int)((float)(a->fconf.yrendersize) / 2.0
-				+ a->rayc.staturewall / 2);
+		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
+		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
 		pointillism(a);
 		a->rayc.nbr_ray++;
 	}

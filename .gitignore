@@ -31,3 +31,5 @@ samples_xpm/
 cub3d_destroyer/
 ejemploraycast.c
 .gitignore
+./mlx
+

@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 09:38:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/14 14:34:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "../mlx/mlx.h"
+# include "../mlx_beta/mlx.h"
 # include "../libft/libft.h"
 # include "../libft/ft_printf/libftprintf.h"
 # include <limits.h>
@@ -66,6 +66,8 @@ typedef struct	s_minilibx
 	t_texture	west;
 	t_texture	east;
 	t_texture	sprite;
+	int			sizex;
+	int			sizey;
 //	t_texture_png	*north;
 //	t_texture_png	*south;
 //	t_texture_png	*west;
@@ -166,6 +168,7 @@ uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 void			save_textures(t_cub3d *a);
 
 void			init_window(t_cub3d *a);
+void			rescale_screen(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 

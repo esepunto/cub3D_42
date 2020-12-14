@@ -17,12 +17,16 @@ SRCS	=	cub3d.c \
 			srcs/utils.c 
 
 LIBS	=	libft/libft.a \
-			mlx/libmlx.a \
-			libft/ft_printf/libftprintf.a
+			libft/ft_printf/libftprintf.a \
+			libmlx.dylib 
+#			mlx/libmlx.a
+
+
 
 OBJECTS	=	$(SRCS:.c=.o)
 
-LINKS	=	-I ./mlx -L ./mlx -lmlx -framework OpenGL -framework AppKit
+LINKS	=	-I ./mlx_beta -L ./mlx_beta -lmlx -framework OpenGL -framework AppKit
+
 
 RM		=	rm -f
 
@@ -31,21 +35,24 @@ all: $(NAME)
 $(NAME):	$(OBJECTS)
 			@make -C libft
 			@make -C libft/ft_printf
-			@make -C mlx
-			$(CC) $(LINKS) $(LIBS) $(OBJECTS) -o $(NAME)
-#			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
+			@make -C mlx_beta
+			@mv ./mlx_beta/libmlx.dylib ./
+#			$(CC) $(LINKS) $(LIBS) $(OBJECTS) -o $(NAME)
+			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJECTS)
 			@make clean -C libft
 			@make clean -C libft/ft_printf
 			@make clean -C mlx
+			@make clean -C mlx_beta
 
 
 fclean:		clean
 			$(RM) $(NAME)
 			@make fclean -C libft
 			@make fclean -C libft/ft_printf
+			rm -f libmlx.dylib 
 
 
 re: fclean all
