@@ -1,7 +1,7 @@
-NO ./wolftex/texture_north.xpm
-SO ./wolftex/texture_south.xpm
-EA ./wolftex/texture_east.xpm
-WE ./wolftex/texture_west.xpm
+NO ./wolftex/mossy.xpm
+SO ./wolftex/eagle.xpm
+EA ./wolftex/greystone.xpm
+WE ./wolftex/redbrick.xpm
 R 780 420
 S ./wolftex/barrel.png
 F 28,189,42

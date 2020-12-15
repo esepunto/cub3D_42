@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 20:51:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/15 14:32:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,18 @@ typedef struct	s_raycast
 	int		endwall;
 	double	staturewall;
 	int		nbr_ray;
-	bool	xhit;
-	bool	yhit;
-	int		wallcolor;
+	bool		xhit;
+	bool		yhit;
+	uint32_t	wallcolor;
 	int		keycode;
+	
+	double	xwallhit;
+	double	ywallhit;
+	int		xtexture;
+	int		ytexture;
+	double	steptexture;
+	double	texPos;
+
 	
 	double	xhypo;
 	double	ystep;
@@ -176,6 +184,8 @@ void			maze_algorithm(t_cub3d *a);
 uint32_t		ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
+void			calc_texturing(t_cub3d *a);
+
 
 void			init_window(t_cub3d *a);
 void			rescale_screen(t_cub3d *a);
