@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 09:34:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 13:49:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	delmem(t_cub3d *a)
 		init_struct(a);
 		if (sizeof(a->fconf.wall_texture) >= 848)
 			ft_delmatrix(a->fconf.wall_texture);
+		if (sizeof(a->fconf.wall) >= 848)
+			ft_delmatrix(a->fconf.wall);
 		if (sizeof(a->fconf.map.maze) >= 208)
 			ft_delmatrix(a->fconf.map.maze);
 		if (sizeof(a) >= sizeof(t_cub3d))
@@ -49,7 +51,23 @@ void	print_textures(t_cub3d *a)
 	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.xpmwall[1].img_width, a->mlibx.xpmwall[1].img_height);
 	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.xpmwall[2].img_width, a->mlibx.xpmwall[2].img_height);
 	printf("east: %s - width %d - heigth %d\n", a->fconf.wall_texture[3], a->mlibx.xpmwall[3].img_width, a->mlibx.xpmwall[3].img_height);
+	int c = 0;
+	while (c <= 3)
+	{
+		printf("%p\n", a->mlibx.xpmwall[c].img->addr);
+		printf("%d\n", a->mlibx.xpmwall[c].img->bits_per_pixel);
+		printf("%d\n", a->mlibx.xpmwall[c].img->line_length);
+		printf("%d\n", a->mlibx.xpmwall[c].img->endian);
+		printf("%p\n", a->mlibx.xpmwall[c].img);
+		c++;
+	}
 }
+
+
+
+
+
+
 
 void	print_fconfig(t_cub3d *a)
 {

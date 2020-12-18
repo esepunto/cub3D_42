@@ -6,11 +6,26 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 08:16:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 10:25:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+** Every ray that hits a wall impact on x,y coordenates.
+** To calculate the texture of the wall impacted by the ray, we
+** need to know 2 data:
+**   1. The exactly x or y coordenate when ray impacts.
+**   2. The quadrant of the ray's angle.
+** So:
+** If impact on x coordenate:
+**    Texture N on 1 and 4 quadrants.
+**    Texture S on 2 and 3 quadrants.
+** If impact on y coordenate:
+**    Texture E on 1 and 2 quadrants.
+**    Texture W on 3 and 4 quadrants.
+*/
 
 void	calc_texture(t_cub3d *a)
 {
@@ -19,16 +34,16 @@ void	calc_texture(t_cub3d *a)
 	if (a->rayc.xhit == 1)
 	{
 		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
-			a->rayc.wallcolor = 0x40343B;
+			a->rayc.wall = 0;//North
 		else if (a->rayc.quadrant == 2 || a->rayc.quadrant == 3)
-			a->rayc.wallcolor = 0x40583B;
+			a->rayc.wall = 1;//South
 	}
 	else if (a->rayc.yhit == 1)
 	{
 		if (a->rayc.quadrant == 1 || a->rayc.quadrant == 2)
-			a->rayc.wallcolor = 0x10343B;
+			a->rayc.wall = 2;//East
 		else if (a->rayc.quadrant == 3 || a->rayc.quadrant == 4)
-			a->rayc.wallcolor = 0x4034aB;
+			a->rayc.wall = 3;//West
 	}
 }
 
@@ -168,8 +183,8 @@ void	ifimpact(t_cub3d *a)
 //			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
 			calc_wallimpact(a);
 			calc_quadrant(a);
+			calc_texture(a);
 			calc_step(a);
-//			calc_texture(a);
 			hit = 1;
 		}
 	}
