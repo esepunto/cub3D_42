@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/15 14:49:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 08:16:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ void	ifimpact(t_cub3d *a)
 //			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
 			calc_wallimpact(a);
 			calc_quadrant(a);
+			calc_step(a);
 //			calc_texture(a);
 			hit = 1;
 		}

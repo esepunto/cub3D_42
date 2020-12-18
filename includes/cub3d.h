@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/15 14:32:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 09:30:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
 
+/*
+typedef struct	s_texture_png
+{
+	void	*mlx;
+	char	filename;
+	int		*width;
+	int		*height;
+}				t_texture_png;
+*/
+
 typedef struct	s_data
 {
 	void	*img;
@@ -42,29 +52,18 @@ typedef struct	s_data
 typedef struct	s_texture_xpm
 {
 	void	*mlx;
-	void	*img;
+	t_data	*img;
 	char	relative_path;
 	int		img_width;
 	int		img_height;
 }				t_texture;
-
-typedef struct	s_texture_png
-{
-	void	*mlx;
-	char	filename;
-	int		*width;
-	int		*height;
-}				t_texture_png;
 
 typedef struct	s_minilibx
 {
 	void		*mlx;
 	void		*win;
 	t_data		img;
-	t_texture	north;
-	t_texture	south;
-	t_texture	west;
-	t_texture	east;
+	t_texture	xpmwall[4];
 	t_texture	sprite;
 	int			sizex;
 	int			sizey;
@@ -121,6 +120,7 @@ typedef struct	s_raycast
 	int		ytexture;
 	double	steptexture;
 	double	texPos;
+
 
 	
 	double	xhypo;

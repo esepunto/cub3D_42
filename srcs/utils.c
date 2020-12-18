@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/14 09:23:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 09:34:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	print_struct(t_cub3d *a)
 
 void	print_textures(t_cub3d *a)
 {
-	printf("north: %s - width %d - heigth %d\n", a->fconf.wall_texture[0], a->mlibx.north.img_width, a->mlibx.north.img_height);
-	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.south.img_width, a->mlibx.south.img_height);
-	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.west.img_width, a->mlibx.west.img_height);
-	printf("east: %s - width %d - heigth %d\n", a->fconf.wall_texture[3], a->mlibx.east.img_width, a->mlibx.east.img_height);
+	printf("north: %s - width %d - heigth %d\n", a->fconf.wall_texture[0], a->mlibx.xpmwall[0].img_width, a->mlibx.xpmwall[0].img_height);
+	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.xpmwall[1].img_width, a->mlibx.xpmwall[1].img_height);
+	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.xpmwall[2].img_width, a->mlibx.xpmwall[2].img_height);
+	printf("east: %s - width %d - heigth %d\n", a->fconf.wall_texture[3], a->mlibx.xpmwall[3].img_width, a->mlibx.xpmwall[3].img_height);
 }
 
 void	print_fconfig(t_cub3d *a)

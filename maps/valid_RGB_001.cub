@@ -1,7 +1,7 @@
-NO ./wolftex/mossy.xpm
-SO ./wolftex/eagle.xpm
-EA ./wolftex/greystone.xpm
-WE ./wolftex/redbrick.xpm
+WE ./wolftex/mossy.xpm
+EA ./wolftex/eagle.xpm
+SO ./wolftex/greystone.xpm
+NO ./wolftex/redbrick.xpm
 R 780 420
 S ./wolftex/barrel.png
 F 28,189,42

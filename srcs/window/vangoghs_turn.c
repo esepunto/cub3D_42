@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/15 14:48:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 09:36:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,31 @@ void	brushstroke(t_cub3d *a, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+/*
+while (i < f->ml.drawstart)
+	{
+		*(f->ml.frame.data + (i * f->w) + f->ml.x) = f->c_c;
+		i++;
+	}
+*/
+
 void	pointillism(t_cub3d *a)
 {
-	double point;
+	double	point;
+//	int		color;
 
 	point = 0;
 	while (point < a->fconf.yrendersize)
 	{
 		if (point < a->rayc.initwall)
 			brushstroke(a, a->rayc.nbr_ray, point, a->fconf.ceilcolor);
-//		else if (point < a->rayc.endwall)
+/*		else if (point < a->rayc.endwall)
+		{
+			f->ml.texty = (int)f->ml.textpos & (f->ml.text[f->ml.t_side].height - 1);
+			f->ml.textpos += f->ml.textstep;
+			color = a->mlibx.south..data[f->ml.text[f->ml.t_side].height * f->ml.texty + f->ml.textx];
+			*(f->ml.frame.data + (point * f->w) + f->ml.x) = color;
+		}*/
 //			brushstroke(a, a->rayc.nbr_ray, point, a->rayc.wallcolor);
 		else if (point >= a->rayc.endwall)
 			brushstroke(a, a->rayc.nbr_ray, point, a->fconf.floorcolor);
