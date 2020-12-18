@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 09:50:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/18 09:52:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 **  If textures exist are checked previously at review_params.c
 */
 
-/*
-a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img,
-			&a->mlibx.img.bits_per_pixel, &a->mlibx.img.line_length,
-			&a->mlibx.img.endian);
-*/
 void	save_textures(t_cub3d *a)
 {
 	int	c;
