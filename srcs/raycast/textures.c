@@ -6,7 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/12/19 12:29:02 by ssacrist         ###   ########.fr       */
+=======
+/*   Updated: 2020/12/19 11:41:35 by ssacrist         ###   ########.fr       */
+>>>>>>> 7ed4adabacaf286875f2032f8ba6e12216b29e06
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,18 +98,28 @@ void	calc_texturing(t_cub3d *a)
 		a->rayc.xwallhit = a->rayc.xray;
 	a->rayc.xwallhit -= floor(a->rayc.xwallhit);
 	a->rayc.xtexture = (a->rayc.xwallhit * a->mlibx.xpmwall[a->rayc.wall].img_width) / 1;
+<<<<<<< HEAD
 
 //	Adjust xtexture
 	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0) || (a->rayc.yhit == 1 && a->rayc.quadrant < 3))
 		a->rayc.xtexture = a->mlibx.xpmwall[a->rayc.wall].img_width
 			- a->rayc.xtexture - 1;//Lodev resta -1
 
+=======
+
+//	Adjust xtexture
+	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0) || (a->rayc.yhit == 1 && a->rayc.quadrant < 3))
+		a->rayc.xtexture = a->mlibx.xpmwall[a->rayc.wall].img_width
+			- a->rayc.xtexture;//Lodev resta -1
+
+>>>>>>> 7ed4adabacaf286875f2032f8ba6e12216b29e06
 //	if (a->rayc.yhit == 1 && (a->rayc.yray - a->rayc.yplyr) < 0)
 /*	if (a->rayc.yhit == 1 && a->rayc.quadrant < 3)
 		a->rayc.xtexture = a->mlibx.xpmwall[a->rayc.wall].img_width
 			- a->rayc.xtexture;//Lodev resta -1
 */
 	// How much to increase the texture coordinate per screen pixel
+<<<<<<< HEAD
 	a->rayc.ysteptexture = 1.0 * a->mlibx.xpmwall[a->rayc.wall].img_height / a->rayc.staturewall;
 	
 	// Starting texture coordinate
@@ -116,4 +130,11 @@ void	calc_texturing(t_cub3d *a)
 	a->rayc.texPos = fmin(64, (a->rayc.initwall - a->fconf.yrendersize / 2 + a->rayc.staturewall / 2)
 		* a->rayc.ysteptexture);
 */
+=======
+	a->rayc.steptexture = 1.0 * a->mlibx.xpmwall[a->rayc.wall].img_height / a->rayc.staturewall;
+	
+	// Starting texture coordinate
+	a->rayc.texPos = (a->rayc.initwall - a->fconf.yrendersize / 2 + a->rayc.staturewall / 2)
+		* a->rayc.steptexture;
+>>>>>>> 7ed4adabacaf286875f2032f8ba6e12216b29e06
 }
