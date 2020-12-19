@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 10:25:40 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 10:39:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,7 @@ void	ifimpact(t_cub3d *a)
 			calc_quadrant(a);
 			calc_texture(a);
 			calc_step(a);
+
 			hit = 1;
 		}
 	}
@@ -217,6 +218,9 @@ int		throw_rays(t_cub3d *a)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
+		
+//		calc_hypotenuses(a);
+		
 		ifimpact(a);
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
 		a->rayc.distance = a->rayc.distance
@@ -227,6 +231,7 @@ int		throw_rays(t_cub3d *a)
 		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
 		calc_texturing(a);
 		pointillism(a);
+		print_direction(a);
 		a->rayc.nbr_ray++;
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);

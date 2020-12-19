@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 10:22:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 10:39:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct	s_texture_xpm
 {
 	void	*mlx;
 	t_data	*img;
-	char	relative_path;
+	char	*relative_path;
 	int		img_width;
 	int		img_height;
 }				t_texture;
@@ -210,5 +210,7 @@ void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
 void			print_struct(t_cub3d *a);
 void			print_textures(t_cub3d *a);
+void	print_divide(double x, int y);
+void	print_direction(t_cub3d *a);
 
 #endif
