@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/19 12:34:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:37:58 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	pointillism(t_cub3d *a)
 //			a->rayc.texPos = fmin(64, a->rayc.texPos);//Necessary?
 			color = a->mlibx.xpmwall[a->rayc.wall].img->addr[a->mlibx.xpmwall[a->rayc.wall].img_height
 					* a->rayc.ytexture + a->rayc.xtexture];
-//			print_textures(a);
 			brushstroke(a, a->rayc.nbr_ray, point, color);
 //			my_mlx_pixel_put(a, a->rayc.nbr_ray, point, color);
 		}
