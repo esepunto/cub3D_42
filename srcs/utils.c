@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 13:49:32 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:34:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ void	delmem(t_cub3d *a)
 	}
 }
 
+void	print_direction(t_cub3d *a)
+{
+		printf("quadrant: %d\n", a->rayc.quadrant);
+		printf("xhit: %d\n", a->rayc.xhit);
+		printf("yhit: %d\n", a->rayc.yhit);
+		printf("xstep: %f - ystep: %f\n", a->rayc.xstep, a->rayc.ystep);
+		printf("xwallhit: %f\n", a->rayc.xwallhit);
+		printf("xtexture: %d\n", a->rayc.xtexture);
+		printf("ytexture: %d\n", a->rayc.ytexture);
+		printf("steptexture: %f\n", a->rayc.ysteptexture);
+		printf("texturePos: %f\n\n", a->rayc.texPos);
+}
+
 int		msg_err(char *error)
 {
 	ft_printf("Error\n%s\n\n", error);
@@ -35,6 +48,12 @@ int		msg_err(char *error)
 	exit(0);
 }
 
+void	print_divide(double x, int y)
+{
+	int f = (x * y) /1;
+	printf("%d", f);
+	exit (0);
+}
 void	print_struct(t_cub3d *a)
 {
 
@@ -59,6 +78,7 @@ void	print_textures(t_cub3d *a)
 		printf("%d\n", a->mlibx.xpmwall[c].img->line_length);
 		printf("%d\n", a->mlibx.xpmwall[c].img->endian);
 		printf("%p\n", a->mlibx.xpmwall[c].img);
+		printf("%s\n\n", a->mlibx.xpmwall[c].relative_path);
 		c++;
 	}
 }

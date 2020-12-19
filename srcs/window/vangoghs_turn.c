@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 14:21:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 12:34:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	pointillism(t_cub3d *a)
 		else if (point < a->rayc.endwall)
 		{
 
-			a->rayc.ytexture = (int)a->rayc.texPos & (a->mlibx.xpmwall[a->rayc.wall].img_height - 1);
-			a->rayc.texPos += a->rayc.steptexture;
+			a->rayc.ytexture = (int)a->rayc.texPos;// &(a->mlibx.xpmwall[a->rayc.wall].img_height - 1);
+			a->rayc.texPos += a->rayc.ysteptexture;
+//			a->rayc.texPos = fmin(64, a->rayc.texPos);//Necessary?
 			color = a->mlibx.xpmwall[a->rayc.wall].img->addr[a->mlibx.xpmwall[a->rayc.wall].img_height
 					* a->rayc.ytexture + a->rayc.xtexture];
 //			print_textures(a);

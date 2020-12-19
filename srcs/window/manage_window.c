@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/15 12:50:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/19 09:27:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		close_window(t_cub3d *a)
 {
 	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
+	delmem(a);
 	system("leaks cub3D");
 	exit(0);
 }
@@ -32,7 +33,6 @@ void	rescale_screen(t_cub3d *a)
 	int	sizey;
 	
 	mlx_get_screen_size(a->mlibx.mlx, &sizex, &sizey);
-	printf("resolución pantalla. X: %d - Y: %d\n", sizex, sizey);
 	if (sizex && sizey)
 	{
 		if (sizex < a->fconf.xrendersize && sizey >= a->fconf.yrendersize)
