@@ -6,11 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/12/19 12:34:27 by ssacrist         ###   ########.fr       */
-=======
-/*   Updated: 2020/12/19 10:54:46 by ssacrist         ###   ########.fr       */
->>>>>>> 7ed4adabacaf286875f2032f8ba6e12216b29e06
+/*   Updated: 2020/12/21 07:40:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +36,9 @@ void	print_direction(t_cub3d *a)
 		printf("xstep: %f - ystep: %f\n", a->rayc.xstep, a->rayc.ystep);
 		printf("xwallhit: %f\n", a->rayc.xwallhit);
 		printf("xtexture: %d\n", a->rayc.xtexture);
-<<<<<<< HEAD
 		printf("ytexture: %d\n", a->rayc.ytexture);
 		printf("steptexture: %f\n", a->rayc.ysteptexture);
 		printf("texturePos: %f\n\n", a->rayc.texPos);
-=======
-		printf("xsteptexture: %f\n\n", a->rayc.steptexture);
->>>>>>> 7ed4adabacaf286875f2032f8ba6e12216b29e06
 }
 
 int		msg_err(char *error)
