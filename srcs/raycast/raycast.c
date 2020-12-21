@@ -6,13 +6,22 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 15:48:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:46:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /*
+**  _______________________________
+**  |  char *id | c |   element   |
+**  |___________|___|_____________|
+**  |	"NO"    | 0 |    north    |
+**  |	"SO"    | 1 |    south    |
+**  |	"WE"    | 2 |    west     |
+**  |	"EA"    | 3 |    east     |
+**  |___________|___|_____________|
+** 
 ** Every ray that hits a wall impact on x,y coordenates.
 ** To calculate the texture of the wall impacted by the ray, we
 ** need to know 2 data:
@@ -27,6 +36,12 @@
 **    Texture E on 3 and 4 quadrants.
 */
 
+/*
+WE ./wolftex/bluestone.xpm
+EA ./wolftex/eagle.xpm
+SO ./wolftex/greystone.xpm
+NO ./wolftex/redbrick.xpm */
+
 // REVIEW THIS!!! Are good calcs?? 
 
 void	calc_texture(t_cub3d *a)
@@ -36,16 +51,16 @@ void	calc_texture(t_cub3d *a)
 	if (a->rayc.xhit == 1)
 	{
 		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
-			a->rayc.wall = 1;//North
+			a->rayc.wall = 2;//West 
 		else if (a->rayc.quadrant == 2 || a->rayc.quadrant == 3)
-			a->rayc.wall = 0;//South
+			a->rayc.wall = 3;//East
 	}
 	else if (a->rayc.yhit == 1)
 	{
 		if (a->rayc.quadrant == 1 || a->rayc.quadrant == 2)
-			a->rayc.wall = 3;//East
+			a->rayc.wall = 0;//North
 		else if (a->rayc.quadrant == 3 || a->rayc.quadrant == 4)
-			a->rayc.wall = 2;//West
+			a->rayc.wall = 1;//South
 	}
 }
 
@@ -54,10 +69,10 @@ void	calc_texture(t_cub3d *a)
 ** its quadrant's angle (1, 2, 3 or 4).
 **
 **       |
-**   4   |   1
+**   3   |   4
 ** ______|_______
 **       |
-**   3   |   2
+**   2   |   1
 **       |
 */
 
@@ -110,7 +125,7 @@ void	calc_step(t_cub3d *a)
 }
 
 
-void	if_impact(t_cub3d *a)
+/* void	if_impact(t_cub3d *a)
 {
 	a->rayc.hit = 0;
 	while (a->rayc.hit == 0 && ((int)a->rayc.yray >= a->fconf.map.first_line
@@ -154,7 +169,7 @@ void	calc_hypotenuses(t_cub3d *a)
 	a->rayc.yhypo2coord = a->rayc.ydist2coord / sin(a->rayc.anglray);
 	a->rayc.xhypo = a->rayc.xstep / cos(a->rayc.anglray);
 	a->rayc.yhypo = a->rayc.ystep / sin(a->rayc.anglray);//Ojo, review
-}
+} */
 
 /*
 ** Every ray that hits a wall impact on x,y coordenates.
@@ -202,7 +217,7 @@ void	ifimpact(t_cub3d *a)
 ** 4. Calc the increment (lines 138-139).
 ** 5. Calc the impact (line 140).
 ** 6. Calc the corrected player's distance to the hit point (lines 141-142).
-** 7. Calc the height of the wall (line 143).
+** 7. Calc the height of the wall (line 143). Tiene en cuenta la resolución dada.
 ** 8. Calc the screen pixel where we should start drawing the wall
 **    (initwall) and where to end up (endwall) (lines 144-145).
 ** 9. Save on an image the picture to paint (line 146).
@@ -219,29 +234,21 @@ int		throw_rays(t_cub3d *a)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
-		
-//		calc_hypotenuses(a);
-		
 		ifimpact(a);
-		
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-		
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
-		
-		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-				a->fconf.yrendersize / a->rayc.distance);
-		
+//		a->rayc.staturewall = a->fconf.yrendersize / a->rayc.distance * a->fconf.xrendersize / a->fconf.yrendersize;//Se tiene en cuenta la resolución dads para no distorsionar la imagen.
+		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;//Lo mismo de arriba 
+//		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+//				a->fconf.yrendersize / a->rayc.distance);
 		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
-		
 		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
-//		print_wall(a);
+//		printf("quadrant: %d\n", a->rayc.quadrant);
 		calc_texturing(a);
-//		print_addr(a);
 		pointillism(a);
 		a->rayc.nbr_ray++;
 	}
-
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 16:14:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:09:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 **  |	"WE"    | 2 |    west     |
 **  |	"EA"    | 3 |    east     |
 **  |___________|___|_____________|
-**
 **  This functions save the .xpm as a image at struct t_data img
 **
 **  If textures exist are checked previously at review_params.c
@@ -62,11 +61,11 @@ void	calc_texturing(t_cub3d *a)
 	
 	a->rayc.xwallhit -= floor(a->rayc.xwallhit);
 	
- 	a->rayc.xtexture = (a->rayc.xwallhit
-			* a->mlibx.xpmwall[a->rayc.wall].img_width) / 1; 
+//	a->rayc.xtexture = (a->rayc.xwallhit
+//			* a->mlibx.xpmwall[a->rayc.wall].img_width) / 1; 
 	
-/*	a->rayc.xtexture = (int)(a->rayc.xwallhit
-			* (double)a->mlibx.xpmwall[a->rayc.wall].img_width);*/
+	a->rayc.xtexture = (int)(a->rayc.xwallhit
+			* (double)a->mlibx.xpmwall[a->rayc.wall].img_width);
 	
 	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0)
 			|| (a->rayc.yhit == 1 && a->rayc.quadrant < 3))

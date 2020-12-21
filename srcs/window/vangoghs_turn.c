@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 16:15:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:30:49 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	pointillism(t_cub3d *a)
 			brushstroke(&a->mlibx.img, a->rayc.nbr_ray, point, a->fconf.ceilcolor);
 		else if (point < a->rayc.endwall)
 		{
-			if (a->rayc.ytexturefloat < 0)
+/*			if (a->rayc.ytexturefloat < 0)
 				a->rayc.ytexturefloat = 0;
-			if (a->rayc.ytexturefloat >
+*/			if (a->rayc.ytexturefloat >
 						a->mlibx.xpmwall[a->rayc.wall].img_height - 1)
 			{
 				a->rayc.ytexturefloat =
