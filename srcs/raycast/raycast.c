@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 17:46:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 17:58:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,12 @@
 **   2. The quadrant of the ray's angle.
 ** So:
 ** If impact on x coordenate:
-**    Texture S on 1 and 4 quadrants.
-**    Texture N on 2 and 3 quadrants.
+**    Texture W on 1 and 4 quadrants.
+**    Texture E on 2 and 3 quadrants.
 ** If impact on y coordenate:
-**    Texture W on 1 and 2 quadrants.
-**    Texture E on 3 and 4 quadrants.
+**    Texture N on 1 and 2 quadrants.
+**    Texture S on 3 and 4 quadrants.
 */
-
-/*
-WE ./wolftex/bluestone.xpm
-EA ./wolftex/eagle.xpm
-SO ./wolftex/greystone.xpm
-NO ./wolftex/redbrick.xpm */
-
-// REVIEW THIS!!! Are good calcs?? 
 
 void	calc_texture(t_cub3d *a)
 {
@@ -235,13 +227,18 @@ int		throw_rays(t_cub3d *a)
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);
+
+		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+				a->fconf.xrendersize / a->rayc.distance);
+
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-		a->rayc.distance = a->rayc.distance
+		if (a->rayc.staturewall <= a->fconf.yrendersize)
+			a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 //		a->rayc.staturewall = a->fconf.yrendersize / a->rayc.distance * a->fconf.xrendersize / a->fconf.yrendersize;//Se tiene en cuenta la resolución dads para no distorsionar la imagen.
-		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;//Lo mismo de arriba 
+//		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;//Lo mismo de arriba 
 //		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-//				a->fconf.yrendersize / a->rayc.distance);
+//				a->fconf.xrendersize / a->rayc.distance);
 		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
 		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
 //		printf("quadrant: %d\n", a->rayc.quadrant);
