@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 14:24:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 15:48:39 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,6 @@ int		throw_rays(t_cub3d *a)
 		calc_texturing(a);
 //		print_addr(a);
 		pointillism(a);
-//		print_direction(a);
 		a->rayc.nbr_ray++;
 	}
 

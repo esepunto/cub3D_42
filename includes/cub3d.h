@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 15:19:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 16:13:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,16 @@ typedef struct	s_data
 typedef struct	s_texture_xpm
 {
 	void	*mlx;
-	t_data	*img;
+//	t_data	*img;
 	char	*relative_path;
 	int		img_width;
 	int		img_height;
+	
+	void	*img;
+	int		*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }				t_texture;
 
 typedef struct	s_minilibx

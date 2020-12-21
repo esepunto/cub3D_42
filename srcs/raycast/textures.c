@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 14:53:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 16:14:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ void	save_textures(t_cub3d *a)
 				a->mlibx.xpmwall[c].relative_path,
 				&a->mlibx.xpmwall[c].img_width,
 				&a->mlibx.xpmwall[c].img_height);
-		a->mlibx.xpmwall[c].img->addr = mlx_get_data_addr
+		a->mlibx.xpmwall[c].addr = (int*)mlx_get_data_addr
 				(a->mlibx.xpmwall[c].img,
-				&a->mlibx.xpmwall[c].img->bits_per_pixel,
-				&a->mlibx.xpmwall[c].img->line_length,
-				&a->mlibx.xpmwall[c].img->endian);
+				&a->mlibx.xpmwall[c].bits_per_pixel,
+				&a->mlibx.xpmwall[c].line_length,
+				&a->mlibx.xpmwall[c].endian);
 	}
 //	print_textures(a);
+//	print_addr(a);
 }
 
 void	calc_texturing(t_cub3d *a)

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 14:17:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 16:13:59 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	delmem(t_cub3d *a)
 	}
 }
 
-void	print_addr(t_cub3d *a)
+ void	print_addr(t_cub3d *a)
 {
 	int c = 0;
 
-	while (a->mlibx.xpmwall[a->rayc.wall].img->addr && c < 100)
+	while (a->mlibx.xpmwall[a->rayc.wall].addr && c < 100)
 	{
-		printf("dst: %s - ", a->mlibx.xpmwall[a->rayc.wall].img->addr);
-		a->mlibx.xpmwall[a->rayc.wall].img->addr++;
+//		printf("dst: %d\n", a->mlibx.xpmwall[a->rayc.wall].addr);
+		a->mlibx.xpmwall[a->rayc.wall].addr++;
 		c++;
 	}
 	printf("\nc: %d\n", c);
@@ -57,7 +57,7 @@ void	print_color(t_cub3d *a)
 	printf("xtexture: %d\n", a->rayc.xtexture);
 	printf("ytexture: %d\n", a->rayc.ytexture);
 	printf("my_color: %d\n", my_color);
-	printf("color: %c\n\n", a->mlibx.xpmwall[a->rayc.wall].img->addr[my_color]);
+	printf("color: %c\n\n", a->mlibx.xpmwall[a->rayc.wall].addr[my_color]);
 }
 
 void	print_wall(t_cub3d *a)
@@ -73,11 +73,11 @@ void	print_direction(t_cub3d *a)
 	printf("xhit: %d\n", a->rayc.xhit);
 	printf("yhit: %d\n", a->rayc.yhit);
 	printf("xstep: %f - ystep: %f\n", a->rayc.xstep, a->rayc.ystep);
-*/	printf("xwallhit: %f\n", a->rayc.xwallhit);
-	printf("xtexture: %d\n", a->rayc.xtexture);
+	printf("xwallhit: %f\n", a->rayc.xwallhit);
+*/	printf("xtexture: %d\n", a->rayc.xtexture);
 	printf("ytexture: %d\n", a->rayc.ytexture);
-	printf("ytexturefloat: %f\n", a->rayc.ytexturefloat);
-	printf("steptexture: %f\n", a->rayc.ysteptexture);
+//	printf("ytexturefloat: %f\n", a->rayc.ytexturefloat);
+//	printf("steptexture: %f\n\n", a->rayc.ysteptexture);
 }
 
 void	print_divide(double x, int y)
@@ -105,10 +105,10 @@ void	print_textures(t_cub3d *a)
 	int c = 0;
 	while (c <= 3)
 	{
-		printf("%p\n", a->mlibx.xpmwall[c].img->addr);
-		printf("%d\n", a->mlibx.xpmwall[c].img->bits_per_pixel);
-		printf("%d\n", a->mlibx.xpmwall[c].img->line_length);
-		printf("%d\n", a->mlibx.xpmwall[c].img->endian);
+		printf("%p\n", a->mlibx.xpmwall[c].addr);
+		printf("%d\n", a->mlibx.xpmwall[c].bits_per_pixel);
+		printf("%d\n", a->mlibx.xpmwall[c].line_length);
+		printf("%d\n", a->mlibx.xpmwall[c].endian);
 		printf("%p\n", a->mlibx.xpmwall[c].img);
 		printf("heigth: %d\n", a->mlibx.xpmwall[c].img_height);
 		printf("width: %d\n", a->mlibx.xpmwall[c].img_width);
@@ -122,10 +122,10 @@ void	print_texture(t_cub3d *a)
 	int c;
 	
 	c = a->rayc.wall;
-	printf("%p\n", a->mlibx.xpmwall[c].img->addr);
-	printf("%d\n", a->mlibx.xpmwall[c].img->bits_per_pixel);
-	printf("%d\n", a->mlibx.xpmwall[c].img->line_length);
-	printf("%d\n", a->mlibx.xpmwall[c].img->endian);
+	printf("%p\n", a->mlibx.xpmwall[c].addr);
+	printf("%d\n", a->mlibx.xpmwall[c].bits_per_pixel);
+	printf("%d\n", a->mlibx.xpmwall[c].line_length);
+	printf("%d\n", a->mlibx.xpmwall[c].endian);
 	printf("%p\n", a->mlibx.xpmwall[c].img);
 	printf("heigth: %d\n", a->mlibx.xpmwall[c].img_height);
 	printf("width: %d\n", a->mlibx.xpmwall[c].img_width);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 14:46:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 16:15:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 
 void	pointillism(t_cub3d *a)
 {
-	int			point;
-	int			color;
+	int				point;
+	unsigned int	color;
 
 	point = 0;
 	while (point < a->fconf.yrendersize)
@@ -51,9 +51,10 @@ void	pointillism(t_cub3d *a)
 						a->mlibx.xpmwall[a->rayc.wall].img_height - 1;
 			}
 			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
-			color = a->mlibx.xpmwall[a->rayc.wall].img->addr[
+			color = a->mlibx.xpmwall[a->rayc.wall].addr[
 					a->mlibx.xpmwall[a->rayc.wall].img_height
 					* a->rayc.ytexture + a->rayc.xtexture];
+//			print_direction(a);
 			brushstroke(&a->mlibx.img, a->rayc.nbr_ray, point, color);
 			a->rayc.ytexturefloat += a->rayc.ysteptexture;
 		}
