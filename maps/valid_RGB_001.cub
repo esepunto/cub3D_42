@@ -2,7 +2,7 @@ WE ./wolftex/bluestone.xpm
 EA ./wolftex/eagle.xpm
 SO ./wolftex/greystone.xpm
 NO ./wolftex/redbrick.xpm
-R 780 420
+R 500 300
 S ./wolftex/barrel.png
 F 28,189,42
 C 134,231,236

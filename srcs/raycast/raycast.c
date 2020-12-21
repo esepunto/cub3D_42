@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 07:40:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 10:55:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 **   2. The quadrant of the ray's angle.
 ** So:
 ** If impact on x coordenate:
-**    Texture N on 1 and 4 quadrants.
-**    Texture S on 2 and 3 quadrants.
+**    Texture S on 1 and 4 quadrants.
+**    Texture N on 2 and 3 quadrants.
 ** If impact on y coordenate:
-**    Texture E on 1 and 2 quadrants.
-**    Texture W on 3 and 4 quadrants.
+**    Texture W on 1 and 2 quadrants.
+**    Texture E on 3 and 4 quadrants.
 */
+
+// REVIEW THIS!!! Are good calcs?? 
 
 void	calc_texture(t_cub3d *a)
 {
@@ -34,16 +36,16 @@ void	calc_texture(t_cub3d *a)
 	if (a->rayc.xhit == 1)
 	{
 		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
-			a->rayc.wall = 0;//North
+			a->rayc.wall = 1;//North
 		else if (a->rayc.quadrant == 2 || a->rayc.quadrant == 3)
-			a->rayc.wall = 1;//South
+			a->rayc.wall = 0;//South
 	}
 	else if (a->rayc.yhit == 1)
 	{
 		if (a->rayc.quadrant == 1 || a->rayc.quadrant == 2)
-			a->rayc.wall = 2;//East
+			a->rayc.wall = 3;//East
 		else if (a->rayc.quadrant == 3 || a->rayc.quadrant == 4)
-			a->rayc.wall = 3;//West
+			a->rayc.wall = 2;//West
 	}
 }
 
@@ -229,11 +231,14 @@ int		throw_rays(t_cub3d *a)
 				a->fconf.yrendersize / a->rayc.distance);
 		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
 		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
+//		print_wall(a);
 		calc_texturing(a);
+//		print_addr(a);
 		pointillism(a);
-		print_direction(a);
+//		print_direction(a);
 		a->rayc.nbr_ray++;
 	}
+
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 	return (0);
 }

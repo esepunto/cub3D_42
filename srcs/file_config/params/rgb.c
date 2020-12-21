@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 09:56:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 11:41:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void		isdigit_str(char *nbr)
 	}
 }
 
-uint32_t	ceilfloorcolor(int c, t_cub3d *a)
+//uint32_t	ceilfloorcolor(int c, t_cub3d *a)
+int	ceilfloorcolor(int c, t_cub3d *a)
 {
 	int	r;
 	int g;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 07:40:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 12:14:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,17 @@ typedef struct	s_raycast
 	int		endwall;
 	double	staturewall;
 	int		nbr_ray;
-	bool		xhit;
-	bool		yhit;
-	uint32_t	wallcolor;
+	bool	xhit;
+	bool	yhit;
+	int		wallcolor;
 	int		keycode;
 	
 	double	xwallhit;
 	double	ywallhit;
 	int		xtexture;
 	int		ytexture;
+	double	ytexturefloat;
 	double	ysteptexture;
-	double	texPos;
 	int		wall;
 
 
@@ -182,7 +182,8 @@ int				nbr_plyrs(int i, int j, t_cub3d *a);
 void			review_maze(t_cub3d *a);
 void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
-uint32_t		ceilfloorcolor(int c, t_cub3d *a);
+//uint32_t		ceilfloorcolor(int c, t_cub3d *a);
+int		ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
@@ -193,7 +194,7 @@ void			rescale_screen(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-void			brushstroke(t_cub3d *a, int x, int y, int color);
+void	brushstroke(t_data *img, int x, int y, int color);
 void			pointillism(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
@@ -210,7 +211,11 @@ void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
 void			print_struct(t_cub3d *a);
 void			print_textures(t_cub3d *a);
+void			print_texture(t_cub3d *a);
 void	print_divide(double x, int y);
 void	print_direction(t_cub3d *a);
+void	print_wall(t_cub3d *a);
+void	print_color(t_cub3d *a);
+void	print_addr(t_cub3d *a);
 
 #endif
