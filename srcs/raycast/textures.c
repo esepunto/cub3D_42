@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 12:14:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:53:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ void	save_textures(t_cub3d *a)
 	while (++c <= 3)
 	{
 		a->mlibx.xpmwall[c].relative_path = a->fconf.wall_texture[c];
-		a->mlibx.xpmwall[c].img = mlx_xpm_file_to_image(a->mlibx.mlx,
-				a->mlibx.xpmwall[c].relative_path, &a->mlibx.xpmwall[c].img_width,
+		a->mlibx.xpmwall[c].img = mlx_xpm_file_to_image
+				(a->mlibx.mlx,
+				a->mlibx.xpmwall[c].relative_path,
+				&a->mlibx.xpmwall[c].img_width,
 				&a->mlibx.xpmwall[c].img_height);
-		a->mlibx.xpmwall[c].img->addr = mlx_get_data_addr(a->mlibx.xpmwall[c].img,
-			&a->mlibx.xpmwall[c].img->bits_per_pixel, &a->mlibx.xpmwall[c].img->line_length,
-			&a->mlibx.xpmwall[c].img->endian);
+		a->mlibx.xpmwall[c].img->addr = mlx_get_data_addr
+				(a->mlibx.xpmwall[c].img,
+				&a->mlibx.xpmwall[c].img->bits_per_pixel,
+				&a->mlibx.xpmwall[c].img->line_length,
+				&a->mlibx.xpmwall[c].img->endian);
 	}
 //	print_textures(a);
 }
@@ -51,15 +55,29 @@ void	calc_texturing(t_cub3d *a)
 {
 	if (a->rayc.xhit == 1)
 		a->rayc.xwallhit = a->rayc.yray;
+	
 	else if (a->rayc.yhit == 1)
 		a->rayc.xwallhit = a->rayc.xray;
+	
 	a->rayc.xwallhit -= floor(a->rayc.xwallhit);
-	a->rayc.xtexture = (a->rayc.xwallhit * a->mlibx.xpmwall[a->rayc.wall].img_width) / 1;
-	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0) || (a->rayc.yhit == 1 && a->rayc.quadrant < 3))
-		a->rayc.xtexture = a->mlibx.xpmwall[a->rayc.wall].img_width
-			- a->rayc.xtexture -1;//Lodev resta -1
-	a->rayc.ysteptexture = 1.0 * a->mlibx.xpmwall[a->rayc.wall].img_height / a->rayc.staturewall;
-	a->rayc.ytexturefloat = fmin(a->mlibx.xpmwall[a->rayc.wall].img_height,
-		(a->rayc.initwall + a->rayc.staturewall / 2 - a->fconf.yrendersize / 2)
-		* a->rayc.ysteptexture);
+	
+ 	a->rayc.xtexture = (a->rayc.xwallhit
+			* a->mlibx.xpmwall[a->rayc.wall].img_width) / 1; 
+	
+/*	a->rayc.xtexture = (int)(a->rayc.xwallhit
+			* (double)a->mlibx.xpmwall[a->rayc.wall].img_width);*/
+	
+	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0)
+			|| (a->rayc.yhit == 1 && a->rayc.quadrant < 3))
+	{
+		a->rayc.xtexture =
+			a->mlibx.xpmwall[a->rayc.wall].img_width - 1 - a->rayc.xtexture;
 	}
+	
+	a->rayc.ysteptexture = 1.0 * a->mlibx.xpmwall[a->rayc.wall].img_height
+			/ a->rayc.staturewall;
+	
+	a->rayc.ytexturefloat = a->rayc.ysteptexture *
+			(a->rayc.initwall + a->rayc.staturewall / 2
+			- a->fconf.yrendersize / 2);
+}

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 12:20:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:46:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,18 @@ void	pointillism(t_cub3d *a)
 			brushstroke(&a->mlibx.img, a->rayc.nbr_ray, point, a->fconf.ceilcolor);
 		else if (point < a->rayc.endwall)
 		{
-			color = a->mlibx.xpmwall[a->rayc.wall].img->addr[a->mlibx.xpmwall[a->rayc.wall].img_width
-					* (int)a->rayc.ytexturefloat + a->rayc.xtexture];
+			if (a->rayc.ytexturefloat < 0)
+				a->rayc.ytexturefloat = 0;
+			if (a->rayc.ytexturefloat >
+						a->mlibx.xpmwall[a->rayc.wall].img_height - 1)
+			{
+				a->rayc.ytexturefloat =
+						a->mlibx.xpmwall[a->rayc.wall].img_height - 1;
+			}
+			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+			color = a->mlibx.xpmwall[a->rayc.wall].img->addr[
+					a->mlibx.xpmwall[a->rayc.wall].img_height
+					* a->rayc.ytexture + a->rayc.xtexture];
 			brushstroke(&a->mlibx.img, a->rayc.nbr_ray, point, color);
 			a->rayc.ytexturefloat += a->rayc.ysteptexture;
 		}

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 10:55:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:24:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,6 @@ void	ifimpact(t_cub3d *a)
 			calc_quadrant(a);
 			calc_texture(a);
 			calc_step(a);
-
 			hit = 1;
 		}
 	}
@@ -224,12 +223,17 @@ int		throw_rays(t_cub3d *a)
 //		calc_hypotenuses(a);
 		
 		ifimpact(a);
+		
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
+		
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
+		
 		a->rayc.staturewall = fmin(a->fconf.yrendersize,
 				a->fconf.yrendersize / a->rayc.distance);
+		
 		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
+		
 		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
 //		print_wall(a);
 		calc_texturing(a);

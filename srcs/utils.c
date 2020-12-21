@@ -6,11 +6,18 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 12:15:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:17:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int		msg_err(char *error)
+{
+	ft_printf("Error\n%s\n\n", error);
+	system("leaks cub3D");
+	exit(0);
+}
 
 void	delmem(t_cub3d *a)
 {
@@ -73,13 +80,6 @@ void	print_direction(t_cub3d *a)
 	printf("steptexture: %f\n", a->rayc.ysteptexture);
 }
 
-int		msg_err(char *error)
-{
-	ft_printf("Error\n%s\n\n", error);
-	system("leaks cub3D");
-	exit(0);
-}
-
 void	print_divide(double x, int y)
 {
 	int f = (x * y) /1;
@@ -131,12 +131,6 @@ void	print_texture(t_cub3d *a)
 	printf("width: %d\n", a->mlibx.xpmwall[c].img_width);
 	printf("%s\n\n", a->mlibx.xpmwall[c].relative_path);
 }
-
-
-
-
-
-
 
 void	print_fconfig(t_cub3d *a)
 {

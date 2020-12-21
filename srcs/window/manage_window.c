@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/19 09:27:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/21 14:19:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		raycast(t_cub3d *a)
 	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
 	return (0);
 }
-
 
 void	rescale_screen(t_cub3d *a)
 {
@@ -48,7 +47,6 @@ void	rescale_screen(t_cub3d *a)
 		}
 	}
 }
-
 
 void	init_window(t_cub3d *a)
 {
