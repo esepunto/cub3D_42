@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 17:09:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/22 15:35:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	save_textures(t_cub3d *a)
 				&a->mlibx.xpmwall[c].line_length,
 				&a->mlibx.xpmwall[c].endian);
 	}
-//	print_textures(a);
-//	print_addr(a);
 }
 
 void	calc_texturing(t_cub3d *a)
@@ -61,11 +59,8 @@ void	calc_texturing(t_cub3d *a)
 	
 	a->rayc.xwallhit -= floor(a->rayc.xwallhit);
 	
-//	a->rayc.xtexture = (a->rayc.xwallhit
-//			* a->mlibx.xpmwall[a->rayc.wall].img_width) / 1; 
-	
-	a->rayc.xtexture = (int)(a->rayc.xwallhit
-			* (double)a->mlibx.xpmwall[a->rayc.wall].img_width);
+	a->rayc.xtexture = (a->rayc.xwallhit
+			* a->mlibx.xpmwall[a->rayc.wall].img_width) / 1;
 	
 	if ((a->rayc.xhit == 1 && a->rayc.xstep < 0)
 			|| (a->rayc.yhit == 1 && a->rayc.quadrant < 3))
@@ -80,4 +75,10 @@ void	calc_texturing(t_cub3d *a)
 	a->rayc.ytexturefloat = a->rayc.ysteptexture *
 			(a->rayc.initwall + a->rayc.staturewall / 2
 			- a->fconf.yrendersize / 2);
+	
+	printf("stature: %f\n", a->rayc.staturewall);
+	printf("init: %d\n", a->rayc.initwall);
+	printf("end: %d\n", a->rayc.endwall);
+//	if (a->rayc.staturewall > a->fconf.yrendersize)
+//		a->rayc.ytexturefloat = a->fconf.yrendersize / 2;
 }

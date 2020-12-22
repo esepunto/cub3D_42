@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 16:13:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/22 12:38:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	print_direction(t_cub3d *a)
 	printf("yhit: %d\n", a->rayc.yhit);
 	printf("xstep: %f - ystep: %f\n", a->rayc.xstep, a->rayc.ystep);
 	printf("xwallhit: %f\n", a->rayc.xwallhit);
-*/	printf("xtexture: %d\n", a->rayc.xtexture);
-	printf("ytexture: %d\n", a->rayc.ytexture);
-//	printf("ytexturefloat: %f\n", a->rayc.ytexturefloat);
-//	printf("steptexture: %f\n\n", a->rayc.ysteptexture);
+	printf("xtexture: %d\n", a->rayc.xtexture);
+*/	printf("ytexture: %d\n", a->rayc.ytexture);
+//	printf("ytexturefloat: %f - ", a->rayc.ytexturefloat);
+//	printf("steptexture: %f\n", a->rayc.ysteptexture);
 }
 
 void	print_divide(double x, int y)

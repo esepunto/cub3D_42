@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 16:13:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/22 14:33:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,12 @@ typedef struct	s_raycast
 	double	ytexturefloat;
 	double	ysteptexture;
 	int		wall;
+	
+	double vert_angl;
+	
+	int		palette;
+	
+	double	sizecell;
 
 
 	
@@ -193,14 +199,16 @@ int		ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
+void	wall_so_close(t_cub3d *a);
 
+void	calc_vertangl(t_cub3d *a);
 
 void			init_window(t_cub3d *a);
 void			rescale_screen(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-void	brushstroke(t_data *img, int x, int y, int color);
+void	brushstroke(int x, int y, t_cub3d *a);
 void			pointillism(t_cub3d *a);
 
 int				raycast(t_cub3d *a);

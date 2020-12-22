@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 17:58:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/22 16:03:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,127 @@ void	calc_step(t_cub3d *a)
 		a->rayc.ystep = floor(sin(a->rayc.anglray));
 }
 
+void	calc_vertangl(t_cub3d *a)
+{
+	double	oppo;
+	double	hypo;
+	double distance;
+
+	a->rayc.sizecell = (a->fconf.xrendersize) / (2 * (a->fconf.map.col - (a->fconf.final_line_params + 1)));
+	distance = a->rayc.distance * (a->fconf.xrendersize / a->rayc.sizecell);
+	oppo = a->rayc.staturewall / 2;
+	hypo = hypot(oppo, distance);
+	a->rayc.vert_angl = asin(hypo);
+	printf("distance: %f - ", distance);
+	printf("sizecell: %f - ", a->rayc.sizecell);
+	printf("oppo: %f - ", oppo);
+	printf("hypot: %f - ", hypo);
+	printf("vertangle: %f - ", a->rayc.vert_angl);
+	printf("oppo/dist (sin alpha): %f - ", oppo / distance);
+	printf("sin(oppo/dist): %f\n", sin(oppo / distance));
+}
+
+/*
+** Every ray that hits a wall impact on x,y coordenates.
+** To calculate the texture of the wall impacted by the ray, we
+** need to know 2 data:
+**   1. The exactly x or y coordenate when ray impacts.
+**   2. The quadrant of the ray's angle.
+** So:
+** If impact on x coordenate:
+**    Texture N on 1 and 4 quadrants.
+**    Texture S on 2 and 3 quadrants.
+** If impact on y coordenate:
+**    Texture E on 1 and 2 quadrants.
+**    Texture W on 3 and 4 quadrants.
+*/
+
+void	ifimpact(t_cub3d *a)
+{
+	int hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		a->rayc.xray += a->rayc.xincrease;
+		a->rayc.yray += a->rayc.yincrease;
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+		{
+			calc_wallimpact(a);
+			calc_quadrant(a);
+			calc_texture(a);
+			calc_step(a);
+
+			hit = 1;
+		}
+	}
+}
+
+
+/*
+**  +*+*+*+* The raycast algorithm *+*+*+*+*
+**
+** 1. Throw a ray from each of the columns on the screen.
+** 2. The ray's init position is the player's position (lines 135-136).
+** 3. Calculate its initial angle (line 137).
+** 4. Calc the increment (lines 138-139).
+** 5. Calc the impact (line 140).
+** 6. Calc the corrected player's distance to the hit point (lines 141-142).
+** 7. Calc the height of the wall (line 143). Tiene en cuenta la resolución dada.
+** 8. Calc the screen pixel where we should start drawing the wall
+**    (initwall) and where to end up (endwall) (lines 144-145).
+** 9. Save on an image the picture to paint (line 146).
+**
+**
+** To avoid distorted images (it depends by resolution on config file): 
+** a->rayc.staturewall = 
+**  a->fconf.yrendersize / a->rayc.distance *
+**  a->fconf.xrendersize / a->fconf.yrendersize; >Multiply by resolution factor
+** And this is the same that:
+** a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
+*/
+
+int		throw_rays(t_cub3d *a)
+{
+	a->rayc.nbr_ray = 0;
+	while (a->rayc.nbr_ray < a->fconf.xrendersize)
+	{
+		a->rayc.xray = a->rayc.xplyr;
+		a->rayc.yray = a->rayc.yplyr;
+		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
+				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
+		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
+		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
+
+		ifimpact(a);
+
+		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
+		a->rayc.distance = a->rayc.distance
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
+
+		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+				a->fconf.xrendersize / a->rayc.distance);
+//		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
+
+		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
+//		a->rayc.initwall = (a->fconf.yrendersize / 2) - (a->rayc.staturewall / 2);
+ //		if (a->rayc.initwall < 0)
+//			a->rayc.initwall = 0;
+		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
+//		a->rayc.endwall = a->rayc.initwall + a->rayc.staturewall;
+//		if (a->rayc.endwall >= a->fconf.yrendersize)
+//			a->rayc.endwall = a->fconf.yrendersize - 1;
+		
+//		calc_vertangl(a);
+		
+		calc_texturing(a);
+		pointillism(a);
+		a->rayc.nbr_ray++;
+	}
+	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+
+	return (0);
+}
 
 /* void	if_impact(t_cub3d *a)
 {
@@ -162,90 +283,3 @@ void	calc_hypotenuses(t_cub3d *a)
 	a->rayc.xhypo = a->rayc.xstep / cos(a->rayc.anglray);
 	a->rayc.yhypo = a->rayc.ystep / sin(a->rayc.anglray);//Ojo, review
 } */
-
-/*
-** Every ray that hits a wall impact on x,y coordenates.
-** To calculate the texture of the wall impacted by the ray, we
-** need to know 2 data:
-**   1. The exactly x or y coordenate when ray impacts.
-**   2. The quadrant of the ray's angle.
-** So:
-** If impact on x coordenate:
-**    Texture N on 1 and 4 quadrants.
-**    Texture S on 2 and 3 quadrants.
-** If impact on y coordenate:
-**    Texture E on 1 and 2 quadrants.
-**    Texture W on 3 and 4 quadrants.
-*/
-
-void	ifimpact(t_cub3d *a)
-{
-	int hit;
-
-	hit = 0;
-	while (hit == 0)
-	{
-		a->rayc.xray += a->rayc.xincrease;
-		a->rayc.yray += a->rayc.yincrease;
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
-		{
-//			printf("x: %f - y: %f\n", a->rayc.xincrease, a->rayc.yincrease);
-			calc_wallimpact(a);
-			calc_quadrant(a);
-			calc_texture(a);
-			calc_step(a);
-			hit = 1;
-		}
-	}
-}
-
-
-/*
-**  +*+*+*+* The raycast algorithm *+*+*+*+*
-**
-** 1. Throw a ray from each of the columns on the screen.
-** 2. The ray's init position is the player's position (lines 135-136).
-** 3. Calculate its initial angle (line 137).
-** 4. Calc the increment (lines 138-139).
-** 5. Calc the impact (line 140).
-** 6. Calc the corrected player's distance to the hit point (lines 141-142).
-** 7. Calc the height of the wall (line 143). Tiene en cuenta la resolución dada.
-** 8. Calc the screen pixel where we should start drawing the wall
-**    (initwall) and where to end up (endwall) (lines 144-145).
-** 9. Save on an image the picture to paint (line 146).
-*/
-
-int		throw_rays(t_cub3d *a)
-{
-	a->rayc.nbr_ray = 0;
-	while (a->rayc.nbr_ray < a->fconf.xrendersize)
-	{
-		a->rayc.xray = a->rayc.xplyr;
-		a->rayc.yray = a->rayc.yplyr;
-		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
-				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
-		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
-		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
-		ifimpact(a);
-
-		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-				a->fconf.xrendersize / a->rayc.distance);
-
-		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-		if (a->rayc.staturewall <= a->fconf.yrendersize)
-			a->rayc.distance = a->rayc.distance
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
-//		a->rayc.staturewall = a->fconf.yrendersize / a->rayc.distance * a->fconf.xrendersize / a->fconf.yrendersize;//Se tiene en cuenta la resolución dads para no distorsionar la imagen.
-//		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;//Lo mismo de arriba 
-//		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-//				a->fconf.xrendersize / a->rayc.distance);
-		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
-		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
-//		printf("quadrant: %d\n", a->rayc.quadrant);
-		calc_texturing(a);
-		pointillism(a);
-		a->rayc.nbr_ray++;
-	}
-	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
-	return (0);
-}
