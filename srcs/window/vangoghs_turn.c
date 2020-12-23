@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/22 16:15:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/24 00:34:49 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,35 @@ void	my_mlx_pixel_put(t_cub3d *a, int x, int y, int color)
 
 void	wall_so_close(t_cub3d *a)
 {
-	static int c = 0;
-	
-	if (c == 0)
+	if (a->rayc.count == 0)
 		a->rayc.ytexturefloat = a->mlibx.xpmwall[a->rayc.wall].img_height / 2;
 	if (a->rayc.ytexturefloat < a->mlibx.xpmwall[a->rayc.wall].img_height)
-		a->rayc.ytexturefloat += a->rayc.ysteptexture;
+		{
+			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+				a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
+					a->mlibx.xpmwall[a->rayc.wall].img_height
+					* a->rayc.ytexture + a->rayc.xtexture];
+			a->rayc.ytexturefloat += a->rayc.ysteptexture;
+		}
 	else 
 	{
 		if (a->rayc.ytexturefloat >= a->mlibx.xpmwall[a->rayc.wall].img_height)
+		{
 			a->rayc.ytexturefloat = (a->mlibx.xpmwall[a->rayc.wall].img_height / 2) - 1;
+			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+				a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
+					a->mlibx.xpmwall[a->rayc.wall].img_height
+					* a->rayc.ytexture + a->rayc.xtexture];
+		}
 		if (a->rayc.ytexturefloat > 0)
 			a->rayc.ytexturefloat -= a->rayc.ysteptexture;
 	}
-//	print_direction(a);
+//	print_wall(a);
+	printf("addr: %d\n", a->mlibx.xpmwall[a->rayc.wall].img_height * a->rayc.ytexture + a->rayc.xtexture);
+	print_direction(a);
 //	printf("%d: wall so close\n", c);
 //	printf("stature: %f\n", a->rayc.staturewall);
-	c++;
+	a->rayc.count++;
 }
 
 
@@ -58,6 +70,7 @@ void	pointillism(t_cub3d *a)
 {
 	int	point;
 
+	a->rayc.count = 0;
 	point = 0;
 	while (point < a->fconf.yrendersize)
 	{
@@ -74,19 +87,29 @@ void	pointillism(t_cub3d *a)
 						a->mlibx.xpmwall[a->rayc.wall].img_height - 1;
 			}
 */			
-			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+/*			a->rayc.ytexture = (int)a->rayc.ytexturefloat;
 			
 			a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
 					a->mlibx.xpmwall[a->rayc.wall].img_height
 					* a->rayc.ytexture + a->rayc.xtexture];
-
+*/
 			if (a->rayc.staturewall > a->fconf.yrendersize)
+			{
 				wall_so_close(a);
+				
+			}
 			else
+			{
+				a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+				a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
+					a->mlibx.xpmwall[a->rayc.wall].img_height
+					* a->rayc.ytexture + a->rayc.xtexture];
 				a->rayc.ytexturefloat += a->rayc.ysteptexture;
+			}
 		}
 		else if (point >= a->rayc.endwall)
 			a->rayc.palette = a->fconf.floorcolor;
+		
 		brushstroke(a->rayc.nbr_ray, point, a);
 		point++;
 	}

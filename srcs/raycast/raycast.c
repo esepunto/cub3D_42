@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/22 16:03:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/23 23:27:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,9 @@ int		throw_rays(t_cub3d *a)
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 
-		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-				a->fconf.xrendersize / a->rayc.distance);
-//		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
+//		a->rayc.staturewall = fmin(a->fconf.yrendersize,
+//				a->fconf.xrendersize / a->rayc.distance);
+		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
 
 		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
 //		a->rayc.initwall = (a->fconf.yrendersize / 2) - (a->rayc.staturewall / 2);

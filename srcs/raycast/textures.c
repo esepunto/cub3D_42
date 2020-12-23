@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/22 15:35:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/23 23:38:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ void	calc_texturing(t_cub3d *a)
 			(a->rayc.initwall + a->rayc.staturewall / 2
 			- a->fconf.yrendersize / 2);
 	
-	printf("stature: %f\n", a->rayc.staturewall);
-	printf("init: %d\n", a->rayc.initwall);
-	printf("end: %d\n", a->rayc.endwall);
+
 //	if (a->rayc.staturewall > a->fconf.yrendersize)
 //		a->rayc.ytexturefloat = a->fconf.yrendersize / 2;
 }

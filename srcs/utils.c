@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/22 12:38:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/24 00:09:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	print_wall(t_cub3d *a)
 {
 	printf("stature : %f\n", a->rayc.staturewall);
 	printf("initwall: %d\n", a->rayc.initwall);
-	printf("endwall : %d\n\n", a->rayc.endwall);
+	printf("endwall : %d\n", a->rayc.endwall);
 }
 
 void	print_direction(t_cub3d *a)
@@ -74,9 +74,9 @@ void	print_direction(t_cub3d *a)
 	printf("yhit: %d\n", a->rayc.yhit);
 	printf("xstep: %f - ystep: %f\n", a->rayc.xstep, a->rayc.ystep);
 	printf("xwallhit: %f\n", a->rayc.xwallhit);
-	printf("xtexture: %d\n", a->rayc.xtexture);
-*/	printf("ytexture: %d\n", a->rayc.ytexture);
-//	printf("ytexturefloat: %f - ", a->rayc.ytexturefloat);
+*/	printf("xtexture: %d\n", a->rayc.xtexture);
+	printf("ytexture: %d\n\n", a->rayc.ytexture);
+//	printf("ytexturefloat: %f - \n\n", a->rayc.ytexturefloat);
 //	printf("steptexture: %f\n", a->rayc.ysteptexture);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/22 14:33:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/24 00:31:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct	s_raycast
 	double	ytexturefloat;
 	double	ysteptexture;
 	int		wall;
+	int		count;
 	
 	double vert_angl;
 	
