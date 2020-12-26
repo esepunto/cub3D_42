@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 10:30:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:07:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	gofront(t_cub3d *a)
+static void	gofront(t_cub3d *a)
 {
 	a->rayc.xplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
@@ -23,7 +23,7 @@ void	gofront(t_cub3d *a)
 	}
 }
 
-void	goback(t_cub3d *a)
+static void	goback(t_cub3d *a)
 {
 	a->rayc.xplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
@@ -34,7 +34,7 @@ void	goback(t_cub3d *a)
 	}
 }
 
-void	goright(t_cub3d *a)
+static void	goright(t_cub3d *a)
 {
 	a->rayc.xplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
@@ -45,7 +45,7 @@ void	goright(t_cub3d *a)
 	}
 }
 
-void	goleft(t_cub3d *a)
+static void	goleft(t_cub3d *a)
 {
 	a->rayc.xplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
@@ -56,7 +56,7 @@ void	goleft(t_cub3d *a)
 	}
 }
 
-int		caress_key(int keycode, t_cub3d *a)
+int			caress_key(int keycode, t_cub3d *a)
 {
 	if (keycode != KEY_ESC && keycode != KEY_MOVE_FRONT
 		&& keycode != KEY_MOVE_BACK && keycode != KEY_MOVE_RIGHT

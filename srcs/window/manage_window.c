@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 10:10:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 12:57:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		close_window(t_cub3d *a)
+int			close_window(t_cub3d *a)
 {
 	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
 	delmem(a);
@@ -20,13 +20,13 @@ int		close_window(t_cub3d *a)
 	exit(0);
 }
 
-int		raycast(t_cub3d *a)
+static int	raycast(t_cub3d *a)
 {
 	mlx_hook(a->mlibx.win, 2, 1L << 17, caress_key, a);
 	return (0);
 }
 
-void	rescale_screen(t_cub3d *a)
+static void	rescale_screen(t_cub3d *a)
 {
 	int	sizex;
 	int	sizey;
@@ -49,7 +49,7 @@ void	rescale_screen(t_cub3d *a)
 	}
 }
 
-void	init_window(t_cub3d *a)
+void		init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
 	rescale_screen(a);

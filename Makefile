@@ -56,3 +56,8 @@ fclean:		clean
 
 
 re: fclean all
+
+norma:	norminette srcs/
+		norminette libft/
+		norminette includes/
+

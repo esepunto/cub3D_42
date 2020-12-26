@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/02 10:44:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:09:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** 		c) resolution
 */
 
-void	review_walls(int c, t_cub3d *a)
+static void	review_walls(int c, t_cub3d *a)
 {
 	int	fd;
 
@@ -34,7 +34,7 @@ void	review_walls(int c, t_cub3d *a)
 		close(fd);
 }
 
-void	review_cefl(int c, t_cub3d *a)
+static void	review_cefl(int c, t_cub3d *a)
 {
 	if (ft_countchr(a->fconf.wall_texture[c], ',') != 2)
 		msg_err("Review RGB colors. Are U in COMMA?");
@@ -44,7 +44,7 @@ void	review_cefl(int c, t_cub3d *a)
 	a->fconf.floorcolor = ceilfloorcolor(1, a);
 }
 
-void	review_res(int c, t_cub3d *a)
+static void	review_res(int c, t_cub3d *a)
 {
 	int		count;
 	char	**size;
@@ -86,7 +86,7 @@ void	review_res(int c, t_cub3d *a)
 **  |___________|___|_____________|
 */
 
-void	review_params(t_cub3d *a)
+void		review_params(t_cub3d *a)
 {
 	int		c;
 

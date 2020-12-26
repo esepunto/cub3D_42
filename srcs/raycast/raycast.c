@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 12:00:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:08:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** of the ray is changed of cell in the last advance.
 */
 
-void	calc_wallimpact(t_cub3d *a)
+static void	calc_wallimpact(t_cub3d *a)
 {
 	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
 		a->rayc.xhit = 1;
@@ -48,7 +48,7 @@ void	calc_wallimpact(t_cub3d *a)
 **       |
 */
 
-void	calc_step_and_quadrant(t_cub3d *a)
+static void	calc_step_and_quadrant(t_cub3d *a)
 {
 	if (cos(a->rayc.anglray) >= 0.0)
 		a->rayc.xstep = ceil(cos(a->rayc.anglray));
@@ -92,7 +92,7 @@ void	calc_step_and_quadrant(t_cub3d *a)
 **    Texture S on 3 and 4 quadrants.
 */
 
-void	choose_texture(t_cub3d *a)
+static void	choose_texture(t_cub3d *a)
 {
 	if (a->rayc.xhit == 1 && a->rayc.yhit == 1)
 		return ;
@@ -112,7 +112,7 @@ void	choose_texture(t_cub3d *a)
 	}
 }
 
-void	ifimpact(t_cub3d *a)
+static void	ifimpact(t_cub3d *a)
 {
 	int hit;
 
@@ -158,7 +158,7 @@ void	ifimpact(t_cub3d *a)
 ** than windows' height.
 */
 
-void	throw_rays(t_cub3d *a)
+void		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)

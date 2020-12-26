@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 11:58:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:00:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	brushstroke(int x, int y, t_cub3d *a, int color)
+static void	brushstroke(int x, int y, t_cub3d *a, int color)
 {
 	char	*dst;
 
@@ -23,7 +23,7 @@ void	brushstroke(int x, int y, t_cub3d *a, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	calc_palette(t_cub3d *a)
+static void	calc_palette(t_cub3d *a)
 {
 	a->rayc.ytexture = (int)a->rayc.ytexturefloat
 		& (a->mlibx.xpmwall[a->rayc.wall].height - 1);
@@ -41,7 +41,7 @@ void	calc_palette(t_cub3d *a)
 ** and paints throw the extreme.
 */
 
-void	close2wall(t_cub3d *a)
+static void	close2wall(t_cub3d *a)
 {
 	if (a->rayc.ytexturefloat < a->mlibx.xpmwall[a->rayc.wall].height
 			&& a->rayc.ytexturefloat >=
@@ -65,7 +65,7 @@ void	close2wall(t_cub3d *a)
 	}
 }
 
-void	paintwalls(t_cub3d *a, int point)
+static void	paintwalls(t_cub3d *a, int point)
 {
 	a->rayc.point = point;
 	if (a->rayc.staturewall > a->fconf.yrendersize)
@@ -82,7 +82,7 @@ void	paintwalls(t_cub3d *a, int point)
 	}
 }
 
-void	pointillism(t_cub3d *a)
+void		pointillism(t_cub3d *a)
 {
 	int	point;
 

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/18 13:00:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:09:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **  Check invalid params
 */
 
-void	isthisaparam(t_cub3d *a)
+static void	isthisaparam(t_cub3d *a)
 {
 	int		i;
 	int		c;
@@ -45,7 +45,7 @@ void	isthisaparam(t_cub3d *a)
 ** Check if any param is repeat ("NO", "SO", etc.)
 */
 
-void	is_repeat(int thisline, t_cub3d *a, const char *id)
+static void	is_repeat(int thisline, t_cub3d *a, const char *id)
 {
 	int			z;
 	int			len;
@@ -75,7 +75,7 @@ void	is_repeat(int thisline, t_cub3d *a, const char *id)
 ** Replace tabs by spaces.
 */
 
-void	cleantexture(int c, t_cub3d *a)
+static void	cleantexture(int c, t_cub3d *a)
 {
 	char	*str;
 
@@ -89,7 +89,7 @@ void	cleantexture(int c, t_cub3d *a)
 ** Stops the program and returns a message when finds an error
 */
 
-char	*look4texture(char *id, size_t idlen, t_cub3d *a)
+static char	*look4texture(char *id, size_t idlen, t_cub3d *a)
 {
 	int		i;
 	char	*map;
@@ -127,7 +127,7 @@ char	*look4texture(char *id, size_t idlen, t_cub3d *a)
 **  |___________|___|_____________|
 */
 
-void	manage_params(t_cub3d *a)
+void		manage_params(t_cub3d *a)
 {
 	int		c;
 	char	**id;

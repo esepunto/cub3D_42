@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:46:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 12:24:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **  by some space: in this case, the maze is open and return error message.
 */
 
-void	surrounded(int i, size_t j, char **maze, t_cub3d *a)
+static void	surrounded(int i, size_t j, char **maze, t_cub3d *a)
 {
 	if (i - 1 == a->fconf.final_line_params
 		|| (maze[i - 1][j - 1] == ' ' || maze[i - 1][j - 1] == '\0')
@@ -33,7 +33,7 @@ void	surrounded(int i, size_t j, char **maze, t_cub3d *a)
 	}
 }
 
-void	maze_algorithm(t_cub3d *a)
+void		maze_algorithm(t_cub3d *a)
 {
 	char	**maze;
 	int		i;

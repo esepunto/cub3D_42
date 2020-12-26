@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 10:02:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:04:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,54 +136,25 @@ typedef struct	s_cub3d
 }				t_cub3d;
 
 int				main(int argc, char **argv);
-void			init_struct(t_cub3d *a);
 void			open_fconfig(char *conf_file, t_cub3d *a);
-void			calc_fconfig(char *conf_file, t_cub3d *a);
-void			save_fconfig(char *conf_file, t_cub3d *a);
-void			isthisaparam(t_cub3d *a);
-char			*look4texture(char *id, size_t idlen, t_cub3d *a);
 void			manage_params(t_cub3d *a);
-void			review_walls(int c, t_cub3d *a);
-void			review_cefl(int c, t_cub3d *a);
-void			review_res(int c, t_cub3d *a);
 void			review_params(t_cub3d *a);
-void			cleantexture(int c, t_cub3d *a);
 void			check_nbr(int c, t_cub3d *a);
 void			isdigit_str(char *nbr);
 void			extract_rgb(int c, t_cub3d *a);
-void			is_repeat(int	m, t_cub3d *a, const char *id);
-void			frstlinemaze(t_cub3d *a);
 void			manage_map(t_cub3d *a);
-void			forbidd_chr(char c);
-int				nbr_plyrs(int i, int j, t_cub3d *a);
-void			review_maze(t_cub3d *a);
-void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
 int				ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
 
-void			rescale_screen(t_cub3d *a);
 void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
-void			gofront(t_cub3d *a);
-void			goback(t_cub3d *a);
-void			goright(t_cub3d *a);
-void			goleft(t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-int				raycast(t_cub3d *a);
 void			throw_rays(t_cub3d *a);
-void			ifimpact(t_cub3d *a);
-void			calc_wallimpact(t_cub3d *a);
-void			calc_step_and_quadrant(t_cub3d *a);
-void			choose_texture(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
 void			pointillism(t_cub3d *a);
-void			paintwalls(t_cub3d *a, int point);
-void			close2wall(t_cub3d *a);
-void			calc_palette(t_cub3d *a);
-void			brushstroke(int x, int y, t_cub3d *a, int color);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);

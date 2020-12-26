@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/05 12:12:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 12:22:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** The maze only accepts '0','1','2','N','S','E','W' and ' ' (space).
 */
 
-void	forbidd_chr(char c)
+static void	forbidd_chr(char c)
 {
 	if (c != '0' && c != '1' && c != '2' && c != ' ' && c != 'N'
 			&& c != 'S' && c != 'E' && c != 'W' && c != '\0')
@@ -32,7 +32,7 @@ void	forbidd_chr(char c)
 **  If c == E, dur = 0.
 */
 
-int		nbr_plyrs(int i, int j, t_cub3d *a)
+static int	nbr_plyrs(int i, int j, t_cub3d *a)
 {
 	char	c;
 
@@ -59,7 +59,7 @@ int		nbr_plyrs(int i, int j, t_cub3d *a)
 **  Check number of players.
 */
 
-void	review_maze(t_cub3d *a)
+static void	review_maze(t_cub3d *a)
 {
 	int		i;
 	size_t	j;
@@ -87,7 +87,7 @@ void	review_maze(t_cub3d *a)
 **  Look for the first line of maze
 */
 
-void	frstlinemaze(t_cub3d *a)
+static void	frstlinemaze(t_cub3d *a)
 {
 	int		frsline;
 
@@ -98,7 +98,7 @@ void	frstlinemaze(t_cub3d *a)
 	a->fconf.map.nbrlines = a->fconf.map.row - a->fconf.map.first_line;
 }
 
-void	manage_map(t_cub3d *a)
+void		manage_map(t_cub3d *a)
 {
 	frstlinemaze(a);
 	review_maze(a);

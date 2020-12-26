@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:57:29 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/11/24 08:38:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 13:10:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** in a new line in struct a.fconf.map.maze
 */
 
-void	save_fconfig(char *conf_file, t_cub3d *a)
+static void	save_fconfig(char *conf_file, t_cub3d *a)
 {
 	int			fd;
 	char		*line;
@@ -45,7 +45,7 @@ void	save_fconfig(char *conf_file, t_cub3d *a)
 ** and return error if config file isn't exist
 */
 
-void	calc_fconfig(char *conf_file, t_cub3d *a)
+static void	calc_fconfig(char *conf_file, t_cub3d *a)
 {
 	int		fd;
 	char	*line;
@@ -74,7 +74,7 @@ void	calc_fconfig(char *conf_file, t_cub3d *a)
 ** the beginning of 42 :p
 */
 
-void	open_fconfig(char *conf_file, t_cub3d *a)
+void		open_fconfig(char *conf_file, t_cub3d *a)
 {
 	int	row;
 
