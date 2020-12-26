@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/24 05:42:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 02:10:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void	ifimpact(t_cub3d *a)
 int		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
+	
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/24 05:11:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 02:23:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void			rescale_screen(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-void	brushstroke(int x, int y, t_cub3d *a);
+void	brushstroke(int x, int y, t_cub3d *a, int color);
 void			pointillism(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
