@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 05:50:21 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 10:02:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ typedef struct	s_raycast
 	double	dirplyr;
 	double	rush;
 	double	rotspeed;
-	double	lasttime;
-	double	delta;
 	double	xray;
 	double	yray;
 	double	anglray;
@@ -90,8 +88,6 @@ typedef struct	s_raycast
 	int		quadrant;
 	double	xincrease;
 	double	yincrease;
-	double	xdist2coord;
-	double	ydist2coord;
 	double	distance;
 	int		initwall;
 	int		endwall;
@@ -99,7 +95,6 @@ typedef struct	s_raycast
 	int		nbr_ray;
 	bool	xhit;
 	bool	yhit;
-	int		wallcolor;
 	int		keycode;
 	double	xwallhit;
 	double	ywallhit;
@@ -114,8 +109,6 @@ typedef struct	s_raycast
 	int		palette;
 	double	ystep;
 	double	xstep;
-	double	xdistance;
-	double	ydistance;
 	bool	hit;
 }				t_raycast;
 
@@ -130,8 +123,8 @@ typedef struct	s_readconfig
 	char		*wall_texture[8];
 	int			nb_wrd_param;
 	int			final_line_params;
-	uint32_t	ceilcolor;
-	uint32_t	floorcolor;
+	int			ceilcolor;
+	int			floorcolor;
 	t_map		map;
 }				t_config;
 
@@ -169,33 +162,33 @@ void			maze_algorithm(t_cub3d *a);
 int				ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
-void			calc_texturing(t_cub3d *a);
 
-void			calc_vertangl(t_cub3d *a);
-
-void			init_window(t_cub3d *a);
 void			rescale_screen(t_cub3d *a);
+void			init_window(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
-int				close_window(t_cub3d *a);
-
-void			brushstroke(int x, int y, t_cub3d *a, int color);
-void			pointillism(t_cub3d *a);
-void			paintwalls(t_cub3d *a, int point);
-void			half_lower_wall(t_cub3d *a);
-void			half_upper_wall(t_cub3d *a);
-
-int				raycast(t_cub3d *a);
-void			throw_rays(t_cub3d *a);
-void			calc_texture(t_cub3d *a);
-void			calc_wallimpact(t_cub3d *a);
 void			gofront(t_cub3d *a);
 void			goback(t_cub3d *a);
 void			goright(t_cub3d *a);
 void			goleft(t_cub3d *a);
+int				close_window(t_cub3d *a);
+
+int				raycast(t_cub3d *a);
+void			throw_rays(t_cub3d *a);
+void			ifimpact(t_cub3d *a);
+void			calc_wallimpact(t_cub3d *a);
+void			calc_step_and_quadrant(t_cub3d *a);
+void			choose_texture(t_cub3d *a);
+void			calc_texturing(t_cub3d *a);
+void			pointillism(t_cub3d *a);
+void			paintwalls(t_cub3d *a, int point);
+void			close2wall(t_cub3d *a);
+void			calc_palette(t_cub3d *a);
+void			brushstroke(int x, int y, t_cub3d *a, int color);
 
 int				msg_err(char *error);
-void			print_fconfig(t_cub3d *a);
 void			delmem(t_cub3d *a);
+
+void			print_fconfig(t_cub3d *a);
 void			print_struct(t_cub3d *a);
 void			print_textures(t_cub3d *a);
 void			print_texture(t_cub3d *a);
