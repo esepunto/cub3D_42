@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 11:19:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 14:00:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,32 @@ void	save_textures(t_cub3d *a)
 				&a->mlibx.xpmwall[c].endian);
 	}
 }
+
+/*
+** To draw the walls, an image (texture) is chosen for
+** each orientation that is predefined in the configuration file.
+**
+** With the help of the minilibx, a one-dimensional matrix is extracted
+** from each texture that includes the color of each texture pixel, and the
+** width and height of the texture measured in pixels.
+**
+** With this information, the algorithm will calculate the x-coordinate of
+** the wall where the ray has hit, and will draw a line on that coordinate
+** throughout the window.
+**
+** ++++ Texture algorithm ++++
+** 1. Calculates the x-coordinate of the wall where the lightning struck.
+** 2. Round the coordinate down.
+** 3. Multiply the coordinate by the width in pixels of the texture.
+** 4. Adjusts the value obtained to prevent the image from flipping sideways.
+** After calculating the x-coordinate of the vertical line to draw,
+** calculates what color each pixel should print based on the texture.
+** 5. It calculates the variable ysteptexture, which indicates how many
+** pixels of the wall correspond to each pixel of the texture.
+** 6. Calculate the y-coordinate by multiplying the ysteptexture variable by
+** the highest point of the wall, plus half the height of the wall, minus
+** half the height of the window. Believe me, it runs :)
+*/
 
 void	calc_texturing(t_cub3d *a)
 {
