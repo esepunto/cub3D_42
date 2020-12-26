@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 03:38:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 05:25:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	half_upper_wall(t_cub3d *a)
 	color = a->mlibx.xpmwall[a->rayc.wall].addr[
 		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];
-	a->rayc.point = (a->fconf.yrendersize / 2) - 1 - a->rayc.aux;
+	a->rayc.point = (a->fconf.yrendersize / 2) - a->rayc.aux;
 	brushstroke(a->rayc.nbr_ray, a->rayc.point, a, color);
 	if (a->rayc.ytexturefloat > 0)
 		a->rayc.ytexturefloat -= a->rayc.ysteptexture;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 03:03:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 05:29:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	delmem(t_cub3d *a)
 {
 	if (a)
 	{
-		init_struct(a);
 		if (sizeof(a->fconf.wall_texture) >= 848)
 			ft_delmatrix(a->fconf.wall_texture);
 		if (sizeof(a->fconf.wall) >= 848)

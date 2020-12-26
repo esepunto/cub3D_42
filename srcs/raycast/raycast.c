@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 03:20:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 05:32:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,14 @@ void	calc_step(t_cub3d *a)
 		a->rayc.ystep = ceil(sin(a->rayc.anglray));
 	else
 		a->rayc.ystep = floor(sin(a->rayc.anglray));
+	if (a->rayc.xstep == 1 && a->rayc.ystep == 1)
+		a->rayc.quadrant = 1;
+	if (a->rayc.xstep == 1 && a->rayc.ystep == -1)
+		a->rayc.quadrant = 4;
+	if (a->rayc.xstep == -1 && a->rayc.ystep == 1)
+		a->rayc.quadrant = 2;
+	if (a->rayc.xstep == -1 && a->rayc.ystep == -1)
+		a->rayc.quadrant = 3;
 }
 
 /*
@@ -143,7 +151,7 @@ void	ifimpact(t_cub3d *a)
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
-			calc_quadrant(a);
+//			calc_quadrant(a);
 			calc_texture(a);
 			calc_step(a);
 			hit = 1;
