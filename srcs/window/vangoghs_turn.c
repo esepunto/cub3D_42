@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 02:39:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:38:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ void	brushstroke(int x, int y, t_cub3d *a, int color)
 	char	*dst;
 
 	if (y >= a->fconf.yrendersize || y < 0)
-		return;
+		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-int	half_lower_wall(t_cub3d *a)
+int		half_lower_wall(t_cub3d *a)
 {
 	int color;
-	if (a->rayc.ytexturefloat < a->mlibx.xpmwall[a->rayc.wall].img_height
-			&& a->rayc.ytexturefloat >= a->mlibx.xpmwall[a->rayc.wall].img_height / 2)
+
+	if (a->rayc.ytexturefloat < a->mlibx.xpmwall[a->rayc.wall].height
+			&& a->rayc.ytexturefloat >=
+			a->mlibx.xpmwall[a->rayc.wall].height / 2)
 	{
 		a->rayc.ytexture = (int)a->rayc.ytexturefloat;
 		color = a->mlibx.xpmwall[a->rayc.wall].addr[
-				a->mlibx.xpmwall[a->rayc.wall].img_height
+				a->mlibx.xpmwall[a->rayc.wall].height
 				* a->rayc.ytexture + a->rayc.xtexture];
-		brushstroke(a->rayc.nbr_ray, a->rayc.point + (a->fconf.yrendersize / 2), a, color);
+		brushstroke(a->rayc.nbr_ray, a->rayc.point + (a->fconf.yrendersize / 2),
+				a, color);
 		a->rayc.ytexturefloat += a->rayc.ysteptexture;
 	}
 	else
@@ -44,28 +47,40 @@ int	half_lower_wall(t_cub3d *a)
 void	half_upper_wall(t_cub3d *a)
 {
 	int	color;
-	
-	if (a->rayc.ytexturefloat >= a->mlibx.xpmwall[a->rayc.wall].img_height)
-		a->rayc.ytexturefloat = (a->mlibx.xpmwall[a->rayc.wall].img_height / 2) - 1;
+
+	if (a->rayc.ytexturefloat >= a->mlibx.xpmwall[a->rayc.wall].height)
+		a->rayc.ytexturefloat = (a->mlibx.xpmwall[a->rayc.wall].height / 2);
 	a->rayc.ytexture = (int)a->rayc.ytexturefloat;
 	color = a->mlibx.xpmwall[a->rayc.wall].addr[
-		a->mlibx.xpmwall[a->rayc.wall].img_height
+		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];
 	a->rayc.point = (a->fconf.yrendersize / 2) - 1 - a->rayc.aux;
-	brushstroke(a->rayc.nbr_ray, a->rayc.point, a, color);	
+	brushstroke(a->rayc.nbr_ray, a->rayc.point, a, color);
 	if (a->rayc.ytexturefloat > 0)
 		a->rayc.ytexturefloat -= a->rayc.ysteptexture;
 	a->rayc.aux++;
 }
 
-void	wall_so_close(t_cub3d *a, int point)
+void	paintwalls(t_cub3d *a, int point)
 {
-	a->rayc.point = point;
-	if (a->rayc.count == 0)
-		a->rayc.ytexturefloat = a->mlibx.xpmwall[a->rayc.wall].img_height / 2;
-	if (half_lower_wall(a) == 1)
-		half_upper_wall(a);
-	a->rayc.count++;
+	if (a->rayc.staturewall > a->fconf.yrendersize)
+	{
+		a->rayc.point = point;
+		if (a->rayc.count == 0)
+			a->rayc.ytexturefloat = a->mlibx.xpmwall[a->rayc.wall].height / 2;
+		if (half_lower_wall(a) == 1)
+			half_upper_wall(a);
+		a->rayc.count++;
+	}
+	else
+	{
+		a->rayc.ytexture = (int)a->rayc.ytexturefloat;
+		a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
+			a->mlibx.xpmwall[a->rayc.wall].height
+			* a->rayc.ytexture + a->rayc.xtexture];
+		a->rayc.ytexturefloat += a->rayc.ysteptexture;
+		brushstroke(a->rayc.nbr_ray, point, a, a->rayc.palette);
+	}
 }
 
 void	pointillism(t_cub3d *a)
@@ -74,27 +89,14 @@ void	pointillism(t_cub3d *a)
 
 	a->rayc.count = 0;
 	point = 0;
-	while (point < a->fconf.yrendersize
-			|| point < a->rayc.staturewall)
+	while (point < a->fconf.yrendersize || point < a->rayc.staturewall)
 	{
 		if (point < a->rayc.initwall)
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.ceilcolor);
 		else if (point >= a->rayc.endwall)
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.floorcolor);
-		else// if (point < a->rayc.endwall)
-		{
-			if (a->rayc.staturewall > a->fconf.yrendersize)
-				wall_so_close(a, point);
-			else
-			{
-				a->rayc.ytexture = (int)a->rayc.ytexturefloat;
-				a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
-					a->mlibx.xpmwall[a->rayc.wall].img_height
-					* a->rayc.ytexture + a->rayc.xtexture];
-				a->rayc.ytexturefloat += a->rayc.ysteptexture;
-				brushstroke(a->rayc.nbr_ray, point, a, a->rayc.palette);
-			}
-		}
+		else
+			paintwalls(a, point);
 		point++;
 	}
 }

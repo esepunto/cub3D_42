@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 08:05:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:27:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		caress_key(int keycode, t_cub3d *a)
 		&& keycode != KEY_MOVE_BACK && keycode != KEY_MOVE_RIGHT
 		&& keycode != KEY_MOVE_LEFT && keycode != KEY_ROTATE_LEFT
 		&& keycode != KEY_ROTATE_RIGHT)
-		return(0);
+		return (0);
 	a->rayc.keycode = keycode;
 	if (a->rayc.keycode == KEY_ESC)
 		close_window(a);

@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 11:41:40 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:06:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void		check_nbr(int c, t_cub3d *a)
+void	check_nbr(int c, t_cub3d *a)
 {
 	if (a->fconf.red[c - 5] < 0 || a->fconf.red[c - 5] > 255
 		|| a->fconf.green[c - 5] < 0 || a->fconf.green[c - 5] > 255
@@ -22,7 +22,7 @@ void		check_nbr(int c, t_cub3d *a)
 	}
 }
 
-void		isdigit_str(char *nbr)
+void	isdigit_str(char *nbr)
 {
 	while (*nbr)
 	{
@@ -32,8 +32,7 @@ void		isdigit_str(char *nbr)
 	}
 }
 
-//uint32_t	ceilfloorcolor(int c, t_cub3d *a)
-int	ceilfloorcolor(int c, t_cub3d *a)
+int		ceilfloorcolor(int c, t_cub3d *a)
 {
 	int	r;
 	int g;
@@ -45,7 +44,7 @@ int	ceilfloorcolor(int c, t_cub3d *a)
 	return (ft_hex2int(ft_rgb2hex(r, g, b)));
 }
 
-void		extract_rgb(int c, t_cub3d *a)
+void	extract_rgb(int c, t_cub3d *a)
 {
 	int		count;
 	char	**color;

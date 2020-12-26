@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/21 14:19:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:32:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,20 @@ void	rescale_screen(t_cub3d *a)
 {
 	int	sizex;
 	int	sizey;
-	
+
 	mlx_get_screen_size(a->mlibx.mlx, &sizex, &sizey);
 	if (sizex && sizey)
 	{
 		if (sizex < a->fconf.xrendersize && sizey >= a->fconf.yrendersize)
 		{
-			a->fconf.yrendersize = a->fconf.yrendersize * sizex / a->fconf.xrendersize; 
+			a->fconf.yrendersize = a->fconf.yrendersize
+					* sizex / a->fconf.xrendersize;
 			a->fconf.xrendersize = sizex;
-			
 		}
 		else if (sizey < a->fconf.yrendersize)
 		{
-			a->fconf.xrendersize = a->fconf.xrendersize * sizey / a->fconf.yrendersize; 
+			a->fconf.xrendersize = a->fconf.xrendersize
+					* sizey / a->fconf.yrendersize;
 			a->fconf.yrendersize = sizey;
 		}
 	}

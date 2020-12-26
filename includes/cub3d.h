@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 02:23:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:46:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
 
-/*
-typedef struct	s_texture_png
-{
-	void	*mlx;
-	char	filename;
-	int		*width;
-	int		*height;
-}				t_texture_png;
-*/
-
 typedef struct	s_data
 {
 	void	*img;
@@ -52,11 +42,9 @@ typedef struct	s_data
 typedef struct	s_texture_xpm
 {
 	void	*mlx;
-//	t_data	*img;
 	char	*relative_path;
-	int		img_width;
-	int		img_height;
-	
+	int		width;
+	int		height;
 	void	*img;
 	int		*addr;
 	int		bits_per_pixel;
@@ -73,12 +61,6 @@ typedef struct	s_minilibx
 	t_texture	sprite;
 	int			sizex;
 	int			sizey;
-//	t_texture_png	*north;
-//	t_texture_png	*south;
-//	t_texture_png	*west;
-//	t_texture_png	*east;
-//	t_texture_png	*sprite;
-	
 }				t_minilibx;
 
 typedef struct	s_map
@@ -119,7 +101,6 @@ typedef struct	s_raycast
 	bool	yhit;
 	int		wallcolor;
 	int		keycode;
-	
 	double	xwallhit;
 	double	ywallhit;
 	int		xtexture;
@@ -130,21 +111,9 @@ typedef struct	s_raycast
 	int		count;
 	int		point;
 	int		aux;
-	
-	double vert_angl;
-	
 	int		palette;
-	
-	double	sizecell;
-
-
-	
-	double	xhypo;
 	double	ystep;
 	double	xstep;
-	double	yhypo;
-	double	xhypo2coord;
-	double	yhypo2coord;
 	double	xdistance;
 	double	ydistance;
 	bool	hit;
@@ -197,25 +166,24 @@ int				nbr_plyrs(int i, int j, t_cub3d *a);
 void			review_maze(t_cub3d *a);
 void			surrounded(int i, size_t j, char **maze, t_cub3d *a);
 void			maze_algorithm(t_cub3d *a);
-//uint32_t		ceilfloorcolor(int c, t_cub3d *a);
-int		ceilfloorcolor(int c, t_cub3d *a);
+int				ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
-void	wall_so_close(t_cub3d *a, int point);
+void			wall_so_close(t_cub3d *a, int point);
 
-void	calc_vertangl(t_cub3d *a);
+void			calc_vertangl(t_cub3d *a);
 
 void			init_window(t_cub3d *a);
 void			rescale_screen(t_cub3d *a);
 int				caress_key(int keycode, t_cub3d *a);
 int				close_window(t_cub3d *a);
 
-void	brushstroke(int x, int y, t_cub3d *a, int color);
+void			brushstroke(int x, int y, t_cub3d *a, int color);
 void			pointillism(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
-int				throw_rays(t_cub3d *a);
+void			throw_rays(t_cub3d *a);
 void			calc_texture(t_cub3d *a);
 void			calc_wallimpact(t_cub3d *a);
 void			gofront(t_cub3d *a);
@@ -229,10 +197,10 @@ void			delmem(t_cub3d *a);
 void			print_struct(t_cub3d *a);
 void			print_textures(t_cub3d *a);
 void			print_texture(t_cub3d *a);
-void	print_divide(double x, int y);
-void	print_direction(t_cub3d *a);
-void	print_wall(t_cub3d *a);
-void	print_color(t_cub3d *a);
-void	print_addr(t_cub3d *a);
+void			print_divide(double x, int y);
+void			print_direction(t_cub3d *a);
+void			print_wall(t_cub3d *a);
+void			print_color(t_cub3d *a);
+void			print_addr(t_cub3d *a);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 02:10:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:20:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 **  |	"WE"    | 2 |    west     |
 **  |	"EA"    | 3 |    east     |
 **  |___________|___|_____________|
-** 
+**
 ** Every ray that hits a wall impact on x,y coordenates.
 ** To calculate the texture of the wall impacted by the ray, we
 ** need to know 2 data:
@@ -43,16 +43,16 @@ void	calc_texture(t_cub3d *a)
 	if (a->rayc.xhit == 1)
 	{
 		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
-			a->rayc.wall = 2;//West 
+			a->rayc.wall = 2;
 		else if (a->rayc.quadrant == 2 || a->rayc.quadrant == 3)
-			a->rayc.wall = 3;//East
+			a->rayc.wall = 3;
 	}
 	else if (a->rayc.yhit == 1)
 	{
 		if (a->rayc.quadrant == 1 || a->rayc.quadrant == 2)
-			a->rayc.wall = 0;//North
+			a->rayc.wall = 0;
 		else if (a->rayc.quadrant == 3 || a->rayc.quadrant == 4)
-			a->rayc.wall = 1;//South
+			a->rayc.wall = 1;
 	}
 }
 
@@ -110,30 +110,10 @@ void	calc_step(t_cub3d *a)
 		a->rayc.xstep = ceil(cos(a->rayc.anglray));
 	else
 		a->rayc.xstep = floor(cos(a->rayc.anglray));
-	if (sin(a->rayc.anglray) >= 0.0)		
+	if (sin(a->rayc.anglray) >= 0.0)
 		a->rayc.ystep = ceil(sin(a->rayc.anglray));
 	else
 		a->rayc.ystep = floor(sin(a->rayc.anglray));
-}
-
-void	calc_vertangl(t_cub3d *a)
-{
-	double	oppo;
-	double	hypo;
-	double distance;
-
-	a->rayc.sizecell = (a->fconf.xrendersize) / (2 * (a->fconf.map.col - (a->fconf.final_line_params + 1)));
-	distance = a->rayc.distance * (a->fconf.xrendersize / a->rayc.sizecell);
-	oppo = a->rayc.staturewall / 2;
-	hypo = hypot(oppo, distance);
-	a->rayc.vert_angl = asin(hypo);
-	printf("distance: %f - ", distance);
-	printf("sizecell: %f - ", a->rayc.sizecell);
-	printf("oppo: %f - ", oppo);
-	printf("hypot: %f - ", hypo);
-	printf("vertangle: %f - ", a->rayc.vert_angl);
-	printf("oppo/dist (sin alpha): %f - ", oppo / distance);
-	printf("sin(oppo/dist): %f\n", sin(oppo / distance));
 }
 
 /*
@@ -166,12 +146,10 @@ void	ifimpact(t_cub3d *a)
 			calc_quadrant(a);
 			calc_texture(a);
 			calc_step(a);
-
 			hit = 1;
 		}
 	}
 }
-
 
 /*
 **  +*+*+*+* The raycast algorithm *+*+*+*+*
@@ -182,24 +160,23 @@ void	ifimpact(t_cub3d *a)
 ** 4. Calc the increment (lines 138-139).
 ** 5. Calc the impact (line 140).
 ** 6. Calc the corrected player's distance to the hit point (lines 141-142).
-** 7. Calc the height of the wall (line 143). Tiene en cuenta la resolución dada.
+** 7. Calc the height of the wall (line 143).
 ** 8. Calc the screen pixel where we should start drawing the wall
 **    (initwall) and where to end up (endwall) (lines 144-145).
 ** 9. Save on an image the picture to paint (line 146).
 **
 **
-** To avoid distorted images (it depends by resolution on config file): 
-** a->rayc.staturewall = 
+** To avoid distorted images (it depends by resolution on config file):
+** a->rayc.staturewall =
 **  a->fconf.yrendersize / a->rayc.distance *
 **  a->fconf.xrendersize / a->fconf.yrendersize; >Multiply by resolution factor
 ** And this is the same that:
 ** a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
 */
 
-int		throw_rays(t_cub3d *a)
+void	throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
-	
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
@@ -209,79 +186,19 @@ int		throw_rays(t_cub3d *a)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
-
 		ifimpact(a);
-
-		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
+		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr,
+								a->rayc.yray - a->rayc.yplyr);
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
-
-//		a->rayc.staturewall = fmin(a->fconf.yrendersize,
-//				a->fconf.xrendersize / a->rayc.distance);
 		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
-
-		a->rayc.initwall = (round((a->fconf.yrendersize) / 2.0 - a->rayc.staturewall / 2));
-//		a->rayc.initwall = (a->fconf.yrendersize / 2) - (a->rayc.staturewall / 2);
- //		if (a->rayc.initwall < 0)
-//			a->rayc.initwall = 0;
-		a->rayc.endwall = (round((a->fconf.yrendersize) / 2.0 + a->rayc.staturewall / 2));
-//		a->rayc.endwall = a->rayc.initwall + a->rayc.staturewall;
-//		if (a->rayc.endwall >= a->fconf.yrendersize)
-//			a->rayc.endwall = a->fconf.yrendersize - 1;
-		
-//		calc_vertangl(a);
-		
+		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
+				- a->rayc.staturewall / 2));
+		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
+				+ a->rayc.staturewall / 2));
 		calc_texturing(a);
 		pointillism(a);
 		a->rayc.nbr_ray++;
 	}
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
-
-	return (0);
 }
-
-/* void	if_impact(t_cub3d *a)
-{
-	a->rayc.hit = 0;
-	while (a->rayc.hit == 0 && ((int)a->rayc.yray >= a->fconf.map.first_line
-			&& (int)a->rayc.yray <= a->fconf.map.row
-			&& a->rayc.xray >= 0 && (size_t)a->rayc.xray <= a->fconf.map.col))
-	{
-		if (a->rayc.xhypo2coord < a->rayc.yhypo2coord)
-		{
-			a->rayc.xhypo2coord += a->rayc.xhypo;
-			a->rayc.xray += a->rayc.xstep;
-			a->rayc.xhit = 1;
-			a->rayc.yhit = 0;
-		}
-		else
-		{
-			a->rayc.yhypo2coord += a->rayc.yhypo;
-			a->rayc.yray += a->rayc.ystep;
-			a->rayc.yhit = 1;
-			a->rayc.xhit = 0;
-		}
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
-			a->rayc.hit = 1;
-	}
-	if (a->rayc.xhit == 1 && a->rayc.hit == 1)
-		a->rayc.distance = a->rayc.xhypo2coord;// - a->rayc.xhypo;//Tengo mis dudas de si restarle xhypo
-	else if (a->rayc.yhit == 1 && a->rayc.hit == 1)
-		a->rayc.distance = a->rayc.yhypo2coord;// - a->rayc.yhypo;//Tengo mis dudas de si restarle yhypo
-}
-
-void	calc_hypotenuses(t_cub3d *a)
-{
-	if (a->rayc.xstep == 1)
-		a->rayc.xdist2coord = ceil(a->rayc.xray) - a->rayc.xray;
-	else if (a->rayc.xstep == -1)
-		a->rayc.xdist2coord = floor(a->rayc.xray) - a->rayc.xray;
-	if (a->rayc.ystep == 1)
-		a->rayc.ydist2coord = ceil(a->rayc.yray) - a->rayc.yray;
-	else if (a->rayc.ystep == -1)
-		a->rayc.ydist2coord = floor(a->rayc.yray) - a->rayc.yray;
-	a->rayc.xhypo2coord = a->rayc.xdist2coord / cos(a->rayc.anglray);
-	a->rayc.yhypo2coord = a->rayc.ydist2coord / sin(a->rayc.anglray);
-	a->rayc.xhypo = a->rayc.xstep / cos(a->rayc.anglray);
-	a->rayc.yhypo = a->rayc.ystep / sin(a->rayc.anglray);//Ojo, review
-} */

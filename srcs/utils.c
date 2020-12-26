@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/24 00:09:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 03:03:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	print_color(t_cub3d *a)
 {
 	int my_color;
 	
-	my_color = a->mlibx.xpmwall[a->rayc.wall].img_height * a->rayc.xtexture + a->rayc.ytexture;
-	printf("img_heigth : %d\n", a->mlibx.xpmwall[a->rayc.wall].img_height);
+	my_color = a->mlibx.xpmwall[a->rayc.wall].height * a->rayc.xtexture + a->rayc.ytexture;
+	printf("img_heigth : %d\n", a->mlibx.xpmwall[a->rayc.wall].height);
 	printf("xtexture: %d\n", a->rayc.xtexture);
 	printf("ytexture: %d\n", a->rayc.ytexture);
 	printf("my_color: %d\n", my_color);
@@ -98,10 +98,10 @@ void	print_struct(t_cub3d *a)
 
 void	print_textures(t_cub3d *a)
 {
-	printf("north: %s - width %d - heigth %d\n", a->fconf.wall_texture[0], a->mlibx.xpmwall[0].img_width, a->mlibx.xpmwall[0].img_height);
-	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.xpmwall[1].img_width, a->mlibx.xpmwall[1].img_height);
-	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.xpmwall[2].img_width, a->mlibx.xpmwall[2].img_height);
-	printf("east: %s - width %d - heigth %d\n\n", a->fconf.wall_texture[3], a->mlibx.xpmwall[3].img_width, a->mlibx.xpmwall[3].img_height);
+	printf("north: %s - width %d - heigth %d\n", a->fconf.wall_texture[0], a->mlibx.xpmwall[0].width, a->mlibx.xpmwall[0].height);
+	printf("south: %s - width %d - heigth %d\n", a->fconf.wall_texture[1], a->mlibx.xpmwall[1].width, a->mlibx.xpmwall[1].height);
+	printf("west: %s - width %d - heigth %d\n", a->fconf.wall_texture[2], a->mlibx.xpmwall[2].width, a->mlibx.xpmwall[2].height);
+	printf("east: %s - width %d - heigth %d\n\n", a->fconf.wall_texture[3], a->mlibx.xpmwall[3].width, a->mlibx.xpmwall[3].height);
 	int c = 0;
 	while (c <= 3)
 	{
@@ -110,8 +110,8 @@ void	print_textures(t_cub3d *a)
 		printf("%d\n", a->mlibx.xpmwall[c].line_length);
 		printf("%d\n", a->mlibx.xpmwall[c].endian);
 		printf("%p\n", a->mlibx.xpmwall[c].img);
-		printf("heigth: %d\n", a->mlibx.xpmwall[c].img_height);
-		printf("width: %d\n", a->mlibx.xpmwall[c].img_width);
+		printf("heigth: %d\n", a->mlibx.xpmwall[c].height);
+		printf("width: %d\n", a->mlibx.xpmwall[c].width);
 		printf("%s\n\n", a->mlibx.xpmwall[c].relative_path);
 		c++;
 	}
@@ -127,8 +127,8 @@ void	print_texture(t_cub3d *a)
 	printf("%d\n", a->mlibx.xpmwall[c].line_length);
 	printf("%d\n", a->mlibx.xpmwall[c].endian);
 	printf("%p\n", a->mlibx.xpmwall[c].img);
-	printf("heigth: %d\n", a->mlibx.xpmwall[c].img_height);
-	printf("width: %d\n", a->mlibx.xpmwall[c].img_width);
+	printf("heigth: %d\n", a->mlibx.xpmwall[c].height);
+	printf("width: %d\n", a->mlibx.xpmwall[c].width);
 	printf("%s\n\n", a->mlibx.xpmwall[c].relative_path);
 }
 
