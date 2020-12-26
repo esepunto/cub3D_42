@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 03:46:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 05:50:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ int				ceilfloorcolor(int c, t_cub3d *a);
 
 void			save_textures(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
-void			wall_so_close(t_cub3d *a, int point);
 
 void			calc_vertangl(t_cub3d *a);
 
@@ -181,6 +180,9 @@ int				close_window(t_cub3d *a);
 
 void			brushstroke(int x, int y, t_cub3d *a, int color);
 void			pointillism(t_cub3d *a);
+void			paintwalls(t_cub3d *a, int point);
+void			half_lower_wall(t_cub3d *a);
+void			half_upper_wall(t_cub3d *a);
 
 int				raycast(t_cub3d *a);
 void			throw_rays(t_cub3d *a);

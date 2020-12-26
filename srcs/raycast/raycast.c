@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 05:32:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/26 06:04:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,6 @@ void	calc_texture(t_cub3d *a)
 	}
 }
 
-/*
-** Asign to every ray that hits a wall
-** its quadrant's angle (1, 2, 3 or 4).
-**
-**       |
-**   3   |   4
-** ______|_______
-**       |
-**   2   |   1
-**       |
-*/
-
-void	calc_quadrant(t_cub3d *a)
-{
-	double	val;
-
-	val = fmod(a->rayc.anglray, M_PI * 2);
-	if ((val >= 0 && val < M_PI_2) || (val >= -(M_PI * 2) && val < -M_PI_2 * 3))
-		a->rayc.quadrant = 1;
-	if ((val >= M_PI_2 && val < M_PI) || (val >= -(M_PI_2 * 3) && val < -M_PI))
-		a->rayc.quadrant = 2;
-	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= -M_PI && val < -M_PI_2))
-		a->rayc.quadrant = 3;
-	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= -M_PI_2 && val < -0))
-		a->rayc.quadrant = 4;
-}
 
 /*
 ** To calc where coodinate (x or y) the impact is.
@@ -104,6 +78,18 @@ void	calc_wallimpact(t_cub3d *a)
 		a->rayc.yhit = 0;
 }
 
+/*
+** Asign to every ray that hits a wall
+** its quadrant's angle (1, 2, 3 or 4).
+**
+**       |
+**   3   |   4
+** ______|_______
+**       |
+**   2   |   1
+**       |
+*/
+
 void	calc_step(t_cub3d *a)
 {
 	if (cos(a->rayc.anglray) >= 0.0)
@@ -124,21 +110,6 @@ void	calc_step(t_cub3d *a)
 		a->rayc.quadrant = 3;
 }
 
-/*
-** Every ray that hits a wall impact on x,y coordenates.
-** To calculate the texture of the wall impacted by the ray, we
-** need to know 2 data:
-**   1. The exactly x or y coordenate when ray impacts.
-**   2. The quadrant of the ray's angle.
-** So:
-** If impact on x coordenate:
-**    Texture N on 1 and 4 quadrants.
-**    Texture S on 2 and 3 quadrants.
-** If impact on y coordenate:
-**    Texture E on 1 and 2 quadrants.
-**    Texture W on 3 and 4 quadrants.
-*/
-
 void	ifimpact(t_cub3d *a)
 {
 	int hit;
@@ -151,9 +122,8 @@ void	ifimpact(t_cub3d *a)
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
-//			calc_quadrant(a);
-			calc_texture(a);
 			calc_step(a);
+			calc_texture(a);
 			hit = 1;
 		}
 	}
@@ -200,10 +170,12 @@ void	throw_rays(t_cub3d *a)
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
-		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
-				- a->rayc.staturewall / 2));
-		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
-				+ a->rayc.staturewall / 2));
+//		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
+//				- a->rayc.staturewall / 2));
+		a->rayc.initwall = (a->fconf.yrendersize / 2) - (a->rayc.staturewall / 2);
+//		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
+//				+ a->rayc.staturewall / 2));
+		a->rayc.endwall = a->rayc.initwall + a->rayc.staturewall;
 		calc_texturing(a);
 		pointillism(a);
 		a->rayc.nbr_ray++;
