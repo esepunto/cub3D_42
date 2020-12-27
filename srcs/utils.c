@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 05:29:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 00:41:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ void	delmem(t_cub3d *a)
 	}
 }
 
- void	print_addr(t_cub3d *a)
+void		print_distances(t_cub3d *a)
+{
+	printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
+}
+
+void	print_addr(t_cub3d *a)
 {
 	int c = 0;
 

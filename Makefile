@@ -14,6 +14,7 @@ SRCS	=	cub3d.c \
 			srcs/raycast/raycast.c \
 			srcs/raycast/movement.c \
 			srcs/raycast/textures.c \
+			srcs/raycast/sprite.c \
 			srcs/utils.c 
 
 LIBS	=	libft/libft.a \

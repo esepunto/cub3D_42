@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:04:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 02:25:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef struct	s_texture_xpm
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	
+	int	xpos;
+	int	ypos;
+	double	angle;
 }				t_texture;
 
 typedef struct	s_minilibx
@@ -58,9 +62,10 @@ typedef struct	s_minilibx
 	void		*win;
 	t_data		img;
 	t_texture	xpmwall[4];
-	t_texture	sprite;
+	t_texture	*sprite;
 	int			sizex;
 	int			sizey;
+	int			nbr_sprite;
 }				t_minilibx;
 
 typedef struct	s_map
@@ -110,6 +115,8 @@ typedef struct	s_raycast
 	double	ystep;
 	double	xstep;
 	bool	hit;
+	
+	double	*alldistances;
 }				t_raycast;
 
 typedef struct	s_readconfig
@@ -156,6 +163,9 @@ void			throw_rays(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
 void			pointillism(t_cub3d *a);
 
+void			sprite(t_cub3d *a);
+void			found_sprite(t_cub3d *a);
+
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);
 
@@ -168,5 +178,6 @@ void			print_direction(t_cub3d *a);
 void			print_wall(t_cub3d *a);
 void			print_color(t_cub3d *a);
 void			print_addr(t_cub3d *a);
+void			print_distances(t_cub3d *a);
 
 #endif

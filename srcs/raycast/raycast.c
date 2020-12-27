@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:08:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 01:51:22 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ static void	ifimpact(t_cub3d *a)
 	{
 		a->rayc.xray += a->rayc.xincrease;
 		a->rayc.yray += a->rayc.yincrease;
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2')
+			found_sprite(a);
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
@@ -175,6 +177,7 @@ void		throw_rays(t_cub3d *a)
 								a->rayc.yray - a->rayc.yplyr);
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
+		sprite(a);
 		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
