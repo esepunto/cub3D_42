@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 02:47:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 03:37:49 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,6 @@ void			print_direction(t_cub3d *a);
 void			print_wall(t_cub3d *a);
 void			print_color(t_cub3d *a);
 void			print_addr(t_cub3d *a);
-void			print_distances(t_cub3d *a);
+void			print_sprites(t_cub3d *a);
 
 #endif

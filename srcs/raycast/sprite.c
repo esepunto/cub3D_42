@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 03:34:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 04:24:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sprite(t_cub3d *a)
 {
 	a->rayc.alldistances[a->rayc.nbr_ray] = a->rayc.distance;
-//	print_distances(a);
 }
 
 void	save_sprites(t_cub3d *a)
@@ -42,8 +41,9 @@ void	save_sprites(t_cub3d *a)
 
 void	allocate_sprites(t_cub3d *a)
 {
-	if (!(a->mlibx.sprite = ft_calloc(a->fconf.map.num_sprites, sizeof(t_sprite))))
-			msg_err("WTF! Give me back my memory!");
+	if (!(a->mlibx.sprite =
+			ft_calloc(a->fconf.map.num_sprites, sizeof(t_sprite))))
+		msg_err("WTF! Give me back my memory!");
 }
 
 void	found_sprite(t_cub3d *a)
@@ -53,12 +53,18 @@ void	found_sprite(t_cub3d *a)
 	{
 		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-	}
-	else if (a->mlibx.sprite[a->mlibx.nbr_sprite].xpos != (int)a->rayc.yray
-			|| a->mlibx.sprite[a->mlibx.nbr_sprite].ypos != (int)a->rayc.xray)
-	{
 		a->mlibx.nbr_sprite++;
+	}
+
+	else if (a->mlibx.sprite[a->mlibx.nbr_sprite - 1].xpos
+				!= (int)a->rayc.yray
+			|| a->mlibx.sprite[a->mlibx.nbr_sprite - 1].ypos
+				!= (int)a->rayc.xray)
+	{
 		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
+		print_sprites(a);
+		a->mlibx.nbr_sprite++;
 	}
+//	print_sprites(a);
 }

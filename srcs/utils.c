@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/27 00:41:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 04:27:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,19 @@ void	delmem(t_cub3d *a)
 	}
 }
 
-void		print_distances(t_cub3d *a)
+void		print_sprites(t_cub3d *a)
 {
-	printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
+	int	c;
+	
+	c = 0;
+	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
+	while (a->mlibx.sprite[c].xpos)
+	{
+		printf("sprite[%d]: x: |%d| - y: |%d|\n", c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos);
+//		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
+//		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
+		c++;
+	}
 }
 
 void	print_addr(t_cub3d *a)

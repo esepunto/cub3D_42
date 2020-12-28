@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 03:06:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 03:43:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int			close_window(t_cub3d *a)
 {
+	print_sprites(a);
 	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
 	delmem(a);
 	system("leaks cub3D");
