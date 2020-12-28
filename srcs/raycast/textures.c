@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 01:53:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 03:13:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 
 void	save_textures(t_cub3d *a)
 {
-	int	c;
+	static int	c = -1;
 
-	c = -1;
+	if (c != -1)
+		return ;
 	while (++c <= 4)
 	{
 		a->mlibx.xpmwall[c].relative_path = a->fconf.wall_texture[c];
