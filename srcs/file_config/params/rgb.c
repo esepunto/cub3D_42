@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 12:43:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 23:58:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	extract_rgb(int c, t_cub3d *a)
 			msg_err("Not RGB colors");
 		isdigit_str(aux);
 		if (count == 0)
-			a->fconf.red[c - 5] = ft_atoi(aux);
+			a->fconf.red[c - 6] = ft_atoi(aux);
 		else if (count == 1)
-			a->fconf.green[c - 5] = ft_atoi(aux);
+			a->fconf.green[c - 6] = ft_atoi(aux);
 		else if (count == 2)
-			a->fconf.blue[c - 5] = ft_atoi(aux);
+			a->fconf.blue[c - 6] = ft_atoi(aux);
 		count++;
 	}
 	ft_delmatrix(color);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:09:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 23:50:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	isthisaparam(t_cub3d *a)
 	char	*map;
 	char	**id;
 
-	id = ft_split("NO ,SO ,WE ,EA ,R ,C ,F ,S ", ',');
+	id = ft_split("NO ,SO ,WE ,EA ,S ,R ,C ,F ", ',');
 	i = 0;
 	while (i <= a->fconf.final_line_params)
 	{
@@ -120,10 +120,10 @@ static char	*look4texture(char *id, size_t idlen, t_cub3d *a)
 **  |	"SO"    | 1 |    south    |
 **  |	"WE"    | 2 |    west     |
 **  |	"EA"    | 3 |    east     |
-**  |	"R"     | 4 |  resolution |
-**  |	"C"     | 5 |  ceilling   |
-**  |	"F"     | 6 |    floor    |
-**  |	"S"     | 7 |   sprites   |
+**  |	"S"     | 4 |   sprites   |
+**  |	"R"     | 5 |  resolution |
+**  |	"C"     | 6 |  ceilling   |
+**  |	"F"     | 7 |    floor    |
 **  |___________|___|_____________|
 */
 
@@ -132,7 +132,7 @@ void		manage_params(t_cub3d *a)
 	int		c;
 	char	**id;
 
-	id = ft_split("NO ,SO ,WE ,EA ,R ,C ,F ,S ", ',');
+	id = ft_split("NO ,SO ,WE ,EA ,S ,R ,C ,F ", ',');
 	c = 0;
 	while (c <= 7)
 	{

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/27 00:45:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 01:58:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			main(int argc, char **argv)
 		init_struct(a);
 		open_fconfig(argv[1], a);
 		init_window(a);
-//		delmem(a);
+		delmem(a);
 	}
 	else
 		msg_err("Revier your fingers, please.");

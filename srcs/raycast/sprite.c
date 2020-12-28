@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/27 02:32:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 01:47:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,14 @@ void	sprite(t_cub3d *a)
 //	print_distances(a);
 }
 
-void	found_sprite(t_cub3d *a)
+void	save_sprites(t_cub3d *a)
 {
 	int	c;
-	
-	if (a->mlibx.nbr_sprite == 0)
+
+	c = -1;
+	while (++c < a->fconf.map.num_sprites)
 	{
-		if (!(a->mlibx.sprite =
-			ft_calloc(a->fconf.map.col * a->fconf.map.nbrlines, sizeof(t_texture))))
-		msg_err("WTF! Give me back my memory!");
-	}
-	c = a->mlibx.nbr_sprite;
-	if (a->mlibx.nbr_sprite == 0 || (a->mlibx.sprite[c].xpos != (int)a->rayc.yray
-			&& a->mlibx.sprite[c].ypos != (int)a->rayc.xray))
-	{
-		c = a->mlibx.nbr_sprite;
-		a->mlibx.sprite[c].relative_path = a->fconf.wall_texture[7];
+		a->mlibx.sprite[c].relative_path = a->fconf.wall_texture[4];
 		a->mlibx.sprite[c].img =
 				mlx_xpm_file_to_image(a->mlibx.mlx,
 				a->mlibx.sprite[c].relative_path,
@@ -44,8 +36,25 @@ void	found_sprite(t_cub3d *a)
 				&a->mlibx.sprite[c].bits_per_pixel,
 				&a->mlibx.sprite[c].line_length,
 				&a->mlibx.sprite[c].endian);
-		a->mlibx.sprite[c].xpos = (int)a->rayc.yray;
-		a->mlibx.sprite[c].ypos = (int)a->rayc.xray;
+	}
+}
+
+void	allocate_sprites(t_cub3d *a)
+{
+	if (!(a->mlibx.sprite =
+		ft_calloc(a->fconf.map.num_sprites, sizeof(t_sprite))))
+	msg_err("WTF! Give me back my memory!");
+	save_sprites(a);
+}
+
+void	found_sprite(t_cub3d *a)
+{
+	if (a->mlibx.nbr_sprite == 0
+			|| (a->mlibx.sprite[a->mlibx.nbr_sprite].xpos != (int)a->rayc.yray
+			&& a->mlibx.sprite[a->mlibx.nbr_sprite].ypos != (int)a->rayc.xray))
+	{
 		a->mlibx.nbr_sprite++;
+		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
+		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
 	}
 }

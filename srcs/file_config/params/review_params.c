@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:09:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/27 23:52:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ static void	review_res(int c, t_cub3d *a)
 **  |	"SO"    | 1 |    south    |
 **  |	"WE"    | 2 |    west     |
 **  |	"EA"    | 3 |    east     |
-**  |	"R"     | 4 |  resolution |
-**  |	"C"     | 5 |  ceilling   |
-**  |	"F"     | 6 |    floor    |
-**  |	"S"     | 7 |   sprites   |
+**  |	"S"     | 4 |   sprites   |
+**  |	"R"     | 5 |  resolution |
+**  |	"C"     | 6 |  ceilling   |
+**  |	"F"     | 7 |    floor    |
 **  |___________|___|_____________|
 */
 
@@ -93,11 +93,11 @@ void		review_params(t_cub3d *a)
 	c = 0;
 	while (c <= 7)
 	{
-		if (c < 4 || c == 7)
+		if (c < 5)
 			review_walls(c, a);
-		if (c >= 5 && c <= 6)
+		if (c >= 6 && c <= 7)
 			review_cefl(c, a);
-		if (c == 4)
+		if (c == 5)
 			review_res(c, a);
 		c++;
 	}

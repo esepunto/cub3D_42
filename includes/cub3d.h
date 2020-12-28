@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/27 02:25:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/28 01:37:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,37 @@ typedef struct	s_texture_xpm
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	
-	int	xpos;
-	int	ypos;
-	double	angle;
 }				t_texture;
+
+typedef struct	s_sprite_xpm
+{
+	void	*mlx;
+	char	*relative_path;
+	int		width;
+	int		height;
+	void	*img;
+	int		*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	
+	int		xpos;
+	int		ypos;
+	double	angle;
+	double	dist_sprite;
+}				t_sprite;
+
 
 typedef struct	s_minilibx
 {
 	void		*mlx;
 	void		*win;
 	t_data		img;
-	t_texture	xpmwall[4];
-	t_texture	*sprite;
+	t_texture	xpmwall[5];
 	int			sizex;
 	int			sizey;
 	int			nbr_sprite;
+	t_sprite	*sprite;
 }				t_minilibx;
 
 typedef struct	s_map
@@ -74,6 +89,7 @@ typedef struct	s_map
 	size_t	col;
 	int		row;
 	int		num_players;
+	int		num_sprites;
 	int		first_line;
 	int		nbrlines;
 }				t_map;
@@ -138,8 +154,8 @@ typedef struct	s_readconfig
 typedef struct	s_cub3d
 {
 	t_config	fconf;
-	t_minilibx	mlibx;
 	t_raycast	rayc;
+	t_minilibx	mlibx;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -165,6 +181,7 @@ void			pointillism(t_cub3d *a);
 
 void			sprite(t_cub3d *a);
 void			found_sprite(t_cub3d *a);
+void	allocate_sprites(t_cub3d *a);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);
