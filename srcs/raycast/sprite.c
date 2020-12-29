@@ -6,16 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/29 01:02:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 04:01:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	sprite(t_cub3d *a)
-{
-	a->rayc.alldistances[a->rayc.nbr_ray] = a->rayc.distance;
-}
 
 void	clean_sprites(t_cub3d *a)
 {
@@ -54,9 +49,18 @@ void	save_sprites(t_cub3d *a)
 
 void	allocate_sprites(t_cub3d *a)
 {
+	int	c;
+	
+	c = 0;
 	if (!(a->mlibx.sprite =
 			ft_calloc(a->fconf.map.num_sprites, sizeof(t_sprite))))
 		msg_err("WTF! Give me back my memory!");
+/*	while (c < a->fconf.map.num_sprites)
+	{
+		if (!(a->mlibx.sprite[c].dist_sprite = ft_calloc(a->fconf.xrendersize, sizeof(double))))
+			msg_err("WTF! Give me back my memory!");
+		c++;
+	}*/
 }
 
 void	if_newsprite(t_cub3d *a)
@@ -68,25 +72,25 @@ void	if_newsprite(t_cub3d *a)
 	{
 		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
+		{
+//			a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = 8.0;
 			return ;
+		}
 		c++;
 	}
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-	print_sprites(a);
+	
 	a->mlibx.nbr_sprite++;
 }
 
 void	found_sprite(t_cub3d *a)
 {
-	save_sprites(a);
-	if (a->mlibx.nbr_sprite == 0)
-	{
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
-		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-		print_sprites(a);
-		a->mlibx.nbr_sprite++;
-	}
-	else
-		if_newsprite(a);
+//	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = a->rayc.distance;
+	
+	if_newsprite(a);
+//	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = 8.0;
+//				hypot(a->rayc.xray - a->rayc.xplyr,
+//					a->rayc.yray - a->rayc.yplyr)
+//				* cos(a->rayc.anglray - a->rayc.dirplyr);
 }

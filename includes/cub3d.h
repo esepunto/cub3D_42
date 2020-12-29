@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/29 00:10:54 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 02:00:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct	s_sprite_xpm
 	int		xpos;
 	int		ypos;
 	double	angle;
-	double	dist_sprite;
+	double	*dist_sprite;
 }				t_sprite;
 
 
@@ -131,8 +131,6 @@ typedef struct	s_raycast
 	double	ystep;
 	double	xstep;
 	bool	hit;
-	
-	double	*alldistances;
 }				t_raycast;
 
 typedef struct	s_readconfig
@@ -179,7 +177,6 @@ void			throw_rays(t_cub3d *a);
 void			calc_texturing(t_cub3d *a);
 void			pointillism(t_cub3d *a);
 
-void			sprite(t_cub3d *a);
 void			found_sprite(t_cub3d *a);
 void	allocate_sprites(t_cub3d *a);
 void	save_sprites(t_cub3d *a);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 04:27:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 03:33:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ void	delmem(t_cub3d *a)
 {
 	if (a)
 	{
+		if (sizeof(a->mlibx.sprite->dist_sprite) >= 16)
+		{
+			int	c = 0;
+			int	i;
+			while (c < a->fconf.map.num_sprites)
+			{
+				i = 0;
+				while (i < a->fconf.xrendersize)
+				{
+					free(&a->mlibx.sprite[c].dist_sprite[i]);
+					i++;
+				}
+				c++;
+			}
+		}
 		if (sizeof(a->fconf.wall_texture) >= 848)
 			ft_delmatrix(a->fconf.wall_texture);
 		if (sizeof(a->fconf.wall) >= 848)
@@ -37,6 +52,7 @@ void	delmem(t_cub3d *a)
 void		print_sprites(t_cub3d *a)
 {
 	int	c;
+	static int i = 1;
 	
 	c = 0;
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
@@ -47,6 +63,8 @@ void		print_sprites(t_cub3d *a)
 //		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
 		c++;
 	}
+	printf("%d\n\n", i);
+	i++;
 }
 
 void	print_addr(t_cub3d *a)
