@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:00:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 01:15:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ static void	close2wall(t_cub3d *a)
 			a->mlibx.xpmwall[a->rayc.wall].height / 2.0)
 	{
 		a->rayc.point += (a->fconf.yrendersize / 2);
-		calc_palette(a);
+		if (a->rayc.point <= a->fconf.yrendersize)
+			calc_palette(a);
 		a->rayc.ytexturefloat += a->rayc.ysteptexture;
+		
 	}
 	else
 	{
@@ -59,7 +61,8 @@ static void	close2wall(t_cub3d *a)
 				(a->mlibx.xpmwall[a->rayc.wall].height / 2.0);
 		}
 		a->rayc.point = (int)((a->fconf.yrendersize / 2) - 1 - a->rayc.aux);
-		calc_palette(a);
+		if (a->rayc.point >= 0)
+			calc_palette(a);
 		a->rayc.ytexturefloat -= a->rayc.ysteptexture;
 		a->rayc.aux++;
 	}

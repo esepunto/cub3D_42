@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 03:37:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 00:10:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void			sprite(t_cub3d *a);
 void			found_sprite(t_cub3d *a);
 void	allocate_sprites(t_cub3d *a);
 void	save_sprites(t_cub3d *a);
+void	clean_sprites(t_cub3d *a);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);

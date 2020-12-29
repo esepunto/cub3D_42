@@ -20,7 +20,6 @@ SRCS	=	cub3d.c \
 LIBS	=	libft/libft.a \
 			libft/ft_printf/libftprintf.a \
 			libmlx.dylib 
-#			mlx/libmlx.a
 
 
 
@@ -33,12 +32,7 @@ RM		=	rm -f
 
 all: $(NAME)
 
-$(NAME):	$(OBJECTS)
-			@make -C libft
-			@make -C libft/ft_printf
-			@make -C mlx_beta
-			@mv ./mlx_beta/libmlx.dylib ./
-#			$(CC) $(LINKS) $(LIBS) $(OBJECTS) -o $(NAME)
+$(NAME):	make_libs $(OBJECTS)
 			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
 
 clean:
@@ -58,7 +52,16 @@ fclean:		clean
 
 re: fclean all
 
-norma:	norminette srcs/
+norma:	
+		norminette srcs/
 		norminette libft/
 		norminette includes/
+
+.PHONY: make_libs
+
+make_libs:
+			@make -C libft
+			@make -C libft/ft_printf
+			@make -C mlx_beta
+			@mv ./mlx_beta/libmlx.dylib ./
 

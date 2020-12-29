@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 04:24:35 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/29 01:02:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 void	sprite(t_cub3d *a)
 {
 	a->rayc.alldistances[a->rayc.nbr_ray] = a->rayc.distance;
+}
+
+void	clean_sprites(t_cub3d *a)
+{
+	int	c;
+		
+	c = 0;
+	while (c <= a->mlibx.nbr_sprite)
+	{
+		ft_memset(&a->mlibx.sprite[c], '\0', sizeof(t_sprite));
+		c++;
+	}
+	a->mlibx.nbr_sprite = 0;
 }
 
 void	save_sprites(t_cub3d *a)
@@ -46,6 +59,24 @@ void	allocate_sprites(t_cub3d *a)
 		msg_err("WTF! Give me back my memory!");
 }
 
+void	if_newsprite(t_cub3d *a)
+{
+	int	c;
+	
+	c = 0;
+	while (c < a->mlibx.nbr_sprite)
+	{
+		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
+			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
+			return ;
+		c++;
+	}
+	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
+	print_sprites(a);
+	a->mlibx.nbr_sprite++;
+}
+
 void	found_sprite(t_cub3d *a)
 {
 	save_sprites(a);
@@ -53,18 +84,9 @@ void	found_sprite(t_cub3d *a)
 	{
 		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-		a->mlibx.nbr_sprite++;
-	}
-
-	else if (a->mlibx.sprite[a->mlibx.nbr_sprite - 1].xpos
-				!= (int)a->rayc.yray
-			|| a->mlibx.sprite[a->mlibx.nbr_sprite - 1].ypos
-				!= (int)a->rayc.xray)
-	{
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
-		a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
 		print_sprites(a);
 		a->mlibx.nbr_sprite++;
 	}
-//	print_sprites(a);
+	else
+		if_newsprite(a);
 }
