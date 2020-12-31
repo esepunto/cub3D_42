@@ -6,11 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 09:18:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 11:54:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../../includes/cub3d.h"
 
 void	clean_sprites(t_cub3d *a)
 {
@@ -23,6 +23,27 @@ void	clean_sprites(t_cub3d *a)
 		c++;
 	}
 	a->mlibx.nbr_sprite = 0;
+}
+
+void sort_sprites(t_cub3d *a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < a->fconf.map.num_sprites)
+	{
+		j = 0;
+		while (j < a->fconf.map.num_sprites)
+		{
+			if (a->mlibx.sprite[j].dist_sprite < a->mlibx.sprite[i].dist_sprite
+					&& a->mlibx.sprite[j].sequence > a->mlibx.sprite[i].sequence)
+				ft_swap(&a->mlibx.sprite[j].sequence, &a->mlibx.sprite[i].sequence);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	save_sprites(t_cub3d *a)
@@ -77,7 +98,7 @@ void	if_newsprite(t_cub3d *a)
 	}
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-	
+	a->mlibx.sprite[a->mlibx.nbr_sprite].sequence = a->mlibx.nbr_sprite;
 	a->mlibx.nbr_sprite++;
 }
 

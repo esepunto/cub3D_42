@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 09:11:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 11:42:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,5 @@ char				*ft_replacetabs(char *str);
 uint32_t			ft_hex2int(char *hex);
 char				*ft_rgb2hex(int r, int g, int b);
 void				calculate_hex(int c, int color, char *result);
+void				ft_swap(int *a, int *b);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 09:18:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 09:55:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		print_sprites(t_cub3d *a)
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
 	while (a->mlibx.sprite[c].xpos)
 	{
-		printf("sprite[%d]: x: |%d| - y: |%d| - distance |%f|\n", c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist_sprite);
+		printf("sprite[%d]: x: |%d| - y: |%d| - distance: |%f|. - sequence: |%d|\n", c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist_sprite, a->mlibx.sprite[c].sequence);
 //		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
 //		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
 		c++;
