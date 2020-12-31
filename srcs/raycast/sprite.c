@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/29 04:01:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 09:18:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,6 @@ void	allocate_sprites(t_cub3d *a)
 	if (!(a->mlibx.sprite =
 			ft_calloc(a->fconf.map.num_sprites, sizeof(t_sprite))))
 		msg_err("WTF! Give me back my memory!");
-/*	while (c < a->fconf.map.num_sprites)
-	{
-		if (!(a->mlibx.sprite[c].dist_sprite = ft_calloc(a->fconf.xrendersize, sizeof(double))))
-			msg_err("WTF! Give me back my memory!");
-		c++;
-	}*/
 }
 
 void	if_newsprite(t_cub3d *a)
@@ -73,7 +67,10 @@ void	if_newsprite(t_cub3d *a)
 		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
 		{
-//			a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = 8.0;
+			a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite = 
+				hypot(a->rayc.xray - a->rayc.xplyr,
+					a->rayc.yray - a->rayc.yplyr)
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
 			return ;
 		}
 		c++;
@@ -86,11 +83,9 @@ void	if_newsprite(t_cub3d *a)
 
 void	found_sprite(t_cub3d *a)
 {
-//	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = a->rayc.distance;
-	
+	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite = 
+				hypot(a->rayc.xray - a->rayc.xplyr,
+					a->rayc.yray - a->rayc.yplyr)
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	if_newsprite(a);
-//	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite[a->rayc.nbr_ray] = 8.0;
-//				hypot(a->rayc.xray - a->rayc.xplyr,
-//					a->rayc.yray - a->rayc.yplyr)
-//				* cos(a->rayc.anglray - a->rayc.dirplyr);
 }
