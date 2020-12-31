@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 13:13:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:11:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void		throw_rays(t_cub3d *a)
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
+		a->mlibx.sprite->aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
@@ -185,10 +186,9 @@ void		throw_rays(t_cub3d *a)
 				+ a->rayc.staturewall / 2));
 		calc_texturing(a);
 		pointillism(a);
+//		print_sprites(a);
 		a->rayc.nbr_ray++;
 	}
-//	print_sprites(a);
-	sort_sprites(a);
-//	print_sprites(a);
+	print_sprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 }

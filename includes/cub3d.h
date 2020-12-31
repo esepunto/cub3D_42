@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 12:45:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 18:09:53 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,17 @@ typedef struct	s_sprite_xpm
 	int		ypos;
 	double	angle;
 	double	dist_sprite;
+	double	stature;
+	double	yfloat;
+	int		ysprite;
+	double	ystep;
+	int		y;
+	int		xaux;
+	int		x;
+	int		count;
+	int		aux;
+	int		point;
+	
 }				t_sprite;
 
 
@@ -81,7 +92,7 @@ typedef struct	s_minilibx
 	int			sizex;
 	int			sizey;
 	int			nbr_sprite;
-	t_sprite	sprite[2024];
+	t_sprite	sprite[1024];
 }				t_minilibx;
 
 typedef struct	s_map
@@ -183,6 +194,8 @@ void	allocate_sprites(t_cub3d *a);
 void	save_sprites(t_cub3d *a);
 void	clean_sprites(t_cub3d *a);
 void	sort_sprites(t_cub3d *a);
+void	calc_stature_sprite(t_cub3d *a, int point);
+void	paintsprites(t_cub3d *a, int point);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);

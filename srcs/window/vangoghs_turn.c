@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/29 01:15:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 17:46:52 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	close2wall(t_cub3d *a)
 		if (a->rayc.point <= a->fconf.yrendersize)
 			calc_palette(a);
 		a->rayc.ytexturefloat += a->rayc.ysteptexture;
-		
 	}
 	else
 	{
@@ -99,6 +98,7 @@ void		pointillism(t_cub3d *a)
 			paintwalls(a, point);
 		else
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.floorcolor);
+		paintsprites(a, point);
 		point++;
 	}
 }
