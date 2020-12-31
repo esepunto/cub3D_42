@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 12:00:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 12:45:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_minilibx
 	int			sizex;
 	int			sizey;
 	int			nbr_sprite;
-	t_sprite	*sprite;
+	t_sprite	sprite[2024];
 }				t_minilibx;
 
 typedef struct	s_map

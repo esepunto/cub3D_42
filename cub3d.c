@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 12:00:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2020/12/31 12:18:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			main(int argc, char **argv)
 			msg_err("WTF! Give me back my memory!");
 		init_struct(a);
 		open_fconfig(argv[1], a);
-		allocate_sprites(a);
+//		allocate_sprites(a);
 		init_window(a);
 		delmem(a);
 	}
