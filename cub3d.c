@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 12:18:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 19:46:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	init_struct(t_cub3d *a)
 {
-	a->rayc.modulo = 0.0002;
+//	a->rayc.modulo = 0.00001;// El modulo se adapta a la resolución para hacer más eficiente el pintado
+	a->rayc.modulo = (a->fconf.xrendersize * a->fconf.yrendersize) * 0.000000001;
+//	printf("res: %d", a->fconf.xrendersize * a->fconf.yrendersize);
 	a->rayc.rush = 0.25;
 	a->rayc.rotspeed = 0.10;
 	a->rayc.fov = 60 * M_PI / 180;
@@ -30,9 +32,10 @@ int			main(int argc, char **argv)
 			msg_err("This is not a .cub file, bro.");
 		if (!(a = ft_calloc(sizeof(a), sizeof(t_cub3d))))
 			msg_err("WTF! Give me back my memory!");
-		init_struct(a);
+		
 		open_fconfig(argv[1], a);
 //		allocate_sprites(a);
+		init_struct(a);
 		init_window(a);
 		delmem(a);
 	}

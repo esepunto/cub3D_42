@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 18:09:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 19:04:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,7 @@ void	calc_stature_sprite(t_cub3d *a, int point)
 	c = 0;
 	while (c < a->fconf.map.num_sprites)
 	{
-		a->mlibx.sprite[c].stature =
-			(a->rayc.staturewall / a->mlibx.sprite[c].dist_sprite)
-			* a->rayc.distance;
-		a->mlibx.sprite[c].xaux = tan(a->mlibx.sprite[c].angle)
-				* a->mlibx.sprite[c].dist_sprite;
-		a->mlibx.sprite[c].x = a->fconf.xrendersize / 2 + a->mlibx.sprite[c].xaux
-				- a->mlibx.sprite[c].width / 2;
-		a->mlibx.sprite[c].aux = 0;
-		a->mlibx.sprite[c].ystep = 1.0 * a->mlibx.sprite[c].height
-			/ a->mlibx.sprite[c].stature;
-//		Revisar esta función
-//		a->>mlibx.sprite[c].yfloat = a->>mlibx.sprite[c].ystep *
-//			(a->rayc.initwall + a->rayc.staturewall / 2
-//			- a->fconf.yrendersize / 2);
+
 		spr_paintwalls(a, point, c);
 		c++;
 	}

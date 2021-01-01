@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 17:46:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 19:04:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		pointillism(t_cub3d *a)
 			paintwalls(a, point);
 		else
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.floorcolor);
-		paintsprites(a, point);
+//		paintsprites(a, point);
 		point++;
 	}
 }

@@ -6,11 +6,27 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 17:29:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 19:00:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+void	calc_quadrantsprite(t_cub3d *a)//Revisar valores dados
+{
+	double	val;
+
+	val = fmod(a->rayc.anglray, M_PI * 2);
+	if ((val >= 0 && val < M_PI_2) || (val >= -(M_PI * 2) && val < -M_PI_2 * 3))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 1;
+	if ((val >= M_PI_2 && val < M_PI) || (val >= -(M_PI_2 * 3) && val < -M_PI))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 2;
+	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= -M_PI && val < -M_PI_2))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 3;
+	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= -M_PI_2 && val < -0))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 4;
+}
+
 
 void	save_sprites(t_cub3d *a)
 {
@@ -98,18 +114,41 @@ void 	sort_sprites(t_cub3d *a)
 	resort(a);
 }
 
+static void	calc_spriteimpact(t_cub3d *a)
+{
+	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].xhit = 1;
+	else
+		a->mlibx.sprite[a->mlibx.nbr_sprite].xhit = 0;
+	if ((int)a->rayc.yray != (int)(a->rayc.yray - a->rayc.yincrease))
+		a->mlibx.sprite[a->mlibx.nbr_sprite].yhit = 1;
+	else
+		a->mlibx.sprite[a->mlibx.nbr_sprite].yhit = 0;
+}
+
 void	init_sprite(t_cub3d *a)
 {
+	calc_spriteimpact(a);
+	calc_quadrantsprite(a);
+	
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].xfloat = a->rayc.xray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite =
 		hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr)
 		* cos(a->rayc.anglray - a->rayc.dirplyr);
-	a->mlibx.sprite[a->mlibx.nbr_sprite].angle = a->rayc.anglray - a->rayc.dirplyr;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].stature = a->fconf.xrendersize / a->rayc.distance;//REVISAR!! Puede que haya que conectarlo con altura píxeles de pared.
+	a->mlibx.sprite[a->mlibx.nbr_sprite].initsprite = (round(a->fconf.yrendersize / 2.0
+				- a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
+	a->mlibx.sprite[a->mlibx.nbr_sprite].endsprite = (round(a->fconf.yrendersize / 2.0
+				+ a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
+	a->mlibx.sprite[a->mlibx.nbr_sprite].angle = a->rayc.anglray - a->rayc.dirplyr;//Ojo, esto puede que no me sirva y solo necesite el ángulo tal cual, sin restar.
 	a->mlibx.sprite[a->mlibx.nbr_sprite].sequence = a->mlibx.nbr_sprite;
 }
 
-void	if_newsprite(t_cub3d *a)
+
+
+void	found_sprite(t_cub3d *a)
 {
 	int	c;
 	
@@ -123,9 +162,4 @@ void	if_newsprite(t_cub3d *a)
 	}
 	init_sprite(a);
 	a->mlibx.nbr_sprite++;
-}
-
-void	found_sprite(t_cub3d *a)
-{
-	if_newsprite(a);
 }
