@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 20:47:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:43:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	spr_calc_palette(t_cub3d *a, int c)
 {
 	a->mlibx.sprite[c].y = (int)a->mlibx.sprite[c].yfloat
 		& (a->mlibx.sprite[c].height - 1);
-	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
-//	a->mlibx.sprite[c].palette = a->mlibx.sprite[c].addr[
-//		a->mlibx.sprite[c].height
-//		* a->mlibx.sprite[c].y + a->mlibx.sprite[c].x];
+//	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
+	a->mlibx.sprite[c].palette = a->mlibx.sprite[c].addr[
+		a->mlibx.sprite[c].height
+		* a->mlibx.sprite[c].y + a->mlibx.sprite[c].x];
 	spr_brushstroke(a->rayc.nbr_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 
@@ -80,9 +80,9 @@ void	paint_spr(t_cub3d *a, int point, int c)
 	}
 	else
 	{*/
-		a->mlibx.sprite[c].point = point;
-		spr_calc_palette(a, c);
-		a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].yfloat;
+	a->mlibx.sprite[c].point = point;
+	spr_calc_palette(a, c);
+	a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
 //	}
 }
 

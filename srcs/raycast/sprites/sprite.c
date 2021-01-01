@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 20:31:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:51:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void 	sort_sprites(t_cub3d *a)
 		j = 0;
 		while (j < a->mlibx.nbr_sprite)
 		{
-			if (a->mlibx.sprite[j].dist_sprite < a->mlibx.sprite[i].dist_sprite
+			if (a->mlibx.sprite[j].dist2hit < a->mlibx.sprite[i].dist2hit
 					&& a->mlibx.sprite[j].sequence > a->mlibx.sprite[i].sequence)
 			{
 				ft_swap(&a->mlibx.sprite[j].sequence, &a->mlibx.sprite[i].sequence);
@@ -115,6 +115,16 @@ static void	calc_spriteimpact(t_cub3d *a)
 		a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit = a->rayc.xray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit -=
 				floor(a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit);
+	
+	
+	a->mlibx.sprite[a->mlibx.nbr_sprite].x = (a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit
+			* a->mlibx.sprite[a->rayc.wall].width) / 1;
+	if ((a->mlibx.sprite[a->mlibx.nbr_sprite].xhit == 1 && a->rayc.xstep < 0)
+			|| (a->mlibx.sprite[a->mlibx.nbr_sprite].yhit == 1 && a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant < 3))
+	{
+		a->mlibx.sprite[a->mlibx.nbr_sprite].x =
+			a->mlibx.sprite[a->mlibx.nbr_sprite].width - 1 - a->mlibx.sprite[a->mlibx.nbr_sprite].x;
+	}
 }
 
 static void	calc_quadrantsprite(t_cub3d *a)//Revisar valores dados
@@ -140,23 +150,38 @@ static void	init_sprite(t_cub3d *a)
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite].xfloat = a->rayc.xray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].yauxfloat = a->rayc.yray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].dist_sprite =
+	
+//	a->mlibx.sprite[a->mlibx.nbr_sprite].yauxfloat = a->rayc.yray;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].ystep = 1.0 * a->mlibx.sprite[a->mlibx.nbr_sprite].height
+			/ a->mlibx.sprite[a->mlibx.nbr_sprite].stature;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].yfloat =
+			a->mlibx.sprite[a->mlibx.nbr_sprite].ystep
+			* (a->mlibx.sprite[a->mlibx.nbr_sprite].init
+			+ a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2
+			- a->fconf.yrendersize / 2);	
+	
+	
+	a->mlibx.sprite[a->mlibx.nbr_sprite].dist2hit =
 		hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr)
 		* cos(a->rayc.anglray - a->rayc.dirplyr);
+	a->mlibx.sprite[a->mlibx.nbr_sprite].dist2add = (- cos(a->rayc.anglray))
+			* a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit;
+	a->mlibx.sprite[a->mlibx.nbr_sprite].distance =
+			a->mlibx.sprite[a->mlibx.nbr_sprite].dist2hit
+			+ a->mlibx.sprite[a->mlibx.nbr_sprite].dist2add;
+	
+	
 	a->mlibx.sprite[a->mlibx.nbr_sprite].stature = a->fconf.xrendersize / a->rayc.distance;//REVISAR!! Puede que haya que conectarlo con altura píxeles de pared.
 	a->mlibx.sprite[a->mlibx.nbr_sprite].init = (round(a->fconf.yrendersize / 2.0
 				- a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
 	a->mlibx.sprite[a->mlibx.nbr_sprite].end = (round(a->fconf.yrendersize / 2.0
 				+ a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
+	
+	
 	a->mlibx.sprite[a->mlibx.nbr_sprite].angle = a->rayc.anglray - a->rayc.dirplyr;//Ojo, esto puede que no me sirva y solo necesite el ángulo tal cual, sin restar.
 	a->mlibx.sprite[a->mlibx.nbr_sprite].sequence = a->mlibx.nbr_sprite;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].ystep = 1.0 * a->mlibx.sprite[a->mlibx.nbr_sprite].height
-			/ a->mlibx.sprite[a->mlibx.nbr_sprite].stature;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].yfloat = a->mlibx.sprite[a->mlibx.nbr_sprite].ystep *
-			(a->mlibx.sprite[a->mlibx.nbr_sprite].init + a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2
-			- a->fconf.yrendersize / 2);
-	
+
+
 }
 
 

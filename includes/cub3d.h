@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 20:33:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:40:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,12 @@ typedef struct	s_sprite_xpm
 	int		line_length;
 	int		endian;
 	double	angle;
-	double	dist_sprite;
+	double	dist2hit;
+	double	dist2add;
+	double	distance;
 	double	stature;
 	double	yfloat;
-	double	yauxfloat;
+//	double	yauxfloat;
 	double	xfloat;
 	double	ystep;
 	double	xspritehit;

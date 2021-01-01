@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 18:59:12 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:34:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		print_sprites(t_cub3d *a)
 	while (a->mlibx.sprite[c].xpos)
 	{
 		printf("sprite[%d]: x: |%d| - y: |%d| - distance: |%f|. - sequence: |%d| - angle: |%f| - stature: |%f| - quadrant: |%d|\n",
-				c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist_sprite, a->mlibx.sprite[c].sequence, a->mlibx.sprite[c].angle, a->mlibx.sprite[c].stature, a->mlibx.sprite[c].quadrant);
+				c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist2hit, a->mlibx.sprite[c].sequence, a->mlibx.sprite[c].angle, a->mlibx.sprite[c].stature, a->mlibx.sprite[c].quadrant);
 //		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
 //		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
 		c++;

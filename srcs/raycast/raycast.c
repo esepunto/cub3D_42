@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 20:38:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 22:00:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ static void	ifimpact(t_cub3d *a)
 			hit = 1;
 		}
 	}
+	print_sprites(a);
 }
 
 /*
@@ -163,10 +164,12 @@ static void	ifimpact(t_cub3d *a)
 void		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
-	clean_sprites(a);
-	save_sprites(a);
+//	clean_sprites(a);
+//	save_sprites(a);
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
+		clean_sprites(a);
+		save_sprites(a);
 		a->rayc.aux = 0;
 		a->mlibx.sprite->aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
