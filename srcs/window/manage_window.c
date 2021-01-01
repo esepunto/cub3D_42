@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/31 09:06:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 20:39:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		init_window(t_cub3d *a)
 	a->mlibx.win = mlx_new_window(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize, "cub3D");
 	save_textures(a);
-	save_sprites(a);
+//	save_sprites(a);
 	throw_rays(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, close_window, a);
 	mlx_loop_hook(a->mlibx.mlx, &raycast, a);

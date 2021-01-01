@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 18:45:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 20:33:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ typedef struct	s_sprite_xpm
 	double	dist_sprite;
 	double	stature;
 	double	yfloat;
+	double	yauxfloat;
 	double	xfloat;
 	double	ystep;
-	int		initsprite;
-	int		endsprite;
+	double	xspritehit;
+	double	yspritehit;
+	int		init;
+	int		end;
 	int		sequence;
 	int		xpos;
 	int		ypos;
@@ -82,6 +85,7 @@ typedef struct	s_sprite_xpm
 	int		aux;
 	int		point;
 	int		quadrant;
+	int		palette;
 	bool	xhit;
 	bool	yhit;
 }				t_sprite;
@@ -96,7 +100,7 @@ typedef struct	s_minilibx
 	int			sizex;
 	int			sizey;
 	int			nbr_sprite;
-	t_sprite	sprite[1024];
+	t_sprite	sprite[15];
 }				t_minilibx;
 
 typedef struct	s_map

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 19:03:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 20:38:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
 	clean_sprites(a);
+	save_sprites(a);
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 19:04:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 20:40:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,14 @@ void		pointillism(t_cub3d *a)
 	point = 0;
 	while (point <= a->fconf.yrendersize || point <= a->rayc.staturewall)
 	{
+//		paintsprites(a, point);
 		if (point <= a->rayc.initwall)
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.ceilcolor);
 		else if (point < a->rayc.endwall)
 			paintwalls(a, point);
 		else
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.floorcolor);
-//		paintsprites(a, point);
+		paintsprites(a, point);
 		point++;
 	}
 }

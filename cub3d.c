@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 19:46:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/01 19:53:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	init_struct(t_cub3d *a)
 //	printf("res: %d", a->fconf.xrendersize * a->fconf.yrendersize);
 	a->rayc.rush = 0.25;
 	a->rayc.rotspeed = 0.10;
-	a->rayc.fov = 60 * M_PI / 180;
+	a->rayc.fov = 60 * M_PI / 180;//Quizás debería vincularse tb a la resolución
+//	a->rayc.fov = 180 / (a->fconf.xrendersize / a->fconf.yrendersize) * M_PI / 180;//Quizás debería vincularse tb a la resolución
 }
 
 int			main(int argc, char **argv)
@@ -34,7 +35,6 @@ int			main(int argc, char **argv)
 			msg_err("WTF! Give me back my memory!");
 		
 		open_fconfig(argv[1], a);
-//		allocate_sprites(a);
 		init_struct(a);
 		init_window(a);
 		delmem(a);
