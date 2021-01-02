@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 15:46:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 22:42:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	brushstroke(int x, int y, t_cub3d *a, int color)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	if ((unsigned int)dst != 0xFFFFFF)
+	if ((unsigned int)dst != 0xFFFFFF)//Ojo!!
 		*(unsigned int*)dst = color;
 }
 
@@ -99,8 +99,10 @@ void		pointillism(t_cub3d *a)
 			paintwalls(a, point);
 		else
 			brushstroke(a->rayc.nbr_ray, point, a, a->fconf.floorcolor);
-		if (a->mlibx.nbr_sprite)
-			paintsprites(a, point);
+//		if (a->mlibx.nbr_sprite)
+//			paintsprites(a, point);
 		point++;
 	}
+	if (a->mlibx.nbr_sprite)
+		paintsprites(a);
 }

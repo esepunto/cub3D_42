@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 16:04:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 21:54:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ typedef struct	s_sprite_xpm
 	int		point;
 	int		quadrant;
 	int		palette;
+	int		first_x;
+	int		last_x;
+	int		first_ray;
+	int		last_ray;
 	bool	xhit;
 	bool	yhit;
 }				t_sprite;
@@ -204,7 +208,7 @@ void	save_sprites(t_cub3d *a);
 void	clean_sprites(t_cub3d *a);
 void	sort_sprites(t_cub3d *a);
 void	calc_stature_sprite(t_cub3d *a, int point);
-void	paintsprites(t_cub3d *a, int point);
+void	paintsprites(t_cub3d *a);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 17:14:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 21:36:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	spr_calc_palette(t_cub3d *a, int c)
 		& (a->mlibx.xpmwall[4].height - 1);
 //	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
 	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
-		a->mlibx.xpmwall[4].height
-		* a->mlibx.sprite[c].y + /*a->rayc.xtexture];//*/a->mlibx.sprite[c].x];
+		a->mlibx.xpmwall[4].height * a->mlibx.sprite[c].y
+		+ a->mlibx.sprite[c].x];
 	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
 		spr_brushstroke(a->rayc.nbr_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
@@ -43,6 +43,7 @@ void	spr_calc_palette(t_cub3d *a, int c)
 ** and paints throw the extreme.
 */
 
+/*
 void	spr_close2wall(t_cub3d *a, int c)
 {
 	if (a->mlibx.sprite[c].yfloat < a->mlibx.xpmwall[4].height
@@ -68,12 +69,10 @@ void	spr_close2wall(t_cub3d *a, int c)
 		a->mlibx.sprite[c].aux++;
 	}
 }
+*/
 
-void	paint_spr(t_cub3d *a, int point, int c)
+void	paint_spr(t_cub3d *a, int c)
 {
-	if (point < a->mlibx.sprite[c].init || point > a->mlibx.sprite[c].end)
-		return ;
-	a->mlibx.sprite[c].point = point;
 /*	if (a->mlibx.sprite[c].stature > a->fconf.yrendersize)
 	{
 		if (a->mlibx.sprite[c].count == 0)
@@ -83,18 +82,21 @@ void	paint_spr(t_cub3d *a, int point, int c)
 	}
 	else
 	{*/
-//	a->mlibx.sprite[c].point = point;
-	spr_calc_palette(a, c);
-	a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
-//	}
+	a->mlibx.sprite[c].point = a->mlibx.sprite[c].init;
+	while (a->mlibx.sprite[c].point < a->mlibx.sprite[c].end)
+	{
+		spr_calc_palette(a, c);
+		a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
+		a->mlibx.sprite[c].point++;
+	}
 }
 
-void	paintsprites(t_cub3d *a, int point)
+void	paintsprites(t_cub3d *a)
 {
 	int	c;
 	
 	sort_sprites(a);
 	c = -1;
 	while (++c < a->fconf.map.num_sprites)
-		paint_spr(a, point, c);
+		paint_spr(a, c);
 }

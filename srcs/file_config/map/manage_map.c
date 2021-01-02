@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 12:22:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 21:02:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	nbr_plyrs(int i, int j, t_cub3d *a)
 	if (c == 'N' || c == 'S'
 		|| c == 'W' || c == 'E')
 	{
-		a->rayc.xplyr = j;
-		a->rayc.yplyr = i;
+		a->rayc.xplyr = j + 0.5;//Ajustar quadrante
+		a->rayc.yplyr = i + 0.5;//Ajustar quadrante
 		if (c == 'N')
 			a->rayc.dirplyr -= M_PI_2;
 		if (c == 'S')

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 16:19:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 18:02:39 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,19 @@ void		print_sprites(t_cub3d *a)
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
 	while (c < a->mlibx.nbr_sprite)
 	{
-		printf("sprite[%d]: x: |%d| - y: |%d| - distance: |%f|. - sequence: |%d| - angle: |%f| - stature: |%f| - quadrant: |%d|\n",
-				c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist2hit, a->mlibx.sprite[c].sequence, a->mlibx.sprite[c].angle, a->mlibx.sprite[c].stature, a->mlibx.sprite[c].quadrant);
+		printf("sprite[%d]     xpos: |%d|\n",c, a->mlibx.sprite[c].xpos);
+		printf("sprite[%d]     ypos: |%d|\n",c,a->mlibx.sprite[c].ypos);
+		printf("sprite[%d]        x: |%d|\n",c, a->mlibx.sprite[c].x);
+		printf("sprite[%d]        y: |%d|\n",c, a->mlibx.sprite[c].y);
+		printf("sprite[%d]   yfloat: |%f|\n",c, a->mlibx.sprite[c].yfloat);
+		printf("sprite[%d]    ystep: |%f|\n",c, a->mlibx.sprite[c].ystep);
+		printf("sprite[%d] distance: |%f|\n",c, a->mlibx.sprite[c].dist2hit);
+		printf("sprite[%d] sequence: |%d|\n",c, a->mlibx.sprite[c].sequence);
+		printf("sprite[%d]    angle: |%f|\n",c, a->mlibx.sprite[c].angle);
+		printf("sprite[%d]  stature: |%f|\n",c, a->mlibx.sprite[c].stature);
+		printf("sprite[%d]     init: |%d|\n",c, a->mlibx.sprite[c].init);
+		printf("sprite[%d]      end: |%d|\n",c, a->mlibx.sprite[c].end);
+		printf("sprite[%d] quadrant: |%d|\n\n",c, a->mlibx.sprite[c].quadrant);
 //		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
 //		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
 		c++;

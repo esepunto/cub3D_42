@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 16:40:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 22:00:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void 	sort_sprites(t_cub3d *a)
 	resort(a);
 }
 
+/*
 void	spr_calc_step(t_cub3d *a)
 {
 	t_sprite	sprite;
@@ -89,7 +90,6 @@ void	spr_calc_step(t_cub3d *a)
 		sprite.ystep = ceil(sin(a->rayc.anglray));
 	else
 		sprite.ystep = floor(sin(a->rayc.anglray));
-	sprite.angle = a->rayc.anglray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
 
@@ -110,8 +110,9 @@ void	calc_quadrantsprite(t_cub3d *a)
 		sprite.quadrant = 4;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
+*/
 
-static void	calc_spriteimpact(t_cub3d *a)
+void	calc_spriteimpact(t_cub3d *a)
 {
 	t_sprite	sprite;
 	
@@ -124,51 +125,77 @@ static void	calc_spriteimpact(t_cub3d *a)
 		sprite.yhit = 1;
 	else
 		sprite.yhit = 0;
-
 	if (sprite.xhit == 1)
 		sprite.xspritehit = a->rayc.yray;
 	else if (sprite.yhit == 1)
 		sprite.xspritehit = a->rayc.xray;
 	sprite.xspritehit -= floor(sprite.xspritehit);
 	sprite.x = (sprite.xspritehit * a->mlibx.xpmwall[4].width) / 1;
-	if ((sprite.xhit == 1 && sprite.xstep < 0)//xtep??
+	if ((sprite.xhit == 1 && sprite.xstep < 0)
 			|| (sprite.yhit == 1 && sprite.quadrant < 3))
 	{
 		sprite.x = a->mlibx.xpmwall[4].width - 1 - sprite.x;
 	}
+	sprite.angle = a->rayc.anglray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
+}
+
+double	calc_dist2add(t_cub3d *a, t_sprite sprite)
+{
+	if (sprite.xhit == 1)
+	{
+		if (sprite.quadrant == 4)
+			sprite.dist2add = sin(M_PI_4) * sprite.xspritehit;
+		else if (sprite.quadrant == 1)
+			sprite.dist2add = sin(M_PI_4) * (1 - sprite.xspritehit);
+		else if (sprite.quadrant == 2)
+			sprite.dist2add = sin(M_PI_4) * sprite.xspritehit;
+		else if (sprite.quadrant == 3)
+			sprite.dist2add = (- cos(a->rayc.anglray)) * sprite.xspritehit;
+	}
+	else if (sprite.yhit == 1)
+	{
+		if (sprite.quadrant == 1)
+			sprite.dist2add = sin(M_PI_4) * sprite.xspritehit;
+		else if (sprite.quadrant == 2)
+			sprite.dist2add = sin(M_PI_4) * (1 - sprite.xspritehit);
+		else if (sprite.quadrant == 3)
+			a->rayc.wall = 3;
+		else if (sprite.quadrant == 4)
+			sprite.dist2add = sin(M_PI_4) * (1 - sprite.xspritehit);
+	}
+	
+	
+	sprite.dist2add = (- cos(a->rayc.anglray)) * sprite.xspritehit;
+	return (sprite.dist2add);
 }
 
 static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
 	
-	
-	
-	spr_calc_step(a);
-	calc_quadrantsprite(a);
+//	spr_calc_step(a);
+//	calc_quadrantsprite(a);
 	calc_spriteimpact(a);
-
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
-	
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
 	
 	sprite.dist2hit = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-	sprite.dist2add = (- cos(a->rayc.anglray)) * sprite.xspritehit;
+//	sprite.dist2add = (- cos(a->rayc.anglray)) * sprite.xspritehit;
+	sprite.dist2add = calc_dist2add(a, sprite);
 	sprite.distance = sprite.dist2hit + sprite.dist2add;
 	sprite.distance = sprite.distance * cos(a->rayc.anglray - a->rayc.dirplyr);
 	
-	sprite.stature = a->fconf.xrendersize / a->rayc.distance;
+	sprite.stature = a->fconf.xrendersize / sprite.distance;
 	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
 	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
-	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
 			- a->fconf.yrendersize / 2);
-	
 	sprite.sequence = a->mlibx.nbr_sprite;
-
+	sprite.first_ray = a->rayc.nbr_ray;
+	sprite.first_x = sprite.x;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
 
@@ -181,10 +208,13 @@ void	found_sprite(t_cub3d *a)
 	{
 		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
-			return ;
+			{
+				a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
+//				a->mlibx.sprite[c].last_x = 
+				return ;
+			}
 		c++;
 	}
 	init_sprite(a);
-//	print_sprites(a);
 	a->mlibx.nbr_sprite++;
 }
