@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 16:36:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 17:14:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	spr_brushstroke(int x, int y, t_cub3d *a, int color)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	if ((unsigned int)dst != 000000)
-		*(unsigned int*)dst = color;
+	*(unsigned int*)dst = color;
 }
 
 void	spr_calc_palette(t_cub3d *a, int c)
@@ -32,7 +31,8 @@ void	spr_calc_palette(t_cub3d *a, int c)
 	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height
 		* a->mlibx.sprite[c].y + /*a->rayc.xtexture];//*/a->mlibx.sprite[c].x];
-	spr_brushstroke(a->rayc.nbr_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
+	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
+		spr_brushstroke(a->rayc.nbr_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 
 /*
