@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 22:34:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 16:19:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		print_sprites(t_cub3d *a)
 	
 	c = 0;
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
-	while (a->mlibx.sprite[c].xpos)
+	while (c < a->mlibx.nbr_sprite)
 	{
 		printf("sprite[%d]: x: |%d| - y: |%d| - distance: |%f|. - sequence: |%d| - angle: |%f| - stature: |%f| - quadrant: |%d|\n",
 				c, a->mlibx.sprite[c].xpos, a->mlibx.sprite[c].ypos, a->mlibx.sprite[c].dist2hit, a->mlibx.sprite[c].sequence, a->mlibx.sprite[c].angle, a->mlibx.sprite[c].stature, a->mlibx.sprite[c].quadrant);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 22:40:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 16:04:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_texture_xpm
 
 typedef struct	s_sprite_xpm
 {
-	void	*mlx;
+/*	void	*mlx;
 	char	*relative_path;
 	int		width;
 	int		height;
@@ -63,15 +63,14 @@ typedef struct	s_sprite_xpm
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	double	angle;
+*/	double	angle;
 	double	dist2hit;
 	double	dist2add;
 	double	distance;
 	double	stature;
 	double	yfloat;
-//	double	yauxfloat;
-	double	xfloat;
 	double	ystep;
+	double	xstep;
 	double	xspritehit;
 	double	yspritehit;
 	int		init;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 13:40:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 16:36:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	spr_brushstroke(int x, int y, t_cub3d *a, int color)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if ((unsigned int)dst != 000000)
+		*(unsigned int*)dst = color;
 }
 
 void	spr_calc_palette(t_cub3d *a, int c)
@@ -30,7 +31,7 @@ void	spr_calc_palette(t_cub3d *a, int c)
 //	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
 	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height
-		* a->mlibx.sprite[c].y + a->mlibx.sprite[c].x];
+		* a->mlibx.sprite[c].y + /*a->rayc.xtexture];//*/a->mlibx.sprite[c].x];
 	spr_brushstroke(a->rayc.nbr_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 
@@ -44,9 +45,9 @@ void	spr_calc_palette(t_cub3d *a, int c)
 
 void	spr_close2wall(t_cub3d *a, int c)
 {
-	if (a->mlibx.sprite[c].yfloat < a->mlibx.sprite[c].height
+	if (a->mlibx.sprite[c].yfloat < a->mlibx.xpmwall[4].height
 			&& a->mlibx.sprite[c].yfloat >=
-			a->mlibx.sprite[c].height / 2.0)
+			a->mlibx.xpmwall[4].height / 2.0)
 	{
 		a->mlibx.sprite[c].point += (a->fconf.yrendersize / 2);
 		if (a->mlibx.sprite[c].point <= a->fconf.yrendersize)
@@ -55,10 +56,10 @@ void	spr_close2wall(t_cub3d *a, int c)
 	}
 	else
 	{
-		if (a->mlibx.sprite[c].yfloat >= a->mlibx.sprite[c].height)
+		if (a->mlibx.sprite[c].yfloat >= a->mlibx.xpmwall[4].height)
 		{
 			a->mlibx.sprite[c].yfloat =
-				(a->mlibx.sprite[c].height / 2.0);
+				(a->mlibx.xpmwall[4].height / 2.0);
 		}
 		a->mlibx.sprite[c].point = (int)((a->fconf.yrendersize / 2) - 1 - a->mlibx.sprite[c].aux);
 		if (a->mlibx.sprite[c].point >= 0)

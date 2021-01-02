@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 13:23:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 15:46:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	brushstroke(int x, int y, t_cub3d *a, int color)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if ((unsigned int)dst != 0xFFFFFF)
+		*(unsigned int*)dst = color;
 }
 
 static void	calc_palette(t_cub3d *a)
