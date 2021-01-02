@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 03:13:15 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 13:29:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 **  _______________________________
 **  |  char *id | c |   element   |
 **  |___________|___|_____________|
-**  |	"NO"    | 0 |    north    |
-**  |	"SO"    | 1 |    south    |
-**  |	"WE"    | 2 |    west     |
-**  |	"EA"    | 3 |    east     |
+**  |   "NO"    | 0 |    north    |
+**  |   "SO"    | 1 |    south    |
+**  |   "WE"    | 2 |    west     |
+**  |   "EA"    | 3 |    east     |
+**  |   "S"     | 4 |   sprites   |
 **  |___________|___|_____________|
 **  This functions save the .xpm as a image at struct t_data img
 **

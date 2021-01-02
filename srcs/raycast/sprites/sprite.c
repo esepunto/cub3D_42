@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 22:51:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/02 13:38:53 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,88 +100,88 @@ void 	sort_sprites(t_cub3d *a)
 
 static void	calc_spriteimpact(t_cub3d *a)
 {
+	t_sprite	sprite;
+	
+	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
+	
 	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xhit = 1;
+		sprite.xhit = 1;
 	else
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xhit = 0;
+		sprite.xhit = 0;
 	if ((int)a->rayc.yray != (int)(a->rayc.yray - a->rayc.yincrease))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].yhit = 1;
+		sprite.yhit = 1;
 	else
-		a->mlibx.sprite[a->mlibx.nbr_sprite].yhit = 0;
+		sprite.yhit = 0;
 
-	if (a->mlibx.sprite[a->mlibx.nbr_sprite].xhit == 1)
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit = a->rayc.yray;
-	else if (a->mlibx.sprite[a->mlibx.nbr_sprite].yhit == 1)
-		a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit = a->rayc.xray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit -=
-				floor(a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit);
-	
-	
-	a->mlibx.sprite[a->mlibx.nbr_sprite].x = (a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit
-			* a->mlibx.sprite[a->rayc.wall].width) / 1;
-	if ((a->mlibx.sprite[a->mlibx.nbr_sprite].xhit == 1 && a->rayc.xstep < 0)
-			|| (a->mlibx.sprite[a->mlibx.nbr_sprite].yhit == 1 && a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant < 3))
+	if (sprite.xhit == 1)
+		sprite.xspritehit = a->rayc.yray;
+	else if (sprite.yhit == 1)
+		sprite.xspritehit = a->rayc.xray;
+	sprite.xspritehit -= floor(sprite.xspritehit);
+
+	sprite.x = (sprite.xspritehit * a->mlibx.sprite[a->rayc.wall].width) / 1;
+	if ((sprite.xhit == 1 && a->rayc.xstep < 0)
+			|| (sprite.yhit == 1 && sprite.quadrant < 3))
 	{
-		a->mlibx.sprite[a->mlibx.nbr_sprite].x =
-			a->mlibx.sprite[a->mlibx.nbr_sprite].width - 1 - a->mlibx.sprite[a->mlibx.nbr_sprite].x;
+		sprite.x = sprite.width - 1 - sprite.x;
 	}
+	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
 
-static void	calc_quadrantsprite(t_cub3d *a)//Revisar valores dados
+/*
+void	calc_quadrantsprite(t_cub3d *a)
 {
 	double	val;
+	t_sprite	sprite;
+	
+	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
 
 	val = fmod(a->rayc.anglray, M_PI * 2);
 	if ((val >= 0 && val < M_PI_2) || (val >= -(M_PI * 2) && val < -M_PI_2 * 3))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 1;
+		sprite.quadrant = 1;
 	if ((val >= M_PI_2 && val < M_PI) || (val >= -(M_PI_2 * 3) && val < -M_PI))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 2;
+		sprite.quadrant = 2;
 	if ((val >= M_PI && val < M_PI_2 * 3) || (val >= -M_PI && val < -M_PI_2))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 3;
+		sprite.quadrant = 3;
 	if ((val >= M_PI_2 * 3 && val < M_PI * 2) || (val >= -M_PI_2 && val < -0))
-		a->mlibx.sprite[a->mlibx.nbr_sprite].quadrant = 4;
+		sprite.quadrant = 4;
+	
+	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
+*/
 
 static void	init_sprite(t_cub3d *a)
 {
+	t_sprite	sprite;
+	
+	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
+	
 	calc_spriteimpact(a);
-	calc_quadrantsprite(a);
+//	calc_quadrantsprite(a);
 	
-	a->mlibx.sprite[a->mlibx.nbr_sprite].xpos = (int)a->rayc.yray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].ypos = (int)a->rayc.xray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].xfloat = a->rayc.xray;
+	sprite.xpos = (int)a->rayc.yray;
+	sprite.ypos = (int)a->rayc.xray;
+	sprite.xfloat = a->rayc.xray;
 	
-//	a->mlibx.sprite[a->mlibx.nbr_sprite].yauxfloat = a->rayc.yray;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].ystep = 1.0 * a->mlibx.sprite[a->mlibx.nbr_sprite].height
-			/ a->mlibx.sprite[a->mlibx.nbr_sprite].stature;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].yfloat =
-			a->mlibx.sprite[a->mlibx.nbr_sprite].ystep
-			* (a->mlibx.sprite[a->mlibx.nbr_sprite].init
-			+ a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2
+//	sprite.yauxfloat = a->rayc.yray;
+	sprite.ystep = 1.0 * sprite.height / sprite.stature;
+	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
 			- a->fconf.yrendersize / 2);	
-	
-	
-	a->mlibx.sprite[a->mlibx.nbr_sprite].dist2hit =
+
+	sprite.dist2hit =
 		hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr)
 		* cos(a->rayc.anglray - a->rayc.dirplyr);
-	a->mlibx.sprite[a->mlibx.nbr_sprite].dist2add = (- cos(a->rayc.anglray))
-			* a->mlibx.sprite[a->mlibx.nbr_sprite].xspritehit;
-	a->mlibx.sprite[a->mlibx.nbr_sprite].distance =
-			a->mlibx.sprite[a->mlibx.nbr_sprite].dist2hit
-			+ a->mlibx.sprite[a->mlibx.nbr_sprite].dist2add;
+	sprite.dist2add = (- cos(a->rayc.anglray)) * sprite.xspritehit;
+	sprite.distance = sprite.dist2hit + sprite.dist2add;
 	
+	sprite.stature = a->fconf.xrendersize / a->rayc.distance;//REVISAR!! Puede que haya que conectarlo con altura píxeles de pared.
+	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
+	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
 	
-	a->mlibx.sprite[a->mlibx.nbr_sprite].stature = a->fconf.xrendersize / a->rayc.distance;//REVISAR!! Puede que haya que conectarlo con altura píxeles de pared.
-	a->mlibx.sprite[a->mlibx.nbr_sprite].init = (round(a->fconf.yrendersize / 2.0
-				- a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
-	a->mlibx.sprite[a->mlibx.nbr_sprite].end = (round(a->fconf.yrendersize / 2.0
-				+ a->mlibx.sprite[a->mlibx.nbr_sprite].stature / 2));
-	
-	
-	a->mlibx.sprite[a->mlibx.nbr_sprite].angle = a->rayc.anglray - a->rayc.dirplyr;//Ojo, esto puede que no me sirva y solo necesite el ángulo tal cual, sin restar.
-	a->mlibx.sprite[a->mlibx.nbr_sprite].sequence = a->mlibx.nbr_sprite;
+	sprite.angle = a->rayc.anglray - a->rayc.dirplyr;//Ojo, esto puede que no me sirva y solo necesite el ángulo tal cual, sin restar.
+	sprite.sequence = a->mlibx.nbr_sprite;
 
-
+	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
 
 
