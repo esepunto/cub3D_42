@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 21:36:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/03 19:35:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	paintsprites(t_cub3d *a)
 	int	c;
 	
 	sort_sprites(a);
-	c = -1;
-	while (++c < a->fconf.map.num_sprites)
+	c = a->fconf.map.num_sprites;
+	while (--c >= 0)
 		paint_spr(a, c);
 }
