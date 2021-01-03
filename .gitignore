@@ -20,7 +20,6 @@ wolftex/*.png
 *.txt
 *.sh
 NOwolftex/
-wolftex/
 *.out
 ejemploraycaster.c
 *.rtf
