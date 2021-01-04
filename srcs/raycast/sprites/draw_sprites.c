@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 16:33:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 19:05:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	spr_calc_palette(t_cub3d *a, int c)
 {
 	a->mlibx.sprite[c].y = (int)a->mlibx.sprite[c].yfloat
 		& (a->mlibx.xpmwall[4].height - 1);
-//	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
-	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
+	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
+/*	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height * a->mlibx.sprite[c].y
 		+ (int)a->mlibx.sprite[c].x];
-	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
+*/	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
 		spr_brushstroke(a->mlibx.sprite[c].current_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 

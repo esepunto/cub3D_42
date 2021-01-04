@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 17:24:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 18:18:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,9 +271,9 @@ void	found_sprite(t_cub3d *a)
 					dist = hypot(a->rayc.xray - a->rayc.xplyr,
 							a->rayc.yray - a->rayc.yplyr);
 					dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-					printf("dist: %f\n", dist);
+//					printf("dist: %f\n", dist);
 					a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
-					printf("sprite[%d] rayo[%d] distance: %f\n\n", c, a->rayc.nbr_ray, a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist);
+//					printf("sprite[%d] rayo[%d] distance: %f\n", c, a->rayc.nbr_ray, a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist);
 				}
 				return ;
 			}

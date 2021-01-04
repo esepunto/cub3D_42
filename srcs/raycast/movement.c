@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/26 13:07:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 21:03:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,26 @@ static void	goleft(t_cub3d *a)
 
 int			caress_key(int keycode, t_cub3d *a)
 {
-	if (keycode != KEY_ESC && keycode != KEY_MOVE_FRONT
+/*	if (keycode != KEY_ESC && keycode != KEY_MOVE_FRONT
 		&& keycode != KEY_MOVE_BACK && keycode != KEY_MOVE_RIGHT
 		&& keycode != KEY_MOVE_LEFT && keycode != KEY_ROTATE_LEFT
 		&& keycode != KEY_ROTATE_RIGHT)
 		return (0);
-	a->rayc.keycode = keycode;
-	if (a->rayc.keycode == KEY_ESC)
+*/	a->rayc.keycode = &keycode;
+	if (a->rayc.keycode[KEY_ESC])//KEY_ESC
 		close_window(a);
-	else if (a->rayc.keycode == KEY_MOVE_FRONT)
+	else if (a->rayc.keycode[KEY_MOVE_FRONT])//KEY_MOVE_FRONT
 		gofront(a);
-	else if (a->rayc.keycode == KEY_MOVE_BACK)
+	else if (a->rayc.keycode[KEY_MOVE_BACK])//KEY_MOVE_BACK
 		goback(a);
-	else if (a->rayc.keycode == KEY_MOVE_RIGHT)
+	else if (a->rayc.keycode[KEY_MOVE_RIGHT])//KEY_MOVE_RIGHT
 		goright(a);
-	else if (a->rayc.keycode == KEY_MOVE_LEFT)
+	else if (a->rayc.keycode[KEY_MOVE_LEFT])//KEY_MOVE_LEFT
 		goleft(a);
-	else if (a->rayc.keycode == KEY_ROTATE_LEFT)
-		a->rayc.dirplyr -= a->rayc.rotspeed;
-	else if (a->rayc.keycode == KEY_ROTATE_RIGHT)
+	else if (a->rayc.keycode[KEY_ROTATE_RIGHT])//KEY_ROTATE_RIGHT
 		a->rayc.dirplyr += a->rayc.rotspeed;
+	else if (a->rayc.keycode[KEY_ROTATE_LEFT])//KEY_ROTATE_LEFT
+		a->rayc.dirplyr -= a->rayc.rotspeed;
 	throw_rays(a);
 	return (0);
 }

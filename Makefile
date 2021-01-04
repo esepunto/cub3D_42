@@ -55,9 +55,9 @@ fclean:		clean
 re: fclean all
 
 norma:	
-		norminette srcs/
-		norminette libft/
-		norminette includes/
+		norminette srcs/*.c
+		norminette libft/*.c
+		norminette includes/*.c
 
 .PHONY: make_libs
 
