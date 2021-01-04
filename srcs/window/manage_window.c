@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 21:04:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 21:44:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,6 @@ static void	rescale_screen(t_cub3d *a)
 	}
 }
 
-int ft_key_hit(int keycode, t_cub3d *a)
-{
-	keycode] = 1;
-	return (0);
-}
-
-int ft_key_release(int keycode, t_cub3d *a)
-{
-	a->rayc.keycode[keycode] = 0;
-	return (0);
-}
-
 void		init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
@@ -76,9 +64,6 @@ void		init_window(t_cub3d *a)
 //	save_sprites(a);
 	throw_rays(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, close_window, a);
-	mlx_hook(a->mlibx.win, KEYPRESS, KEYPRESSMASK, ft_key_hit, a);
-	mlx_hook(a->mlibx.win, KEYRELEASE, KEYRELEASEMASK, ft_key_release, a);
-//	mlx_loop_hook(a->mlibx.mlx, &caress_key, a);
 	mlx_loop_hook(a->mlibx.mlx, &raycast, a);
 	mlx_loop(a->mlibx.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 21:04:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 21:44:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 # define KEY_MOVE_BACK		1
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
-# define KEYPRESS 2
-# define KEYRELEASE 3
-# define KEYPRESSMASK 1L
-# define KEYRELEASEMASK 2L
-
 
 typedef struct	s_buffer_distances_all_rays
 {
@@ -164,13 +159,6 @@ typedef struct	s_raycast
 	bool	xhit;
 	bool	yhit;
 	int		keycode;
-	int		c;
-	int		gf;
-	int		gb;
-	int		gr;
-	int		gl;
-	int		rr;
-	int		rl;
 	double	xwallhit;
 	double	ywallhit;
 	int		xtexture;
