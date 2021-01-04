@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 14:08:02 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 15:53:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,12 @@ typedef struct	s_map
 	int		nbrlines;
 }				t_map;
 
+typedef struct	s_buffer_distances_all_rays
+{
+	double	dist;
+}				t_dist;
+
+
 typedef struct	s_raycast
 {
 	double	modulo;
@@ -167,6 +173,7 @@ typedef struct	s_raycast
 	double	ystep;
 	double	xstep;
 	bool	hit;
+	t_dist	*buffer;
 }				t_raycast;
 
 typedef struct	s_readconfig

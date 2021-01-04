@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 13:24:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 14:13:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,12 +175,12 @@ void	calc_spriteimpact(t_cub3d *a)
 
 double	calc_dist2add(t_sprite sprite)
 {
-	printf("pre xspritehit: %f\n", sprite.xspritehit);
+/*	printf("pre xspritehit: %f\n", sprite.xspritehit);
 	printf("pre angle: %f\n", sprite.angle);
 	printf("pre d2a: %f\n", sprite.dist2add);
 	printf("sum_angle: %f\n", M_PI - M_PI_4 - (M_PI_2 - sprite.angle));
 	printf("quadrant: %d\n", sprite.quadrant);
-	if (sprite.xhit == 1)
+*/	if (sprite.xhit == 1)
 	{
 		if (sprite.quadrant == 4)
 			sprite.dist2add = (sprite.xspritehit * sin(M_PI_4)) / sin(M_PI - M_PI_4 - (M_PI_2 - sprite.angle));
@@ -202,11 +202,11 @@ double	calc_dist2add(t_sprite sprite)
 		else if (sprite.quadrant == 3)
 			sprite.dist2add = (sprite.xspritehit * sin(M_PI_4)) / sin(M_PI - M_PI_4 - (M_PI - sprite.angle));
 	}
-	printf("xspritehit: %f\n", sprite.xspritehit);
+/*	printf("xspritehit: %f\n", sprite.xspritehit);
 	printf("angle: %f\n", sprite.angle);
 	printf("d2a: %f\n", sprite.dist2add);
-	sprite.dist2add = (- cos(sprite.angle)) * sprite.xspritehit;
-	printf("d2a: %f\n\n", sprite.dist2add);
+*/	sprite.dist2add = (- cos(sprite.angle)) * sprite.xspritehit;
+//	printf("d2a: %f\n\n", sprite.dist2add);
 	return (sprite.dist2add);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 14:10:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 16:05:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ void	paint_spr(t_cub3d *a, int c)
 	else
 	{*/
 	a->mlibx.sprite[c].total_rays = a->mlibx.sprite[c].last_ray - a->mlibx.sprite[c].first_ray;
-	a->mlibx.sprite[c].x_aux = a->mlibx.sprite[c].total_rays / a->mlibx.xpmwall[4].width;
+	a->mlibx.sprite[c].x_aux = fmod((double)a->mlibx.sprite[c].total_rays, (double)a->mlibx.xpmwall[4].width);
+//	printf("total rays: %d\n", a->mlibx.sprite[c].total_rays);
+//	printf("ancho text_spr: %d\n", a->mlibx.xpmwall[4].width);
+//	printf("x_aux: %f\n", a->mlibx.sprite[c].x_aux);
 	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].first_ray;
 	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
 	{
@@ -95,6 +98,7 @@ void	paint_spr(t_cub3d *a, int c)
 			a->mlibx.sprite[c].point++;
 		}
 		a->mlibx.sprite[c].x += a->mlibx.sprite[c].x_aux;
+//		printf("x: %f\n", a->mlibx.sprite[c].x);
 		a->mlibx.sprite[c].current_ray++;
 	}
 }
