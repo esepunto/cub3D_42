@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 11:52:12 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 13:24:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,37 +133,30 @@ void	calc_spriteimpact(t_cub3d *a)
 	t_sprite	sprite;
 	
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
+/*	
 	if ((int)a->rayc.xray != (int)(a->rayc.xray - a->rayc.xincrease))
-	{
 		sprite.xhit = 1;
-		sprite.first_xhit = 1;
-	}
 	else
-	{
 		sprite.xhit = 0;
-		sprite.first_xhit = 0;
-	}
 	if ((int)a->rayc.yray != (int)(a->rayc.yray - a->rayc.yincrease))
-	{
 		sprite.yhit = 1;
-		sprite.first_yhit = 1;
-	}
 	else
-	{
 		sprite.yhit = 0;
-		sprite.first_yhit = 0;
-	}
+
 	if (sprite.xhit == 1)
 		sprite.xspritehit = a->rayc.yray;
 	else if (sprite.yhit == 1)
 		sprite.xspritehit = a->rayc.xray;
+	
 	sprite.xspritehit -= floor(sprite.xspritehit);
+	
 	sprite.x = (sprite.xspritehit * a->mlibx.xpmwall[4].width) / 1;
 	if ((sprite.xhit == 1 && sprite.xstep < 0)
 			|| (sprite.yhit == 1 && sprite.quadrant < 3))
 	{
 		sprite.x = a->mlibx.xpmwall[4].width - 1 - sprite.x;
 	}
+*/
 	sprite.angle = a->rayc.anglray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
@@ -246,7 +239,7 @@ static void	init_sprite(t_cub3d *a)
 	sprite.ypos = (int)a->rayc.xray;
 	
 	calc_distance_nd_stature(a, sprite);
-	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];//Vaya chorroc
+	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];//Vaya chorro-cé
 
 
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;

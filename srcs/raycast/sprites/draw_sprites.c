@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 12:34:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 14:10:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	spr_calc_palette(t_cub3d *a, int c)
 //	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
 	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height * a->mlibx.sprite[c].y
-		+ a->mlibx.sprite[c].x];
-//	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
-	spr_brushstroke(a->mlibx.sprite[c].current_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
+		+ (int)a->mlibx.sprite[c].x];
+	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
+		spr_brushstroke(a->mlibx.sprite[c].current_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 
 /*
@@ -83,7 +83,7 @@ void	paint_spr(t_cub3d *a, int c)
 	else
 	{*/
 	a->mlibx.sprite[c].total_rays = a->mlibx.sprite[c].last_ray - a->mlibx.sprite[c].first_ray;
-	
+	a->mlibx.sprite[c].x_aux = a->mlibx.sprite[c].total_rays / a->mlibx.xpmwall[4].width;
 	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].first_ray;
 	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
 	{
@@ -94,6 +94,7 @@ void	paint_spr(t_cub3d *a, int c)
 			a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
 			a->mlibx.sprite[c].point++;
 		}
+		a->mlibx.sprite[c].x += a->mlibx.sprite[c].x_aux;
 		a->mlibx.sprite[c].current_ray++;
 	}
 }
