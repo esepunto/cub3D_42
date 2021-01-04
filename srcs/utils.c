@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/02 18:02:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:46:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void		print_sprites(t_cub3d *a)
 		printf("sprite[%d]  stature: |%f|\n",c, a->mlibx.sprite[c].stature);
 		printf("sprite[%d]     init: |%d|\n",c, a->mlibx.sprite[c].init);
 		printf("sprite[%d]      end: |%d|\n",c, a->mlibx.sprite[c].end);
-		printf("sprite[%d] quadrant: |%d|\n\n",c, a->mlibx.sprite[c].quadrant);
+		printf("sprite[%d]  1st_ray: |%d|\n",c, a->mlibx.sprite[c].first_ray);
+		printf("sprite[%d]  lst_ray: |%d|\n\n",c, a->mlibx.sprite[c].last_ray);
 //		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
 //		printf("xpos: %d - ypos: %d\n\n", a->mlibx.sprite[a->mlibx.nbr_sprite].xpos, a->mlibx.sprite[a->mlibx.nbr_sprite].ypos);
 		c++;

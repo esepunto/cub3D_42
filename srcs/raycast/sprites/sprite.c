@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/03 22:40:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 11:52:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,22 @@ double	calc_dist2add(t_sprite sprite)
 	return (sprite.dist2add);
 }
 
+void	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
+{
+	sprite.dist2hit = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
+		sprite.dist2hit = sprite.dist2hit
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
+	sprite.dist2add = calc_dist2add(sprite);
+	sprite.distance = sprite.dist2hit + sprite.dist2add;
+//	sprite.distance = sprite.distance * cos(a->rayc.anglray - a->rayc.dirplyr);
+
+	sprite.stature = a->fconf.xrendersize / sprite.distance;
+	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
+	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
+
+	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
+}
+
 static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
@@ -229,18 +245,9 @@ static void	init_sprite(t_cub3d *a)
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
 	
-	sprite.dist2hit = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-	
-	sprite.dist2hit = sprite.dist2hit
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
-	
-	sprite.dist2add = calc_dist2add(sprite);
-	sprite.distance = sprite.dist2hit + sprite.dist2add;
-//	sprite.distance = sprite.distance * cos(a->rayc.anglray - a->rayc.dirplyr);
+	calc_distance_nd_stature(a, sprite);
+	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];//Vaya chorroc
 
-	sprite.stature = a->fconf.xrendersize / sprite.distance;
-	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
-	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
 
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2

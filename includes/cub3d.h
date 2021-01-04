@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/03 18:50:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 12:09:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,14 @@ typedef struct	s_sprite_xpm
 	int		first_ray;
 	int		last_ray;
 	int		first_x;
+	int		current_ray;
 	bool	xhit;
 	bool	yhit;
-	bool	first_xhit;
-	bool	first_yhit;
-	bool	last_xhit;
-	bool	last_yhit;
+	double	first_xhit;
+	double	first_yhit;
+	double	last_xhit;
+	double	last_yhit;
+	int		nbr_rays;
 }				t_sprite;
 
 
