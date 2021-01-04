@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 16:05:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 16:33:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,53 +35,9 @@ void	spr_calc_palette(t_cub3d *a, int c)
 		spr_brushstroke(a->mlibx.sprite[c].current_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
 }
 
-/*
-** To paint wall when player is close to the sprite and
-** its ocuppes all the screen, first paints lower half of
-** the sprite and then paints upper half.
-** To paint both halves, starts from just half of the screen
-** and paints throw the extreme.
-*/
-
-/*
-void	spr_close2wall(t_cub3d *a, int c)
-{
-	if (a->mlibx.sprite[c].yfloat < a->mlibx.xpmwall[4].height
-			&& a->mlibx.sprite[c].yfloat >=
-			a->mlibx.xpmwall[4].height / 2.0)
-	{
-		a->mlibx.sprite[c].point += (a->fconf.yrendersize / 2);
-		if (a->mlibx.sprite[c].point <= a->fconf.yrendersize)
-			spr_calc_palette(a, c);
-		a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].yfloat;
-	}
-	else
-	{
-		if (a->mlibx.sprite[c].yfloat >= a->mlibx.xpmwall[4].height)
-		{
-			a->mlibx.sprite[c].yfloat =
-				(a->mlibx.xpmwall[4].height / 2.0);
-		}
-		a->mlibx.sprite[c].point = (int)((a->fconf.yrendersize / 2) - 1 - a->mlibx.sprite[c].aux);
-		if (a->mlibx.sprite[c].point >= 0)
-			spr_calc_palette(a, c);
-		a->mlibx.sprite[c].yfloat -= a->mlibx.sprite[c].yfloat;
-		a->mlibx.sprite[c].aux++;
-	}
-}
-*/
 
 void	paint_spr(t_cub3d *a, int c)
 {
-/*	if (a->mlibx.sprite[c].stature > a->fconf.yrendersize)
-	{
-		if (a->mlibx.sprite[c].count == 0)
-			a->mlibx.sprite[c].yfloat = a->mlibx.sprite[c].height / 2.0;
-		spr_close2wall(a, c);
-		a->mlibx.sprite[c].count++;
-	}
-	else
-	{*/
 	a->mlibx.sprite[c].total_rays = a->mlibx.sprite[c].last_ray - a->mlibx.sprite[c].first_ray;
 	a->mlibx.sprite[c].x_aux = fmod((double)a->mlibx.sprite[c].total_rays, (double)a->mlibx.xpmwall[4].width);
 //	printf("total rays: %d\n", a->mlibx.sprite[c].total_rays);
@@ -91,9 +47,12 @@ void	paint_spr(t_cub3d *a, int c)
 	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
 	{
 		a->mlibx.sprite[c].point = a->mlibx.sprite[c].init;
+		a->mlibx.sprite[c].point = 0;
 		while (a->mlibx.sprite[c].point < a->mlibx.sprite[c].end)
 		{
-			spr_calc_palette(a, c);
+			if (a->rayc.buffer[a->mlibx.sprite[c].current_ray].dist >
+					a->mlibx.sprite[c].distance)
+				spr_calc_palette(a, c);
 			a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
 			a->mlibx.sprite[c].point++;
 		}
@@ -110,5 +69,9 @@ void	paintsprites(t_cub3d *a)
 	sort_sprites(a);
 	c = a->fconf.map.num_sprites;
 	while (--c >= 0)
+	{
 		paint_spr(a, c);
+		if (a->mlibx.sprite[c].buffer)
+			free(a->mlibx.sprite[c].buffer);
+	}
 }

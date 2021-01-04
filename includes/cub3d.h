@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 15:53:28 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 16:29:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define KEY_MOVE_BACK		1
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
+
+
+typedef struct	s_buffer_distances_all_rays
+{
+	double	dist;
+}				t_dist;
 
 typedef struct	s_data
 {
@@ -104,6 +110,7 @@ typedef struct	s_sprite_xpm
 	double	last_xhit;
 	double	last_yhit;
 	int		nbr_rays;
+	t_dist	*buffer;
 }				t_sprite;
 
 
@@ -129,12 +136,6 @@ typedef struct	s_map
 	int		first_line;
 	int		nbrlines;
 }				t_map;
-
-typedef struct	s_buffer_distances_all_rays
-{
-	double	dist;
-}				t_dist;
-
 
 typedef struct	s_raycast
 {

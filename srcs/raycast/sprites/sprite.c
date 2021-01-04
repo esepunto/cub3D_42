@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 14:13:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/04 17:24:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ double	calc_dist2add(t_sprite sprite)
 void	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 {
 	sprite.dist2hit = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray - a->rayc.yplyr);
-		sprite.dist2hit = sprite.dist2hit
+	sprite.dist2hit = sprite.dist2hit
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.dist2add = calc_dist2add(sprite);
 	sprite.distance = sprite.dist2hit + sprite.dist2add;
@@ -230,6 +230,9 @@ static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
 	
+	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer = (t_dist *)malloc(a->fconf.xrendersize * sizeof(t_dist))))
+		msg_err("No memory for buffer!");
+	
 //	spr_calc_step(a);
 	calc_quadrantsprite(a);
 	calc_spriteimpact(a);
@@ -240,7 +243,6 @@ static void	init_sprite(t_cub3d *a)
 	
 	calc_distance_nd_stature(a, sprite);
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];//Vaya chorro-cé
-
 
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
@@ -254,7 +256,8 @@ static void	init_sprite(t_cub3d *a)
 
 void	found_sprite(t_cub3d *a)
 {
-	int	c;
+	int		c;
+	double	dist;
 	
 	c = 0;
 	while (c < a->mlibx.nbr_sprite)
@@ -263,6 +266,15 @@ void	found_sprite(t_cub3d *a)
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
 			{
 				a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
+				if (!a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist)
+				{
+					dist = hypot(a->rayc.xray - a->rayc.xplyr,
+							a->rayc.yray - a->rayc.yplyr);
+					dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
+					printf("dist: %f\n", dist);
+					a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+					printf("sprite[%d] rayo[%d] distance: %f\n\n", c, a->rayc.nbr_ray, a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist);
+				}
 				return ;
 			}
 		c++;
