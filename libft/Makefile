@@ -6,7 +6,7 @@
 #    By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:54:03 by ssacrist          #+#    #+#              #
-#    Updated: 2020/12/31 11:42:58 by ssacrist         ###   ########.fr        #
+#    Updated: 2021/01/05 18:34:32 by ssacrist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC			=	ft_atoi.c \
 				*ft_strtrim.c \
 				*ft_substr.c \
 				ft_chekext.c \
+				ft_checkwords.c \
 				ft_delmatrix.c \
 				ft_countchr.c \
 				ft_cntwrds.c \

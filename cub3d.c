@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 18:18:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 18:46:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int			main(int argc, char **argv)
 			msg_err("This is not a .cub file, bro.");
 		if (argc == 3)
 		{
-			if (ft_memcmp(argv[2], "--save", 6) != 0 ||
-					ft_strlen(argv[2]) != 6)
+			if (ft_checkwords(argv[2], "--save") != 0)
 				msg_err("To save a -bmp screenshot, type --save.");
 			a->save = 1;
 		}
@@ -47,5 +46,4 @@ int			main(int argc, char **argv)
 	}
 	else
 		msg_err("Revier your fingers, please.");
-	system("leaks cub3D");
 }

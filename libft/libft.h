@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 18:54:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 18:38:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void				ft_memdel(void **a);
 char				*ft_extract(char *str);
 int					ft_chop(char **str, char **line);
 int					ft_chekext(const char *str, char *ext);
+int					ft_checkwords(const char *str1, const char *str2);
 size_t				ft_countchr(char *str, char chr);
 size_t				ft_cntwrds(char *str);
 char				*ft_delinitblanks(char *str);
