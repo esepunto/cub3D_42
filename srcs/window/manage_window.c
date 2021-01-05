@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 21:44:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 17:38:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	rescale_screen(t_cub3d *a)
 void		init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
-	rescale_screen(a);
+	if (a->save != 1)
+		rescale_screen(a);
 	a->mlibx.img.img = mlx_new_image(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize);
 	a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img,
@@ -63,6 +64,8 @@ void		init_window(t_cub3d *a)
 	save_textures(a);
 //	save_sprites(a);
 	throw_rays(a);
+	if (a->save == 1)
+		take_screenshot(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, close_window, a);
 	mlx_loop_hook(a->mlibx.mlx, &raycast, a);
 	mlx_loop(a->mlibx.mlx);

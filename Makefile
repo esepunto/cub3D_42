@@ -17,6 +17,7 @@ SRCS	=	cub3d.c \
 			srcs/raycast/sprites/sprite.c \
 			srcs/raycast/sprites/draw_sprites.c \
 			srcs/raycast/sprites/sprite_algorithm.c \
+			srcs/screenshot/bmp2.c \
 			srcs/utils.c 
 
 LIBS	=	libft/libft.a \

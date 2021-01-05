@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 21:44:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 17:30:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct	s_cub3d
 	t_config	fconf;
 	t_raycast	rayc;
 	t_minilibx	mlibx;
+	bool		save;
 }				t_cub3d;
 
 int				main(int argc, char **argv);
@@ -227,6 +228,8 @@ void	clean_sprites(t_cub3d *a);
 void	sort_sprites(t_cub3d *a);
 void	calc_stature_sprite(t_cub3d *a, int point);
 void	paintsprites(t_cub3d *a);
+
+void	take_screenshot(t_cub3d *a);
 
 int				msg_err(char *error);
 void			delmem(t_cub3d *a);

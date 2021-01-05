@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/01 19:53:35 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 18:18:43 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,19 @@ int			main(int argc, char **argv)
 {
 	t_cub3d	*a;
 
-	if (argc == 2)
+	if (argc == 2 || argc == 3)
 	{
-		if (ft_chekext(argv[1], ".cub") != 0)
-			msg_err("This is not a .cub file, bro.");
 		if (!(a = ft_calloc(sizeof(a), sizeof(t_cub3d))))
 			msg_err("WTF! Give me back my memory!");
-		
+		if (ft_chekext(argv[1], ".cub") != 0)
+			msg_err("This is not a .cub file, bro.");
+		if (argc == 3)
+		{
+			if (ft_memcmp(argv[2], "--save", 6) != 0 ||
+					ft_strlen(argv[2]) != 6)
+				msg_err("To save a -bmp screenshot, type --save.");
+			a->save = 1;
+		}
 		open_fconfig(argv[1], a);
 		init_struct(a);
 		init_window(a);
