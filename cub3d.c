@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 18:46:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 21:27:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			main(int argc, char **argv)
 		{
 			if (ft_checkwords(argv[2], "--save") != 0)
 				msg_err("To save a -bmp screenshot, type --save.");
-			a->save = 1;
+			a->save_bmp = 1;
 		}
 		open_fconfig(argv[1], a);
 		init_struct(a);

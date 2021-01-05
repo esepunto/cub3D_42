@@ -10,14 +10,14 @@ SRCS	=	cub3d.c \
 			srcs/file_config/map/manage_map.c \
 			srcs/file_config/map/maze_algorithm.c \
 			srcs/window/manage_window.c \
-			srcs/window/vangoghs_turn.c \
+			srcs/window/vangogh_turn.c \
 			srcs/raycast/raycast.c \
 			srcs/raycast/movement.c \
 			srcs/raycast/textures.c \
 			srcs/raycast/sprites/sprite.c \
 			srcs/raycast/sprites/draw_sprites.c \
 			srcs/raycast/sprites/sprite_algorithm.c \
-			srcs/screenshot/bmp2.c \
+			srcs/screenshot/gerdataro_turn.c \
 			srcs/utils.c 
 
 LIBS	=	libft/libft.a \

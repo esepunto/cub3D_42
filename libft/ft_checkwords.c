@@ -6,14 +6,14 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 18:26:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 18:39:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/05 18:56:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 /*
-**  This function receives two strings and corpare its. If return 1, the
+**  This function receives two strings and corpare its. If return 0, the
 **  two words are equal.
 */
 
