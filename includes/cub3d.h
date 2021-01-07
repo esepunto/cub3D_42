@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 17:32:28 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 22:30:23 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ typedef struct	s_buffer_rays_used
 	bool	ray;
 }				t_rays;
 
+typedef struct	s_buffer_xhit
+{
+	double	ximpact;
+}				t_hits;
+
+
 typedef struct	s_data
 {
 	void	*img;
@@ -58,6 +64,7 @@ typedef struct	s_texture_xpm
 	int		height;
 	void	*img;
 	int		*addr;
+//	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -65,58 +72,31 @@ typedef struct	s_texture_xpm
 
 typedef struct	s_sprite_xpm
 {
-/*	void	*mlx;
-	char	*relative_path;
-	int		width;
-	int		height;
-	void	*img;
-	int		*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-*/	double	angle;
-	double	dist2hit;
-	double	dist2add;
+	double	angle;
 	double	distance;
 	double	stature;
 	double	yfloat;
 	double	ystep;
 	double	xstep;
-	double	xspritehit;
-	double	yspritehit;
+	double	x;
 	int		init;
 	int		end;
 	int		sequence;
 	int		xpos;
 	int		ypos;
-	int		ysprite;
 	int		y;
-	double	x_aux;
-	double	x;
-	int		count;
+	int		ysprite;
+	int		xsprite;
 	int		aux;
 	int		point;
-	int		quadrant;
 	int		palette;
-	int		first_hit;
-	int		last_hit;
 	int		first_ray;
 	int		last_ray;
-	int		first_x;
 	int		current_ray;
-	int		total_rays;
-	int		init_hit;
-	int		end_hit;
-	double	factor_x;
-	bool	xhit;
-	bool	yhit;
-	double	first_xhit;
-	double	first_yhit;
-	double	last_xhit;
-	double	last_yhit;
-	int		nbr_rays;
+	int		tot_rays;
 	t_dist	*buffer;
 	t_rays	*rays_used;
+	t_hits	*ximpacts;
 }				t_sprite;
 
 

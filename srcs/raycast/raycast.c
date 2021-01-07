@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 17:19:06 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 21:03:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ void		throw_rays(t_cub3d *a)
 //		print_sprites(a);
 		a->rayc.nbr_ray++;
 	}
-	print_sprites(a);
+//	print_sprites(a);
 	if (a->mlibx.nbr_sprite)
 		paintsprites(a);
 

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 17:46:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 22:33:24 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void		print_sprites(t_cub3d *a)
 			{
 				printf("sprite[%d]_ray[%d]     used: |%d|\n",c, h, a->mlibx.sprite[c].rays_used[h].ray);
 				printf("sprite[%d]_ray[%d] distance: |%f|\n",c, h, a->mlibx.sprite[c].buffer[h].dist);
+				printf("sprite[%d]_ray[%d]     xhit: |%f|\n",c, h, a->mlibx.sprite[c].ximpacts[h].ximpact);
 			}
 			h++;
 		}
@@ -81,11 +82,19 @@ void	print_addr(t_cub3d *a)
 
 	while (a->mlibx.xpmwall[a->rayc.wall].addr && c < 100)
 	{
-//		printf("dst: %d\n", a->mlibx.xpmwall[a->rayc.wall].addr);
+	//	printf("dst: %s\n", (char *)a->mlibx.xpmwall[a->rayc.wall].addr);
 		a->mlibx.xpmwall[a->rayc.wall].addr++;
 		c++;
 	}
-	printf("\nc: %d\n", c);
+	c = 4;
+	printf("addr: %p\n", a->mlibx.xpmwall[c].addr);
+	printf("bpp: %d\n", a->mlibx.xpmwall[c].bits_per_pixel);
+	printf("line_len: %d\n", a->mlibx.xpmwall[c].line_length);
+	printf("endian: %d\n", a->mlibx.xpmwall[c].endian);
+	printf("img: %p\n", a->mlibx.xpmwall[c].img);
+	printf("heigth: %d\n", a->mlibx.xpmwall[c].height);
+	printf("width: %d\n", a->mlibx.xpmwall[c].width);
+	printf("path: %s\n\n", a->mlibx.xpmwall[c].relative_path);
 }
 
 void	print_color(t_cub3d *a)

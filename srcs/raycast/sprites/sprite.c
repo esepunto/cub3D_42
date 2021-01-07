@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 19:14:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 22:38:08 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void 	sort_sprites(t_cub3d *a)
 		j = 0;
 		while (j < a->mlibx.nbr_sprite)
 		{
-			if (a->mlibx.sprite[j].dist2hit < a->mlibx.sprite[i].dist2hit
+			if (a->mlibx.sprite[j].distance < a->mlibx.sprite[i].distance
 					&& a->mlibx.sprite[j].sequence > a->mlibx.sprite[i].sequence)
 			{
 				ft_swap(&a->mlibx.sprite[j].sequence, &a->mlibx.sprite[i].sequence);
@@ -101,6 +101,10 @@ static void	allocate_sprite(t_cub3d *a)
 			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used),
 			a->fconf.xrendersize * sizeof(t_rays))))
 		msg_err("No memory for buffer!");
+	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts =
+			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts),
+			a->fconf.xrendersize * sizeof(t_rays))))
+		msg_err("No memory for buffer!");
 }
 
 static void	init_sprite(t_cub3d *a)
@@ -108,36 +112,29 @@ static void	init_sprite(t_cub3d *a)
 	t_sprite	sprite;
 
 	allocate_sprite(a);
-/*	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
-			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer),
-			a->fconf.xrendersize * sizeof(t_dist))))
-		msg_err("No memory for buffer!");
-
-	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used =
-			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used),
-			a->fconf.xrendersize * sizeof(t_rays))))
-		msg_err("No memory for buffer!");
-*/
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
+	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
+	
 	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
 		- a->fconf.yrendersize / 2);
+	
+	
 	sprite.sequence = a->mlibx.nbr_sprite;
 	sprite.first_ray = a->rayc.nbr_ray;
-	sprite.first_x = sprite.x;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
-	print_sprites(a);
+//	print_sprites(a);
 }
 
 void	found_sprite(t_cub3d *a)
 {
 	int		c;
-//	double	dist;
+	double	dist;
 	
 	c = 0;
 	while (c < a->mlibx.nbr_sprite)
@@ -146,10 +143,11 @@ void	found_sprite(t_cub3d *a)
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
 			{
 				a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
-//				dist = a->mlibx.sprite[c].distance;
-//				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-//				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+				dist = a->mlibx.sprite[c].distance;
+				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
+				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
 				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
+				a->mlibx.sprite[c].ximpacts[a->rayc.nbr_ray].ximpact = a->rayc.xtexture;
 				return ;
 			}
 		c++;
