@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 21:32:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 13:17:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define KEY_MOVE_BACK		1
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
+# define Answer_to_the_Ultimate_Question_of_Life	0x42
 
 typedef struct	s_buffer_distances_all_rays
 {

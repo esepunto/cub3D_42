@@ -6,11 +6,15 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:06:26 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 22:27:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 13:18:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+** See comments below (at the lower of).
+*/
 
 void	browse_bits(char *header_plus, int i)
 {
@@ -21,6 +25,60 @@ void	browse_bits(char *header_plus, int i)
 }
 
 /*
+** header[0] = 0x42, so, please, excuse the joke in line 36 (or don't)
+*/
+
+void	write_header(int fd, t_cub3d *a, int file_size)
+{
+	char	header[54];
+
+	ft_bzero(header, 54);
+	header[0] = Answer_to_the_Ultimate_Question_of_Life;
+	header[1] = 0x4D;
+	browse_bits(header + 2, file_size);
+	header[10] = (unsigned char)54;
+	header[14] = (unsigned char)40;
+	browse_bits(header + 18, a->fconf.xrendersize);
+	browse_bits(header + 22, -a->fconf.yrendersize);
+	header[26] = (unsigned char)1;
+	header[28] = (unsigned char)32;
+	write(fd, header, 54);
+}
+
+void	write_image(int fd, t_cub3d *a)
+{
+	char	*pixels_from_image;
+	int		i;
+
+	i = 0;
+	pixels_from_image = (char *)a->mlibx.img.addr;
+	while (i < a->fconf.yrendersize)
+		write(fd,
+			&pixels_from_image[i++ * (a->mlibx.img.line_length * 4)],
+			a->fconf.xrendersize * 16);
+}
+
+void	take_photo(t_cub3d *a)
+{
+	int	fd;
+	int	file_size;
+
+	if ((fd = open("./gerda_taro.bmp", O_CREAT | O_RDWR, S_IRWXU)) < 0)
+		msg_err("I can't create the file.");
+	file_size = 54 + (a->fconf.xrendersize * a->fconf.yrendersize * 4);
+	write_header(fd, a, file_size);
+	write_image(fd, a);
+	close(fd);
+	close_window(a);
+}
+
+/*
+** BMP file has the following format:
+** 
+** Header: 54 bytes
+** Palette (optional): 0 bytes (for 24-bit RGB images)
+** Image Data: file size - 54 bytes (for 24-bit RGB images)
+**
 ** METADATA OF BMP HEADER (labeled BITMAPFILEHEADER). Total: 14 bytes (0-13).
 **
 ** FileType (2 bytes). A 2 character string value in ASCII to specify a
@@ -81,46 +139,6 @@ void	browse_bits(char *header_plus, int i)
 **
 ** ImportantColors (4 bytes). An integer (unsigned) representing the number of
 ** important colors. Generally ignored by setting '0' decimal value. NOT USE.
+**
+** Link with info about BMP: https://engineering.purdue.edu/ece264/17au/hw/HW15
 */
-
-void	prepare_to_save(int fd, t_cub3d *a, int file_size)
-{
-	char	header[54];
-
-	ft_bzero(header, 54);
-	header[0] = 0x42;
-	header[1] = 0x4D;
-	browse_bits(header + 2, file_size);
-	header[10] = (unsigned char)54;
-	header[14] = (unsigned char)40;
-	browse_bits(header + 18, a->fconf.xrendersize);
-	browse_bits(header + 22, -a->fconf.yrendersize);
-	header[26] = (unsigned char)1;
-	header[28] = (unsigned char)32;
-	write(fd, header, 54);
-}
-
-void	write_image_to_file(int fd, t_cub3d *a)
-{
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = (char *)a->mlibx.img.addr;
-	while (i < a->fconf.yrendersize)
-		write(fd, &tmp[i++ * (a->mlibx.img.line_length * 4)], a->fconf.xrendersize * 16);
-}
-
-void	take_photo(t_cub3d *a)
-{
-	int	fd;
-	int	file_size;
-
-	if ((fd = open("./gerda_taro.bmp", O_CREAT | O_RDWR, S_IRWXU)) < 0)
-		close_window(a);
-	file_size = 54 + (a->fconf.xrendersize * a->fconf.yrendersize * 4);
-	prepare_to_save(fd, a, file_size);
-	write_image_to_file(fd, a);
-	close(fd);
-	close_window(a);
-}
