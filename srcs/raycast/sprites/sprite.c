@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 19:03:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:14:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,24 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 	return (sprite);
 }
 
+static void	allocate_sprite(t_cub3d *a)
+{
+	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
+			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer),
+			a->fconf.xrendersize * sizeof(t_dist))))
+		msg_err("No memory for buffer!");
+	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used =
+			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used),
+			a->fconf.xrendersize * sizeof(t_rays))))
+		msg_err("No memory for buffer!");
+}
+
 static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
 
-	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
+	allocate_sprite(a);
+/*	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
 			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer),
 			a->fconf.xrendersize * sizeof(t_dist))))
 		msg_err("No memory for buffer!");
@@ -104,7 +117,7 @@ static void	init_sprite(t_cub3d *a)
 			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used),
 			a->fconf.xrendersize * sizeof(t_rays))))
 		msg_err("No memory for buffer!");
-
+*/
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
