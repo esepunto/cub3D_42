@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 17:43:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:03:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,23 @@ void 	sort_sprites(t_cub3d *a)
 
 t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 {
-	sprite.distance = hypot((a->rayc.xray + 0.5) - a->rayc.xplyr, (a->rayc.yray + 0.5) - a->rayc.yplyr);
-	sprite.distance = sprite.distance
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
+	sprite.distance = hypot(
+				((int)a->rayc.xray + 0.5) - a->rayc.xplyr,
+				((int)a->rayc.yray + 0.5) - a->rayc.yplyr);
+//	sprite.distance = sprite.distance
+//				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
-//	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
-//	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
-	sprite.init = a->fconf.yrendersize / 2.0 - sprite.stature / 2;
-	sprite.end = a->fconf.yrendersize / 2.0 + sprite.stature / 2;
+	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
+	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
+//	sprite.init = (int)((float)(a->fconf.yrendersize) / 2.0 - sprite.stature / 2);
+//	sprite.end = (int)((float)(a->fconf.yrendersize) / 2.0 + sprite.stature / 2);
 	return (sprite);
 }
 
 static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
-	
+
 	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
 			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer),
 			a->fconf.xrendersize * sizeof(t_dist))))
@@ -122,7 +124,7 @@ static void	init_sprite(t_cub3d *a)
 void	found_sprite(t_cub3d *a)
 {
 	int		c;
-	double	dist;
+//	double	dist;
 	
 	c = 0;
 	while (c < a->mlibx.nbr_sprite)
@@ -131,9 +133,9 @@ void	found_sprite(t_cub3d *a)
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
 			{
 				a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
-				dist = a->mlibx.sprite[c].distance;
-				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+//				dist = a->mlibx.sprite[c].distance;
+//				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
+//				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
 				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
 				return ;
 			}

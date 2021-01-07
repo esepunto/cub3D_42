@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 17:52:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:01:02 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,10 @@ void	spr_calc_palette(t_cub3d *a, int c)
 void	paint_spr(t_cub3d *a, int c)
 {
 	
-//	a->mlibx.sprite[c].total_rays = a->mlibx.sprite[c].last_ray - a->mlibx.sprite[c].first_ray;
-//	a->mlibx.sprite[c].x_aux = fmod((double)a->mlibx.sprite[c].total_rays, (double)a->mlibx.xpmwall[4].width);
-	
 	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].first_ray;
 	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
 	{
 		a->mlibx.sprite[c].point = a->mlibx.sprite[c].init;
-		a->mlibx.sprite[c].point = 0;
 		while (a->mlibx.sprite[c].point < a->mlibx.sprite[c].end)
 		{
 			if (a->mlibx.sprite[c].rays_used[a->mlibx.sprite[c].current_ray].ray == 1)
