@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 16:31:33 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/07 17:46:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,27 @@ void		print_sprites(t_cub3d *a)
 	int	c;
 	static int i = 1;
 	
+	
 	c = 0;
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
 	while (c < a->mlibx.nbr_sprite)
 	{
+		int h = 0;
 		printf("sprite[%d]     xpos: |%d|\n",c, a->mlibx.sprite[c].xpos);
 		printf("sprite[%d]     ypos: |%d|\n",c,a->mlibx.sprite[c].ypos);
 		printf("sprite[%d]        x: |%f|\n",c, a->mlibx.sprite[c].x);
 		printf("sprite[%d]        y: |%d|\n",c, a->mlibx.sprite[c].y);
 		printf("sprite[%d]   yfloat: |%f|\n",c, a->mlibx.sprite[c].yfloat);
 		printf("sprite[%d]    ystep: |%f|\n",c, a->mlibx.sprite[c].ystep);
-		printf("sprite[%d] distance: |%f|\n",c, a->mlibx.sprite[c].dist2hit);
+		while (h < a->fconf.xrendersize)
+		{
+			if (a->mlibx.sprite[c].rays_used[h].ray == 1)
+			{
+				printf("sprite[%d]_ray[%d]     used: |%d|\n",c, h, a->mlibx.sprite[c].rays_used[h].ray);
+				printf("sprite[%d]_ray[%d] distance: |%f|\n",c, h, a->mlibx.sprite[c].buffer[h].dist);
+			}
+			h++;
+		}
 		printf("sprite[%d] sequence: |%d|\n",c, a->mlibx.sprite[c].sequence);
 		printf("sprite[%d]    angle: |%f|\n",c, a->mlibx.sprite[c].angle);
 		printf("sprite[%d]  stature: |%f|\n",c, a->mlibx.sprite[c].stature);
