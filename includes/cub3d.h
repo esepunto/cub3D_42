@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 22:30:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/08 14:09:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_buffer_distances_all_rays
 typedef struct	s_buffer_rays_used
 {
 	bool	ray;
+	double	angle;
 }				t_rays;
 
 typedef struct	s_buffer_xhit
@@ -94,6 +95,7 @@ typedef struct	s_sprite_xpm
 	int		last_ray;
 	int		current_ray;
 	int		tot_rays;
+	double	midangle;
 	t_dist	*buffer;
 	t_rays	*rays_used;
 	t_hits	*ximpacts;

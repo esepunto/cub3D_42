@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 22:38:08 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/08 14:10:26 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,21 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 	return (sprite);
 }
 
+/*
+** To calc value of the mid angle, use phytagoras
+** tan(alpha) = opposite / adyacent
+*/
+t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
+{
+	double	opposite;
+	double	adyacent;
+	
+	opposite = ((int)a->rayc.yray + 0.5) - a->rayc.yplyr;
+	adyacent = ((int)a->rayc.xray + 0.5) - a->rayc.xplyr;
+	sprite.midangle = atan2(opposite, adyacent);
+	return (sprite);
+}
+
 static void	allocate_sprite(t_cub3d *a)
 {
 	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
@@ -103,7 +118,7 @@ static void	allocate_sprite(t_cub3d *a)
 		msg_err("No memory for buffer!");
 	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts =
 			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts),
-			a->fconf.xrendersize * sizeof(t_rays))))
+			a->fconf.xrendersize * sizeof(t_hits))))
 		msg_err("No memory for buffer!");
 }
 
@@ -117,6 +132,9 @@ static void	init_sprite(t_cub3d *a)
 	sprite.ypos = (int)a->rayc.xray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
+	
+	sprite = calc_midangle(a, sprite);
+
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
@@ -146,8 +164,10 @@ void	found_sprite(t_cub3d *a)
 				dist = a->mlibx.sprite[c].distance;
 				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
 				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
 				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
 				a->mlibx.sprite[c].ximpacts[a->rayc.nbr_ray].ximpact = a->rayc.xtexture;
+				a->mlibx.sprite[c] = calc_midangle(a, a->mlibx.sprite[c]);
 				return ;
 			}
 		c++;
