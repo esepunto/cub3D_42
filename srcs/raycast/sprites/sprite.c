@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/08 14:10:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/08 16:10:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,14 +133,18 @@ static void	init_sprite(t_cub3d *a)
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	
+//	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
+	
 	sprite = calc_midangle(a, sprite);
 
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
-	
 	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
 		- a->fconf.yrendersize / 2);
+
+//	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
+//	sprite.xfloat = sprite.xstep;// * (rayo_actual - rayo medio);REVISAR
 	
 	
 	sprite.sequence = a->mlibx.nbr_sprite;
