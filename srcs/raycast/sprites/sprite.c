@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/08 16:10:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 06:25:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 //	sprite.distance = sprite.distance
 //				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
-	sprite.init = (round(a->fconf.yrendersize / 2.0 - sprite.stature / 2));
-	sprite.end = (round(a->fconf.yrendersize / 2.0 + sprite.stature / 2));
+	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
+	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
 //	sprite.init = (int)((float)(a->fconf.yrendersize) / 2.0 - sprite.stature / 2);
 //	sprite.end = (int)((float)(a->fconf.yrendersize) / 2.0 + sprite.stature / 2);
 	return (sprite);
@@ -133,18 +133,19 @@ static void	init_sprite(t_cub3d *a)
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	
-//	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
+	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
 	
 	sprite = calc_midangle(a, sprite);
 
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
-	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
-		- a->fconf.yrendersize / 2);
+	sprite.yfloat = 0;
+//	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
+//		- a->fconf.yrendersize / 2);
 
-//	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
-//	sprite.xfloat = sprite.xstep;// * (rayo_actual - rayo medio);REVISAR
+	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
+	sprite.xfloat = 0;// * (rayo_actual - rayo medio);REVISAR
 	
 	
 	sprite.sequence = a->mlibx.nbr_sprite;

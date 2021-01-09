@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:06:26 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 13:18:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 06:14:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	take_photo(t_cub3d *a)
 	write_header(fd, a, file_size);
 	write_image(fd, a);
 	close(fd);
+	ft_printf("The file gerda_taro.bmp has been saved successfully.\n\n");
 	close_window(a);
 }
 

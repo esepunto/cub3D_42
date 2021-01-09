@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/07 19:21:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 05:04:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	calc_palette(t_cub3d *a)
 {
 	a->rayc.ytexture = (int)a->rayc.ytexturefloat
 		& (a->mlibx.xpmwall[a->rayc.wall].height - 1);
+	
 	a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
 		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];

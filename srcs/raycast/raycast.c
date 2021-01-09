@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/08 14:03:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 04:13:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ void		throw_rays(t_cub3d *a)
 //		printf("ray angle[%d]: %f\n", a->rayc.nbr_ray, a->rayc.anglray);
 		a->rayc.nbr_ray++;
 	}
-	print_sprites(a);
+//	print_sprites(a);
 	if (a->mlibx.nbr_sprite)
 		paintsprites(a);
 
