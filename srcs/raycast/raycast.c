@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 04:13:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 19:50:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void		throw_rays(t_cub3d *a)
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
-		a->mlibx.sprite->aux = 0;
+//		a->mlibx.sprite->aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)

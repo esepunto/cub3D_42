@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/08 15:43:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 19:52:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct	s_texture_xpm
 	int		height;
 	void	*img;
 	int		*addr;
-//	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -81,16 +80,13 @@ typedef struct	s_sprite_xpm
 	double	xfloat;
 	double	ystep;
 	double	xstep;
-	double	x;
 	int		init;
 	int		end;
 	int		sequence;
 	int		xpos;
 	int		ypos;
-	int		y;
 	int		ysprite;
 	int		xsprite;
-	int		aux;
 	int		point;
 	int		palette;
 	int		first_ray;

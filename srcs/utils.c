@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 11:25:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/08 14:13:26 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/09 19:52:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void		print_sprites(t_cub3d *a)
 		int h = 0;
 		printf("sprite[%d]     xpos: |%d|\n",c, a->mlibx.sprite[c].xpos);
 		printf("sprite[%d]     ypos: |%d|\n",c,a->mlibx.sprite[c].ypos);
-		printf("sprite[%d]        x: |%f|\n",c, a->mlibx.sprite[c].x);
-		printf("sprite[%d]        y: |%d|\n",c, a->mlibx.sprite[c].y);
 		printf("sprite[%d]   yfloat: |%f|\n",c, a->mlibx.sprite[c].yfloat);
 		printf("sprite[%d]    ystep: |%f|\n",c, a->mlibx.sprite[c].ystep);
 		printf("sprite[%d] midangle: |%f|\n",c, a->mlibx.sprite[c].midangle);
