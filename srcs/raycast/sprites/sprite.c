@@ -6,16 +6,16 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 06:25:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/10 02:04:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	clean_sprites(t_cub3d *a)
+void		clean_sprites(t_cub3d *a)
 {
 	int	c;
-		
+
 	c = 0;
 	while (c <= a->mlibx.nbr_sprite)
 	{
@@ -25,7 +25,7 @@ void	clean_sprites(t_cub3d *a)
 	a->mlibx.nbr_sprite = 0;
 }
 
-void	resort(t_cub3d *a)
+void		resort(t_cub3d *a)
 {
 	int			i;
 	int			j;
@@ -51,7 +51,7 @@ void	resort(t_cub3d *a)
 	}
 }
 
-void 	sort_sprites(t_cub3d *a)
+void		sort_sprites(t_cub3d *a)
 {
 	int	i;
 	int	j;
@@ -132,29 +132,22 @@ static void	init_sprite(t_cub3d *a)
 	sprite.ypos = (int)a->rayc.xray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
-	
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
-	
+//	printf("stature: %f\n", sprite.stature);
+//	printf("   span: %f\n\n", sprite.width_span);
 	sprite = calc_midangle(a, sprite);
-
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
-	
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
-	sprite.yfloat = 0;
+//	sprite.yfloat = 0;
 //	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
 //		- a->fconf.yrendersize / 2);
-
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
-	sprite.xfloat = 0;// * (rayo_actual - rayo medio);REVISAR
-	
-	
+//	sprite.xfloat = 0;
 	sprite.sequence = a->mlibx.nbr_sprite;
-	sprite.first_ray = a->rayc.nbr_ray;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
-//	print_sprites(a);
 }
 
-void	found_sprite(t_cub3d *a)
+void		found_sprite(t_cub3d *a)
 {
 	int		c;
 	double	dist;
@@ -164,17 +157,18 @@ void	found_sprite(t_cub3d *a)
 	{
 		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
 			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
-			{
-				a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
-				dist = a->mlibx.sprite[c].distance;
-				dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-				a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
-				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
-				a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
-				a->mlibx.sprite[c].ximpacts[a->rayc.nbr_ray].ximpact = a->rayc.xtexture;
-				a->mlibx.sprite[c] = calc_midangle(a, a->mlibx.sprite[c]);
-				return ;
-			}
+		{
+			a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
+			dist = a->mlibx.sprite[c].distance;
+			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
+			a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
+			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
+//			a->mlibx.sprite[c] = calc_midangle(a, a->mlibx.sprite[c]);
+			if (a->rayc.anglray < a->mlibx.sprite[c].midangle)
+				a->mlibx.sprite[c].midangle_minus = a->rayc.nbr_ray;
+			return ;
+		}
 		c++;
 	}
 	init_sprite(a);

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:06:26 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 06:14:04 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/10 02:09:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	take_photo(t_cub3d *a)
 
 /*
 ** BMP file has the following format:
-** 
+**
 ** Header: 54 bytes
 ** Palette (optional): 0 bytes (for 24-bit RGB images)
 ** Image Data: file size - 54 bytes (for 24-bit RGB images)
@@ -99,9 +99,9 @@ void	take_photo(t_cub3d *a)
 ** of actual pixel data in bytes. In nutshell:- it is the number of bytes
 ** between start of the file (0) and the first byte of the pixel data.
 **
-** 
+**
 ** INFODATA OF DIB HEADER (labeled BITMAPINFOHEADER). Total: 40 bytes (14-54)
-** 
+**
 ** HeaderSize (4 bytes). An integer (unsigned) representing the size of the
 ** header in bytes. It should be '40' in decimal to represent
 ** BITMAPINFOHEADER header type.
