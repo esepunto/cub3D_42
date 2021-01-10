@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 02:08:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/10 21:23:42 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ void	paint_spr(t_cub3d *a, int c)
 {
 //	if (a->mlibx.sprite[c].distance < 0.0)
 //		return ;
-	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].midangle_minus - 
-		(a->mlibx.sprite[c].width_span / 2);
+//	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].midangle_minus - 
+//		(a->mlibx.sprite[c].width_span / 2);//Revisar calculo angulo medio
+//	a->mlibx.sprite[c].current_ray += a->mlibx.sprite[c].rayinit;
+	a->mlibx.sprite[c].rayinit = fmax(0, (int)
+			((a->mlibx.sprite[c].midangle / (a->rayc.fov / a->fconf.xrendersize))
+			- ((a->mlibx.sprite[c].width_span / 2) * (a->rayc.fov / a->fconf.xrendersize))));
+	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].rayinit;
 	a->mlibx.sprite[c].xfloat = 0;
 	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
 	{

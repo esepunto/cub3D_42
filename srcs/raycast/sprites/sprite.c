@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 02:04:40 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/10 20:51:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ static void	init_sprite(t_cub3d *a)
 //	printf("stature: %f\n", sprite.stature);
 //	printf("   span: %f\n\n", sprite.width_span);
 	sprite = calc_midangle(a, sprite);
+//	sprite.rayinit = fmax(0.0, (int)((((a->rayc.fov / a->fconf.xrendersize) * (sprite.width_span / 2)) * sprite.width_span) / a->mlibx.xpmwall[4].width));
+//	sprite.rayinit += a->mlibx.nbr_sprite;
+//	printf("rayinit %d\n", sprite.rayinit);
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 //	sprite.yfloat = 0;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 02:20:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/10 20:28:36 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct	s_sprite_xpm
 	int		last_ray;
 	int		current_ray;
 	int		tot_rays;
+	int		rayinit;
+	int	midray;
 	double	midangle;
 	double	midangle_minus;
 	double	midangle_plus;
