@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:22:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:40:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct	s_cub3d
 	t_config	fconf;
 	t_raycast	rayc;
 	t_minilibx	mlibx;
+	t_sprite	sprite[15];
 	bool		save_bmp;
 }				t_cub3d;
 

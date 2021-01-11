@@ -17,7 +17,8 @@ SRCS	=	cub3d.c \
 			srcs/raycast/sprites/sprite.c \
 			srcs/raycast/sprites/draw_sprites.c \
 			srcs/screenshot/gerdataro_turn.c \
-			srcs/utils.c 
+			srcs/utils.c \
+			toprint.c
 
 LIBS	=	libft/libft.a libft/ft_printf/libftprintf.a libmlx.dylib 
 

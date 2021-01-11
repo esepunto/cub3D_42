@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:05:15 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:41:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	spr_calc_palette(t_cub3d *a, t_sprite sprite)
 
 void	paint_spr(t_cub3d *a, int c, t_sprite sprite)
 {
-//	if (a->mlibx.sprite[c].distance < 0.0)
+//	if (a->sprite[c].distance < 0.0)
 //		return ;
 	sprite.current_ray = sprite.rayinit;
 	sprite.xfloat = 0;
@@ -54,7 +54,7 @@ void	paint_spr(t_cub3d *a, int c, t_sprite sprite)
 		sprite.point = sprite.init;
 		while (sprite.point < sprite.end)
 		{
-			if (sprite.rays_used[a->mlibx.sprite[c].current_ray].ray)
+			if (sprite.rays_used[a->sprite[c].current_ray].ray)
 				if (sprite.rays_used[sprite.current_ray].ray == true)
 					spr_calc_palette(a, sprite);
 //			else
@@ -71,15 +71,15 @@ void	calc_init_ray(t_cub3d *a, int c)
 {
 	int	ray;
 
-	ray = a->mlibx.sprite[c].first_ray;
-	while (a->mlibx.sprite[c].rays_used[ray].angle
-			< a->mlibx.sprite[c].midangle)
+	ray = a->sprite[c].first_ray;
+	while (a->sprite[c].rays_used[ray].angle
+			< a->sprite[c].midangle)
 	{
-		a->mlibx.sprite[c].rayinit = ray;
+		a->sprite[c].rayinit = ray;
 		ray++;
 	}
-	a->mlibx.sprite[c].rayinit++;
-	a->mlibx.sprite[c].rayinit -= (a->mlibx.sprite[c].width_span / 2);
+	a->sprite[c].rayinit++;
+	a->sprite[c].rayinit -= (a->sprite[c].width_span / 2);
 }
 
 void	paintsprites(t_cub3d *a)
@@ -90,16 +90,16 @@ void	paintsprites(t_cub3d *a)
 	c = a->fconf.map.num_sprites - 1;
 	while (c >= 0)
 	{
-		if (a->mlibx.sprite[c].view == false)
+		if (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		paint_spr(a, c, a->mlibx.sprite[c]);
-		if (a->mlibx.sprite[c].buffer)
-			free(a->mlibx.sprite[c].buffer);
-		if (a->mlibx.sprite[c].rays_used)
-			free(a->mlibx.sprite[c].rays_used);
-		if (a->mlibx.sprite[c].ximpacts)
-			free(a->mlibx.sprite[c].ximpacts);
+		paint_spr(a, c, a->sprite[c]);
+		if (a->sprite[c].buffer)
+			free(a->sprite[c].buffer);
+		if (a->sprite[c].rays_used)
+			free(a->sprite[c].rays_used);
+		if (a->sprite[c].ximpacts)
+			free(a->sprite[c].ximpacts);
 		c--;
 	}
 }

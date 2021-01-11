@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:13:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:41:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		clean_sprites(t_cub3d *a)
 	c = 0;
 	while (c <= a->mlibx.nbr_sprite)
 	{
-		ft_memset(&a->mlibx.sprite[c], '\0', sizeof(t_sprite));
+		ft_memset(&a->sprite[c], '\0', sizeof(t_sprite));
 		c++;
 	}
 	a->mlibx.nbr_sprite = 0;
@@ -38,11 +38,11 @@ void		resort(t_cub3d *a)
 		j = 0;
 		while (j < a->mlibx.nbr_sprite)
 		{
-			if (a->mlibx.sprite[j].sequence > a->mlibx.sprite[i].sequence)
+			if (a->sprite[j].sequence > a->sprite[i].sequence)
 			{
-				temp = a->mlibx.sprite[j];
-				a->mlibx.sprite[j] = a->mlibx.sprite[i];
-				a->mlibx.sprite[i] = temp;
+				temp = a->sprite[j];
+				a->sprite[j] = a->sprite[i];
+				a->sprite[i] = temp;
 				j = 0;
 			}
 			j++;
@@ -63,13 +63,13 @@ void		sort_sprites(t_cub3d *a)
 		j = 0;
 		while (j < a->mlibx.nbr_sprite)
 		{
-			if (a->mlibx.sprite[j].distance
-					< a->mlibx.sprite[i].distance
-					&& a->mlibx.sprite[j].sequence
-					> a->mlibx.sprite[i].sequence)
+			if (a->sprite[j].distance
+					< a->sprite[i].distance
+					&& a->sprite[j].sequence
+					> a->sprite[i].sequence)
 			{
-				ft_swap(&a->mlibx.sprite[j].sequence,
-						&a->mlibx.sprite[i].sequence);
+				ft_swap(&a->sprite[j].sequence,
+						&a->sprite[i].sequence);
 				i = 0;
 			}
 			j++;
@@ -110,16 +110,16 @@ t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 
 static void	allocate_sprite(t_cub3d *a)
 {
-	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer =
-			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].buffer),
+	if (!(a->sprite[a->mlibx.nbr_sprite].buffer =
+			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].buffer),
 			a->fconf.xrendersize * sizeof(t_dist))))
 		msg_err("No memory for buffer!");
-	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used =
-			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].rays_used),
+	if (!(a->sprite[a->mlibx.nbr_sprite].rays_used =
+			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].rays_used),
 			a->fconf.xrendersize * sizeof(t_rays))))
 		msg_err("No memory for buffer!");
-	if (!(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts =
-			calloc(sizeof(a->mlibx.sprite[a->mlibx.nbr_sprite].ximpacts),
+	if (!(a->sprite[a->mlibx.nbr_sprite].ximpacts =
+			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].ximpacts),
 			a->fconf.xrendersize * sizeof(t_hits))))
 		msg_err("No memory for buffer!");
 }
@@ -129,7 +129,7 @@ static void	init_sprite(t_cub3d *a)
 	t_sprite	sprite;
 
 	allocate_sprite(a);
-	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
+	sprite = a->sprite[a->mlibx.nbr_sprite];
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
@@ -144,7 +144,7 @@ static void	init_sprite(t_cub3d *a)
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
 	sprite.sequence = a->mlibx.nbr_sprite;
-	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
+	a->sprite[a->mlibx.nbr_sprite] = sprite;
 }
 
 void		found_sprite(t_cub3d *a)
@@ -155,18 +155,18 @@ void		found_sprite(t_cub3d *a)
 	c = 0;
 	while (c < a->mlibx.nbr_sprite)
 	{
-		if (a->mlibx.sprite[c].xpos == (int)a->rayc.yray
-			&& a->mlibx.sprite[c].ypos == (int)a->rayc.xray)
+		if (a->sprite[c].xpos == (int)a->rayc.yray
+			&& a->sprite[c].ypos == (int)a->rayc.xray)
 		{
-			a->mlibx.sprite[c].last_ray = a->rayc.nbr_ray;
-			dist = a->mlibx.sprite[c].distance;
+			a->sprite[c].last_ray = a->rayc.nbr_ray;
+			dist = a->sprite[c].distance;
 			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-			a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
-			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle =
+			a->sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
+			a->sprite[c].rays_used[a->rayc.nbr_ray].angle =
 				a->rayc.anglray;
-			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
-			if (a->rayc.anglray < a->mlibx.sprite[c].midangle)
-				a->mlibx.sprite[c].midangle_minus = a->rayc.nbr_ray;
+			a->sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
+			if (a->rayc.anglray < a->sprite[c].midangle)
+				a->sprite[c].midangle_minus = a->rayc.nbr_ray;
 			return ;
 		}
 		c++;
