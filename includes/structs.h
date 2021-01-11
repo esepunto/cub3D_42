@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 20:28:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 17:40:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct	s_sprite_xpm
 	double	midangle;
 	double	midangle_minus;
 	double	midangle_plus;
+	bool	view;
 	t_dist	*buffer;
 	t_rays	*rays_used;
 	t_hits	*ximpacts;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 20:51:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 17:47:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,11 @@ static void	init_sprite(t_cub3d *a)
 
 	allocate_sprite(a);
 	sprite = a->mlibx.sprite[a->mlibx.nbr_sprite];
+	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
+	sprite.rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
+	sprite.first_ray = a->rayc.nbr_ray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
@@ -142,8 +145,6 @@ static void	init_sprite(t_cub3d *a)
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 //	sprite.yfloat = 0;
-//	sprite.yfloat = sprite.ystep * (sprite.init + sprite.stature / 2
-//		- a->fconf.yrendersize / 2);
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
 //	sprite.xfloat = 0;
 	sprite.sequence = a->mlibx.nbr_sprite;
