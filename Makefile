@@ -20,23 +20,16 @@ SRCS	=	cub3d.c \
 			srcs/screenshot/gerdataro_turn.c \
 			srcs/utils.c 
 
-LIBS	=	libft/libft.a \
-			libft/ft_printf/libftprintf.a \
-			libmlx.dylib 
-
-
+LIBS	=	libft/libft.a libft/ft_printf/libftprintf.a libmlx.dylib 
 
 OBJECTS	=	$(SRCS:.c=.o)
 
 LINKS	=	-I ./mlx_beta -L ./mlx_beta -lmlx -framework OpenGL -framework AppKit
 
-
 RM		=	rm -f
 
-all: $(NAME)
-
-$(NAME):	make_libs $(OBJECTS)
-			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
+$(NAME):	$(LIBS) $(OBJECTS)
+			$(CC) $(LINKS) $(SRCS) -o $(NAME)
 
 clean:
 			$(RM) $(OBJECTS)
@@ -45,13 +38,11 @@ clean:
 			@make clean -C mlx
 			@make clean -C mlx_beta
 
-
 fclean:		clean
 			$(RM) $(NAME)
 			@make fclean -C libft
 			@make fclean -C libft/ft_printf
 			rm -f libmlx.dylib 
-
 
 re: fclean all
 
@@ -60,8 +51,10 @@ norma:
 		norminette libft/
 		norminette includes/
 
-.PHONY: make_libs
+.PHONY:		all
+all:		make_libs $(NAME)
 
+.PHONY:	make_libs
 make_libs:
 			@make -C libft
 			@make -C libft/ft_printf
