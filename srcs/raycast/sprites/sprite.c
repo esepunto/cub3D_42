@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/11 17:47:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:13:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		resort(t_cub3d *a)
 	int			i;
 	int			j;
 	t_sprite	temp;
-	
+
 	i = 0;
 	j = 0;
 	while (i < a->mlibx.nbr_sprite)
@@ -63,10 +63,13 @@ void		sort_sprites(t_cub3d *a)
 		j = 0;
 		while (j < a->mlibx.nbr_sprite)
 		{
-			if (a->mlibx.sprite[j].distance < a->mlibx.sprite[i].distance
-					&& a->mlibx.sprite[j].sequence > a->mlibx.sprite[i].sequence)
+			if (a->mlibx.sprite[j].distance
+					< a->mlibx.sprite[i].distance
+					&& a->mlibx.sprite[j].sequence
+					> a->mlibx.sprite[i].sequence)
 			{
-				ft_swap(&a->mlibx.sprite[j].sequence, &a->mlibx.sprite[i].sequence);
+				ft_swap(&a->mlibx.sprite[j].sequence,
+						&a->mlibx.sprite[i].sequence);
 				i = 0;
 			}
 			j++;
@@ -86,8 +89,6 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
 	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
 	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
-//	sprite.init = (int)((float)(a->fconf.yrendersize) / 2.0 - sprite.stature / 2);
-//	sprite.end = (int)((float)(a->fconf.yrendersize) / 2.0 + sprite.stature / 2);
 	return (sprite);
 }
 
@@ -95,11 +96,12 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 ** To calc value of the mid angle, use phytagoras
 ** tan(alpha) = opposite / adyacent
 */
+
 t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 {
 	double	opposite;
 	double	adyacent;
-	
+
 	opposite = ((int)a->rayc.yray + 0.5) - a->rayc.yplyr;
 	adyacent = ((int)a->rayc.xray + 0.5) - a->rayc.xplyr;
 	sprite.midangle = atan2(opposite, adyacent);
@@ -135,18 +137,12 @@ static void	init_sprite(t_cub3d *a)
 	sprite.first_ray = a->rayc.nbr_ray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
-	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature) / a->mlibx.xpmwall[4].height;
-//	printf("stature: %f\n", sprite.stature);
-//	printf("   span: %f\n\n", sprite.width_span);
+	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)
+		/ a->mlibx.xpmwall[4].height;
 	sprite = calc_midangle(a, sprite);
-//	sprite.rayinit = fmax(0.0, (int)((((a->rayc.fov / a->fconf.xrendersize) * (sprite.width_span / 2)) * sprite.width_span) / a->mlibx.xpmwall[4].width));
-//	sprite.rayinit += a->mlibx.nbr_sprite;
-//	printf("rayinit %d\n", sprite.rayinit);
 	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
-//	sprite.yfloat = 0;
-	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;//step = stature / a->mlibx.xpmwall[4].width REVISAR
-//	sprite.xfloat = 0;
+	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
 	sprite.sequence = a->mlibx.nbr_sprite;
 	a->mlibx.sprite[a->mlibx.nbr_sprite] = sprite;
 }
@@ -155,7 +151,7 @@ void		found_sprite(t_cub3d *a)
 {
 	int		c;
 	double	dist;
-	
+
 	c = 0;
 	while (c < a->mlibx.nbr_sprite)
 	{
@@ -166,9 +162,9 @@ void		found_sprite(t_cub3d *a)
 			dist = a->mlibx.sprite[c].distance;
 			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
 			a->mlibx.sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
-			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
+			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].angle =
+				a->rayc.anglray;
 			a->mlibx.sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
-//			a->mlibx.sprite[c] = calc_midangle(a, a->mlibx.sprite[c]);
 			if (a->rayc.anglray < a->mlibx.sprite[c].midangle)
 				a->mlibx.sprite[c].midangle_minus = a->rayc.nbr_ray;
 			return ;
@@ -178,11 +174,3 @@ void		found_sprite(t_cub3d *a)
 	init_sprite(a);
 	a->mlibx.nbr_sprite++;
 }
-
-
-
-
-
-
-
-

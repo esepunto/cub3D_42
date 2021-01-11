@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:06:26 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/10 02:09:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:31:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	browse_bits(char *header_plus, int i)
 }
 
 /*
-** header[0] = 0x42, so, please, excuse the joke in line 36 (or don't)
+** header[0] = 0x42, so, please, excuse the joke in line 36... or don't >;)
 */
 
 void	write_header(int fd, t_cub3d *a, int file_size)
@@ -33,7 +33,7 @@ void	write_header(int fd, t_cub3d *a, int file_size)
 	char	header[54];
 
 	ft_bzero(header, 54);
-	header[0] = Answer_to_the_Ultimate_Question_of_Life;
+	header[0] = ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE;
 	header[1] = 0x4D;
 	browse_bits(header + 2, file_size);
 	header[10] = (unsigned char)54;
@@ -109,7 +109,7 @@ void	take_photo(t_cub3d *a)
 ** ImageWidth (4 bytes). An integer (signed) representing the width of the
 ** final image in pixels.
 **
-** ImageHeight (4 bytes). An integer (signed) representing the height of the 
+** ImageHeight (4 bytes). An integer (signed) representing the height of the
 ** final image in pixels.
 **
 ** Planes (2 bytes). An integer (unsigned) representing the number of color

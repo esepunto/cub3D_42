@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/11 17:43:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 23:47:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ static void	ifimpact(t_cub3d *a)
 		a->rayc.yray += a->rayc.yincrease;
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2')
 			found_sprite(a);
-//		printf("raycast\n");
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
@@ -179,8 +178,6 @@ void		throw_rays(t_cub3d *a)
 								a->rayc.yray - a->rayc.yplyr);
 		a->rayc.distance = a->rayc.distance
 				* cos(a->rayc.anglray - a->rayc.dirplyr);
-//		a->rayc.buffer[a->rayc.nbr_ray].dist = a->rayc.distance;
-//		printf("buffer_dist[%d]: %f\n", a->rayc.nbr_ray, a->rayc.buffer[a->rayc.nbr_ray].dist);
 		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
@@ -188,13 +185,9 @@ void		throw_rays(t_cub3d *a)
 				+ a->rayc.staturewall / 2));
 		calc_texturing(a);
 		pointillism(a);
-//		print_sprites(a);
-//		printf("ray angle[%d]: %f\n", a->rayc.nbr_ray, a->rayc.anglray);
 		a->rayc.nbr_ray++;
 	}
-//	print_sprites(a);
 	if (a->mlibx.nbr_sprite)
 		paintsprites(a);
-
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 }

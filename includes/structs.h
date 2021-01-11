@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/11 17:40:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:22:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct	s_buffer_xhit
 {
 	double	ximpact;
 }				t_hits;
-
 
 typedef struct	s_data
 {
@@ -56,7 +55,7 @@ typedef struct	s_sprite_xpm
 {
 	double	angle;
 	double	distance;
-	double	stature;//¿heigth?
+	double	stature;
 	double	width_span;
 	double	yfloat;
 	double	xfloat;
@@ -76,7 +75,7 @@ typedef struct	s_sprite_xpm
 	int		current_ray;
 	int		tot_rays;
 	int		rayinit;
-	int	midray;
+	int		midray;
 	double	midangle;
 	double	midangle_minus;
 	double	midangle_plus;
@@ -85,7 +84,6 @@ typedef struct	s_sprite_xpm
 	t_rays	*rays_used;
 	t_hits	*ximpacts;
 }				t_sprite;
-
 
 typedef struct	s_minilibx
 {
@@ -147,7 +145,6 @@ typedef struct	s_raycast
 	double	ystep;
 	double	xstep;
 	bool	hit;
-//	t_dist	*buffer;
 }				t_raycast;
 
 typedef struct	s_readconfig

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 19:48:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:18:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	brushstroke(int x, int y, t_cub3d *a, int color)
 {
 	char	*dst;
 
-	if (y >= a->fconf.yrendersize || y < 0)//Probar a ponerlo ft anterior to agile
+	if (y >= a->fconf.yrendersize || y < 0)//Ponerlo ft anterior to agile
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
@@ -28,7 +28,6 @@ static void	calc_palette(t_cub3d *a)
 {
 	a->rayc.ytexture = (int)a->rayc.ytexturefloat
 		& (a->mlibx.xpmwall[a->rayc.wall].height - 1);
-	
 	a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
 		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];

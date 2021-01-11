@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 06:13:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 00:16:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	raycast(t_cub3d *a)
 }
 
 /*
-** The image should be rescaled when the resolution indicated in the 
-** config file is greater than the screen resolution. 
+** The image should be rescaled when the resolution indicated in the
+** config file is greater than the screen resolution.
 ** When rescaling the image, the proportions must be maintained.
 ** Rescaling MUST NOT be done when the "--save" argument has been included,
 ** as the bmp must be saved with the resolution indicated in the config file.

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 04:05:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 23:48:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,4 @@ void	calc_texturing(t_cub3d *a)
 	a->rayc.ysteptexture = 1.0 * a->mlibx.xpmwall[a->rayc.wall].height
 			/ a->rayc.staturewall;
 	a->rayc.ytexturefloat = 0;
-//	a->rayc.ytexturefloat = a->rayc.ysteptexture * 0;
-//			(a->rayc.initwall + a->rayc.staturewall / 2
-//			- a->fconf.yrendersize / 2);
 }
