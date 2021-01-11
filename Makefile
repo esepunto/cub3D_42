@@ -28,8 +28,18 @@ LINKS	=	-I ./mlx_beta -L ./mlx_beta -lmlx -framework OpenGL -framework AppKit
 
 RM		=	rm -f
 
-$(NAME):	$(LIBS) $(OBJECTS)
-			$(CC) $(LINKS) $(SRCS) -o $(NAME)
+.PHONY:		all
+all:		make_libs $(NAME)
+
+.PHONY:	make_libs
+make_libs:
+			@make -C libft
+			@make -C libft/ft_printf
+			@make -C mlx_beta
+			@mv ./mlx_beta/libmlx.dylib ./
+
+$(NAME):	$(OBJECTS)
+			$(CC) $(LINKS) $(LIBS) $(SRCS) -o $(NAME) 
 
 clean:
 			$(RM) $(OBJECTS)
@@ -51,13 +61,5 @@ norma:
 		norminette libft/
 		norminette includes/
 
-.PHONY:		all
-all:		make_libs $(NAME)
 
-.PHONY:	make_libs
-make_libs:
-			@make -C libft
-			@make -C libft/ft_printf
-			@make -C mlx_beta
-			@mv ./mlx_beta/libmlx.dylib ./
 

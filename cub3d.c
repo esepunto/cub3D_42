@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/09 06:16:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 19:30:33 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_struct(t_cub3d *a)
 //	a->rayc.modulo = 0.00001;// El modulo se adapta a la resolución para hacer más eficiente el pintado
 	a->rayc.modulo = (a->fconf.xrendersize
 		* a->fconf.yrendersize) * 0.000000001;
-	a->rayc.rush = 0.25;
+	a->rayc.rush = 0.10;
 	a->rayc.rotspeed = 0.10;
 	a->rayc.fov = 66 * M_PI / 180;//Quizás debería vincularse tb a la resolución
 //	a->rayc.fov = 180 / (a->fconf.xrendersize / a->fconf.yrendersize) * M_PI / 180;//Quizás debería vincularse tb a la resolución
