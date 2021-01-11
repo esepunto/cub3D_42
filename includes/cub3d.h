@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 21:32:49 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:53:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define KEY_MOVE_BACK		1
 # define KEY_MOVE_LEFT		0
 # define KEY_MOVE_RIGHT		2
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define KEYPRESSMASK 1L
+# define KEYRELEASEMASK 2L
 
 typedef struct	s_buffer_distances_all_rays
 {
@@ -158,7 +162,6 @@ typedef struct	s_raycast
 	int		nbr_ray;
 	bool	xhit;
 	bool	yhit;
-	int		keycode;
 	double	xwallhit;
 	double	ywallhit;
 	int		xtexture;
@@ -174,6 +177,14 @@ typedef struct	s_raycast
 	double	xstep;
 	bool	hit;
 	t_dist	*buffer;
+	int		keycode[125];
+	int		c;
+	int		gf;
+	int		gb;
+	int		gr;
+	int		gl;
+	int		rr;
+	int		rl;
 }				t_raycast;
 
 typedef struct	s_readconfig
@@ -214,7 +225,7 @@ int				ceilfloorcolor(int c, t_cub3d *a);
 void			save_textures(t_cub3d *a);
 
 void			init_window(t_cub3d *a);
-int				caress_key(int keycode, t_cub3d *a);
+int				caress_key(t_cub3d *a);
 int				close_window(t_cub3d *a);
 
 void			throw_rays(t_cub3d *a);
