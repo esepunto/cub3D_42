@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:40:27 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 01:06:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ typedef struct	s_minilibx
 	t_texture	xpmwall[5];
 	int			sizex;
 	int			sizey;
-	int			nbr_sprite;
-	t_sprite	sprite[15];
 }				t_minilibx;
 
 typedef struct	s_map
@@ -106,6 +104,7 @@ typedef struct	s_map
 	int		num_sprites;
 	int		first_line;
 	int		nbrlines;
+	int		nbr_sprite;
 }				t_map;
 
 typedef struct	s_raycast

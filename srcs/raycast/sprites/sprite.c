@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:41:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 01:10:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void		clean_sprites(t_cub3d *a)
 	int	c;
 
 	c = 0;
-	while (c <= a->mlibx.nbr_sprite)
+	while (c <= a->fconf.map.nbr_sprite)
 	{
 		ft_memset(&a->sprite[c], '\0', sizeof(t_sprite));
 		c++;
 	}
-	a->mlibx.nbr_sprite = 0;
+	a->fconf.map.nbr_sprite = 0;
 }
 
 void		resort(t_cub3d *a)
@@ -33,10 +33,10 @@ void		resort(t_cub3d *a)
 
 	i = 0;
 	j = 0;
-	while (i < a->mlibx.nbr_sprite)
+	while (i < a->fconf.map.nbr_sprite)
 	{
 		j = 0;
-		while (j < a->mlibx.nbr_sprite)
+		while (j < a->fconf.map.nbr_sprite)
 		{
 			if (a->sprite[j].sequence > a->sprite[i].sequence)
 			{
@@ -58,10 +58,10 @@ void		sort_sprites(t_cub3d *a)
 
 	i = 0;
 	j = 0;
-	while (i < a->mlibx.nbr_sprite)
+	while (i < a->fconf.map.nbr_sprite)
 	{
 		j = 0;
-		while (j < a->mlibx.nbr_sprite)
+		while (j < a->fconf.map.nbr_sprite)
 		{
 			if (a->sprite[j].distance
 					< a->sprite[i].distance
@@ -93,6 +93,8 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 }
 
 /*
+** Var "midangle" is the angle of the ray that across the center
+** of the sprite. It helps to calc the space to paint this sprite.
 ** To calc value of the mid angle, use phytagoras
 ** tan(alpha) = opposite / adyacent
 */
@@ -110,26 +112,31 @@ t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 
 static void	allocate_sprite(t_cub3d *a)
 {
-	if (!(a->sprite[a->mlibx.nbr_sprite].buffer =
-			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].buffer),
+	if (!(a->sprite[a->fconf.map.nbr_sprite].buffer =
+			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].buffer),
 			a->fconf.xrendersize * sizeof(t_dist))))
 		msg_err("No memory for buffer!");
-	if (!(a->sprite[a->mlibx.nbr_sprite].rays_used =
-			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].rays_used),
+	if (!(a->sprite[a->fconf.map.nbr_sprite].rays_used =
+			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].rays_used),
 			a->fconf.xrendersize * sizeof(t_rays))))
 		msg_err("No memory for buffer!");
-	if (!(a->sprite[a->mlibx.nbr_sprite].ximpacts =
-			calloc(sizeof(a->sprite[a->mlibx.nbr_sprite].ximpacts),
+	if (!(a->sprite[a->fconf.map.nbr_sprite].ximpacts =
+			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].ximpacts),
 			a->fconf.xrendersize * sizeof(t_hits))))
 		msg_err("No memory for buffer!");
 }
+
+/*
+** This function is executed only the first time that
+** the sprite was found by the raycast.
+*/
 
 static void	init_sprite(t_cub3d *a)
 {
 	t_sprite	sprite;
 
 	allocate_sprite(a);
-	sprite = a->sprite[a->mlibx.nbr_sprite];
+	sprite = a->sprite[a->fconf.map.nbr_sprite];
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
@@ -140,12 +147,21 @@ static void	init_sprite(t_cub3d *a)
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)
 		/ a->mlibx.xpmwall[4].height;
 	sprite = calc_midangle(a, sprite);
-	sprite.buffer[a->mlibx.nbr_sprite].dist = sprite.distance;
+	sprite.buffer[a->fconf.map.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
-	sprite.sequence = a->mlibx.nbr_sprite;
-	a->sprite[a->mlibx.nbr_sprite] = sprite;
+	sprite.sequence = a->fconf.map.nbr_sprite;
+	a->sprite[a->fconf.map.nbr_sprite] = sprite;
 }
+
+/*
+** When raycast found a sprite before wall call this function.
+** This ft checks if this sprite was found before or not, 
+** because the next steps depends on it.
+** Some data only saved first time a sprite was found, and
+** other data are saved (in this function) all the times that
+** the sprite was found.
+*/
 
 void		found_sprite(t_cub3d *a)
 {
@@ -153,7 +169,7 @@ void		found_sprite(t_cub3d *a)
 	double	dist;
 
 	c = 0;
-	while (c < a->mlibx.nbr_sprite)
+	while (c < a->fconf.map.nbr_sprite)
 	{
 		if (a->sprite[c].xpos == (int)a->rayc.yray
 			&& a->sprite[c].ypos == (int)a->rayc.xray)
@@ -172,5 +188,5 @@ void		found_sprite(t_cub3d *a)
 		c++;
 	}
 	init_sprite(a);
-	a->mlibx.nbr_sprite++;
+	a->fconf.map.nbr_sprite++;
 }

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/11 23:47:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 01:12:21 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void		throw_rays(t_cub3d *a)
 		pointillism(a);
 		a->rayc.nbr_ray++;
 	}
-	if (a->mlibx.nbr_sprite)
+	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 }

@@ -8,7 +8,7 @@ void		print_sprites(t_cub3d *a)
 	
 	c = 0;
 	//printf("distance[%d]: %f\n", a->rayc.nbr_ray, a->rayc.alldistances[a->rayc.nbr_ray]);
-	while (c < a->mlibx.nbr_sprite)
+	while (c < a->fconf.map.nbr_sprite)
 	{
 		int h = 0;
 		printf("sprite[%d]     xpos: |%d|\n",c, a->sprite[c].xpos);
@@ -38,7 +38,7 @@ void		print_sprites(t_cub3d *a)
 		printf("sprite[%d]  1st_ray: |%d|\n",c, a->sprite[c].first_ray);
 		printf("sprite[%d]  lst_ray: |%d|\n\n",c, a->sprite[c].last_ray);*/
 //		printf("yray: %d - xray: %d\n", (int)a->rayc.yray, (int)a->rayc.xray);
-//		printf("xpos: %d - ypos: %d\n\n", a->sprite[a->mlibx.nbr_sprite].xpos, a->sprite[a->mlibx.nbr_sprite].ypos);
+//		printf("xpos: %d - ypos: %d\n\n", a->sprite[a->fconf.map.nbr_sprite].xpos, a->sprite[a->fconf.map.nbr_sprite].ypos);
 		c++;
 	}
 	printf("%d\n\n", i);
