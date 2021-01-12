@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:14:38 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:24:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 18:19:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		close_window(t_cub3d *a);
 void	throw_rays(t_cub3d *a);
 void	calc_texturing(t_cub3d *a);
 void	pointillism(t_cub3d *a);
+void	brushstroke(int x, int y, t_cub3d *a, int color);
 
 void	found_sprite(t_cub3d *a);
 void	allocate_sprites(t_cub3d *a);

@@ -6,22 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 18:05:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 18:26:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
-
-void	spr_brushstroke(int x, int y, t_cub3d *a, int color)
-{
-	char	*dst;
-
-	if (y >= a->fconf.yrendersize || y < 0)
-		return ;
-	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
-			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 void	spr_calc_palette(t_cub3d *a, int c)
 {
@@ -34,18 +23,14 @@ void	spr_calc_palette(t_cub3d *a, int c)
 		* a->sprite[c].ysprite
 		+ a->sprite[c].xsprite];
 	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
-	{
-		spr_brushstroke(a->sprite[c].current_ray,
-			a->sprite[c].point,
-			a,
+		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
 			a->sprite[c].palette);
-	}
 }
 
 void	paint_spr(t_cub3d *a, int c)
 {
-//	if (a->sprite[c].distance < 0.0)
-//		return ;
+	if (a->sprite[c].distance < 0.0)
+		return ;
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
 	while (a->sprite[c].current_ray <= a->sprite[c].last_ray)
