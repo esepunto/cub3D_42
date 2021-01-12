@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 01:10:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 04:09:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 	sprite.distance = hypot(
 				((int)a->rayc.xray + 0.5) - a->rayc.xplyr,
 				((int)a->rayc.yray + 0.5) - a->rayc.yplyr);
-//	sprite.distance = sprite.distance
-//				* cos(a->rayc.anglray - a->rayc.dirplyr);
+	sprite.distance = sprite.distance
+				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
 	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
 	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
@@ -107,6 +107,7 @@ t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 	opposite = ((int)a->rayc.yray + 0.5) - a->rayc.yplyr;
 	adyacent = ((int)a->rayc.xray + 0.5) - a->rayc.xplyr;
 	sprite.midangle = atan2(opposite, adyacent);
+	sprite.midangle = fmod(sprite.midangle, M_PI * 2);
 	return (sprite);
 }
 
@@ -140,7 +141,7 @@ static void	init_sprite(t_cub3d *a)
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
-	sprite.rays_used[a->rayc.nbr_ray].angle = a->rayc.anglray;
+	sprite.rays_used[a->rayc.nbr_ray].angle = fmod(a->rayc.anglray, M_PI * 2);
 	sprite.first_ray = a->rayc.nbr_ray;
 	sprite.rays_used[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
@@ -176,13 +177,13 @@ void		found_sprite(t_cub3d *a)
 		{
 			a->sprite[c].last_ray = a->rayc.nbr_ray;
 			dist = a->sprite[c].distance;
-			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
+//			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
 			a->sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
 			a->sprite[c].rays_used[a->rayc.nbr_ray].angle =
-				a->rayc.anglray;
+				fmod(a->rayc.anglray, M_PI * 2);
 			a->sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
-			if (a->rayc.anglray < a->sprite[c].midangle)
-				a->sprite[c].midangle_minus = a->rayc.nbr_ray;
+//			if (a->rayc.anglray < a->sprite[c].midangle)
+//				a->sprite[c].midangle_minus = a->rayc.nbr_ray;
 			return ;
 		}
 		c++;

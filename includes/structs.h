@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 01:06:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 04:00:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_texture_xpm
 	int		endian;
 }				t_texture;
 
-typedef struct	s_sprite_xpm
+typedef struct	s_sprite
 {
 	double	angle;
 	double	distance;
@@ -167,7 +167,7 @@ typedef struct	s_cub3d
 	t_config	fconf;
 	t_raycast	rayc;
 	t_minilibx	mlibx;
-	t_sprite	sprite[15];
+	t_sprite	sprite[25];
 	bool		save_bmp;
 }				t_cub3d;
 
