@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 18:26:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 00:15:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,16 @@ void	paint_spr(t_cub3d *a, int c)
 void	calc_init_ray(t_cub3d *a, int c)
 {
 	int	ray;
-	double	val;
 
 	ray = a->sprite[c].first_ray;
-	printf(" 1st_ray[%d]: %d\n", c, a->sprite[c].first_ray);
-	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
 	while (a->sprite[c].buff[ray].angle
 			< a->sprite[c].midangle)
 	{
 		a->sprite[c].midray = ray;
-		printf("var ray: %d\n", ray);
-		printf("angle: %f\n", a->sprite[c].buff[ray].angle);
-		printf("midangle[%d]: %f\n\n", c, a->sprite[c].midangle);
 		ray++;
 	}
 	a->sprite[c].midray++;
 	a->sprite[c].rayinit = a->sprite[c].midray - (a->sprite[c].width_span / 2);
-	val = fmod(a->sprite[c].buff[ray].angle, M_PI * 2);
-	printf("ray_init[%d]: %d\n", c, a->sprite[c].rayinit);
-	printf("val: %f\n\n", val);
 }
 
 void	paintsprites(t_cub3d *a)

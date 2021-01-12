@@ -6,17 +6,17 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 18:24:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 00:32:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	brushstroke(int x, int y, t_cub3d *a, int color)
+void		brushstroke(int x, int y, t_cub3d *a, int color)
 {
 	char	*dst;
 
-	if (y >= a->fconf.yrendersize || y < 0)//Ponerlo ft anterior to agile
+	if (y >= a->fconf.yrendersize || y < 0)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
@@ -89,6 +89,7 @@ void		pointillism(t_cub3d *a)
 {
 	int	point;
 
+	calc_texturing(a);
 	a->rayc.count = 0;
 	point = 0;
 	while (point <= a->fconf.yrendersize || point <= a->rayc.staturewall)

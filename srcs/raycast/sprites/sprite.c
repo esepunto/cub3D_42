@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 13:29:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 00:33:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ static void	init_sprite(t_cub3d *a)
 
 /*
 ** When raycast found a sprite before wall call this function.
-** This ft checks if this sprite was found before or not, 
+** This ft checks if this sprite was found before or not,
 ** because the next steps depends on it.
 ** Some data only saved first time a sprite was found, and
 ** other data are saved (in this function) all the times that
@@ -169,13 +169,10 @@ void		found_sprite(t_cub3d *a)
 		{
 			a->sprite[c].last_ray = a->rayc.nbr_ray;
 			dist = a->sprite[c].distance;
-//			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
 			a->sprite[c].buff[a->rayc.nbr_ray].dist = dist;
 			a->sprite[c].buff[a->rayc.nbr_ray].angle =
 				fmod(a->rayc.anglray, M_PI * 2);
 			a->sprite[c].buff[a->rayc.nbr_ray].ray = true;
-//			if (a->rayc.anglray < a->sprite[c].midangle)
-//				a->sprite[c].midangle_minus = a->rayc.nbr_ray;
 			return ;
 		}
 		c++;
