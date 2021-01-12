@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 04:09:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 13:29:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,17 +113,9 @@ t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 
 static void	allocate_sprite(t_cub3d *a)
 {
-	if (!(a->sprite[a->fconf.map.nbr_sprite].buffer =
-			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].buffer),
-			a->fconf.xrendersize * sizeof(t_dist))))
-		msg_err("No memory for buffer!");
-	if (!(a->sprite[a->fconf.map.nbr_sprite].rays_used =
-			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].rays_used),
-			a->fconf.xrendersize * sizeof(t_rays))))
-		msg_err("No memory for buffer!");
-	if (!(a->sprite[a->fconf.map.nbr_sprite].ximpacts =
-			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].ximpacts),
-			a->fconf.xrendersize * sizeof(t_hits))))
+	if (!(a->sprite[a->fconf.map.nbr_sprite].buff =
+			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].buff),
+			a->fconf.xrendersize * sizeof(t_buffer))))
 		msg_err("No memory for buffer!");
 }
 
@@ -141,14 +133,14 @@ static void	init_sprite(t_cub3d *a)
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
-	sprite.rays_used[a->rayc.nbr_ray].angle = fmod(a->rayc.anglray, M_PI * 2);
+	sprite.buff[a->rayc.nbr_ray].angle = fmod(a->rayc.anglray, M_PI * 2);
 	sprite.first_ray = a->rayc.nbr_ray;
-	sprite.rays_used[a->rayc.nbr_ray].ray = true;
+	sprite.buff[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)
 		/ a->mlibx.xpmwall[4].height;
 	sprite = calc_midangle(a, sprite);
-	sprite.buffer[a->fconf.map.nbr_sprite].dist = sprite.distance;
+	sprite.buff[a->fconf.map.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
 	sprite.sequence = a->fconf.map.nbr_sprite;
@@ -178,10 +170,10 @@ void		found_sprite(t_cub3d *a)
 			a->sprite[c].last_ray = a->rayc.nbr_ray;
 			dist = a->sprite[c].distance;
 //			dist = dist * cos(a->rayc.anglray - a->rayc.dirplyr);
-			a->sprite[c].buffer[a->rayc.nbr_ray].dist = dist;
-			a->sprite[c].rays_used[a->rayc.nbr_ray].angle =
+			a->sprite[c].buff[a->rayc.nbr_ray].dist = dist;
+			a->sprite[c].buff[a->rayc.nbr_ray].angle =
 				fmod(a->rayc.anglray, M_PI * 2);
-			a->sprite[c].rays_used[a->rayc.nbr_ray].ray = true;
+			a->sprite[c].buff[a->rayc.nbr_ray].ray = true;
 //			if (a->rayc.anglray < a->sprite[c].midangle)
 //				a->sprite[c].midangle_minus = a->rayc.nbr_ray;
 			return ;

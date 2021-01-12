@@ -6,28 +6,20 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 04:00:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 17:51:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct	s_buffer_distances_all_rays
+typedef struct	s_buffer
 {
 	double	dist;
-}				t_dist;
-
-typedef struct	s_buffer_rays_used
-{
-	bool	ray;
 	double	angle;
-}				t_rays;
-
-typedef struct	s_buffer_xhit
-{
 	double	ximpact;
-}				t_hits;
+	bool	ray;
+}				t_buffer;
 
 typedef struct	s_data
 {
@@ -53,36 +45,34 @@ typedef struct	s_texture_xpm
 
 typedef struct	s_sprite
 {
-	double	angle;
-	double	distance;
-	double	stature;
-	double	width_span;
-	double	yfloat;
-	double	xfloat;
-	double	ystep;
-	double	xstep;
-	int		init;
-	int		end;
-	int		sequence;
-	int		xpos;
-	int		ypos;
-	int		ysprite;
-	int		xsprite;
-	int		point;
-	int		palette;
-	int		first_ray;
-	int		last_ray;
-	int		current_ray;
-	int		tot_rays;
-	int		rayinit;
-	int		midray;
-	double	midangle;
-	double	midangle_minus;
-	double	midangle_plus;
-	bool	view;
-	t_dist	*buffer;
-	t_rays	*rays_used;
-	t_hits	*ximpacts;
+	double		angle;
+	double		distance;
+	double		stature;
+	double		width_span;
+	double		yfloat;
+	double		xfloat;
+	double		ystep;
+	double		xstep;
+	int			init;
+	int			end;
+	int			sequence;
+	int			xpos;
+	int			ypos;
+	int			ysprite;
+	int			xsprite;
+	int			point;
+	int			palette;
+	int			first_ray;
+	int			last_ray;
+	int			current_ray;
+	int			tot_rays;
+	int			rayinit;
+	int			midray;
+	double		midangle;
+	double		midangle_minus;
+	double		midangle_plus;
+	bool		view;
+	t_buffer	*buff;
 }				t_sprite;
 
 typedef struct	s_minilibx

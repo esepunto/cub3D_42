@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 04:15:59 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/12 18:05:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	paint_spr(t_cub3d *a, int c)
 		a->sprite[c].point = a->sprite[c].init;
 		while (a->sprite[c].point < a->sprite[c].end)
 		{
-			if (a->sprite[c].rays_used[a->sprite[c].current_ray].ray != '\0')
+			if (a->sprite[c].buff[a->sprite[c].current_ray].ray != '\0')
 			{
-				if (a->sprite[c].rays_used[a->sprite[c].current_ray].ray == true)
+				if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 					spr_calc_palette(a, c);
 			}
 			else
@@ -75,21 +75,22 @@ void	calc_init_ray(t_cub3d *a, int c)
 	double	val;
 
 	ray = a->sprite[c].first_ray;
-//	printf(" 1st_ray[%d]: %d\n", c, a->sprite[c].first_ray);
-//	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
-	while (a->sprite[c].rays_used[ray].angle
+	printf(" 1st_ray[%d]: %d\n", c, a->sprite[c].first_ray);
+	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
+	while (a->sprite[c].buff[ray].angle
 			< a->sprite[c].midangle)
 	{
-		a->sprite[c].rayinit = ray;
-//		printf("var ray: %d\n", ray);
+		a->sprite[c].midray = ray;
+		printf("var ray: %d\n", ray);
+		printf("angle: %f\n", a->sprite[c].buff[ray].angle);
+		printf("midangle[%d]: %f\n\n", c, a->sprite[c].midangle);
 		ray++;
 	}
-	a->sprite[c].rayinit++;
-	a->sprite[c].rayinit -= (a->sprite[c].width_span / 2);
-	val = fmod(a->sprite[c].rays_used[ray].angle, M_PI * 2);
-//	printf("ray_init[%d]: %d\n", c, a->sprite[c].rayinit);
-//	printf("angle: %f\n", a->sprite[c].rays_used[ray].angle);
-//	printf("val: %f\n\n", val);
+	a->sprite[c].midray++;
+	a->sprite[c].rayinit = a->sprite[c].midray - (a->sprite[c].width_span / 2);
+	val = fmod(a->sprite[c].buff[ray].angle, M_PI * 2);
+	printf("ray_init[%d]: %d\n", c, a->sprite[c].rayinit);
+	printf("val: %f\n\n", val);
 }
 
 void	paintsprites(t_cub3d *a)
@@ -104,11 +105,7 @@ void	paintsprites(t_cub3d *a)
 			c--;
 		calc_init_ray(a, c);
 		paint_spr(a, c);
-		if (a->sprite[c].buffer)
-			free(a->sprite[c].buffer);
-		if (a->sprite[c].rays_used)
-			free(a->sprite[c].rays_used);
-		if (a->sprite[c].ximpacts)
-			free(a->sprite[c].ximpacts);
+		if (a->sprite[c].buff)
+			free(a->sprite[c].buff);
 	}
 }
