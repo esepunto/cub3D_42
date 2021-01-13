@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 17:51:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:29:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 typedef struct	s_buffer
 {
-	double	dist;
 	double	angle;
-	double	ximpact;
 	bool	ray;
 }				t_buffer;
 
@@ -65,12 +63,9 @@ typedef struct	s_sprite
 	int			first_ray;
 	int			last_ray;
 	int			current_ray;
-	int			tot_rays;
 	int			rayinit;
 	int			midray;
 	double		midangle;
-	double		midangle_minus;
-	double		midangle_plus;
 	bool		view;
 	t_buffer	*buff;
 }				t_sprite;

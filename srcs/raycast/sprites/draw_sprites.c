@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 00:15:29 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:14:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,9 @@ void	paint_spr(t_cub3d *a, int c)
 		a->sprite[c].point = a->sprite[c].init;
 		while (a->sprite[c].point < a->sprite[c].end)
 		{
-			if (a->sprite[c].buff[a->sprite[c].current_ray].ray != '\0')
-			{
-				if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
+			if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 					spr_calc_palette(a, c);
-			}
-			else
+		else
 				break ;
 			a->sprite[c].yfloat += a->sprite[c].ystep;
 			a->sprite[c].point++;

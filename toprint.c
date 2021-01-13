@@ -23,10 +23,6 @@ void		print_sprites(t_cub3d *a)
 				printf("sprite[%d]_ray[%d]     used: |%d|\n",c, h, a->sprite[c].buff[h].ray);
 				printf("sprite[%d]          midangle: |%f|\n",c, a->sprite[c].midangle);
 				printf("sprite[%d]_ray[%d]    angle: |%f|\n",c, h, a->sprite[c].buff[h].angle);
-				printf("sprite[%d]_ray[%d] distance: |%f|\n",c, h, a->sprite[c].buff[h].dist);
-				printf("sprite[%d]_ray[%d]     xhit: |%f|\n\n",c, h, a->sprite[c].buff[h].ximpact);
-				
-
 			}
 			h++;
 		}

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 00:33:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 02:21:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ static void	init_sprite(t_cub3d *a)
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)
 		/ a->mlibx.xpmwall[4].height;
 	sprite = calc_midangle(a, sprite);
-	sprite.buff[a->fconf.map.nbr_sprite].dist = sprite.distance;
+//	sprite.buff[a->fconf.map.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
 	sprite.sequence = a->fconf.map.nbr_sprite;
@@ -159,7 +159,7 @@ static void	init_sprite(t_cub3d *a)
 void		found_sprite(t_cub3d *a)
 {
 	int		c;
-	double	dist;
+//	double	dist;
 
 	c = 0;
 	while (c < a->fconf.map.nbr_sprite)
@@ -168,8 +168,8 @@ void		found_sprite(t_cub3d *a)
 			&& a->sprite[c].ypos == (int)a->rayc.xray)
 		{
 			a->sprite[c].last_ray = a->rayc.nbr_ray;
-			dist = a->sprite[c].distance;
-			a->sprite[c].buff[a->rayc.nbr_ray].dist = dist;
+//			dist = a->sprite[c].distance;
+//			a->sprite[c].buff[a->rayc.nbr_ray].dist = dist;
 			a->sprite[c].buff[a->rayc.nbr_ray].angle =
 				fmod(a->rayc.anglray, M_PI * 2);
 			a->sprite[c].buff[a->rayc.nbr_ray].ray = true;
