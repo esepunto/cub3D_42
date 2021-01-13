@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 02:14:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:09:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	spr_calc_palette(t_cub3d *a, int c)
+static void	spr_calc_palette(t_cub3d *a, int c)
 {
 	a->sprite[c].ysprite = (int)a->sprite[c].yfloat
 		& (a->mlibx.xpmwall[4].height - 1);
@@ -27,7 +27,7 @@ void	spr_calc_palette(t_cub3d *a, int c)
 			a->sprite[c].palette);
 }
 
-void	paint_spr(t_cub3d *a, int c)
+static void	paint_spr(t_cub3d *a, int c)
 {
 	if (a->sprite[c].distance < 0.0)
 		return ;
@@ -40,8 +40,8 @@ void	paint_spr(t_cub3d *a, int c)
 		while (a->sprite[c].point < a->sprite[c].end)
 		{
 			if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
-					spr_calc_palette(a, c);
-		else
+				spr_calc_palette(a, c);
+			else
 				break ;
 			a->sprite[c].yfloat += a->sprite[c].ystep;
 			a->sprite[c].point++;
@@ -51,7 +51,7 @@ void	paint_spr(t_cub3d *a, int c)
 	}
 }
 
-void	calc_init_ray(t_cub3d *a, int c)
+static void	calc_init_ray(t_cub3d *a, int c)
 {
 	int	ray;
 
@@ -66,7 +66,7 @@ void	calc_init_ray(t_cub3d *a, int c)
 	a->sprite[c].rayinit = a->sprite[c].midray - (a->sprite[c].width_span / 2);
 }
 
-void	paintsprites(t_cub3d *a)
+void		paintsprites(t_cub3d *a)
 {
 	int	c;
 

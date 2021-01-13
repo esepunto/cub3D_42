@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 02:21:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 03:10:59 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void		clean_sprites(t_cub3d *a)
+void			clean_sprites(t_cub3d *a)
 {
 	int	c;
 
@@ -25,7 +25,7 @@ void		clean_sprites(t_cub3d *a)
 	a->fconf.map.nbr_sprite = 0;
 }
 
-void		resort(t_cub3d *a)
+static void		resort(t_cub3d *a)
 {
 	int			i;
 	int			j;
@@ -51,7 +51,7 @@ void		resort(t_cub3d *a)
 	}
 }
 
-void		sort_sprites(t_cub3d *a)
+void			sort_sprites(t_cub3d *a)
 {
 	int	i;
 	int	j;
@@ -79,7 +79,7 @@ void		sort_sprites(t_cub3d *a)
 	resort(a);
 }
 
-t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
+t_sprite		calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 {
 	sprite.distance = hypot(
 				((int)a->rayc.xray + 0.5) - a->rayc.xplyr,
@@ -99,7 +99,7 @@ t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
 ** tan(alpha) = opposite / adyacent
 */
 
-t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
+t_sprite		calc_midangle(t_cub3d *a, t_sprite sprite)
 {
 	double	opposite;
 	double	adyacent;
@@ -111,7 +111,7 @@ t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 	return (sprite);
 }
 
-static void	allocate_sprite(t_cub3d *a)
+static void		allocate_sprite(t_cub3d *a)
 {
 	if (!(a->sprite[a->fconf.map.nbr_sprite].buff =
 			calloc(sizeof(a->sprite[a->fconf.map.nbr_sprite].buff),
@@ -124,12 +124,8 @@ static void	allocate_sprite(t_cub3d *a)
 ** the sprite was found by the raycast.
 */
 
-static void	init_sprite(t_cub3d *a)
+t_sprite		init_sprite(t_cub3d *a, t_sprite sprite)
 {
-	t_sprite	sprite;
-
-	allocate_sprite(a);
-	sprite = a->sprite[a->fconf.map.nbr_sprite];
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
@@ -140,11 +136,10 @@ static void	init_sprite(t_cub3d *a)
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)
 		/ a->mlibx.xpmwall[4].height;
 	sprite = calc_midangle(a, sprite);
-//	sprite.buff[a->fconf.map.nbr_sprite].dist = sprite.distance;
 	sprite.ystep = 1.0 * a->mlibx.xpmwall[4].height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.xpmwall[4].width / sprite.width_span;
 	sprite.sequence = a->fconf.map.nbr_sprite;
-	a->sprite[a->fconf.map.nbr_sprite] = sprite;
+	return (sprite);
 }
 
 /*
@@ -156,10 +151,9 @@ static void	init_sprite(t_cub3d *a)
 ** the sprite was found.
 */
 
-void		found_sprite(t_cub3d *a)
+void			found_sprite(t_cub3d *a)
 {
 	int		c;
-//	double	dist;
 
 	c = 0;
 	while (c < a->fconf.map.nbr_sprite)
@@ -168,15 +162,14 @@ void		found_sprite(t_cub3d *a)
 			&& a->sprite[c].ypos == (int)a->rayc.xray)
 		{
 			a->sprite[c].last_ray = a->rayc.nbr_ray;
-//			dist = a->sprite[c].distance;
-//			a->sprite[c].buff[a->rayc.nbr_ray].dist = dist;
-			a->sprite[c].buff[a->rayc.nbr_ray].angle =
-				fmod(a->rayc.anglray, M_PI * 2);
+			a->sprite[c].buff[a->rayc.nbr_ray].angle = a->rayc.anglray;
 			a->sprite[c].buff[a->rayc.nbr_ray].ray = true;
 			return ;
 		}
 		c++;
 	}
-	init_sprite(a);
+	allocate_sprite(a);
+	a->sprite[a->fconf.map.nbr_sprite] =
+		init_sprite(a, a->sprite[a->fconf.map.nbr_sprite]);
 	a->fconf.map.nbr_sprite++;
 }
