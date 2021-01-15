@@ -1,6 +1,6 @@
 NAME	=	cub3D
 
-CC		=	gcc -Wall -Wextra -Werror -g -fsanitize=address
+CC		=	gcc -Wall -Wextra -Werror -g
 
 SRCS	=	cub3d.c \
 			srcs/file_config/readnsave_fconfig.c \
