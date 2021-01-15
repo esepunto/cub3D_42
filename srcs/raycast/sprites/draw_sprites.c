@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 03:09:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/15 22:00:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ static void	paint_spr(t_cub3d *a, int c)
 {
 	if (a->sprite[c].distance < 0.0)
 		return ;
+	while (a->sprite[c].rayinit < 0)
+		a->sprite[c].rayinit++;
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
 	while (a->sprite[c].current_ray <= a->sprite[c].last_ray)
 	{
 		a->sprite[c].yfloat = 0;
+		while (a->sprite[c].init < 0)//Ver esto
+			a->sprite[c].init++;//Ver esto
 		a->sprite[c].point = a->sprite[c].init;
 		while (a->sprite[c].point < a->sprite[c].end)
 		{
