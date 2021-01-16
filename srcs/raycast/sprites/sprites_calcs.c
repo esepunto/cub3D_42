@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 15:41:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 16:54:17 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			clean_sprites(t_cub3d *a)
 	int	c;
 
 	c = 0;
-	while (c <= a->fconf.map.num_sprites)
+	while (c <= a->fconf.map.nbr_sprite)
 	{
 		ft_memset(&a->sprite[c], '\0', sizeof(t_sprite));
 		c++;
