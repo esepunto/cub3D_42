@@ -6,11 +6,15 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 00:32:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:27:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/*
+** Functions to print walls
+*/
 
 void		brushstroke(int x, int y, t_cub3d *a, int color)
 {

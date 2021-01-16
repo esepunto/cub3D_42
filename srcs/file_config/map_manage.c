@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_map.c                                       :+:      :+:    :+:   */
+/*   map_manage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 10:32:12 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 00:18:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 21:38:24 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 /*
 ** Check if ther're chars forbidden on maze.
@@ -95,7 +95,6 @@ static void	frstlinemaze(t_cub3d *a)
 	while (a->fconf.map.maze[frsline][0] == '\0')
 		frsline++;
 	a->fconf.map.first_line = frsline;
-	a->fconf.map.nbrlines = a->fconf.map.row - a->fconf.map.first_line;
 }
 
 void		manage_map(t_cub3d *a)

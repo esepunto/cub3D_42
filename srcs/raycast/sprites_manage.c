@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   sprites_manage.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 15:41:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 21:29:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void		allocate_sprite(t_cub3d *a)
 {
@@ -59,7 +59,6 @@ static t_sprite	init_sprite(t_cub3d *a, t_sprite sprite)
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
-	sprite.first_ray = a->rayc.nbr_ray;
 	sprite.buff[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
 	sprite.width_span = (a->mlibx.xpmwall[4].width * sprite.stature)

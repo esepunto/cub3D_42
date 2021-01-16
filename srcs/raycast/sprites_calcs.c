@@ -6,11 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 16:54:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:33:10 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void			clean_sprites(t_cub3d *a)
 {

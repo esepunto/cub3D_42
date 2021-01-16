@@ -6,11 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2020/12/28 00:21:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:41:15 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 /*
 **  Next two functions review if 0,2,N,S,E or W are surrounded

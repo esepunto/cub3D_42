@@ -3,23 +3,21 @@ NAME	=	cub3D
 CC		=	gcc -Wall -Wextra -Werror -g
 
 SRCS	=	cub3d.c \
-			srcs/file_config/readnsave_fconfig.c \
-			srcs/file_config/params/manage_params.c \
-			srcs/file_config/params/review_params.c \
-			srcs/file_config/params/rgb.c \
-			srcs/file_config/map/manage_map.c \
-			srcs/file_config/map/maze_algorithm.c \
+			srcs/file_config/load_fconfig.c \
+			srcs/file_config/params_manage.c \
+			srcs/file_config/params_review.c \
+			srcs/file_config/rgb_colors.c \
+			srcs/file_config/map_manage.c \
+			srcs/file_config/maze_algorithm.c \
 			srcs/window/manage_window.c \
 			srcs/window/vangogh_turn.c \
-			srcs/raycast/raycast.c \
+			srcs/window/picasso_turn.c \
+			srcs/raycast/init_raycast.c \
 			srcs/raycast/movement.c \
 			srcs/raycast/textures.c \
-			srcs/raycast/sprites/sprite.c \
-			srcs/raycast/sprites/draw_sprites.c \
-			srcs/raycast/sprites/sprites_calcs.c \
-			srcs/screenshot/gerdataro_turn.c \
-			srcs/utils.c \
-			toprint.c
+			srcs/raycast/sprites_manage.c \
+			srcs/raycast/sprites_calcs.c \
+			srcs/screenshot/gerdataro_turn.c
 
 LIBS	=	libft/libft.a libft/ft_printf/libftprintf.a libmlx.dylib 
 
@@ -58,6 +56,7 @@ fclean:		clean
 re: fclean all
 
 norma:	
+		norminette cub3d.c
 		norminette srcs/
 		norminette libft/
 		norminette includes/

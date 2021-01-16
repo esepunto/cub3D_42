@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_sprites.c                                     :+:      :+:    :+:   */
+/*   picasso_turn.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 15:32:05 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 20:38:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
+
+/*
+** Functions to print sprites
+*/
 
 static void	spr_calc_palette(t_cub3d *a, int c)
 {

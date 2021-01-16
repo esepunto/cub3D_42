@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 15:57:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 21:43:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 typedef struct	s_buffer
 {
-	double	angle;
 	bool	ray;
 }				t_buffer;
 
@@ -51,6 +50,7 @@ typedef struct	s_sprite
 	double		xfloat;
 	double		ystep;
 	double		xstep;
+	double		midangle;
 	int			init;
 	int			end;
 	int			sequence;
@@ -60,15 +60,10 @@ typedef struct	s_sprite
 	int			xsprite;
 	int			point;
 	int			palette;
-	int			first_ray;
-	int			last_ray;
 	int			current_ray;
 	int			rayinit;
 	int			rayend;
 	int			midray;
-	double		midangle;
-	double		initangle;
-	double		endangle;
 	bool		view;
 	t_buffer	*buff;
 }				t_sprite;
@@ -91,7 +86,6 @@ typedef struct	s_map
 	int		num_players;
 	int		num_sprites;
 	int		first_line;
-	int		nbrlines;
 	int		nbr_sprite;
 }				t_map;
 
@@ -107,30 +101,30 @@ typedef struct	s_raycast
 	double	yray;
 	double	anglray;
 	double	fov;
-	int		quadrant;
 	double	xincrease;
 	double	yincrease;
 	double	distance;
-	int		initwall;
-	int		endwall;
 	double	staturewall;
-	int		nbr_ray;
-	bool	xhit;
-	bool	yhit;
 	double	xwallhit;
 	double	ywallhit;
-	int		xtexture;
-	int		ytexture;
 	double	ytexturefloat;
 	double	ysteptexture;
+	double	ystep;
+	double	xstep;
+	int		quadrant;
+	int		initwall;
+	int		endwall;
+	int		nbr_ray;
+	int		xtexture;
+	int		ytexture;
 	int		wall;
 	int		count;
 	int		point;
 	int		aux;
 	int		palette;
-	double	ystep;
-	double	xstep;
 	bool	hit;
+	bool	xhit;
+	bool	yhit;
 	double	*angbuf;
 	int		keycode[125];
 }				t_raycast;
@@ -142,22 +136,22 @@ typedef struct	s_readconfig
 	int			red[2];
 	int			green[2];
 	int			blue[2];
-	char		*wall[8];
-	char		*wall_texture[8];
 	int			nb_wrd_param;
 	int			final_line_params;
 	int			ceilcolor;
 	int			floorcolor;
+	char		*wall[8];
+	char		*wall_texture[8];
 	t_map		map;
 }				t_config;
 
 typedef struct	s_cub3d
 {
+	bool		save_bmp;
 	t_config	fconf;
 	t_raycast	rayc;
 	t_minilibx	mlibx;
 	t_sprite	sprite[25];
-	bool		save_bmp;
 }				t_cub3d;
 
 #endif

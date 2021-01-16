@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 17:06:26 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/12 00:31:16 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 21:14:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** See comments below (at the lower of).
 */
 
-void	browse_bits(char *header_plus, int i)
+static void	browse_bits(char *header_plus, int i)
 {
 	header_plus[0] = (unsigned char)i;
 	header_plus[1] = (unsigned char)(i >> 8);
@@ -28,7 +28,7 @@ void	browse_bits(char *header_plus, int i)
 ** header[0] = 0x42, so, please, excuse the joke in line 36... or don't >;)
 */
 
-void	write_header(int fd, t_cub3d *a, int file_size)
+static void	write_header(int fd, t_cub3d *a, int file_size)
 {
 	char	header[54];
 
@@ -45,7 +45,7 @@ void	write_header(int fd, t_cub3d *a, int file_size)
 	write(fd, header, 54);
 }
 
-void	write_image(int fd, t_cub3d *a)
+static void	write_image(int fd, t_cub3d *a)
 {
 	char	*pixels_from_image;
 	int		i;
@@ -58,7 +58,7 @@ void	write_image(int fd, t_cub3d *a)
 			a->fconf.xrendersize * 16);
 }
 
-void	take_photo(t_cub3d *a)
+void		take_photo(t_cub3d *a)
 {
 	int	fd;
 	int	file_size;
