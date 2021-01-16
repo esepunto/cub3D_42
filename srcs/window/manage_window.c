@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 17:05:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 22:21:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static int	ft_key_release(int keycode, t_cub3d *a)
 void		init_window(t_cub3d *a)
 {
 	a->mlibx.mlx = mlx_init();
-	rescale_screen(a);
+	if (a->save_bmp == false)
+		rescale_screen(a);
 	a->mlibx.img.img = mlx_new_image(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize);
 	a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img,
@@ -76,6 +77,8 @@ void		init_window(t_cub3d *a)
 			a->fconf.yrendersize, "cub3D");
 	save_textures(a);
 	throw_rays(a);
+	if (a->save_bmp == true)
+		take_photo(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, close_window, a);
 	mlx_hook(a->mlibx.win, KEYPRESS, KEYPRESSMASK, ft_key_hit, a);
 	mlx_hook(a->mlibx.win, KEYRELEASE, KEYRELEASEMASK, ft_key_release, a);
