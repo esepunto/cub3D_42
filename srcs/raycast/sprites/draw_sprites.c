@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/15 22:00:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 01:56:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 		& (a->mlibx.xpmwall[4].height - 1);
 	a->sprite[c].xsprite = (int)a->sprite[c].xfloat
 		& (a->mlibx.xpmwall[4].width - 1);
+//	a->sprite[c].palette = 0xFF00FF;
 	a->sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height
 		* a->sprite[c].ysprite
@@ -29,26 +30,23 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 
 static void	paint_spr(t_cub3d *a, int c)
 {
-	if (a->sprite[c].distance < 0.0)
+	if (a->sprite[c].distance < 0.5)
 		return ;
-	while (a->sprite[c].rayinit < 0)
-		a->sprite[c].rayinit++;
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
-	while (a->sprite[c].current_ray <= a->sprite[c].last_ray)
+	while (a->sprite[c].current_ray <= a->sprite[c].rayend)
 	{
-		a->sprite[c].yfloat = 0;
-		while (a->sprite[c].init < 0)//Ver esto
-			a->sprite[c].init++;//Ver esto
-		a->sprite[c].point = a->sprite[c].init;
-		while (a->sprite[c].point < a->sprite[c].end)
+//		printf("ray[%d]: %d\n", a->sprite[c].current_ray, a->sprite[c].buff[a->sprite[c].current_ray].ray);
+		if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 		{
-			if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
+			a->sprite[c].yfloat = 0;
+			a->sprite[c].point = a->sprite[c].init;
+			while (a->sprite[c].point <= a->sprite[c].end)
+			{
 				spr_calc_palette(a, c);
-			else
-				break ;
-			a->sprite[c].yfloat += a->sprite[c].ystep;
-			a->sprite[c].point++;
+				a->sprite[c].yfloat += a->sprite[c].ystep;
+				a->sprite[c].point++;
+			}
 		}
 		a->sprite[c].xfloat += a->sprite[c].xstep;
 		a->sprite[c].current_ray++;
@@ -57,17 +55,28 @@ static void	paint_spr(t_cub3d *a, int c)
 
 static void	calc_init_ray(t_cub3d *a, int c)
 {
-	int	ray;
-
-	ray = a->sprite[c].first_ray;
-	while (a->sprite[c].buff[ray].angle
-			< a->sprite[c].midangle)
+	int		ray;
+	double	ang;
+	
+	ray = 0;
+//	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
+	while (ray <= a->fconf.xrendersize + a->sprite[c].width_span)
 	{
-		a->sprite[c].midray = ray;
+		ang = fmod(a->rayc.angbuf[ray], M_PI * 2);
+//		printf("ang[%d]: %f\n", ray, ang);
+		if (ang < a->sprite[c].midangle)
+			a->sprite[c].midray = ray;
+		else
+			break ;
 		ray++;
 	}
-	a->sprite[c].midray++;
 	a->sprite[c].rayinit = a->sprite[c].midray - (a->sprite[c].width_span / 2);
+	a->sprite[c].rayend = a->sprite[c].midray + (a->sprite[c].width_span / 2);
+/*	printf("initangle[%d]: %f\n", c, a->sprite[c].initangle);
+	printf(" endangle[%d]: %f\n", c, a->sprite[c].endangle);
+	printf(" rayinit[%d]: %d\n", c, a->sprite[c].rayinit);
+	printf("  rayend[%d]: %d\n", c, a->sprite[c].rayend);
+	printf("  raymid[%d]: %d\n\n", c, a->sprite[c].midray);*/
 }
 
 void		paintsprites(t_cub3d *a)

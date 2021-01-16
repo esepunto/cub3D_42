@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 00:32:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 00:56:45 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,11 @@ void		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
 	clean_sprites(a);
+	if (a->rayc.angbuf)
+		free(a->rayc.angbuf);
+	if (!(a->rayc.angbuf =
+		calloc(sizeof(a->rayc.angbuf), a->fconf.xrendersize)))
+		msg_err("No memory to angle buffer");
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
@@ -171,6 +176,7 @@ void		throw_rays(t_cub3d *a)
 		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ a->rayc.nbr_ray * (a->rayc.fov / a->fconf.xrendersize);
+		a->rayc.angbuf[a->rayc.nbr_ray] = a->rayc.anglray;
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);

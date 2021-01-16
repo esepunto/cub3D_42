@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/13 02:29:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 00:23:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ typedef struct	s_sprite
 	int			last_ray;
 	int			current_ray;
 	int			rayinit;
+	int			rayend;
 	int			midray;
 	double		midangle;
+	double		initangle;
+	double		endangle;
 	bool		view;
 	t_buffer	*buff;
 }				t_sprite;
@@ -129,6 +132,7 @@ typedef struct	s_raycast
 	double	ystep;
 	double	xstep;
 	bool	hit;
+	double	*angbuf;
 }				t_raycast;
 
 typedef struct	s_readconfig
