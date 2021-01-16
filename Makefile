@@ -16,6 +16,7 @@ SRCS	=	cub3d.c \
 			srcs/raycast/textures.c \
 			srcs/raycast/sprites/sprite.c \
 			srcs/raycast/sprites/draw_sprites.c \
+			srcs/raycast/sprites/sprites_calcs.c \
 			srcs/screenshot/gerdataro_turn.c \
 			srcs/utils.c \
 			toprint.c

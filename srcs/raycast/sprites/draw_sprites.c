@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 13:03:15 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:32:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 		& (a->mlibx.xpmwall[4].height - 1);
 	a->sprite[c].xsprite = (int)a->sprite[c].xfloat
 		& (a->mlibx.xpmwall[4].width - 1);
-//	a->sprite[c].palette = 0xFF00FF;
 	a->sprite[c].palette = a->mlibx.xpmwall[4].addr[
 		a->mlibx.xpmwall[4].height
 		* a->sprite[c].ysprite
@@ -30,15 +29,11 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 
 static void	paint_spr(t_cub3d *a, int c)
 {
-	if (a->sprite[c].distance < 0.6)
-		return ;
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
 	while (a->sprite[c].current_ray <= a->sprite[c].rayend
 		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
-//		printf("ray[%d]: %d\n", a->sprite[c].current_ray, a->sprite[c].buff[a->sprite[c].current_ray].ray);
-		
 		while (a->sprite[c].current_ray < 0)
 		{
 			a->sprite[c].xfloat += a->sprite[c].xstep;
@@ -60,45 +55,58 @@ static void	paint_spr(t_cub3d *a, int c)
 	}
 }
 
-static void	calc_init_ray(t_cub3d *a, int c)
+static void	resort(t_cub3d *a)
 {
-	int		ray;
-	double	ang;
-	double	diffang;
-	
-	ray = - (a->sprite[c].width_span);
-//	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
-	while (ray <= a->fconf.xrendersize + a->sprite[c].width_span)
+	int			i;
+	int			j;
+	t_sprite	temp;
+
+	i = 0;
+	j = 0;
+	while (i < a->fconf.map.nbr_sprite)
 	{
-		
-		ang = (a->rayc.dirplyr - a->rayc.fov / 2.0)
-				+ (ray * (a->rayc.fov / a->fconf.xrendersize));
-/*		
-		if (ray >= 0)
-			ang = a->rayc.angbuf[ray];
-		else
-*///	ang = a->rayc.angbuf[0] + (ray * (a->rayc.fov / a->fconf.xrendersize));
-	//	ang = a->rayc.angbuf[0] + (ray * (a->rayc.fov / a->fconf.xrendersize));
-		
-//		printf("ang[%d]: %f\n", ray, ang);
-		diffang = ang - a->sprite[c].midangle;
-		if (diffang < - 1.0 * M_PI)
-			diffang += 2.0 * M_PI;
-		if (diffang > M_PI)
-			diffang -= 2.0 * M_PI;
-		if (diffang < 0.0)
-			a->sprite[c].midray = ray;
-		else
-			break ;
-		ray++;
+		j = 0;
+		while (j < a->fconf.map.nbr_sprite)
+		{
+			if (a->sprite[j].sequence > a->sprite[i].sequence)
+			{
+				temp = a->sprite[j];
+				a->sprite[j] = a->sprite[i];
+				a->sprite[i] = temp;
+				j = 0;
+			}
+			j++;
+		}
+		i++;
 	}
-	a->sprite[c].rayinit = a->sprite[c].midray - (a->sprite[c].width_span / 2);
-	a->sprite[c].rayend = a->sprite[c].midray + (a->sprite[c].width_span / 2);
-/*	printf("initangle[%d]: %f\n", c, a->sprite[c].initangle);
-	printf(" endangle[%d]: %f\n", c, a->sprite[c].endangle);
-	printf(" rayinit[%d]: %d\n", c, a->sprite[c].rayinit);
-	printf("  rayend[%d]: %d\n", c, a->sprite[c].rayend);
-	printf("  raymid[%d]: %d\n\n", c, a->sprite[c].midray);*/
+}
+
+static void	sort_sprites(t_cub3d *a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < a->fconf.map.nbr_sprite)
+	{
+		j = 0;
+		while (j < a->fconf.map.nbr_sprite)
+		{
+			if (a->sprite[j].distance
+					< a->sprite[i].distance
+					&& a->sprite[j].sequence
+					> a->sprite[i].sequence)
+			{
+				ft_swap(&a->sprite[j].sequence,
+						&a->sprite[i].sequence);
+				i = 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	resort(a);
 }
 
 void		paintsprites(t_cub3d *a)
@@ -112,7 +120,8 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		paint_spr(a, c);
+		if (a->sprite[c].distance >= 0.6)
+			paint_spr(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);
 	}
