@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 01:14:23 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 04:03:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			clean_sprites(t_cub3d *a)
 	int	c;
 
 	c = 0;
-	while (c <= a->fconf.map.nbr_sprite)
+	while (c <= a->fconf.map.num_sprites)
 	{
 		ft_memset(&a->sprite[c], '\0', sizeof(t_sprite));
 		c++;
@@ -107,7 +107,7 @@ t_sprite		calc_midangle(t_cub3d *a, t_sprite sprite)
 	opposite = ((int)a->rayc.yray + 0.5) - a->rayc.yplyr;
 	adyacent = ((int)a->rayc.xray + 0.5) - a->rayc.xplyr;
 	sprite.midangle = atan2(opposite, adyacent);
-	sprite.midangle = fmod(sprite.midangle, M_PI * 2);
+//	sprite.midangle = fmod(sprite.midangle, M_PI * 2);
 	return (sprite);
 }
 
@@ -129,7 +129,8 @@ t_sprite		init_sprite(t_cub3d *a, t_sprite sprite)
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
-	sprite.buff[a->rayc.nbr_ray].angle = fmod(a->rayc.anglray, M_PI * 2);
+//	sprite.buff[a->rayc.nbr_ray].angle = fmod(a->rayc.anglray, M_PI * 2);//Es necesario?
+//	sprite.buff[a->rayc.nbr_ray].angle = a->rayc.anglray;
 	sprite.first_ray = a->rayc.nbr_ray;
 	sprite.buff[a->rayc.nbr_ray].ray = true;
 	sprite = calc_distance_nd_stature(a, sprite);
@@ -161,8 +162,8 @@ void			found_sprite(t_cub3d *a)
 		if (a->sprite[c].xpos == (int)a->rayc.yray
 			&& a->sprite[c].ypos == (int)a->rayc.xray)
 		{
-			a->sprite[c].last_ray = a->rayc.nbr_ray;
-			a->sprite[c].buff[a->rayc.nbr_ray].angle = a->rayc.anglray;
+//			a->sprite[c].last_ray = a->rayc.nbr_ray;
+//			a->sprite[c].buff[a->rayc.nbr_ray].angle = a->rayc.anglray;
 			a->sprite[c].buff[a->rayc.nbr_ray].ray = true;
 			return ;
 		}
@@ -173,3 +174,6 @@ void			found_sprite(t_cub3d *a)
 		init_sprite(a, a->sprite[a->fconf.map.nbr_sprite]);
 	a->fconf.map.nbr_sprite++;
 }
+// Ojo, cuando dejo de ver sprites, el programa no entra aqui y
+// no borra la info que tiene, y por eso al dar varias vueltas sobre s
+// mismo, el jugador de repente deja de ver los sprites. CORREGIR.

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 01:56:38 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 03:48:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,20 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 
 static void	paint_spr(t_cub3d *a, int c)
 {
-	if (a->sprite[c].distance < 0.5)
+	if (a->sprite[c].distance < 0.6)
 		return ;
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
-	while (a->sprite[c].current_ray <= a->sprite[c].rayend)
+	while (a->sprite[c].current_ray <= a->sprite[c].rayend
+		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
 //		printf("ray[%d]: %d\n", a->sprite[c].current_ray, a->sprite[c].buff[a->sprite[c].current_ray].ray);
+		
+		while (a->sprite[c].current_ray < 0)
+		{
+			a->sprite[c].xfloat += a->sprite[c].xstep;
+			a->sprite[c].current_ray++;
+		}
 		if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 		{
 			a->sprite[c].yfloat = 0;
@@ -57,14 +64,29 @@ static void	calc_init_ray(t_cub3d *a, int c)
 {
 	int		ray;
 	double	ang;
+	double	diffang;
 	
-	ray = 0;
+	ray = - (a->sprite[c].width_span);
 //	printf("midangle[%d]: %f\n", c, a->sprite[c].midangle);
 	while (ray <= a->fconf.xrendersize + a->sprite[c].width_span)
 	{
-		ang = fmod(a->rayc.angbuf[ray], M_PI * 2);
+		
+		ang = (a->rayc.dirplyr - a->rayc.fov / 2.0)
+				+ (ray * (a->rayc.fov / a->fconf.xrendersize));
+/*		
+		if (ray >= 0)
+			ang = a->rayc.angbuf[ray];
+		else
+*///	ang = a->rayc.angbuf[0] + (ray * (a->rayc.fov / a->fconf.xrendersize));
+	//	ang = a->rayc.angbuf[0] + (ray * (a->rayc.fov / a->fconf.xrendersize));
+		
 //		printf("ang[%d]: %f\n", ray, ang);
-		if (ang < a->sprite[c].midangle)
+		diffang = ang - a->sprite[c].midangle;
+		if (diffang < - 1.0 * M_PI)
+			diffang += 2.0 * M_PI;
+		if (diffang > M_PI)
+			diffang -= 2.0 * M_PI;
+		if (diffang < 0.0)
 			a->sprite[c].midray = ray;
 		else
 			break ;

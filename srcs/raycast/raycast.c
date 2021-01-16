@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 00:56:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 04:07:29 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void		throw_rays(t_cub3d *a)
 		msg_err("No memory to angle buffer");
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
+	//	clean_sprites(a);
 		a->rayc.aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
