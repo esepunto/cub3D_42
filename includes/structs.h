@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 00:23:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:57:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct	s_raycast
 	int		nbr_ray;
 	bool	xhit;
 	bool	yhit;
-	int		keycode;
 	double	xwallhit;
 	double	ywallhit;
 	int		xtexture;
@@ -133,6 +132,7 @@ typedef struct	s_raycast
 	double	xstep;
 	bool	hit;
 	double	*angbuf;
+	int		keycode[125];
 }				t_raycast;
 
 typedef struct	s_readconfig

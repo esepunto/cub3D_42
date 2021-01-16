@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:14:38 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 15:36:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:54:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			ceilfloorcolor(int c, t_cub3d *a);
 void		save_textures(t_cub3d *a);
 
 void		init_window(t_cub3d *a);
-int			caress_key(int keycode, t_cub3d *a);
+int			caress_key(t_cub3d *a);
 int			close_window(t_cub3d *a);
 
 void		throw_rays(t_cub3d *a);
