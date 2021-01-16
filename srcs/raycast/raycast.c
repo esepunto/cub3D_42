@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 17:16:35 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 13:51:52 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ static void	ifimpact(t_cub3d *a)
 		a->rayc.yray += a->rayc.yincrease;
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2')
 			found_sprite(a);
-//		printf("raycast\n");
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
@@ -165,14 +164,9 @@ void		throw_rays(t_cub3d *a)
 {
 	a->rayc.nbr_ray = 0;
 	clean_sprites(a);
-	if (a->rayc.buffer)
-		free(a->rayc.buffer);
-	if (!(a->rayc.buffer = (t_dist *)malloc(a->fconf.xrendersize * sizeof(t_dist))))
-		msg_err("No memory for buffer!");
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
-		a->mlibx.sprite->aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
 		a->rayc.yray = a->rayc.yplyr;
 		a->rayc.anglray = (a->rayc.dirplyr - a->rayc.fov / 2.0)
@@ -180,24 +174,17 @@ void		throw_rays(t_cub3d *a)
 		a->rayc.xincrease = cos(a->rayc.anglray) * a->rayc.modulo;
 		a->rayc.yincrease = sin(a->rayc.anglray) * a->rayc.modulo;
 		ifimpact(a);
-		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr,
-								a->rayc.yray - a->rayc.yplyr);
-		a->rayc.distance = a->rayc.distance
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.buffer[a->rayc.nbr_ray].dist = a->rayc.distance;
-//		printf("buffer_dist[%d]: %f\n", a->rayc.nbr_ray, a->rayc.buffer[a->rayc.nbr_ray].dist);
+		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray
+				- a->rayc.yplyr) * cos(a->rayc.anglray - a->rayc.dirplyr);
 		a->rayc.staturewall = a->fconf.xrendersize / a->rayc.distance;
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
 		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
 				+ a->rayc.staturewall / 2));
-		calc_texturing(a);
 		pointillism(a);
-//		print_sprites(a);
 		a->rayc.nbr_ray++;
 	}
-	if (a->mlibx.nbr_sprite)
+	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
-//	print_sprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
 }

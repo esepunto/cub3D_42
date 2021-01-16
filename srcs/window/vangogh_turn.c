@@ -6,22 +6,21 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/05 21:31:52 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/13 00:32:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	brushstroke(int x, int y, t_cub3d *a, int color)
+void		brushstroke(int x, int y, t_cub3d *a, int color)
 {
 	char	*dst;
 
-	if (y >= a->fconf.yrendersize || y < 0)//Probar a ponerlo ft anterior to agile
+	if (y >= a->fconf.yrendersize || y < 0)
 		return ;
 	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
 			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	if ((unsigned int)dst != 0xFFFFFF)//Ojo!!
-		*(unsigned int*)dst = color;
+	*(unsigned int*)dst = color;
 }
 
 static void	calc_palette(t_cub3d *a)
@@ -31,7 +30,8 @@ static void	calc_palette(t_cub3d *a)
 	a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
 		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];
-	brushstroke(a->rayc.nbr_ray, a->rayc.point, a, a->rayc.palette);
+	if ((a->rayc.palette & 0x00FFFFFF) != 0)
+		brushstroke(a->rayc.nbr_ray, a->rayc.point, a, a->rayc.palette);
 }
 
 /*
@@ -89,6 +89,7 @@ void		pointillism(t_cub3d *a)
 {
 	int	point;
 
+	calc_texturing(a);
 	a->rayc.count = 0;
 	point = 0;
 	while (point <= a->fconf.yrendersize || point <= a->rayc.staturewall)

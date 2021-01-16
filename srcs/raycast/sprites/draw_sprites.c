@@ -6,72 +6,123 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/04 19:05:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 15:32:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-void	spr_brushstroke(int x, int y, t_cub3d *a, int color)
+static void	spr_calc_palette(t_cub3d *a, int c)
 {
-	char	*dst;
-
-	if (y >= a->fconf.yrendersize || y < 0)
-		return ;
-	dst = a->mlibx.img.addr + (y * a->mlibx.img.line_length
-			+ x * (a->mlibx.img.bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void	spr_calc_palette(t_cub3d *a, int c)
-{
-	a->mlibx.sprite[c].y = (int)a->mlibx.sprite[c].yfloat
+	a->sprite[c].ysprite = (int)a->sprite[c].yfloat
 		& (a->mlibx.xpmwall[4].height - 1);
-	a->mlibx.sprite[c].palette = a->fconf.ceilcolor;
-/*	a->mlibx.sprite[c].palette = a->mlibx.xpmwall[4].addr[
-		a->mlibx.xpmwall[4].height * a->mlibx.sprite[c].y
-		+ (int)a->mlibx.sprite[c].x];
-*/	if((a->mlibx.sprite[c].palette & 0x00FFFFFF) != 0)
-		spr_brushstroke(a->mlibx.sprite[c].current_ray, a->mlibx.sprite[c].point, a, a->mlibx.sprite[c].palette);
+	a->sprite[c].xsprite = (int)a->sprite[c].xfloat
+		& (a->mlibx.xpmwall[4].width - 1);
+	a->sprite[c].palette = a->mlibx.xpmwall[4].addr[
+		a->mlibx.xpmwall[4].height
+		* a->sprite[c].ysprite
+		+ a->sprite[c].xsprite];
+	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
+		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
+			a->sprite[c].palette);
 }
 
-
-void	paint_spr(t_cub3d *a, int c)
+static void	paint_spr(t_cub3d *a, int c)
 {
-	a->mlibx.sprite[c].total_rays = a->mlibx.sprite[c].last_ray - a->mlibx.sprite[c].first_ray;
-	a->mlibx.sprite[c].x_aux = fmod((double)a->mlibx.sprite[c].total_rays, (double)a->mlibx.xpmwall[4].width);
-//	printf("total rays: %d\n", a->mlibx.sprite[c].total_rays);
-//	printf("ancho text_spr: %d\n", a->mlibx.xpmwall[4].width);
-//	printf("x_aux: %f\n", a->mlibx.sprite[c].x_aux);
-	a->mlibx.sprite[c].current_ray = a->mlibx.sprite[c].first_ray;
-	while (a->mlibx.sprite[c].current_ray <= a->mlibx.sprite[c].last_ray)
+	a->sprite[c].current_ray = a->sprite[c].rayinit;
+	a->sprite[c].xfloat = 0;
+	while (a->sprite[c].current_ray <= a->sprite[c].rayend
+		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
-		a->mlibx.sprite[c].point = a->mlibx.sprite[c].init;
-		a->mlibx.sprite[c].point = 0;
-		while (a->mlibx.sprite[c].point < a->mlibx.sprite[c].end)
+		while (a->sprite[c].current_ray < 0)
 		{
-			if (a->rayc.buffer[a->mlibx.sprite[c].current_ray].dist >
-					a->mlibx.sprite[c].distance)
-				spr_calc_palette(a, c);
-			a->mlibx.sprite[c].yfloat += a->mlibx.sprite[c].ystep;
-			a->mlibx.sprite[c].point++;
+			a->sprite[c].xfloat += a->sprite[c].xstep;
+			a->sprite[c].current_ray++;
 		}
-		a->mlibx.sprite[c].x += a->mlibx.sprite[c].x_aux;
-//		printf("x: %f\n", a->mlibx.sprite[c].x);
-		a->mlibx.sprite[c].current_ray++;
+		if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
+		{
+			a->sprite[c].yfloat = 0;
+			a->sprite[c].point = a->sprite[c].init;
+			while (a->sprite[c].point <= a->sprite[c].end)
+			{
+				spr_calc_palette(a, c);
+				a->sprite[c].yfloat += a->sprite[c].ystep;
+				a->sprite[c].point++;
+			}
+		}
+		a->sprite[c].xfloat += a->sprite[c].xstep;
+		a->sprite[c].current_ray++;
 	}
 }
 
-void	paintsprites(t_cub3d *a)
+static void	resort(t_cub3d *a)
+{
+	int			i;
+	int			j;
+	t_sprite	temp;
+
+	i = 0;
+	j = 0;
+	while (i < a->fconf.map.nbr_sprite)
+	{
+		j = 0;
+		while (j < a->fconf.map.nbr_sprite)
+		{
+			if (a->sprite[j].sequence > a->sprite[i].sequence)
+			{
+				temp = a->sprite[j];
+				a->sprite[j] = a->sprite[i];
+				a->sprite[i] = temp;
+				j = 0;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	sort_sprites(t_cub3d *a)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < a->fconf.map.nbr_sprite)
+	{
+		j = 0;
+		while (j < a->fconf.map.nbr_sprite)
+		{
+			if (a->sprite[j].distance
+					< a->sprite[i].distance
+					&& a->sprite[j].sequence
+					> a->sprite[i].sequence)
+			{
+				ft_swap(&a->sprite[j].sequence,
+						&a->sprite[i].sequence);
+				i = 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	resort(a);
+}
+
+void		paintsprites(t_cub3d *a)
 {
 	int	c;
-	
+
 	sort_sprites(a);
 	c = a->fconf.map.num_sprites;
 	while (--c >= 0)
 	{
-		paint_spr(a, c);
-		if (a->mlibx.sprite[c].buffer)
-			free(a->mlibx.sprite[c].buffer);
+		while (a->sprite[c].view == false)
+			c--;
+		calc_init_ray(a, c);
+		if (a->sprite[c].distance >= 0.6)
+			paint_spr(a, c);
+		if (a->sprite[c].buff)
+			free(a->sprite[c].buff);
 	}
 }

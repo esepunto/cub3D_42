@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/11 16:59:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/16 17:05:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int			close_window(t_cub3d *a)
 }
 
 /*
-** The image should be rescaled when the resolution indicated in the 
-** config file is greater than the screen resolution. 
+** The image should be rescaled when the resolution indicated in the
+** config file is greater than the screen resolution.
 ** When rescaling the image, the proportions must be maintained.
 ** Rescaling MUST NOT be done when the "--save" argument has been included,
 ** as the bmp must be saved with the resolution indicated in the config file.
@@ -51,13 +51,13 @@ static void	rescale_screen(t_cub3d *a)
 	}
 }
 
-int ft_key_hit(int keycode, t_cub3d *a)
+static int	ft_key_hit(int keycode, t_cub3d *a)
 {
 	a->rayc.keycode[keycode] = 1;
 	return (0);
 }
 
-int ft_key_release(int keycode, t_cub3d *a)
+static int	ft_key_release(int keycode, t_cub3d *a)
 {
 	a->rayc.keycode[keycode] = 0;
 	return (0);
@@ -75,7 +75,6 @@ void		init_window(t_cub3d *a)
 	a->mlibx.win = mlx_new_window(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize, "cub3D");
 	save_textures(a);
-//	save_sprites(a);
 	throw_rays(a);
 	mlx_hook(a->mlibx.win, 17, 1L << 17, close_window, a);
 	mlx_hook(a->mlibx.win, KEYPRESS, KEYPRESSMASK, ft_key_hit, a);

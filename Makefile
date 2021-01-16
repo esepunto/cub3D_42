@@ -16,27 +16,31 @@ SRCS	=	cub3d.c \
 			srcs/raycast/textures.c \
 			srcs/raycast/sprites/sprite.c \
 			srcs/raycast/sprites/draw_sprites.c \
-			srcs/raycast/sprites/sprite_algorithm.c \
+			srcs/raycast/sprites/sprites_calcs.c \
 			srcs/screenshot/gerdataro_turn.c \
-			srcs/utils.c 
+			srcs/utils.c \
+			toprint.c
 
-LIBS	=	libft/libft.a \
-			libft/ft_printf/libftprintf.a \
-			libmlx.dylib 
-
-
+LIBS	=	libft/libft.a libft/ft_printf/libftprintf.a libmlx.dylib 
 
 OBJECTS	=	$(SRCS:.c=.o)
 
 LINKS	=	-I ./mlx_beta -L ./mlx_beta -lmlx -framework OpenGL -framework AppKit
 
-
 RM		=	rm -f
 
-all: $(NAME)
+.PHONY:		all
+all:		make_libs $(NAME)
 
-$(NAME):	make_libs $(OBJECTS)
-			$(CC) $(LINKS) $(SRCS) $(LIBS) -o $(NAME)
+.PHONY:	make_libs
+make_libs:
+			@make -C libft
+			@make -C libft/ft_printf
+			@make -C mlx_beta
+			@mv ./mlx_beta/libmlx.dylib ./
+
+$(NAME):	$(OBJECTS)
+			$(CC) $(LINKS) $(LIBS) $(SRCS) -o $(NAME) 
 
 clean:
 			$(RM) $(OBJECTS)
@@ -45,26 +49,18 @@ clean:
 			@make clean -C mlx
 			@make clean -C mlx_beta
 
-
 fclean:		clean
 			$(RM) $(NAME)
 			@make fclean -C libft
 			@make fclean -C libft/ft_printf
 			rm -f libmlx.dylib 
 
-
 re: fclean all
 
 norma:	
-		norminette srcs/*.c
-		norminette libft/*.c
-		norminette includes/*.c
+		norminette srcs/
+		norminette libft/
+		norminette includes/
 
-.PHONY: make_libs
 
-make_libs:
-			@make -C libft
-			@make -C libft/ft_printf
-			@make -C mlx_beta
-			@mv ./mlx_beta/libmlx.dylib ./
 
