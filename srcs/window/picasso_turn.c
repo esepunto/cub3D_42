@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/17 22:53:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 00:06:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 		a->mlibx.xpmwall[4].height
 		* a->sprite[c].ysprite
 		+ a->sprite[c].xsprite];
-	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
-		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
+//	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
+	brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
 			a->sprite[c].palette);
 }
 
