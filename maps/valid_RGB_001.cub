@@ -1,11 +1,17 @@
 NO ./wolftex/purplestone.xpm
 EA ./wolftex/eagle.xpm
 WE ./wolftex/fuhrer.xpm
-SO ./wolftex/redbrick.xpm
+
+
+
+
+
+
+SO       ./wolftex/redbrick.xpm
 R 640  400
 S ./wolftex/pillar.xpm
-F 28,189,42
-C 134,231,236
+F 28,189    ,    42 
+C         134,231,236
 
 1111111111111111111111111
 1000000200110000000000001
@@ -23,3 +29,8 @@ C 134,231,236
 1000000000000000000000001
 1000000000000000000000001
 1111111111111111111111111
+
+
+
+
+

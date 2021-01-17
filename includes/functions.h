@@ -6,14 +6,12 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:14:38 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 21:23:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:41:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
-
-int			main(int argc, char **argv);
 
 /*
 ** File config functions
@@ -22,7 +20,7 @@ int			main(int argc, char **argv);
 void		open_fconfig(char *conf_file, t_cub3d *a);
 void		manage_params(t_cub3d *a);
 void		review_params(t_cub3d *a);
-void		check_nbr(int c, t_cub3d *a);
+void		check_rgb(int c, t_cub3d *a);
 void		isdigit_str(char *nbr);
 int			ceilfloorcolor(int c, t_cub3d *a);
 void		extract_rgb(int c, t_cub3d *a);
@@ -62,6 +60,5 @@ void		take_photo(t_cub3d *a);
 */
 
 int			msg_err(char *error);
-void		delmem(t_cub3d *a);
 
 #endif

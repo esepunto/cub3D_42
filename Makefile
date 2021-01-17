@@ -55,11 +55,17 @@ fclean:		clean
 
 re: fclean all
 
-norma:	
+norma:
 		norminette cub3d.c
 		norminette srcs/
 		norminette libft/
 		norminette includes/
 
+play:
+		make
+		./cub3D maps/valid_RGB_001.cub
 
+save:
+		make
+		./cub3D maps/valid_RGB_001.cub --save
 

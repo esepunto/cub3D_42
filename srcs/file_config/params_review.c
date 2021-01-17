@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 20:44:46 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:38:34 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	review_cefl(int c, t_cub3d *a)
 	if (ft_countchr(a->fconf.wall_texture[c], ',') != 2)
 		msg_err("Review RGB colors. Are U in COMMA?");
 	extract_rgb(c, a);
-	check_nbr(c, a);
+	check_rgb(c, a);
 	a->fconf.ceilcolor = ceilfloorcolor(0, a);
 	a->fconf.floorcolor = ceilfloorcolor(1, a);
 }

@@ -6,13 +6,13 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 20:45:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:37:32 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	check_nbr(int c, t_cub3d *a)
+void	check_rgb(int c, t_cub3d *a)
 {
 	if (a->fconf.red[c - 5] < 0 || a->fconf.red[c - 5] > 255
 		|| a->fconf.green[c - 5] < 0 || a->fconf.green[c - 5] > 255

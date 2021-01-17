@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 22:21:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/17 22:28:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@ int			msg_err(char *error)
 	ft_printf("Error\n%s\n\n", error);
 	system("leaks cub3D");
 	exit(0);
-}
-
-void		delmem(t_cub3d *a)
-{
-	if (a)
-	{
-		if (sizeof(a->fconf.wall_texture) >= 848)
-			ft_delmatrix(a->fconf.wall_texture);
-		if (sizeof(a->fconf.wall) >= 848)
-			ft_delmatrix(a->fconf.wall);
-		if (sizeof(a->fconf.map.maze) >= 208)
-			ft_delmatrix(a->fconf.map.maze);
-		if (sizeof(a) >= sizeof(t_cub3d))
-			free(a);
-	}
 }
 
 static void	init_struct(t_cub3d *a)
@@ -62,7 +47,6 @@ int			main(int argc, char **argv)
 		open_fconfig(argv[1], a);
 		init_struct(a);
 		init_window(a);
-		delmem(a);
 	}
 	else
 		msg_err("Revier your fingers, please.");
