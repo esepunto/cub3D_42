@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 00:06:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 01:56:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 static void	spr_calc_palette(t_cub3d *a, int c)
 {
 	a->sprite[c].ysprite = (int)a->sprite[c].yfloat
-		& (a->mlibx.xpmwall[4].height - 1);
+		& (a->mlibx.object.height - 1);
 	a->sprite[c].xsprite = (int)a->sprite[c].xfloat
-		& (a->mlibx.xpmwall[4].width - 1);
-	a->sprite[c].palette = a->mlibx.xpmwall[4].addr[
-		a->mlibx.xpmwall[4].height
+		& (a->mlibx.object.width - 1);
+	a->sprite[c].palette = a->mlibx.object.addr[
+		a->mlibx.object.height
 		* a->sprite[c].ysprite
 		+ a->sprite[c].xsprite];
-//	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
-	brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
+	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
+		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
 			a->sprite[c].palette);
 }
 

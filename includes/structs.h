@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 22:19:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 01:56:55 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef struct	s_minilibx
 	void		*mlx;
 	void		*win;
 	t_data		img;
-	t_texture	xpmwall[5];
+	t_texture	xpmwall[4];
+	t_texture	object;
 	int			sizex;
 	int			sizey;
 }				t_minilibx;
