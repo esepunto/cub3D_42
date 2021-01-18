@@ -6,7 +6,7 @@
 #    By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/13 12:54:03 by ssacrist          #+#    #+#              #
-#    Updated: 2021/01/05 18:34:32 by ssacrist         ###   ########.fr        #
+#    Updated: 2021/01/18 03:17:22 by ssacrist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SRC			=	ft_atoi.c \
 				ft_hex2int.c \
 				ft_rgb2hex.c \
 				ft_swap.c \
+				ft_normangle.c \
 				get_next_line.c
 
 SRC_BONUS	=	ft_lstnew_bonus.c \

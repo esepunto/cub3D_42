@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 15:21:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 22:22:09 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 03:19:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ void			clean_sprites(t_cub3d *a)
 	a->fconf.map.nbr_sprite = 0;
 }
 
-static double	normalize_angle(double diffang)
-{
-	if (diffang < -1.0 * M_PI)
-		diffang += 2.0 * M_PI;
-	else if (diffang > M_PI)
-		diffang -= 2.0 * M_PI;
-	return (diffang);
-}
-
 void			calc_init_ray(t_cub3d *a, int c)
 {
 	int		ray;
@@ -46,7 +37,7 @@ void			calc_init_ray(t_cub3d *a, int c)
 		initang = (a->rayc.dirplyr - a->rayc.fov / 2.0)
 				+ (ray * (a->rayc.fov / a->fconf.xrendersize));
 		diffang = initang - a->sprite[c].midangle;
-		diffang = normalize_angle(diffang);
+		diffang = ft_normangle(diffang);
 		if (diffang < 0.0)
 			a->sprite[c].midray = ray;
 		else

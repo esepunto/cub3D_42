@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 01:56:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 03:38:01 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@ static void		allocate_sprite(t_cub3d *a)
 		msg_err("No memory for buffer!");
 }
 
-static t_sprite	calc_distance_nd_stature(t_cub3d *a, t_sprite sprite)
+static t_sprite	calc_dist_stature_wspan(t_cub3d *a, t_sprite sprite)
 {
 	sprite.distance = hypot(
 				(int)a->rayc.xray + 0.5 - a->rayc.xplyr,
-				(int)a->rayc.yray + 0.5 - a->rayc.yplyr)
-				* cos(a->rayc.anglray - a->rayc.dirplyr);
+				(int)a->rayc.yray + 0.5 - a->rayc.yplyr);
+//				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
+	
+//	sprite.stature = (a->mlibx.object.height * a->rayc.staturewall) / a->mlibx.xpmwall[0].height;
+	
 	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
 	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
+	sprite.width_span = (a->mlibx.object.width * sprite.stature)
+		/ a->mlibx.object.height;
 	return (sprite);
 }
 
@@ -47,6 +52,7 @@ static t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 	opposite = ((int)a->rayc.yray + 0.5) - a->rayc.yplyr;
 	adyacent = ((int)a->rayc.xray + 0.5) - a->rayc.xplyr;
 	sprite.midangle = atan2(opposite, adyacent);
+	sprite.midangle = ft_normangle(sprite.midangle);
 	return (sprite);
 }
 
@@ -61,9 +67,7 @@ static t_sprite	init_sprite(t_cub3d *a, t_sprite sprite)
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
 	sprite.buff[a->rayc.nbr_ray].ray = true;
-	sprite = calc_distance_nd_stature(a, sprite);
-	sprite.width_span = (a->mlibx.object.width * sprite.stature)
-		/ a->mlibx.object.height;
+	sprite = calc_dist_stature_wspan(a, sprite);
 	sprite = calc_midangle(a, sprite);
 	sprite.ystep = 1.0 * a->mlibx.object.height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.object.width / sprite.width_span;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 02:00:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 02:39:35 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,22 @@
 **  If textures exist are checked previously at review_params.c
 */
 
-void	save_textures(t_cub3d *a)
+static void	save_sprite(t_cub3d *a)
+{
+	a->mlibx.object.relative_path = a->fconf.wall_texture[4];
+	a->mlibx.object.img =
+				mlx_xpm_file_to_image(a->mlibx.mlx,
+				a->mlibx.object.relative_path,
+				&a->mlibx.object.width,
+				&a->mlibx.object.height);
+	a->mlibx.object.addr =
+				(int*)mlx_get_data_addr(a->mlibx.object.img,
+				&a->mlibx.object.bits_per_pixel,
+				&a->mlibx.object.line_length,
+				&a->mlibx.object.endian);
+}
+
+void		save_textures(t_cub3d *a)
 {
 	static int	c = -1;
 
@@ -49,17 +64,7 @@ void	save_textures(t_cub3d *a)
 				&a->mlibx.xpmwall[c].line_length,
 				&a->mlibx.xpmwall[c].endian);
 	}
-	a->mlibx.object.relative_path = a->fconf.wall_texture[4];
-	a->mlibx.object.img =
-				mlx_xpm_file_to_image(a->mlibx.mlx,
-				a->mlibx.object.relative_path,
-				&a->mlibx.object.width,
-				&a->mlibx.object.height);
-	a->mlibx.object.addr =
-				(int*)mlx_get_data_addr(a->mlibx.object.img,
-				&a->mlibx.object.bits_per_pixel,
-				&a->mlibx.object.line_length,
-				&a->mlibx.object.endian);
+	save_sprite(a);
 }
 
 /*
@@ -88,7 +93,7 @@ void	save_textures(t_cub3d *a)
 ** half the height of the window. Believe me, it runs :)
 */
 
-void	calc_texturing(t_cub3d *a)
+void		calc_texturing(t_cub3d *a)
 {
 	if (a->rayc.xhit == 1)
 		a->rayc.xwallhit = a->rayc.yray;

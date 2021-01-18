@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/17 22:28:44 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 04:17:12 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_struct(t_cub3d *a)
 {
 	a->rayc.modulo = (a->fconf.xrendersize
 		* a->fconf.yrendersize) * 0.000000001;
-	a->rayc.rush = 0.10;
+	a->rayc.rush = 0.02;
 	a->rayc.rotspeed = 0.10;
 	a->rayc.fov = 66 * M_PI / 180;
 }

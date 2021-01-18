@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 01:56:25 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/18 04:14:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static void	sort_sprites(t_cub3d *a)
 ** whose are at least at distance of the radius of the
 ** circle circunscribed to every ceil.
 ** Calc with Pythagoras:
-** radius (minimum distance to print) = sqtr( (square ceil / 2) ^ 2)
+** radius (minimum distance to print) = sqtr( 2 * ( (square ceil / 2) ^ 2) )
 */
 
 void		paintsprites(t_cub3d *a)
@@ -132,7 +132,7 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		if (a->sprite[c].distance >= sqrt(pow(0.5, 2)))
+		if (a->sprite[c].distance >= sqrt(2 * (pow(0.5, 2))))
 			paint_spr(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);
