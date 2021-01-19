@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 17:03:43 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 05:23:51 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	gofront(t_cub3d *a)
 {
 	a->rayc.xplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
-	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1')
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1'
+		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2')
 	{
 		a->rayc.xplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
@@ -27,7 +28,8 @@ static void	goback(t_cub3d *a)
 {
 	a->rayc.xplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
-	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1')
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1'
+		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2')
 	{
 		a->rayc.xplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
@@ -38,7 +40,8 @@ static void	goright(t_cub3d *a)
 {
 	a->rayc.xplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
-	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1')
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1'
+		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2')
 	{
 		a->rayc.xplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
@@ -49,7 +52,8 @@ static void	goleft(t_cub3d *a)
 {
 	a->rayc.xplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
 	a->rayc.yplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
-	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1')
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '1'
+		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2')
 	{
 		a->rayc.xplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += cos(a->rayc.dirplyr) * a->rayc.rush;

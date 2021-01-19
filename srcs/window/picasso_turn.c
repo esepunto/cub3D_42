@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 04:10:48 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 05:25:00 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		if (a->sprite[c].distance > sqrt(2 * (pow(0.5, 2))))
-			paint_spr(a, c);
+		paint_spr(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);
 	}
