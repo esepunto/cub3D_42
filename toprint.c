@@ -26,8 +26,7 @@ void		print_sprites(t_cub3d *a)
 			}
 			h++;
 		}
-/*		printf("sprite[%d] sequence: |%d|\n",c, a->sprite[c].sequence);
-		printf("sprite[%d]    angle: |%f|\n",c, a->sprite[c].angle);
+/*		printf("sprite[%d]    angle: |%f|\n",c, a->sprite[c].angle);
 		printf("sprite[%d]  stature: |%f|\n",c, a->sprite[c].stature);
 		printf("sprite[%d]     init: |%d|\n",c, a->sprite[c].init);
 		printf("sprite[%d]      end: |%d|\n",c, a->sprite[c].end);
