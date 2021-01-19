@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 04:14:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 04:10:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,58 +59,28 @@ static void	paint_spr(t_cub3d *a, int c)
 	}
 }
 
-static void	resort(t_cub3d *a)
-{
-	int			i;
-	int			j;
-	t_sprite	temp;
-
-	i = 0;
-	j = 0;
-	while (i < a->fconf.map.nbr_sprite)
-	{
-		j = 0;
-		while (j < a->fconf.map.nbr_sprite)
-		{
-			if (a->sprite[j].sequence > a->sprite[i].sequence)
-			{
-				temp = a->sprite[j];
-				a->sprite[j] = a->sprite[i];
-				a->sprite[i] = temp;
-				j = 0;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 static void	sort_sprites(t_cub3d *a)
 {
 	int	i;
 	int	j;
+	t_sprite	temp;
 
 	i = 0;
-	j = 0;
 	while (i < a->fconf.map.nbr_sprite)
 	{
-		j = 0;
+		j = i + 1;
 		while (j < a->fconf.map.nbr_sprite)
 		{
-			if (a->sprite[j].distance
-					< a->sprite[i].distance
-					&& a->sprite[j].sequence
-					> a->sprite[i].sequence)
+			if (a->sprite[j].distance < a->sprite[i].distance)
 			{
-				ft_swap(&a->sprite[j].sequence,
-						&a->sprite[i].sequence);
-				i = 0;
+				temp = a->sprite[j];
+				a->sprite[j] = a->sprite[i];
+				a->sprite[i] = temp;
 			}
 			j++;
 		}
 		i++;
 	}
-	resort(a);
 }
 
 /*
@@ -132,7 +102,7 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		if (a->sprite[c].distance >= sqrt(2 * (pow(0.5, 2))))
+		if (a->sprite[c].distance > sqrt(2 * (pow(0.5, 2))))
 			paint_spr(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);

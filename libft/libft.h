@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:45:07 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 03:20:36 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 04:06:41 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,3 +107,5 @@ void				calculate_hex(int c, int color, char *result);
 void				ft_swap(int *a, int *b);
 double				ft_normangle(double ang);
 #endif
+
+
