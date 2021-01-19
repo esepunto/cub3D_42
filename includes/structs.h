@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 05:04:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 07:03:27 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ typedef struct	s_readconfig
 typedef struct	s_cub3d
 {
 	bool		save_bmp;
+	int			life;
+	char		*text_life;
 	t_config	fconf;
 	t_raycast	rayc;
 	t_minilibx	mlibx;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 04:51:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 07:14:30 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,9 @@ static void	ifimpact(t_cub3d *a)
 
 void		throw_rays(t_cub3d *a)
 {
+	char	*text_life;
+	char	*points;
+	
 	a->rayc.nbr_ray = 0;
 	clean_sprites(a);
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
@@ -188,4 +191,9 @@ void		throw_rays(t_cub3d *a)
 	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+	points = ft_itoa(a->life);
+	text_life = ft_strjoin("Life points: ", points);
+	free(points);
+	mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 50, 0x000000, text_life);
+	free(text_life);
 }
