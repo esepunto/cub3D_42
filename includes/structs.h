@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:18:28 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 01:56:55 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 05:04:19 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct	s_sprite
 	double		midangle;
 	int			init;
 	int			end;
-	int			sequence;
 	int			xpos;
 	int			ypos;
 	int			ysprite;

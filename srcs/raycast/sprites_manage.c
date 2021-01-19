@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/18 03:38:01 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 05:03:54 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static t_sprite	init_sprite(t_cub3d *a, t_sprite sprite)
 	sprite = calc_midangle(a, sprite);
 	sprite.ystep = 1.0 * a->mlibx.object.height / sprite.stature;
 	sprite.xstep = 1.0 * a->mlibx.object.width / sprite.width_span;
-	sprite.sequence = a->fconf.map.nbr_sprite;
 	return (sprite);
 }
 
