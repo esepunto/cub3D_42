@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 08:41:53 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:14:03 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:41:04 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,28 @@
 
 static void	save_sprite(t_cub3d *a)
 {
-	a->mlibx.object.relative_path = a->fconf.wall_texture[4];
-	a->mlibx.object.img =
+	a->mlibx.object[0].relative_path = a->fconf.wall_texture[4];
+	a->mlibx.object[0].img =
 				mlx_xpm_file_to_image(a->mlibx.mlx,
-				a->mlibx.object.relative_path,
-				&a->mlibx.object.width,
-				&a->mlibx.object.height);
-	a->mlibx.object.addr =
-				(int*)mlx_get_data_addr(a->mlibx.object.img,
-				&a->mlibx.object.bits_per_pixel,
-				&a->mlibx.object.line_length,
-				&a->mlibx.object.endian);
+				a->mlibx.object[0].relative_path,
+				&a->mlibx.object[0].width,
+				&a->mlibx.object[0].height);
+	a->mlibx.object[0].addr =
+				(int*)mlx_get_data_addr(a->mlibx.object[0].img,
+				&a->mlibx.object[0].bits_per_pixel,
+				&a->mlibx.object[0].line_length,
+				&a->mlibx.object[0].endian);
+	a->mlibx.object[1].relative_path = a->fconf.wall_texture[5];
+	a->mlibx.object[1].img =
+				mlx_xpm_file_to_image(a->mlibx.mlx,
+				a->mlibx.object[1].relative_path,
+				&a->mlibx.object[1].width,
+				&a->mlibx.object[1].height);
+	a->mlibx.object[1].addr =
+				(int*)mlx_get_data_addr(a->mlibx.object[1].img,
+				&a->mlibx.object[1].bits_per_pixel,
+				&a->mlibx.object[1].line_length,
+				&a->mlibx.object[1].endian);
 }
 
 void		save_textures(t_cub3d *a)

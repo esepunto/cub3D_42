@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:13:24 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 22:54:31 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,8 @@ static void	ifimpact(t_cub3d *a)
 	{
 		a->rayc.xray += a->rayc.xincrease;
 		a->rayc.yray += a->rayc.yincrease;
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2')
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2' 
+			|| a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '3')
 			found_sprite(a);
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{

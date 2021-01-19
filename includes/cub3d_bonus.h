@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 09:42:55 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 18:52:41 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:28:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include "./macros.h"
-# include "./structs.h"
+# include "./structs_bonus.h"
 # include "./functions.h"
 # include "./functions_bonus.h"
 #endif

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:30:23 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:13:14 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:04:38 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_rgb(int c, t_cub3d *a)
 {
-	if (a->fconf.red[c - 5] < 0 || a->fconf.red[c - 5] > 255
-		|| a->fconf.green[c - 5] < 0 || a->fconf.green[c - 5] > 255
-		|| a->fconf.blue[c - 5] < 0 || a->fconf.blue[c - 5] > 255)
+	if (a->fconf.red[c - 6] < 0 || a->fconf.red[c - 6] > 255
+		|| a->fconf.green[c - 6] < 0 || a->fconf.green[c - 6] > 255
+		|| a->fconf.blue[c - 6] < 0 || a->fconf.blue[c - 6] > 255)
 	{
 		msg_err("The RGB < 0 or RGB > 255. You 're over the rainbow.");
 	}
@@ -61,11 +61,11 @@ void	extract_rgb(int c, t_cub3d *a)
 			msg_err("Not RGB colors");
 		isdigit_str(aux);
 		if (count == 0)
-			a->fconf.red[c - 6] = ft_atoi(aux);
+			a->fconf.red[c - 7] = ft_atoi(aux);
 		else if (count == 1)
-			a->fconf.green[c - 6] = ft_atoi(aux);
+			a->fconf.green[c - 7] = ft_atoi(aux);
 		else if (count == 2)
-			a->fconf.blue[c - 6] = ft_atoi(aux);
+			a->fconf.blue[c - 7] = ft_atoi(aux);
 		count++;
 	}
 	ft_delmatrix(color);

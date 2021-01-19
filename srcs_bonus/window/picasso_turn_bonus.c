@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:52:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:46:58 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int			dark_color_sprite(t_cub3d *a, int nb_spr, int color)
 	return (rtn);
 }
 
-static void	spr_calc_palette(t_cub3d *a, int c)
+static void	spr_calc_palette(t_cub3d *a, int c, int kill)
 {
 	a->sprite[c].ysprite = (int)a->sprite[c].yfloat
-		& (a->mlibx.object.height - 1);
+		& (a->mlibx.object[kill].height - 1);
 	a->sprite[c].xsprite = (int)a->sprite[c].xfloat
-		& (a->mlibx.object.width - 1);
-	a->sprite[c].palette = a->mlibx.object.addr[
-		a->mlibx.object.height
+		& (a->mlibx.object[kill].width - 1);
+	a->sprite[c].palette = a->mlibx.object[kill].addr[
+		a->mlibx.object[kill].height
 		* a->sprite[c].ysprite
 		+ a->sprite[c].xsprite];
 	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
@@ -76,7 +76,7 @@ static void	paint_spr(t_cub3d *a, int c)
 			a->sprite[c].point = a->sprite[c].init;
 			while (a->sprite[c].point <= a->sprite[c].end)
 			{
-				spr_calc_palette(a, c);
+				spr_calc_palette(a, c, a->sprite[c].killer);
 				a->sprite[c].yfloat += a->sprite[c].ystep;
 				a->sprite[c].point++;
 			}

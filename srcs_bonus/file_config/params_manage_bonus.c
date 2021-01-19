@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:55:37 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:12:57 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:00:14 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static void	isthisaparam(t_cub3d *a)
 	char	*map;
 	char	**id;
 
-	id = ft_split("NO ,SO ,WE ,EA ,S ,R ,C ,F ", ',');
+	id = ft_split("NO ,SO ,WE ,EA ,S1 ,S2 ,R ,C ,F ", ',');
 	i = 0;
 	while (i <= a->fconf.final_line_params)
 	{
 		c = 0;
 		map = ft_delinitendblanks(a->fconf.map.maze[i]);
-		while (c <= 7 && map[0] != '\0'
+		while (c <= 8 && map[0] != '\0'
 			&& ft_strnstr(map, id[c], ft_strlen(id[c])) == NULL)
 		{
-			if (c == 7)
+			if (c == 8)
 				msg_err("There is line and isn't a param.");
 			c++;
 		}
@@ -120,7 +120,8 @@ static char	*look4texture(char *id, size_t idlen, t_cub3d *a)
 **  |	"SO"    | 1 |    south    |
 **  |	"WE"    | 2 |    west     |
 **  |	"EA"    | 3 |    east     |
-**  |	"S"     | 4 |   sprites   |
+**  |	"S1"    | 4 |   sprite1   |
+**  	"S2"	  5     sprite2
 **  |	"R"     | 5 |  resolution |
 **  |	"C"     | 6 |  ceilling   |
 **  |	"F"     | 7 |    floor    |
@@ -132,9 +133,9 @@ void		manage_params(t_cub3d *a)
 	int		c;
 	char	**id;
 
-	id = ft_split("NO ,SO ,WE ,EA ,S ,R ,C ,F ", ',');
+	id = ft_split("NO ,SO ,WE ,EA ,S1 ,S2 ,R ,C ,F ", ',');
 	c = 0;
-	while (c <= 7)
+	while (c <= 8)
 	{
 		a->fconf.wall_texture[c] = look4texture(id[c], ft_strlen(id[c]), a);
 		cleantexture(c, a);

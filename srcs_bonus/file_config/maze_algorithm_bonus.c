@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 13:13:10 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:12:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:13:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ void		maze_algorithm(t_cub3d *a)
 		j = 0;
 		while (j <= ft_strlen(maze[i]))
 		{
-			if (maze[i][j] == '0' || maze[i][j] == '2' || maze[i][j] == 'N'
-				|| maze[i][j] == 'S' || maze[i][j] == 'E' || maze[i][j] == 'W')
+			if (maze[i][j] == '0' || maze[i][j] == '2' || maze[i][j] == '3'
+				|| maze[i][j] == 'N' || maze[i][j] == 'S' || maze[i][j] == 'E'
+				|| maze[i][j] == 'W')
 			{
-				if (maze[i][j] == '2')
+				if (maze[i][j] == '2' || maze[i][j] == '3')
 					a->fconf.map.num_sprites++;
 				surrounded(i, j, maze, a);
 			}

@@ -103,7 +103,7 @@ play:
 
 play_bonus:
 		make bonus
-		./cub3D_bonus maps/valid_RGB_001.cub
+		./cub3D_bonus maps/bonus_valid_RGB_001.cub
 
 save:
 		make
@@ -111,7 +111,7 @@ save:
 
 save_bonus:
 		make bonus
-		./cub3D_bonus maps/valid_RGB_001.cub --save
+		./cub3D_bonus maps/bonus_valid_RGB_001.cub --save
 
 delgerda:
 		$(RM) gerda_taro.bmp gerda_taro_bonus.bmp

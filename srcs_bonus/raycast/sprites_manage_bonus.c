@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:49:56 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:44:48 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ static t_sprite	calc_dist_stature_wspan(t_cub3d *a, t_sprite sprite)
 //	sprite.stature = (a->mlibx.object.height * a->rayc.staturewall) / a->mlibx.xpmwall[0].height;
 	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
 	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
-	sprite.width_span = (a->mlibx.object.width * sprite.stature)
-		/ a->mlibx.object.height;
+	if (sprite.killer == 0)
+		sprite.width_span = (a->mlibx.object[0].width * sprite.stature)
+			/ a->mlibx.object[0].height;
+	else if (sprite.killer == 1)
+		sprite.width_span = (a->mlibx.object[1].width * sprite.stature)
+			/ a->mlibx.object[1].height;
 	return (sprite);
 }
 
@@ -61,14 +65,26 @@ static t_sprite	calc_midangle(t_cub3d *a, t_sprite sprite)
 
 static t_sprite	init_sprite(t_cub3d *a, t_sprite sprite)
 {
+	if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '3')
+		sprite.killer = true;
+	else if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2')
+		sprite.killer = false;
 	sprite.view = true;
 	sprite.xpos = (int)a->rayc.yray;
 	sprite.ypos = (int)a->rayc.xray;
 	sprite.buff[a->rayc.nbr_ray].ray = true;
 	sprite = calc_dist_stature_wspan(a, sprite);
 	sprite = calc_midangle(a, sprite);
-	sprite.ystep = 1.0 * a->mlibx.object.height / sprite.stature;
-	sprite.xstep = 1.0 * a->mlibx.object.width / sprite.width_span;
+	if (sprite.killer == 0)
+	{
+		sprite.ystep = 1.0 * a->mlibx.object[0].height / sprite.stature;
+		sprite.xstep = 1.0 * a->mlibx.object[0].width / sprite.width_span;
+	}
+	else if (sprite.killer == 1)
+	{
+		sprite.ystep = 1.0 * a->mlibx.object[1].height / sprite.stature;
+		sprite.xstep = 1.0 * a->mlibx.object[1].width / sprite.width_span;
+	}
 	return (sprite);
 }
 
