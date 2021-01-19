@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 05:25:00 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 06:38:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,30 @@
 /*
 ** Functions to print sprites
 */
+
+int		dark_color_sprite(t_cub3d *a, int nb_spr, int color)
+{
+	double	dark;
+	int		c[3];
+	int		dc[3];
+	int		rtn;
+	
+	dark = 2.5 / a->sprite[nb_spr].distance;
+	c[0] = (color >> 16) & 255;
+	c[1] = (color >> 8) & 255;
+	c[2] = color & 255;
+	dc[0] = (int)(c[0] * dark);
+	dc[1] = (int)(c[1] * dark);
+	dc[2] = (int)(c[2] * dark);
+	if (dc[0] > c[0])
+		dc[0] = c[0];
+	if (dc[1] > c[1])
+		dc[1] = c[1];
+	if (dc[2] > c[2])
+		dc[2] = c[2];
+	rtn = (dc[0] * 256 * 256) + (dc[1] * 256) + dc[2];
+	return (rtn);
+}
 
 static void	spr_calc_palette(t_cub3d *a, int c)
 {
@@ -27,8 +51,11 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 		* a->sprite[c].ysprite
 		+ a->sprite[c].xsprite];
 	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
+	{
+		a->sprite[c].palette = dark_color_sprite(a, c, a->sprite[c].palette);
 		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
 			a->sprite[c].palette);
+	}
 }
 
 static void	paint_spr(t_cub3d *a, int c)

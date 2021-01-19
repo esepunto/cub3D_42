@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 14:27:24 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/16 20:27:19 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 06:28:44 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,30 @@
 /*
 ** Functions to print walls
 */
+
+static int		dark_color_wall(t_cub3d *a)
+{
+	double	dark;
+	int		c[3];
+	int		dc[3];
+	int		rtn;
+
+	dark = (2.5 / a->rayc.distance);
+	c[0] = (a->rayc.palette >> 16) & 255;
+	c[1] = (a->rayc.palette >> 8) & 255;
+	c[2] = a->rayc.palette & 255;
+	dc[0] = (int)(c[0] * dark);
+	dc[1] = (int)(c[1] * dark);
+	dc[2] = (int)(c[2] * dark);
+	if (dc[0] > c[0])
+		dc[0] = c[0];
+	if (dc[1] > c[1])
+		dc[1] = c[1];
+	if (dc[2] > c[2])
+		dc[2] = c[2];
+	rtn = (dc[0] * 256 * 256) + (dc[1] * 256) + dc[2];
+	return (rtn);
+}
 
 void		brushstroke(int x, int y, t_cub3d *a, int color)
 {
@@ -34,8 +58,12 @@ static void	calc_palette(t_cub3d *a)
 	a->rayc.palette = a->mlibx.xpmwall[a->rayc.wall].addr[
 		a->mlibx.xpmwall[a->rayc.wall].height
 		* a->rayc.ytexture + a->rayc.xtexture];
+	
 	if ((a->rayc.palette & 0x00FFFFFF) != 0)
+	{
+		a->rayc.palette = dark_color_wall(a);
 		brushstroke(a->rayc.nbr_ray, a->rayc.point, a, a->rayc.palette);
+	}
 }
 
 /*
