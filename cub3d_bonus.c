@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:26:53 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:06:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ int			msg_err(char *error)
 	ft_printf("Error\n%s\n\n", error);
 	system("leaks cub3D");
 	exit(0);
+}
+
+void		calc_lifepoints(t_cub3d *a)
+{
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2')
+		a->life -= 10;
+	if (a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '3')
+		a->life += 10;
 }
 
 static void	init_struct(t_cub3d *a)

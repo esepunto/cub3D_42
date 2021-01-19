@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:39:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:32:45 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:07:58 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static void	isdead(t_cub3d *a)
 {
+	static int	t = 0;
 
-	static int		t = 0;
-	
 	if (t++ < 100)
 		mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
 			"GAME OVER - This window will selfdestruct in 5 seconds");
@@ -28,7 +27,7 @@ void		print_lifepoints(t_cub3d *a)
 {
 	char	*text_life;
 	char	*points;
-	
+
 	if (a->life <= 0)
 		isdead(a);
 	else

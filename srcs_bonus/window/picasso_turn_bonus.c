@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 23:46:58 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:04:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 ** Functions to print sprites
 */
 
-int			dark_color_sprite(t_cub3d *a, int nb_spr, int color)
+int			shadow_color(double dist, int palette)
 {
 	double	dark;
 	int		c[3];
 	int		dc[3];
 	int		rtn;
 
-	dark = 2.5 / a->sprite[nb_spr].distance;
-	c[0] = (color >> 16) & 255;
-	c[1] = (color >> 8) & 255;
-	c[2] = color & 255;
+	dark = (2.5 / dist);
+	c[0] = (palette >> 16) & 255;
+	c[1] = (palette >> 8) & 255;
+	c[2] = palette & 255;
 	dc[0] = (int)(c[0] * dark);
 	dc[1] = (int)(c[1] * dark);
 	dc[2] = (int)(c[2] * dark);
@@ -52,7 +52,8 @@ static void	spr_calc_palette(t_cub3d *a, int c, int kill)
 		+ a->sprite[c].xsprite];
 	if ((a->sprite[c].palette & 0x00FFFFFF) != 0)
 	{
-		a->sprite[c].palette = dark_color_sprite(a, c, a->sprite[c].palette);
+		a->sprite[c].palette =
+			shadow_color(a->sprite[c].distance, a->sprite[c].palette);
 		brushstroke(a->sprite[c].current_ray, a->sprite[c].point, a,
 			a->sprite[c].palette);
 	}

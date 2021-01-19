@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 23:29:34 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:53:03 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	gofront(t_cub3d *a)
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2'
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '3')
 	{
+		calc_lifepoints(a);
 		a->rayc.xplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
-		a->life -= 10;
 	}
 }
 
@@ -34,9 +34,9 @@ static void	goback(t_cub3d *a)
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2'
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '3')
 	{
+		calc_lifepoints(a);
 		a->rayc.xplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
-		a->life -= 10;
 	}
 }
 
@@ -48,9 +48,9 @@ static void	goright(t_cub3d *a)
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2'
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '3')
 	{
+		calc_lifepoints(a);
 		a->rayc.xplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
-		a->life -= 10;
 	}
 }
 
@@ -62,9 +62,9 @@ static void	goleft(t_cub3d *a)
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '2'
 		|| a->fconf.map.maze[(int)a->rayc.yplyr][(int)a->rayc.xplyr] == '3')
 	{
+		calc_lifepoints(a);
 		a->rayc.xplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
-		a->life -= 10;
 	}
 }
 

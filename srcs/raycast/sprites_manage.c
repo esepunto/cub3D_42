@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:46:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:33:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ static t_sprite	calc_dist_stature_wspan(t_cub3d *a, t_sprite sprite)
 	sprite.distance = hypot(
 				(int)a->rayc.xray + 0.5 - a->rayc.xplyr,
 				(int)a->rayc.yray + 0.5 - a->rayc.yplyr);
-//				* cos(a->rayc.anglray - a->rayc.dirplyr);
 	sprite.stature = a->fconf.xrendersize / sprite.distance;
-//	sprite.stature = (a->mlibx.object.height * a->rayc.staturewall) / a->mlibx.xpmwall[0].height;
 	sprite.init = round(a->fconf.yrendersize / 2.0 - sprite.stature / 2);
 	sprite.end = round(a->fconf.yrendersize / 2.0 + sprite.stature / 2);
 	sprite.width_span = (a->mlibx.object.width * sprite.stature)

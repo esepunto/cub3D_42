@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 22:54:31 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:10:47 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static void	ifimpact(t_cub3d *a)
 	{
 		a->rayc.xray += a->rayc.xincrease;
 		a->rayc.yray += a->rayc.yincrease;
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2' 
+		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2'
 			|| a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '3')
 			found_sprite(a);
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
@@ -163,9 +163,9 @@ static void	ifimpact(t_cub3d *a)
 
 void		throw_rays(t_cub3d *a)
 {
-	a->rayc.nbr_ray = 0;
+	a->rayc.nbr_ray = -1;
 	clean_sprites(a);
-	while (a->rayc.nbr_ray < a->fconf.xrendersize)
+	while (++a->rayc.nbr_ray < a->fconf.xrendersize)
 	{
 		a->rayc.aux = 0;
 		a->rayc.xray = a->rayc.xplyr;
@@ -177,13 +177,12 @@ void		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray
 				- a->rayc.yplyr) * cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;// (a->fconf.xrendersize / a->fconf.yrendersize);
+		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
 		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
 				+ a->rayc.staturewall / 2));
 		pointillism(a);
-		a->rayc.nbr_ray++;
 	}
 	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
