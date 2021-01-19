@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprites_manage.c                                   :+:      :+:    :+:   */
+/*   sprites_manage_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 22:50:27 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:46:42 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 19:49:56 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 static void		allocate_sprite(t_cub3d *a)
 {

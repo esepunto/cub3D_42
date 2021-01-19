@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_raycast.c                                     :+:      :+:    :+:   */
+/*   init_raycast_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:46:10 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 19:13:24 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/cub3d_bonus.h"
 
 /*
 ** To calc where coodinate (x or y) the impact is.
@@ -176,7 +176,7 @@ void		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray
 				- a->rayc.yplyr) * cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;
+		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;// (a->fconf.xrendersize / a->fconf.yrendersize);
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
 		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
@@ -187,4 +187,5 @@ void		throw_rays(t_cub3d *a)
 	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
+	print_lifepoints(a);
 }
