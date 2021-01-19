@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 12:45:47 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 05:23:51 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 12:07:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	gofront(t_cub3d *a)
 	{
 		a->rayc.xplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
+		a->life -= 10;
 	}
 }
 
@@ -33,6 +34,7 @@ static void	goback(t_cub3d *a)
 	{
 		a->rayc.xplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
+		a->life -= 10;
 	}
 }
 
@@ -45,6 +47,7 @@ static void	goright(t_cub3d *a)
 	{
 		a->rayc.xplyr += sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr -= cos(a->rayc.dirplyr) * a->rayc.rush;
+		a->life -= 10;
 	}
 }
 
@@ -57,6 +60,7 @@ static void	goleft(t_cub3d *a)
 	{
 		a->rayc.xplyr -= sin(a->rayc.dirplyr) * a->rayc.rush;
 		a->rayc.yplyr += cos(a->rayc.dirplyr) * a->rayc.rush;
+		a->life -= 10;
 	}
 }
 

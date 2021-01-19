@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 07:14:30 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 12:02:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,6 @@ static void	ifimpact(t_cub3d *a)
 
 void		throw_rays(t_cub3d *a)
 {
-	char	*text_life;
-	char	*points;
-	
 	a->rayc.nbr_ray = 0;
 	clean_sprites(a);
 	while (a->rayc.nbr_ray < a->fconf.xrendersize)
@@ -179,8 +176,7 @@ void		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray
 				- a->rayc.yplyr) * cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance)
-				* 0.9;// (a->fconf.xrendersize / a->fconf.yrendersize);
+		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;// (a->fconf.xrendersize / a->fconf.yrendersize);
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
 		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0
@@ -191,9 +187,5 @@ void		throw_rays(t_cub3d *a)
 	if (a->fconf.map.nbr_sprite)
 		paintsprites(a);
 	mlx_put_image_to_window(a->mlibx.mlx, a->mlibx.win, a->mlibx.img.img, 0, 0);
-	points = ft_itoa(a->life);
-	text_life = ft_strjoin("Life points: ", points);
-	free(points);
-	mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 50, 0x000000, text_life);
-	free(text_life);
+	print_lifepoints(a);
 }

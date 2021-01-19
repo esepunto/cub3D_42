@@ -8,7 +8,7 @@ WE ./wolftex/fuhrer.xpm
 
 
 SO       ./wolftex/redbrick.xpm
-R 641 441
+R 241 441
 S ./wolftex/pillar.xpm
 F 28,189    ,    42 
 C         134,231,236

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 02:14:38 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 06:03:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/19 11:41:40 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int			msg_err(char *error);
 ** Bonus functions
 */
 
+void		print_lifepoints(t_cub3d *a);
 //int			dark_color(t_cub3d *a);
 
 #endif
