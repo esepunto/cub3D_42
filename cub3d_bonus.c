@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/20 01:06:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:22:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ static void	init_struct(t_cub3d *a)
 	a->life = 100;
 }
 
+/*
+** I think the programs is close to absolut perfect.
+** It's time to write the last comments.
+*/
+
 int			main(int argc, char **argv)
 {
 	t_cub3d	*a;
@@ -58,5 +63,5 @@ int			main(int argc, char **argv)
 		init_window(a);
 	}
 	else
-		msg_err("Revier your fingers, please.");
+		msg_err("Review your fingers, please.");
 }

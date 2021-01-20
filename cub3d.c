@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 03:50:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/20 01:22:18 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static void	init_struct(t_cub3d *a)
 	a->rayc.rotspeed = 0.10;
 	a->rayc.fov = 66 * M_PI / 180;
 }
+
+/*
+** I think the programs is close to absolut perfect.
+** It's time to write the last comments.
+*/
 
 int			main(int argc, char **argv)
 {
@@ -49,5 +54,5 @@ int			main(int argc, char **argv)
 		init_window(a);
 	}
 	else
-		msg_err("Revier your fingers, please.");
+		msg_err("Review your fingers, please.");
 }
