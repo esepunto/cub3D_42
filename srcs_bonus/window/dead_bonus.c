@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:39:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 13:09:13 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:23:06 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,24 @@ static void	isdead(t_cub3d *a)
 {
 	static int	t = 0;
 
-	if (t++ < 100)
-		mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
-			"GAME OVER - This window will selfdestruct in 5 seconds");
+	if (t++ <= 50)
+	{
+		if (t < 10)
+			mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
+				"GAME OVER - This window will selfdestruct in 5 seconds");
+		else if (t < 20)
+			mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
+				"GAME OVER - This window will selfdestruct in 4 seconds");
+		else if (t < 30)
+			mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
+				"GAME OVER - This window will selfdestruct in 3 seconds");
+		else if (t < 40)
+			mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
+				"GAME OVER - This window will selfdestruct in 2 seconds");
+		else if (t < 50)
+			mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 60, 0x000000,
+				"GAME OVER - This window will selfdestruct in 1 seconds");
+	}
 	else
 		close_window(a);
 }

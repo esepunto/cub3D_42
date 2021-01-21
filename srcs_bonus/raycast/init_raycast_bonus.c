@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 11:54:15 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/20 01:10:47 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:00:46 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	choose_texture(t_cub3d *a)
 {
 	if (a->rayc.xhit == 1 && a->rayc.yhit == 1)
 		return ;
-	if (a->rayc.xhit == 1)
+	else if (a->rayc.xhit == 1)
 	{
 		if (a->rayc.quadrant == 4 || a->rayc.quadrant == 1)
 			a->rayc.wall = 2;
@@ -124,7 +124,7 @@ static void	ifimpact(t_cub3d *a)
 		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '2'
 			|| a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '3')
 			found_sprite(a);
-		if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
+		else if (a->fconf.map.maze[(int)a->rayc.yray][(int)a->rayc.xray] == '1')
 		{
 			calc_wallimpact(a);
 			calc_step_and_quadrant(a);
@@ -177,7 +177,7 @@ void		throw_rays(t_cub3d *a)
 		ifimpact(a);
 		a->rayc.distance = hypot(a->rayc.xray - a->rayc.xplyr, a->rayc.yray
 				- a->rayc.yplyr) * cos(a->rayc.anglray - a->rayc.dirplyr);
-		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance) * 0.9;
+		a->rayc.staturewall = (a->fconf.xrendersize / a->rayc.distance);
 		a->rayc.initwall = (round(a->fconf.yrendersize / 2.0
 				- a->rayc.staturewall / 2));
 		a->rayc.endwall = (round(a->fconf.yrendersize / 2.0

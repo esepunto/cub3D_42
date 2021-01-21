@@ -6,11 +6,18 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 15:39:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:08:37 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d_bonus.h"
+
+int			close_window(t_cub3d *a)
+{
+	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
+	system("leaks cub3D_bonus");
+	exit(0);
+}
 
 int			msg_err(char *error)
 {
@@ -29,11 +36,13 @@ void		calc_lifepoints(t_cub3d *a)
 
 static void	init_struct(t_cub3d *a)
 {
-	a->rayc.modulo = (a->fconf.xrendersize
-		* a->fconf.yrendersize) * 0.000000001;
+//	a->rayc.modulo = a->fconf.xrendersize 
+//		* a->fconf.yrendersize) * 0.000000001;
+//	a->rayc.modulo = 0.0003;
+	a->rayc.modulo = a->fconf.xrendersize * a->fconf.yrendersize * 0.0003 / 240000;
 	a->rayc.rush = 0.2;
 	a->rayc.rotspeed = 0.10;
-	a->rayc.fov = 66 * M_PI / 180;
+	a->rayc.fov = 60 * M_PI / 180;
 	a->life = 100;
 }
 

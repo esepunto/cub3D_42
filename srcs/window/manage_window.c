@@ -6,18 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/17 22:30:17 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:14:25 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int			close_window(t_cub3d *a)
-{
-	mlx_destroy_window(a->mlibx.mlx, a->mlibx.win);
-	system("leaks cub3D");
-	exit(0);
-}
 
 /*
 ** The image should be rescaled when the resolution indicated in the
@@ -50,23 +43,40 @@ static void	rescale_screen(t_cub3d *a)
 	}
 }
 
+static int	checkey(int keycode)
+{
+	if (keycode == KEY_ESC
+			||keycode == KEY_ROTATE_RIGHT
+			||keycode == KEY_ROTATE_LEFT
+			||keycode == KEY_MOVE_FRONT
+			||keycode == KEY_MOVE_BACK
+			||keycode == KEY_MOVE_LEFT
+			||keycode == KEY_MOVE_RIGHT)
+		return (1);
+	else
+		return (0);
+
+}
+
 static int	ft_key_hit(int keycode, t_cub3d *a)
 {
-	a->rayc.keycode[keycode] = 1;
+	if (checkey(keycode) == 1)
+		a->rayc.keycode[keycode] = 1;
 	return (0);
 }
 
 static int	ft_key_release(int keycode, t_cub3d *a)
 {
-	a->rayc.keycode[keycode] = 0;
+	if (checkey(keycode) == 1)
+		a->rayc.keycode[keycode] = 0;
 	return (0);
 }
 
 void		init_window(t_cub3d *a)
 {
-	a->mlibx.mlx = mlx_init();
 	if (a->save_bmp == false)
 		rescale_screen(a);
+	a->mlibx.mlx = mlx_init();
 	a->mlibx.img.img = mlx_new_image(a->mlibx.mlx, a->fconf.xrendersize,
 			a->fconf.yrendersize);
 	a->mlibx.img.addr = mlx_get_data_addr(a->mlibx.img.img,

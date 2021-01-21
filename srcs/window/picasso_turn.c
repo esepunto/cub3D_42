@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/19 19:44:39 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 16:08:11 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,24 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 			a->sprite[c].palette);
 }
 
+static void invisible_rays(t_cub3d *a, int c)
+{
+	while (a->sprite[c].current_ray < 0)
+	{
+		a->sprite[c].xfloat += a->sprite[c].xstep;
+		a->sprite[c].current_ray++;
+	}
+}
+
 static void	paint_spr(t_cub3d *a, int c)
 {
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
+	if (a->sprite[c].current_ray < 0)
+		invisible_rays(a, c);
 	while (a->sprite[c].current_ray <= a->sprite[c].rayend
 		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
-		while (a->sprite[c].current_ray < 0)
-		{
-			a->sprite[c].xfloat += a->sprite[c].xstep;
-			a->sprite[c].current_ray++;
-		}
 		if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 		{
 			a->sprite[c].yfloat = 0;
@@ -102,8 +108,10 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		if (a->sprite[c].distance > sqrt(2 * (pow(0.5, 2))))
-			paint_spr(a, c);
+		if ((int)a->sprite[c].xpos != (int)a->rayc.yplyr
+				|| (int)a->sprite[c].ypos != (int)a->rayc.xplyr)
+			if (a->sprite[c].distance > sqrt(2 * (pow(0.5, 2))))
+				paint_spr(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);
 	}

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/20 01:04:50 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 18:54:07 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ int			shadow_color(double dist, int palette)
 	int		c[3];
 	int		dc[3];
 	int		rtn;
+	int		z;
 
 	dark = (2.5 / dist);
+	
+	z = 0;
+
 	c[0] = (palette >> 16) & 255;
 	c[1] = (palette >> 8) & 255;
 	c[2] = palette & 255;
-	dc[0] = (int)(c[0] * dark);
-	dc[1] = (int)(c[1] * dark);
-	dc[2] = (int)(c[2] * dark);
-	if (dc[0] > c[0])
-		dc[0] = c[0];
-	if (dc[1] > c[1])
-		dc[1] = c[1];
-	if (dc[2] > c[2])
-		dc[2] = c[2];
+	while (z <= 3)
+	{
+		dc[z] = (int)(c[z] * dark);
+		if (dc[z] > c[z])
+			dc[z] = c[z];
+		z++;
+	}
 	rtn = (dc[0] * 256 * 256) + (dc[1] * 256) + dc[2];
 	return (rtn);
 }
@@ -59,10 +61,21 @@ static void	spr_calc_palette(t_cub3d *a, int c, int kill)
 	}
 }
 
-static void	paint_spr(t_cub3d *a, int c)
+static void invisible_rays(t_cub3d *a, int c)
+{
+	while (a->sprite[c].current_ray < 0)
+	{
+		a->sprite[c].xfloat += a->sprite[c].xstep;
+		a->sprite[c].current_ray++;
+	}
+}
+
+static void	paint(t_cub3d *a, int c)
 {
 	a->sprite[c].current_ray = a->sprite[c].rayinit;
 	a->sprite[c].xfloat = 0;
+	if (a->sprite[c].current_ray < 0)
+		invisible_rays(a, c);
 	while (a->sprite[c].current_ray <= a->sprite[c].rayend
 		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
@@ -130,7 +143,10 @@ void		paintsprites(t_cub3d *a)
 		while (a->sprite[c].view == false)
 			c--;
 		calc_init_ray(a, c);
-		paint_spr(a, c);
+		if ((int)a->sprite[c].xpos != (int)a->rayc.yplyr
+				|| (int)a->sprite[c].ypos != (int)a->rayc.xplyr)
+			if (a->sprite[c].distance > sqrt(2 * (pow(0.5, 2))))
+				paint(a, c);
 		if (a->sprite[c].buff)
 			free(a->sprite[c].buff);
 	}
