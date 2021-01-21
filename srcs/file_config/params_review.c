@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 20:01:22 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 20:48:20 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@
 ** 		c) resolution
 */
 
+
 static void	review_walls(int c, t_cub3d *a)
 {
 	int	fd;
 
 	if (ft_cntwrds(a->fconf.wall_texture[c]) != 1)
 		msg_err("Too much information in walls.");
+	if (ft_chekext(a->fconf.wall_texture[c], ".xpm") != 0)
+		msg_err("Please, load .xpm files on textures.");
 	if ((fd = open(a->fconf.wall_texture[c], O_RDONLY)) == -1)
 		msg_err("This file is out of the air.");
 	else
 		close(fd);
-	if (ft_chekext(a->fconf.wall_texture[c], ".xpm") != 0)
-		msg_err("Please, load .xpm files on textures.");
 }
+
 
 static void	review_cefl(int c, t_cub3d *a)
 {
