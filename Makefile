@@ -1,6 +1,6 @@
 NAME	=	cub3D
 
-NAME_BONUS	=	cub3D_bonus
+NAME_BONUS	= cub3d
 
 CC		=	gcc -Wall -Wextra -Werror -g
 
@@ -50,10 +50,10 @@ LINKS	=	-I ./mlx_beta -L ./mlx_beta -lmlx -framework OpenGL -framework AppKit
 RM		=	rm -f
 
 .PHONY:		all
-all:		make_libs $(NAME)
+all:		delexe make_libs $(NAME)
 
 .PHONY:		bonus
-bonus:		make_libs $(NAME_BONUS)
+bonus:		delexe make_libs $(NAME_BONUS)
 
 .PHONY:		make_libs
 make_libs:
@@ -61,6 +61,10 @@ make_libs:
 			@make -C libft/ft_printf
 			@make -C mlx_beta
 			@mv ./mlx_beta/libmlx.dylib ./
+
+delexe:
+			$(RM) $(NAME)
+			$(RM) $(NAME_BONUS)
 
 $(NAME):	$(OBJECTS)
 			$(CC) $(LINKS) $(LIBS) $(SRCS) -o $(NAME)
@@ -76,12 +80,13 @@ clean:
 			@make clean -C mlx
 			@make clean -C mlx_beta
 
+
 fclean:		clean
 			$(RM) $(NAME)
 			$(RM) $(NAME_BONUS)
 			@make fclean -C libft
 			@make fclean -C libft/ft_printf
-			rm -f libmlx.dylib 
+			@rm -f libmlx.dylib 
 
 re: fclean all
 
@@ -99,19 +104,19 @@ norma_bonus:
 
 play:
 		make
-		./cub3D maps/valid_RGB_001.cub
+		./$(NAME) maps/valid_RGB_001.cub
 
 play_bonus:
 		make bonus
-		./cub3D_bonus maps/bonus_valid_RGB_001.cub
+		./$(NAME_BONUS) maps/bonus_valid_RGB_001.cub
 
 save:
 		make
-		./cub3D maps/valid_RGB_001.cub --save
+		./$(NAME) maps/valid_RGB_001.cub --save
 
 save_bonus:
 		make bonus
-		./cub3D_bonus maps/bonus_valid_RGB_001.cub --save
+		./$(NAME_BONUS) maps/bonus_valid_RGB_001.cub --save
 
 delgerda:
 		$(RM) gerda_taro.bmp gerda_taro_bonus.bmp

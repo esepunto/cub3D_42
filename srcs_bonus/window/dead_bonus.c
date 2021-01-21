@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:39:17 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/20 01:07:58 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 13:09:13 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		print_lifepoints(t_cub3d *a)
 		points = ft_itoa(a->life);
 		text_life = ft_strjoin("Life points: ", points);
 		free(points);
+//		text_life = points;
+//		printf("%s", text_life);
 		mlx_string_put(a->mlibx.mlx, a->mlibx.win, 50, 50, 0x000000, text_life);
 		free(text_life);
 	}
