@@ -1,6 +1,6 @@
 NAME	=	cub3D
 
-NAME_BONUS	= cub3d
+NAME_BONUS = cub3D_bonus
 
 CC		=	gcc -Wall -Wextra -Werror -g
 
@@ -77,7 +77,6 @@ clean:
 			$(RM) $(OBJECTS_BONUS)
 			@make clean -C libft
 			@make clean -C libft/ft_printf
-			@make clean -C mlx
 			@make clean -C mlx_beta
 
 
