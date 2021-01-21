@@ -6,12 +6,11 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 14:23:45 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 19:14:40 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:49:09 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
 
 /*
 ** The image should be rescaled when the resolution indicated in the
@@ -47,16 +46,15 @@ static void	rescale_screen(t_cub3d *a)
 static int	checkey(int keycode)
 {
 	if (keycode == KEY_ESC
-			||keycode == KEY_ROTATE_RIGHT
-			||keycode == KEY_ROTATE_LEFT
-			||keycode == KEY_MOVE_FRONT
-			||keycode == KEY_MOVE_BACK
-			||keycode == KEY_MOVE_LEFT
-			||keycode == KEY_MOVE_RIGHT)
+			|| keycode == KEY_ROTATE_RIGHT
+			|| keycode == KEY_ROTATE_LEFT
+			|| keycode == KEY_MOVE_FRONT
+			|| keycode == KEY_MOVE_BACK
+			|| keycode == KEY_MOVE_LEFT
+			|| keycode == KEY_MOVE_RIGHT)
 		return (1);
 	else
 		return (0);
-
 }
 
 static int	ft_key_hit(int keycode, t_cub3d *a)

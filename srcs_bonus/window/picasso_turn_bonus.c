@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 18:54:07 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:48:28 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,6 @@
 /*
 ** Functions to print sprites
 */
-
-int			shadow_color(double dist, int palette)
-{
-	double	dark;
-	int		c[3];
-	int		dc[3];
-	int		rtn;
-	int		z;
-
-	dark = (2.5 / dist);
-	
-	z = 0;
-
-	c[0] = (palette >> 16) & 255;
-	c[1] = (palette >> 8) & 255;
-	c[2] = palette & 255;
-	while (z <= 3)
-	{
-		dc[z] = (int)(c[z] * dark);
-		if (dc[z] > c[z])
-			dc[z] = c[z];
-		z++;
-	}
-	rtn = (dc[0] * 256 * 256) + (dc[1] * 256) + dc[2];
-	return (rtn);
-}
 
 static void	spr_calc_palette(t_cub3d *a, int c, int kill)
 {
@@ -61,7 +35,7 @@ static void	spr_calc_palette(t_cub3d *a, int c, int kill)
 	}
 }
 
-static void invisible_rays(t_cub3d *a, int c)
+static void	invisible_rays(t_cub3d *a, int c)
 {
 	while (a->sprite[c].current_ray < 0)
 	{
@@ -79,11 +53,6 @@ static void	paint(t_cub3d *a, int c)
 	while (a->sprite[c].current_ray <= a->sprite[c].rayend
 		&& a->sprite[c].current_ray < a->fconf.xrendersize)
 	{
-		while (a->sprite[c].current_ray < 0)
-		{
-			a->sprite[c].xfloat += a->sprite[c].xstep;
-			a->sprite[c].current_ray++;
-		}
 		if (a->sprite[c].buff[a->sprite[c].current_ray].ray == true)
 		{
 			a->sprite[c].yfloat = 0;

@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 11:17:00 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 19:08:37 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:39:50 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,19 @@ void		calc_lifepoints(t_cub3d *a)
 		a->life += 10;
 }
 
+/*
+** Modulo is the length of the step on the ray during the raycast.
+** The longer the modulo the faster the program and inferior image quality.
+**
+** Other options to calc modulo.
+** a->rayc.modulo = a->fconf.xrendersize * a->fconf.yrendersize) * 0.000000001;
+** a->rayc.modulo = 0.0003;
+*/
+
 static void	init_struct(t_cub3d *a)
 {
-//	a->rayc.modulo = a->fconf.xrendersize 
-//		* a->fconf.yrendersize) * 0.000000001;
-//	a->rayc.modulo = 0.0003;
-	a->rayc.modulo = a->fconf.xrendersize * a->fconf.yrendersize * 0.0003 / 240000;
+	a->rayc.modulo =
+		a->fconf.xrendersize * a->fconf.yrendersize * 0.0003 / 240000;
 	a->rayc.rush = 0.2;
 	a->rayc.rotspeed = 0.10;
 	a->rayc.fov = 60 * M_PI / 180;

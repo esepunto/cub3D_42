@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 13:34:51 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 16:08:11 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 19:38:16 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	spr_calc_palette(t_cub3d *a, int c)
 			a->sprite[c].palette);
 }
 
-static void invisible_rays(t_cub3d *a, int c)
+static void	invisible_rays(t_cub3d *a, int c)
 {
 	while (a->sprite[c].current_ray < 0)
 	{

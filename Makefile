@@ -28,7 +28,7 @@ SRCS_BONUS		=	cub3d_bonus.c \
 					srcs_bonus/file_config/rgb_colors_bonus.c \
 					srcs_bonus/file_config/map_manage_bonus.c \
 					srcs_bonus/file_config/maze_algorithm_bonus.c \
-					srcs_bonus/window/dead_bonus.c \
+					srcs_bonus/window/bonuses.c \
 					srcs_bonus/window/manage_window_bonus.c \
 					srcs_bonus/window/vangogh_turn_bonus.c \
 					srcs_bonus/window/picasso_turn_bonus.c \
