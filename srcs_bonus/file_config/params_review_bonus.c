@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 20:48:18 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 20:51:57 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	review_walls(int c, t_cub3d *a)
 		msg_err("This file is out of the air.");
 	else
 		close(fd);
-
 }
 
 static void	review_cefl(int c, t_cub3d *a)

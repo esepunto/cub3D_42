@@ -6,7 +6,7 @@
 /*   By: ssacrist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 14:26:35 by ssacrist          #+#    #+#             */
-/*   Updated: 2021/01/21 20:48:20 by ssacrist         ###   ########.fr       */
+/*   Updated: 2021/01/21 20:51:05 by ssacrist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 ** 		b) floor and ceilling
 ** 		c) resolution
 */
-
 
 static void	review_walls(int c, t_cub3d *a)
 {
@@ -33,7 +32,6 @@ static void	review_walls(int c, t_cub3d *a)
 	else
 		close(fd);
 }
-
 
 static void	review_cefl(int c, t_cub3d *a)
 {
